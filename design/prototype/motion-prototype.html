@@ -1,0 +1,672 @@
+<title>Shreyansh & Mrunalini</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Tiro+Devanagari+Hindi:ital@0;1&family=Tiro+Devanagari+Marathi:ital@0;1&display=swap">
+<noscript><style>#cover{display:none}</style></noscript>
+<style>
+:root{
+  --rani:#A3195B; --rani-deep:#8A1450; --mor:#0E5C63; --zari:#C9A04A; --chuna:#F5EFE3;
+  --kagaz:#EFE3C8; --kajal:#2B211B; --sindoor:#B3261E; --haldi:#D99A1E; --neel:#2F3E73;
+  --sal:#5E6B3A; --deep:#7A3522;
+  --selv:clamp(8px,1.1vw,16px);
+  --gut:calc(var(--selv) + 20px);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html.locked,html.locked body{overflow:hidden}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+body{margin:0;background:var(--kagaz);color:var(--kajal);font-family:"Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif;font-size:clamp(17px,.45vw + 15px,20px);line-height:1.6;-webkit-font-smoothing:antialiased}
+.cal{font-family:Amita,"Tiro Devanagari Hindi",Georgia,serif}
+.mr{font-family:"Tiro Devanagari Marathi","Noto Serif Devanagari",Georgia,serif}
+h1,h2,h3{text-wrap:balance}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--zari);outline-offset:3px}
+
+/* textiles */
+.paper{background-color:var(--kagaz);background-image:radial-gradient(rgba(94,60,20,.10) 1px,transparent 1.4px),radial-gradient(rgba(255,255,255,.35) 1px,transparent 1.6px);background-size:9px 9px,5px 5px;background-position:0 0,2px 3px}
+.silk{background-color:var(--rani);background-image:radial-gradient(var(--zari) 1.2px,transparent 1.6px),repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0 1px,transparent 1px 3px),repeating-linear-gradient(0deg,rgba(43,33,27,.07) 0 1px,transparent 1px 4px);background-size:26px 26px,auto,auto;background-position:13px 13px,0 0,0 0}
+.morsilk{background-color:var(--mor);background-image:radial-gradient(rgba(201,160,74,.55) 1.1px,transparent 1.5px),repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 3px),repeating-linear-gradient(0deg,rgba(0,0,0,.08) 0 1px,transparent 1px 4px);background-size:26px 26px,auto,auto;background-position:13px 13px,0 0,0 0}
+.zari{background-color:var(--zari);background-image:linear-gradient(135deg,var(--mor) 25%,transparent 25%),linear-gradient(225deg,var(--mor) 25%,transparent 25%);background-size:14px 14px}
+.hatch{background:repeating-linear-gradient(45deg,var(--kajal) 0 1.5px,var(--kagaz) 1.5px 6px)}
+.band{display:flex;height:22px}
+.band>div{flex:1}
+.band>.hatch{border-left:2px solid var(--kajal)}
+.selv{position:fixed;top:0;bottom:0;width:var(--selv);z-index:40;pointer-events:none}
+.selv.l{left:0}
+.selv.r{right:0;border-left:2px solid var(--kajal)}
+
+.eyebrow{margin:0;font-style:italic;font-size:1rem}
+.divider{display:block;margin:0 auto}
+.wrap{padding-inline:var(--gut);max-width:1200px;margin-inline:auto}
+.plate{background:var(--kajal);color:var(--chuna)}
+
+/* buttons */
+.btn{min-height:52px;padding:8px 20px;font:inherit;font-size:1.05rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.btn-primary{border:0;background:var(--rani);color:var(--chuna);box-shadow:inset 0 0 0 3px var(--rani),inset 0 0 0 5px var(--zari)}
+.btn-primary:hover{background:var(--rani-deep);box-shadow:inset 0 0 0 3px var(--rani-deep),inset 0 0 0 5px var(--zari)}
+.btn-line{border:3px double var(--kajal);background:transparent;color:var(--kajal)}
+.btn-line:hover{background:var(--chuna)}
+.ic{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* cover */
+#cover{position:fixed;inset:0;z-index:50;overflow:hidden}
+#cover .cloth{position:absolute;inset:0;display:flex;flex-direction:column;color:var(--chuna)}
+#cover .cloth-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;padding:clamp(24px,5vh,48px) var(--gut)}
+#cover .zb{height:30px}
+#cover .mb{height:6px;background:var(--mor)}
+.cv-names{display:flex;flex-direction:column;align-items:center;gap:6px}
+.cv-names .nm{font-size:clamp(44px,11vw,84px);line-height:1.1;font-weight:700}
+.cv-names .amp{font-size:clamp(26px,6vw,44px);line-height:1;color:var(--zari)}
+.cv-names .dn{font-size:clamp(26px,6vw,40px);line-height:1.4;color:var(--zari)}
+.seal{width:min(100%,320px);min-height:78px;border:0;background:var(--zari);color:var(--kajal);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:inset 0 0 0 4px var(--zari),inset 0 0 0 6px var(--kajal),0 0 0 2px var(--mor);font:inherit}
+.seal:hover{background:#D8B25C;box-shadow:inset 0 0 0 4px #D8B25C,inset 0 0 0 6px var(--kajal),0 0 0 2px var(--mor)}
+.seal .big{font-size:1.65rem;line-height:1.25;font-weight:700}
+.seal .small{font-size:.95rem;font-style:italic}
+
+#akshata{position:fixed;inset:0;pointer-events:none;z-index:60;overflow:hidden}
+.grain{position:absolute;width:5px;height:10px;border-radius:50%}
+
+/* hero */
+#hero{position:relative;display:flex;flex-direction:column;min-height:100vh;min-height:100svh}
+.hero-top{position:relative;flex:1;display:grid;place-items:center;padding:72px var(--gut) 44px;overflow:hidden}
+.half{position:absolute;top:0;bottom:0;width:50%}
+.half.l{left:0}
+.half.r{right:0}
+.invocation{position:relative;margin:0;padding:3px 14px;background:var(--kajal);color:var(--chuna);font-size:1rem}
+.hero-top .invocation{position:absolute;top:28px;left:50%;transform:translateX(-50%);white-space:nowrap}
+.hero-grid{position:relative;display:grid;grid-template-columns:1fr;justify-items:center;width:100%}
+.med{width:min(86vw,400px);aspect-ratio:1;max-width:100%}
+.med svg{display:block;width:100%;height:100%;overflow:visible}
+.hero-side{display:none}
+.art-labels{position:absolute;left:0;right:0;bottom:12px;display:flex;font-style:italic;font-size:.9rem}
+.art-labels span{flex:1;text-align:center}
+.art-labels .l{color:var(--chuna)}
+.hero-plate{padding:26px var(--gut) 30px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px}
+.hero-plate .nm{font-size:clamp(38px,9vw,64px);line-height:1.15;font-weight:700;margin:0}
+.hero-plate .dn{font-size:clamp(22px,5vw,30px);color:var(--zari);line-height:1.4}
+.write{display:inline-block}
+@media (min-width:1024px){
+  .hero-grid{grid-template-columns:1fr auto 1fr;align-items:center;gap:32px}
+  .hero-side{display:flex;flex-direction:column;gap:6px}
+  .hero-side.her{justify-self:start;color:var(--chuna)}
+  .hero-side.his{justify-self:end;text-align:right;color:var(--kajal)}
+  .hero-side .lbl{font-style:italic}
+  .hero-side .nm{font-size:clamp(56px,5.6vw,84px);line-height:1.05;font-weight:700}
+  .hero-side .dn{font-size:clamp(30px,2.8vw,44px);line-height:1.35}
+  .hero-side.her .dn{color:var(--zari)}
+  .hero-side.his .dn{color:var(--rani)}
+  .med{width:min(34vw,440px)}
+  .hero-plate .dn,.art-labels{display:none}
+  .hero-plate .nm{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+}
+
+/* meeting */
+#meeting{position:relative}
+.stage{position:relative;height:100vh;height:100svh;overflow:hidden;background:var(--kajal);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(8px,2vh,20px);padding:0 var(--gut)}
+.stage .half{z-index:0}
+.caps{position:relative;z-index:1;height:2em;width:100%;text-align:center}
+.cap{position:absolute;inset:0;margin:0;font-style:italic;font-size:1.05rem;color:var(--chuna)}
+.cap span{background:var(--kajal);padding:3px 12px}
+#meetSvg{position:relative;z-index:1;width:min(94vw,760px);max-height:58svh;height:auto;overflow:visible}
+.meet-names{position:relative;z-index:1;padding:14px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;box-shadow:0 0 0 2px var(--zari)}
+.meet-names .nm{font-size:clamp(32px,7vw,64px);line-height:1.15;font-weight:700}
+.meet-names .amp{color:var(--zari)}
+.meet-names .dn{font-size:clamp(20px,4vw,30px);color:var(--zari);line-height:1.4}
+
+/* schedule */
+.sched-head{text-align:center;color:var(--chuna);padding:40px var(--gut) 36px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.sched-head h2{margin:0;font-size:clamp(34px,6vw,54px);line-height:1.2;font-weight:700}
+.sched-head h2 span{color:var(--zari)}
+.chapters{display:grid;grid-template-columns:1fr;gap:0;padding-block:40px 56px}
+.chapter{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;max-width:440px;margin-inline:auto;width:100%}
+.chapter .med{width:min(64vw,250px)}
+.chapter h3{margin:10px 0 0;font-size:clamp(38px,8vw,48px);line-height:1.15;font-weight:700}
+.chapter .dn{font-size:1.4rem;line-height:1.4;color:var(--rani)}
+.chapter .story{font-style:italic;color:var(--deep)}
+.chapter dl{margin:10px 0 0;width:100%;display:grid;grid-template-columns:72px minmax(0,1fr);gap:8px 12px;text-align:left;line-height:1.45}
+.chapter dt{font-style:italic;color:var(--sal)}
+.chapter dd{margin:0}
+.swatch{display:inline-block;width:30px;height:20px;vertical-align:-3px;margin-right:10px;box-shadow:inset 0 0 0 2px var(--edge),0 0 0 1px var(--kajal)}
+.actions{display:flex;gap:10px;width:100%;margin-top:14px}
+.actions>*{flex:1}
+.threads{display:block;margin:22px auto}
+@media (min-width:1024px){
+  .chapters{grid-template-columns:repeat(3,minmax(0,1fr));gap:56px;align-items:start}
+  .threads{display:none}
+}
+
+/* mangalashtak */
+#mangal{color:var(--chuna)}
+.mg-inner{padding:56px var(--gut) 36px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.mg-inner h2{margin:0;font-size:clamp(34px,6vw,54px);line-height:1.2;font-weight:700}
+.mg-inner h2 span{color:var(--zari)}
+.verse{font-size:clamp(20px,2.4vw,26px);line-height:1.7;max-width:34em;display:flex;flex-direction:column;align-items:center;gap:4px}
+.verse .ln{display:flex;flex-wrap:wrap;justify-content:center;column-gap:.4em}
+.verse .river{box-shadow:inset 0 -2px 0 var(--zari)}
+.gloss{font-style:italic;max-width:34em;margin:0}
+.savdhan{font-size:clamp(30px,6vw,52px);line-height:1.35;font-weight:700;color:var(--zari);margin:10px 0 0}
+.count{padding:30px var(--gut) 40px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
+.units{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;width:min(100%,440px)}
+.unit{display:flex;flex-direction:column;align-items:center;gap:6px}
+.dial{width:clamp(84px,22vw,112px);aspect-ratio:1;border-radius:50%;background:var(--kagaz);color:var(--kajal);display:grid;place-items:center;box-shadow:-3px 0 0 0 var(--zari),3px 0 0 0 var(--chuna),0 0 0 6px var(--kajal)}
+.dial b{font-family:Amita,"Tiro Devanagari Hindi",Georgia,serif;font-size:clamp(32px,8vw,44px);font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+
+/* rsvp */
+.rsvp{padding:48px var(--gut) 56px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.rsvp .med{width:min(48vw,200px)}
+.rsvp h2{margin:0;font-size:clamp(36px,7vw,52px);line-height:1.15;font-weight:700}
+.rsvp form{width:min(100%,460px);display:flex;flex-direction:column;gap:14px;margin-top:10px;text-align:left}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;background:var(--chuna);border:3px double var(--kajal)}
+.row .ev{display:flex;flex-direction:column}
+.row .ev b{font-family:Amita,"Tiro Devanagari Hindi",Georgia,serif;font-size:1.5rem;line-height:1.2}
+.row .ev i{font-size:.9rem;color:var(--sal)}
+.step{display:flex;align-items:center;gap:6px}
+.step button{width:44px;height:44px;border-radius:50%;border:0;background:transparent;color:var(--kajal);cursor:pointer;display:grid;place-items:center;box-shadow:inset 0 0 0 2px var(--zari),inset 0 0 0 4px var(--chuna),inset 0 0 0 5.5px var(--kajal)}
+.step button:hover{background:var(--kagaz)}
+.step output{min-width:30px;text-align:center;font-family:Amita,"Tiro Devanagari Hindi",Georgia,serif;font-size:1.7rem;font-weight:700}
+.field{display:flex;flex-direction:column;gap:2px}
+.field label{font-style:italic;color:var(--sal);font-size:.95rem}
+.field input{min-height:48px;padding:8px 2px;border:0;border-bottom:3px double var(--kajal);background:transparent;font:inherit;font-size:1.1rem;color:var(--kajal)}
+.thanks{width:min(100%,460px);padding:24px 20px;background:var(--chuna);border:3px double var(--kajal)}
+.thanks .dhanyavad{font-size:2rem;font-weight:700;color:var(--rani);margin:0}
+.note{font-size:.9rem;font-style:italic;color:var(--deep)}
+
+footer{text-align:center}
+.foot{padding:30px var(--gut) 40px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.foot .chaupai{color:var(--zari);font-size:1.15rem;line-height:1.55;margin:0}
+.foot .love{font-size:1.3rem;margin:0}
+</style>
+
+<div class="selv l zari" aria-hidden="true"></div>
+<div class="selv r hatch" aria-hidden="true"></div>
+<div id="akshata" aria-hidden="true"></div>
+
+<div id="cover" role="dialog" aria-modal="true" aria-labelledby="cvTitle">
+  <div class="cloth silk">
+    <div class="zb zari"></div><div class="mb"></div>
+    <div class="cloth-body">
+      <div class="cv-text" style="display:flex;flex-direction:column;align-items:center;gap:2px;font-style:italic">
+        <span>Dear [Guest name] family</span>
+        <span lang="hi">प्रिय [अतिथि] परिवार</span>
+      </div>
+      <div class="cv-text cv-names">
+        <p lang="hi" style="margin:0;font-size:1.1rem">॥ श्री गणेशाय नमः ॥</p>
+        <svg class="divider" viewBox="0 0 220 16" width="200" height="15" aria-hidden="true"><path d="M0 8H96" stroke="#C9A04A" stroke-width="2"/><path d="M124 6H220M124 10H220" stroke="#F5EFE3" stroke-width="1.2"/><path d="M110 0 101 8 110 16Z" fill="#C9A04A"/><path d="M110 0 119 8 110 16Z" fill="#F5EFE3"/></svg>
+        <p id="cvTitle" style="margin:0;display:flex;flex-direction:column;align-items:center">
+          <span class="cal nm">Shreyansh</span>
+          <span class="cal amp">&amp;</span>
+          <span class="cal nm">Mrunalini</span>
+        </p>
+        <span lang="hi" class="cal dn">श्रेयांश · मृणालिनी</span>
+        <span>8 &amp; 9 December 2026 · Ranchi</span>
+      </div>
+      <div class="cv-text" style="display:flex;flex-direction:column;align-items:center;gap:12px;width:100%">
+        <button type="button" class="seal" id="openBtn">
+          <span lang="mr" class="cal big">शुभमंगल सावधान</span>
+          <span class="small">Tap to open your invitation</span>
+        </button>
+      </div>
+    </div>
+    <div class="mb"></div><div class="zb zari"></div>
+  </div>
+</div>
+
+<main>
+  <section id="hero" aria-labelledby="heroTitle">
+    <div class="band"><div class="zari"></div><div class="hatch"></div></div>
+    <div class="hero-top">
+      <div class="half l silk"></div>
+      <div class="half r paper"></div>
+      <p lang="hi" class="invocation">॥ श्री गणेशाय नमः ॥</p>
+      <div class="hero-grid">
+        <div class="hero-side her">
+          <span class="lbl">Paithani · from her Pune</span>
+          <span class="cal nm write">Mrunalini</span>
+          <span lang="mr" class="cal dn write">मृणालिनी</span>
+        </div>
+        <div class="med" data-pose="apart" data-id="hero"></div>
+        <div class="hero-side his">
+          <span class="lbl">Madhubani · from his Bihar</span>
+          <span class="cal nm write">Shreyansh</span>
+          <span lang="hi" class="cal dn write">श्रेयांश</span>
+        </div>
+      </div>
+      <div class="art-labels" aria-hidden="true"><span class="l">Paithani · <span lang="mr" class="cal">पैठणी</span></span><span>Madhubani · <span lang="hi" class="cal">मधुबनी</span></span></div>
+    </div>
+    <div class="hero-plate plate">
+      <h1 id="heroTitle" tabindex="-1" class="cal nm"><span class="write">Shreyansh <span style="color:var(--zari)">&amp;</span> Mrunalini</span></h1>
+      <span lang="hi" class="cal dn"><span class="write">श्रेयांश · मृणालिनी</span></span>
+      <span>Tuesday 8 &amp; Wednesday 9 December 2026 · Haveli Banquet, Ranchi</span>
+    </div>
+  </section>
+
+  <section id="meeting" aria-label="The two peacocks meet">
+    <div class="stage">
+      <div class="half l silk" id="mL"></div>
+      <div class="half r paper" id="mR"></div>
+      <div class="caps">
+        <p class="cap"><span>They see each other. Keep scrolling.</span></p>
+        <p class="cap"><span>Silk from her side, paper from his</span></p>
+        <p class="cap"><span>Tails open, feather by feather</span></p>
+        <p class="cap"><span>They meet, and the garland is exchanged</span></p>
+      </div>
+      <svg id="meetSvg" viewBox="0 0 400 300" aria-hidden="true"></svg>
+      <div class="meet-names plate">
+        <span class="cal nm write">Shreyansh <span class="amp">&amp;</span> Mrunalini</span>
+        <span lang="hi" class="cal dn write">श्रेयांश · मृणालिनी</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="schedule" aria-labelledby="schedTitle">
+    <div class="sched-head silk">
+      <p class="eyebrow reveal"><span lang="mr" class="mr">कार्यक्रम</span> · the celebrations</p>
+      <h2 id="schedTitle" class="cal reveal">From Pune to Ranchi, <span>three celebrations</span></h2>
+      <svg class="divider reveal" viewBox="0 0 220 16" width="200" height="15" aria-hidden="true"><path d="M0 8H96" stroke="#C9A04A" stroke-width="2"/><path d="M124 6H220M124 10H220" stroke="#F5EFE3" stroke-width="1.2"/><path d="M110 0 101 8 110 16Z" fill="#C9A04A"/><path d="M110 0 119 8 110 16Z" fill="#F5EFE3"/></svg>
+    </div>
+    <div class="band"><div class="zari"></div><div class="hatch"></div></div>
+    <div class="paper">
+      <div class="wrap chapters">
+        <article class="chapter" data-pose="haldi">
+          <div class="med" data-pose="haldi" data-id="haldi"></div>
+          <h3 class="cal reveal">Haldi</h3>
+          <div class="cal dn reveal"><span lang="mr">हळद</span> · <span lang="hi">हल्दी</span></div>
+          <p class="story reveal" style="margin:0">They see each other across the turmeric.</p>
+          <dl class="reveal">
+            <dt>When</dt><dd>Tuesday, 8 December 2026 · 12 noon</dd>
+            <dt>Where</dt><dd>Haveli Banquet, Ranchi</dd>
+            <dt>Wear</dt><dd><span class="swatch" style="background:#D99A1E;--edge:#E8C06A"></span>Yellow, in turmeric shades</dd>
+          </dl>
+          <div class="actions reveal">
+            <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Haveli+Banquet+Ranchi" target="_blank" rel="noopener">Open in Maps</a>
+            <button type="button" class="btn btn-primary">Add to calendar</button>
+          </div>
+          <svg class="threads" viewBox="0 0 60 130" width="60" height="130" aria-hidden="true"><path pathLength="1" d="M30 0C54 22 6 44 30 65S6 108 30 130" fill="none" stroke="#C9A04A" stroke-width="3"/><path pathLength="1" d="M30 0C6 22 54 44 30 65S54 108 30 130" fill="none" stroke="#2B211B" stroke-width="1.6"/></svg>
+        </article>
+        <article class="chapter" data-pose="dance">
+          <div class="med" data-pose="dance" data-id="sangeet"></div>
+          <h3 class="cal reveal">Sangeet</h3>
+          <div class="cal dn reveal"><span lang="mr">संगीत</span> · <span lang="hi">संगीत संध्या</span></div>
+          <p class="story reveal" style="margin:0">They dance, tails open.</p>
+          <dl class="reveal">
+            <dt>When</dt><dd>Tuesday, 8 December 2026 · 8 in the evening</dd>
+            <dt>Where</dt><dd>Haveli Banquet, Ranchi</dd>
+            <dt>Wear</dt><dd><span class="swatch" style="background:#2F3E73;--edge:#C9A04A"></span>Evening formals; Indo-western welcome</dd>
+          </dl>
+          <div class="actions reveal">
+            <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Haveli+Banquet+Ranchi" target="_blank" rel="noopener">Open in Maps</a>
+            <button type="button" class="btn btn-primary">Add to calendar</button>
+          </div>
+          <svg class="threads" viewBox="0 0 60 130" width="60" height="130" aria-hidden="true"><path pathLength="1" d="M30 0C54 22 6 44 30 65S6 108 30 130" fill="none" stroke="#C9A04A" stroke-width="3"/><path pathLength="1" d="M30 0C6 22 54 44 30 65S54 108 30 130" fill="none" stroke="#2B211B" stroke-width="1.6"/></svg>
+        </article>
+        <article class="chapter" data-pose="garland">
+          <div class="med" data-pose="garland" data-id="shaadi"></div>
+          <h3 class="cal reveal">Shaadi</h3>
+          <div class="cal dn reveal"><span lang="mr">लग्न</span> · <span lang="hi">शुभ विवाह</span></div>
+          <p class="story reveal" style="margin:0">They meet, and the garland is exchanged.</p>
+          <dl class="reveal">
+            <dt>When</dt><dd>Wednesday, 9 December 2026 · 8 in the evening</dd>
+            <dt>Where</dt><dd>Haveli Banquet, Ranchi</dd>
+            <dt>Wear</dt><dd><span class="swatch" style="background:#A3195B;--edge:#C9A04A"></span>Traditional finery: Paithani, Banarasi, lehengas, sherwanis. Jewel tones.</dd>
+          </dl>
+          <div class="actions reveal">
+            <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Haveli+Banquet+Ranchi" target="_blank" rel="noopener">Open in Maps</a>
+            <button type="button" class="btn btn-primary">Add to calendar</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="mangal" class="morsilk" aria-labelledby="mgTitle">
+    <div class="band"><div class="zari"></div><div class="hatch"></div></div>
+    <div class="mg-inner">
+      <p class="eyebrow reveal"><span lang="mr" class="mr">मंगलाष्टक</span> · Mangalashtak</p>
+      <h2 id="mgTitle" class="cal reveal">Two rivers, <span>one blessing</span></h2>
+      <div class="verse mr" lang="sa" id="verse"></div>
+      <p class="gloss reveal">Ganga, Sindhu, Saraswati, Yamuna, Godavari, Narmada… and the famed Gandaki: may these holy rivers bring you auspiciousness. The Godavari flows through her Maharashtra; the Gandaki through his Bihar.</p>
+      <p lang="mr" class="cal savdhan" id="savdhan">॥ शुभमंगल सावधान ॥</p>
+    </div>
+    <div class="band"><div class="zari"></div><div class="hatch"></div></div>
+    <div class="count plate">
+      <p class="eyebrow"><span lang="mr" class="mr">मुहूर्त</span> · the muhurat is in</p>
+      <div class="units" aria-live="off">
+        <div class="unit"><div class="dial"><b id="cd-d">–</b></div><i>days</i></div>
+        <div class="unit"><div class="dial"><b id="cd-h">–</b></div><i>hours</i></div>
+        <div class="unit"><div class="dial"><b id="cd-m">–</b></div><i>minutes</i></div>
+      </div>
+      <span>Wednesday, 9 December 2026 · 8 in the evening</span>
+    </div>
+  </section>
+
+  <section id="rsvp" class="paper" aria-labelledby="rsvpTitle">
+    <div class="rsvp">
+      <div class="med" data-pose="meet" data-id="rsvp" data-fan="closed"></div>
+      <p class="eyebrow reveal" style="color:var(--deep)"><span lang="hi">उत्तराकांक्षी</span> · awaiting your reply</p>
+      <h2 id="rsvpTitle" class="cal reveal">Will you join us?</h2>
+      <p class="reveal" style="margin:0;font-style:italic">[Guest name] family, how many of you will come to each celebration?</p>
+      <form id="rsvpForm" class="reveal" novalidate>
+        <div class="row"><div class="ev"><b>Haldi</b><i>Tue 8 Dec · 12 noon</i></div><div class="step"><button type="button" data-k="haldi" data-d="-1" aria-label="One fewer guest for Haldi"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="ic" d="M6 12h12"/></svg></button><output id="n-haldi">2</output><button type="button" data-k="haldi" data-d="1" aria-label="One more guest for Haldi"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="ic" d="M6 12h12M12 6v12"/></svg></button></div></div>
+        <div class="row"><div class="ev"><b>Sangeet</b><i>Tue 8 Dec · 8 pm</i></div><div class="step"><button type="button" data-k="sangeet" data-d="-1" aria-label="One fewer guest for Sangeet"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="ic" d="M6 12h12"/></svg></button><output id="n-sangeet">2</output><button type="button" data-k="sangeet" data-d="1" aria-label="One more guest for Sangeet"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="ic" d="M6 12h12M12 6v12"/></svg></button></div></div>
+        <div class="row"><div class="ev"><b>Shaadi</b><i>Wed 9 Dec · 8 pm</i></div><div class="step"><button type="button" data-k="shaadi" data-d="-1" aria-label="One fewer guest for Shaadi"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="ic" d="M6 12h12"/></svg></button><output id="n-shaadi">2</output><button type="button" data-k="shaadi" data-d="1" aria-label="One more guest for Shaadi"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="ic" d="M6 12h12M12 6v12"/></svg></button></div></div>
+        <div class="field"><label for="rsvpName">Your name</label><input id="rsvpName" type="text" autocomplete="name" placeholder="[Guest name]"></div>
+        <button type="submit" class="btn btn-primary" style="min-height:60px;font-size:1.2rem"><span class="cal" style="font-weight:700">Send RSVP</span>&nbsp;·&nbsp;<span id="total">6</span>&nbsp;guests</button>
+        <p class="note" style="margin:0;text-align:center">Prototype: replies aren't sent anywhere yet.</p>
+      </form>
+      <div class="thanks" id="thanks" hidden>
+        <p lang="hi" class="cal dhanyavad">धन्यवाद</p>
+        <p class="cal" style="font-size:1.8rem;font-weight:700;margin:0">Thank you!</p>
+        <p style="margin:6px 0 0;font-style:italic">We’ve noted <span id="total2">6</span> guests across the celebrations. See you in Ranchi.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="plate">
+  <div class="band"><div class="zari"></div><div class="hatch"></div></div>
+  <div class="foot">
+    <p lang="hi" class="chaupai">मंगल भवन अमंगल हारी।<br>द्रवउ सो दसरथ अजिर बिहारी॥</p>
+    <p class="cal love">With love, the families of Shreyansh &amp; Mrunalini</p>
+    <p class="note" style="color:var(--chuna);margin:0">Motion prototype. The peacocks and borders are drawn stand-ins; the final art will be commissioned.</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const C = { rani:'#A3195B', mor:'#0E5C63', zari:'#C9A04A', chuna:'#F5EFE3', kagaz:'#EFE3C8', kajal:'#2B211B', sindoor:'#B3261E', haldi:'#D99A1E', neel:'#2F3E73', sal:'#5E6B3A' };
+  const BODY = 'M34 118C28 96 44 80 64 84C66 70 62 52 74 44C80 39 90 40 93 46C96 52 90 57 86 60C80 66 80 76 84 86C92 100 86 118 70 124C54 130 38 128 34 118Z';
+  const TAIL = 'M36 112C20 118 6 128 2 142C10 150 24 156 40 156C44 144 46 132 44 122Z';
+  const BEAK = 'M93 44 104 47 93 50Z';
+  const CREST = 'M84 42 80 30M88 40 88 28M92 42 96 30';
+  const LEGS = 'M58 128 56 144M68 126 70 142';
+  const f = (n) => n.toFixed(1);
+
+  function fan(P) {
+    const cx = 38, cy = 112, r0 = 8, r1 = 46, re = 54, rx = 10, ry = 6.5, rin = 3.2;
+    let s = '';
+    for (let i = 0; i < 9; i++) {
+      const a = (160 + (130 * i) / 8) * Math.PI / 180, c = Math.cos(a), si = Math.sin(a);
+      const ex = cx + re * c, ey = cy + re * si, deg = f(a * 180 / Math.PI);
+      const x0 = ex - rx * c, y0 = ey - rx * si, x1 = ex + rx * c, y1 = ey + rx * si;
+      s += '<g class="feather">' +
+        '<path class="f-line" pathLength="1" d="M' + f(cx + r0 * c) + ' ' + f(cy + r0 * si) + 'L' + f(cx + r1 * c) + ' ' + f(cy + r1 * si) + '" fill="none" stroke="' + (P ? C.zari : C.kajal) + '" stroke-width="' + (P ? 1.6 : 1.8) + '" stroke-linecap="round"/>' +
+        '<path class="f-eye" d="M' + f(x0) + ' ' + f(y0) + 'A' + rx + ' ' + ry + ' ' + deg + ' 1 0 ' + f(x1) + ' ' + f(y1) + 'A' + rx + ' ' + ry + ' ' + deg + ' 1 0 ' + f(x0) + ' ' + f(y0) + 'Z" fill="' + (P ? C.mor : C.haldi) + '" stroke="' + (P ? C.zari : C.kajal) + '" stroke-width="' + (P ? 1.4 : 2.2) + '"/>' +
+        '<circle class="f-in" cx="' + f(ex + 1.5 * c) + '" cy="' + f(ey + 1.5 * si) + '" r="' + rin + '" fill="' + (P ? C.rani : C.neel) + '"/>' +
+        '</g>';
+    }
+    return '<g class="fan">' + s + '</g>';
+  }
+  function eyes(o, i) {
+    return [[12, 138], [24, 149], [37, 148]].map(([x, y]) => '<circle cx="' + x + '" cy="' + y + '" r="6.5" fill="' + o + '"/><circle cx="' + x + '" cy="' + y + '" r="3" fill="' + i + '"/>').join('');
+  }
+  function peacock(side, place, fanMode) {
+    const P = side === 'p';
+    const fanG = fanMode === 'none' ? '' : fan(P);
+    const tailHidden = fanMode === 'open' ? ' style="display:none"' : '';
+    const tail = P
+      ? '<path d="' + TAIL + '" fill="' + C.zari + '"/>' + eyes(C.mor, C.rani)
+      : '<path d="' + TAIL + '" fill="' + C.sal + '" stroke="' + C.kajal + '" stroke-width="4.2" stroke-linejoin="round"/><path d="' + TAIL + '" fill="none" stroke="' + C.kagaz + '" stroke-width="1.3"/>' + eyes(C.haldi, C.sindoor);
+    const body = P
+      ? '<path d="' + BODY + '" fill="' + C.zari + '"/><path d="' + BEAK + '" fill="' + C.zari + '"/><path d="' + LEGS + '" stroke="' + C.zari + '" stroke-width="2" stroke-linecap="round"/><path d="M46 104C56 96 72 98 80 108" fill="none" stroke="' + C.rani + '" stroke-width="2" stroke-linecap="round"/><circle cx="88" cy="47" r="2" fill="' + C.rani + '"/>'
+      : '<path d="' + BODY + '" fill="' + C.neel + '" stroke="' + C.kajal + '" stroke-width="4.2" stroke-linejoin="round"/><path d="' + BODY + '" fill="none" stroke="' + C.kagaz + '" stroke-width="1.3"/><path d="' + BEAK + '" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="2.4" stroke-linejoin="round"/><path d="' + LEGS + '" stroke="' + C.kajal + '" stroke-width="2" stroke-linecap="round"/><path d="M46 104C56 96 72 98 80 108M50 108 54 100M58 108 61 99M66 109 68 100M74 110 75 102" fill="none" stroke="' + C.kagaz + '" stroke-width="1.6" stroke-linecap="round"/><circle cx="88" cy="47" r="2.4" fill="' + C.kagaz + '"/><circle cx="88" cy="47" r="1.1" fill="' + C.kajal + '"/>';
+    const crest = P
+      ? '<path d="' + CREST + '" stroke="' + C.zari + '" stroke-width="2" stroke-linecap="round"/>' + [[80, 29], [88, 27], [96, 29]].map(([x, y]) => '<circle cx="' + x + '" cy="' + y + '" r="2.6" fill="' + C.zari + '"/>').join('')
+      : '<path d="' + CREST + '" stroke="' + C.kajal + '" stroke-width="2" stroke-linecap="round"/>' + [[80, 29], [88, 27], [96, 29]].map(([x, y]) => '<circle cx="' + x + '" cy="' + y + '" r="2.8" fill="' + C.sindoor + '"/>').join('');
+    return '<g class="pk pk-' + (P ? 'l' : 'r') + '"><g transform="' + place + '">' + fanG + '<g class="tail"' + tailHidden + '>' + tail + '</g>' + body + '<g class="crest">' + crest + '</g></g></g>';
+  }
+  function beads(p0, p1, p2, n, r) {
+    let s = '';
+    for (let i = 0; i <= n; i++) {
+      const t = i / n, u = 1 - t;
+      const x = u * u * p0[0] + 2 * u * t * p1[0] + t * t * p2[0];
+      const y = u * u * p0[1] + 2 * u * t * p1[1] + t * t * p2[1];
+      s += '<circle class="bead" cx="' + f(x) + '" cy="' + f(y) + '" r="' + r + '" fill="' + (i % 2 ? C.sindoor : C.haldi) + '"/>';
+    }
+    return '<g class="garland">' + s + '</g>';
+  }
+  const PLACE = {
+    apart: ['translate(14 44) scale(1.15)', 'translate(306 44) scale(-1.15 1.15)'],
+    haldi: ['translate(14 44) scale(1.15)', 'translate(306 44) scale(-1.15 1.15)'],
+    meet: ['translate(40 44) scale(1.15)', 'translate(280 44) scale(-1.15 1.15)'],
+    garland: ['translate(40 44) scale(1.15)', 'translate(280 44) scale(-1.15 1.15)'],
+    dance: ['translate(34 62) scale(1.05)', 'translate(286 62) scale(-1.05 1.05)']
+  };
+  function medallion(pose, fanMode) {
+    const [pl, pr] = PLACE[pose];
+    let center = '';
+    if (pose === 'apart') center = '<g class="bud"><path d="M160 268C150 256 150 240 160 228Z" fill="' + C.rani + '" stroke="' + C.zari + '" stroke-width="2"/><path d="M160 268C170 256 170 240 160 228Z" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="2.4"/></g>';
+    if (pose === 'meet') {
+      const pet = 'M0 0C-16-16-14-44 0-58C14-44 16-16 0 0Z';
+      center = '<g class="lotus" transform="translate(160 272)">' +
+        [-60, -30].map((a) => '<path transform="rotate(' + a + ')" d="' + pet + '" fill="' + C.rani + '" stroke="' + C.zari + '" stroke-width="2"/>').join('') +
+        [60, 30].map((a) => '<path transform="rotate(' + a + ')" d="' + pet + '" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="2.6"/>').join('') +
+        '<path d="M0 0C-16-16-14-44 0-58Z" fill="' + C.rani + '" stroke="' + C.zari + '" stroke-width="2"/><path d="M0 0C16-16 14-44 0-58Z" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="2.6"/></g>';
+    }
+    if (pose === 'haldi') center = '<g class="bowl"><path d="M126 246H194A34 26 0 0 1 126 246Z" fill="' + C.zari + '" stroke="' + C.kajal + '" stroke-width="2.6" stroke-linejoin="round"/><path d="M134 246C140 230 180 230 186 246Z" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="2"/><path d="M134 258H186" stroke="' + C.kajal + '" stroke-width="1.4"/></g>';
+    const garland = pose === 'garland' ? beads([64, 118], [160, 8], [256, 118], 16, 5) : '';
+    return '<svg viewBox="0 0 320 320" aria-hidden="true">' +
+      '<path class="disc" d="M160 12A148 148 0 0 0 160 308Z" fill="' + C.rani + '"/>' +
+      '<path class="disc" d="M160 12A148 148 0 0 1 160 308Z" fill="' + C.kagaz + '"/>' +
+      '<path class="ring-draw" pathLength="1" d="M160 18A142 142 0 0 0 160 302" fill="none" stroke="' + C.zari + '" stroke-width="8"/>' +
+      '<path class="ring-m" d="M160 18A142 142 0 0 1 160 302" fill="none" stroke="' + C.kajal + '" stroke-width="9" stroke-dasharray="1.6 3.2"/>' +
+      '<path class="ring-draw" pathLength="1" d="M160 10A150 150 0 0 1 160 310" fill="none" stroke="' + C.kajal + '" stroke-width="2.5"/>' +
+      '<path class="ring-draw" pathLength="1" d="M160 26A134 134 0 0 1 160 294" fill="none" stroke="' + C.kajal + '" stroke-width="2.5"/>' +
+      '<path class="ring-draw" pathLength="1" d="M160 10A150 150 0 0 0 160 310" fill="none" stroke="' + C.zari + '" stroke-width="2"/>' +
+      '<path class="ring-draw" pathLength="1" d="M160 26A134 134 0 0 0 160 294" fill="none" stroke="' + C.zari + '" stroke-width="2"/>' +
+      garland + peacock('p', pl, fanMode) + peacock('m', pr, fanMode) + center + '</svg>';
+  }
+
+  document.querySelectorAll('.med').forEach((el) => {
+    const pose = el.dataset.pose;
+    const fanMode = pose === 'dance' ? 'open' : (el.dataset.fan === 'closed' ? 'closed' : 'none');
+    el.innerHTML = medallion(pose, fanMode);
+  });
+  document.getElementById('meetSvg').innerHTML =
+    beads([150, 94], [200, -6], [250, 94], 12, 4.6) +
+    peacock('p', 'translate(85.6 44) scale(1.1)', 'closed') +
+    peacock('m', 'translate(314.4 44) scale(-1.1 1.1)', 'closed');
+
+  const verse = [
+    'गङ्गा सिन्धु सरस्वती च यमुना गोदावरी नर्मदा',
+    'कावेरी सरयू महेन्द्रतनया चर्मण्वती वेदिका।',
+    'शिप्रा वेत्रवती महासुरनदी ख्याता च या गण्डकी',
+    'पूर्णाः पुण्यजलैः समुद्रसहिताः कुर्वन्तु वो मङ्गलम्॥'
+  ];
+  document.getElementById('verse').innerHTML = verse.map((line) =>
+    '<span class="ln">' + line.split(' ').map((w) => '<span class="vw' + (w === 'गोदावरी' || w === 'गण्डकी' ? ' river' : '') + '">' + w + '</span>').join('') + '</span>'
+  ).join('');
+
+  const target = Date.UTC(2026, 11, 9, 14, 30);
+  function tick() {
+    const ms = Math.max(0, target - Date.now());
+    document.getElementById('cd-d').textContent = Math.floor(ms / 86400000);
+    document.getElementById('cd-h').textContent = String(Math.floor((ms % 86400000) / 3600000)).padStart(2, '0');
+    document.getElementById('cd-m').textContent = String(Math.floor((ms % 3600000) / 60000)).padStart(2, '0');
+  }
+  tick();
+  setInterval(tick, 30000);
+
+  const counts = { haldi: 2, sangeet: 2, shaadi: 2 };
+  const total = () => counts.haldi + counts.sangeet + counts.shaadi;
+  document.querySelectorAll('.step button').forEach((b) => b.addEventListener('click', () => {
+    const k = b.dataset.k;
+    counts[k] = Math.max(0, Math.min(20, counts[k] + Number(b.dataset.d)));
+    document.getElementById('n-' + k).textContent = counts[k];
+    document.getElementById('total').textContent = total();
+  }));
+
+  const hasGsap = !!window.gsap && !!window.ScrollTrigger;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(pointer: fine)').matches;
+  const root = document.documentElement;
+  const cover = document.getElementById('cover');
+  root.classList.add('locked');
+  document.getElementById('openBtn').focus({ preventScroll: true });
+
+  let lenis = null;
+  if (hasGsap) {
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
+    if (!reduce && fine && window.Lenis) {
+      lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((t) => lenis.raf(t * 1000));
+      gsap.ticker.lagSmoothing(0);
+      lenis.stop();
+    }
+  }
+
+  function burst(n) {
+    if (!hasGsap || reduce) return;
+    const layer = document.getElementById('akshata');
+    const W = innerWidth, H = innerHeight;
+    for (let i = 0; i < n; i++) {
+      const g = document.createElement('i');
+      g.className = 'grain';
+      g.style.left = (W * (0.12 + Math.random() * 0.76)) + 'px';
+      g.style.top = '-14px';
+      g.style.background = [C.zari, C.chuna, C.haldi][i % 3];
+      layer.appendChild(g);
+      gsap.fromTo(g, { y: 0, rotation: Math.random() * 180 }, {
+        y: H * (0.35 + Math.random() * 0.55), x: (Math.random() - 0.5) * 90, rotation: '+=' + (200 + Math.random() * 300),
+        duration: 1.5 + Math.random() * 0.8, ease: 'power1.in', onComplete: () => g.remove()
+      });
+      gsap.to(g, { autoAlpha: 0, duration: 0.5, delay: 1.2 + Math.random() * 0.7 });
+    }
+  }
+
+  let heroIntro = null;
+  function unlock() {
+    root.classList.remove('locked');
+    cover.remove();
+    if (lenis) lenis.start();
+    if (hasGsap) ScrollTrigger.refresh();
+    if (heroIntro) heroIntro.play();
+    const h = document.getElementById('heroTitle');
+    if (h) h.focus({ preventScroll: true });
+  }
+  let opened = false;
+  document.getElementById('openBtn').addEventListener('click', () => {
+    if (opened) return;
+    opened = true;
+    if (!hasGsap || reduce) { unlock(); return; }
+    gsap.timeline({ onComplete: unlock })
+      .to('#cover .cv-text', { y: -18, autoAlpha: 0, duration: 0.35, ease: 'power2.in', stagger: 0.05 })
+      .to('#cover .cloth', { yPercent: 104, duration: 0.95, ease: 'power2.inOut' }, '-=0.1')
+      .add(() => burst(30), '-=0.55');
+  });
+
+  document.getElementById('rsvpForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.getElementById('total2').textContent = total();
+    const form = e.currentTarget, thanks = document.getElementById('thanks');
+    const svg = document.querySelector('#rsvp .med svg');
+    const finish = () => { form.hidden = true; thanks.hidden = false; };
+    if (!hasGsap || reduce) { svg.querySelectorAll('.tail').forEach((t) => (t.style.display = 'none')); svg.querySelectorAll('.feather').forEach((t) => { t.style.opacity = 1; t.style.visibility = 'visible'; }); if (hasGsap) { gsap.set(svg.querySelectorAll('.f-line'), { strokeDashoffset: 0 }); gsap.set(svg.querySelectorAll('.f-eye, .f-in'), { scale: 1 }); } finish(); return; }
+    gsap.timeline({ onComplete: () => burst(22) })
+      .to(form, { autoAlpha: 0, y: -12, duration: 0.3, ease: 'power2.in', onComplete: finish })
+      .to(svg.querySelectorAll('.tail'), { autoAlpha: 0, duration: 0.25 }, 0.1)
+      .to(svg.querySelectorAll('.f-line'), { strokeDashoffset: 0, duration: 0.5, stagger: 0.03, ease: 'power2.out' }, 0.2)
+      .to(svg.querySelectorAll('.f-eye, .f-in'), { scale: 1, duration: 0.45, stagger: 0.015, ease: 'back.out(1.4)' }, 0.3)
+      .from(thanks, { autoAlpha: 0, y: 16, duration: 0.6, ease: 'power3.out' }, 0.45);
+  });
+
+  if (!hasGsap) { return; }
+
+  const mm = gsap.matchMedia();
+  mm.add({ phone: '(max-width: 599px)', desk: '(min-width: 1024px)', reduce: '(prefers-reduced-motion: reduce)' }, (ctx) => {
+    const { phone, reduce: rm } = ctx.conditions;
+    if (rm) {
+      gsap.set('#meetSvg .tail', { autoAlpha: 0 });
+      gsap.set('#mL, #mR', { xPercent: 0 });
+      gsap.set('#meeting .cap', { autoAlpha: 0 });
+      gsap.set('#meeting .cap:last-child', { autoAlpha: 1 });
+      gsap.set('#rsvp .feather', { autoAlpha: 0 });
+      return;
+    }
+
+    heroIntro = gsap.timeline({ paused: !document.documentElement.classList.contains('locked') ? false : true, defaults: { ease: 'power3.out' } })
+      .from('#hero .half.l', { xPercent: -100, duration: 0.9 })
+      .from('#hero .half.r', { xPercent: 100, duration: 0.9 }, '<')
+      .from('#hero .med svg', { scale: 0.9, autoAlpha: 0, duration: 0.8, transformOrigin: '50% 50%' }, '-=0.5')
+      .from('#hero .pk-l', { x: -40, duration: 1 }, '<0.1')
+      .from('#hero .pk-r', { x: 40, duration: 1 }, '<0.08')
+      .from('#hero .write', { clipPath: 'inset(0% 100% 0% 0%)', duration: 1.1, ease: 'power2.inOut', stagger: 0.12 }, '-=0.6');
+    if (!cover.isConnected) heroIntro.play();
+
+    const bob = gsap.to('#hero .crest', { y: -1.6, duration: 1.4, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: 0.5, paused: true });
+    ScrollTrigger.create({ trigger: '#hero', start: 'top bottom', end: 'bottom top', onToggle: (s) => (s.isActive ? bob.play() : bob.pause()) });
+
+    gsap.set('#meetSvg .f-line', { strokeDasharray: 1 });
+    gsap.set('#meeting .cap', { autoAlpha: 0 });
+    gsap.set('#meeting .cap:first-child', { autoAlpha: 1 });
+    const caps = gsap.utils.toArray('#meeting .cap');
+    const meet = gsap.timeline({
+      defaults: { ease: 'none' },
+      scrollTrigger: {
+        trigger: '#meeting', start: 'top top', end: () => '+=' + Math.round(innerHeight * (phone ? 1.5 : 2.1)),
+        pin: '#meeting .stage', scrub: fine ? 1.2 : 0.5, anticipatePin: 1, invalidateOnRefresh: true,
+        onLeave: () => burst(26)
+      }
+    });
+    meet.fromTo('#mL', { xPercent: -60 }, { xPercent: 0, duration: 0.35 }, 0)
+      .fromTo('#mR', { xPercent: 60 }, { xPercent: 0, duration: 0.35 }, 0)
+      .fromTo('#meetSvg .pk-l', { x: -110 }, { x: -24, duration: 0.35 }, 0)
+      .fromTo('#meetSvg .pk-r', { x: 110 }, { x: 24, duration: 0.35 }, 0)
+      .to('#meetSvg .pk', { keyframes: { y: [0, -4, 0, -4, 0] }, duration: 0.35 }, 0)
+      .to(caps[0], { autoAlpha: 0, duration: 0.04 }, 0.18)
+      .to(caps[1], { autoAlpha: 1, duration: 0.04 }, 0.2)
+      .to('#meetSvg .tail', { autoAlpha: 0, duration: 0.08 }, 0.38)
+      .fromTo('#meetSvg .f-line', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.14, stagger: 0.012 }, 0.36)
+      .fromTo('#meetSvg .f-eye, #meetSvg .f-in', { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.1, stagger: 0.006 }, 0.42)
+      .to(caps[1], { autoAlpha: 0, duration: 0.04 }, 0.37)
+      .to(caps[2], { autoAlpha: 1, duration: 0.04 }, 0.39)
+      .to('#meetSvg .pk-l', { x: 0, duration: 0.15 }, 0.7)
+      .to('#meetSvg .pk-r', { x: 0, duration: 0.15 }, 0.7)
+      .fromTo('#meetSvg .bead', { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.08, stagger: 0.008 }, 0.76)
+      .to(caps[2], { autoAlpha: 0, duration: 0.04 }, 0.72)
+      .to(caps[3], { autoAlpha: 1, duration: 0.04 }, 0.74)
+      .fromTo('#meeting .write', { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.14, stagger: 0.03 }, 0.86);
+
+    gsap.utils.toArray('.chapter').forEach((ch) => {
+      const svg = ch.querySelector('.med svg');
+      const rings = svg.querySelectorAll('.ring-draw');
+      gsap.set(rings, { strokeDasharray: 1 });
+      const tl = gsap.timeline({ scrollTrigger: { trigger: ch, start: 'top 80%', once: true }, defaults: { ease: 'power3.out' } });
+      tl.fromTo(rings, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut', stagger: 0.06 })
+        .from(svg.querySelectorAll('.disc, .ring-m'), { autoAlpha: 0, duration: 0.6 }, 0.1)
+        .from(svg.querySelector('.pk-l'), { x: -40, autoAlpha: 0, duration: 0.9 }, 0.35)
+        .from(svg.querySelector('.pk-r'), { x: 40, autoAlpha: 0, duration: 0.9 }, 0.43);
+      if (ch.dataset.pose === 'dance') {
+        gsap.set(svg.querySelectorAll('.f-line'), { strokeDasharray: 1 });
+        tl.fromTo(svg.querySelectorAll('.f-line'), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.5, stagger: 0.04 }, 0.9)
+          .from(svg.querySelectorAll('.f-eye, .f-in'), { scale: 0, transformOrigin: '50% 50%', duration: 0.45, ease: 'back.out(1.4)', stagger: 0.02 }, 1.0);
+      }
+      if (ch.dataset.pose === 'garland') tl.from(svg.querySelectorAll('.bead'), { scale: 0, transformOrigin: '50% 50%', duration: 0.35, stagger: 0.03 }, 0.95);
+      if (ch.dataset.pose === 'haldi') tl.from(svg.querySelector('.bowl'), { y: 18, autoAlpha: 0, duration: 0.7 }, 0.8);
+      tl.from(ch.querySelectorAll('.reveal'), { y: 24, autoAlpha: 0, duration: 0.8, stagger: 0.07 }, 0.55);
+    });
+
+    gsap.utils.toArray('.threads path').forEach((p) => {
+      gsap.fromTo(p, { strokeDasharray: 1, strokeDashoffset: 1 }, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: p.closest('svg'), start: 'top 88%', end: 'bottom 50%', scrub: true } });
+    });
+
+    gsap.utils.toArray('#schedule .sched-head .reveal, #mangal .reveal, #rsvp .reveal').forEach((el) => {
+      gsap.from(el, { y: 24, autoAlpha: 0, duration: 0.85, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+    });
+
+    gsap.fromTo('#verse .vw', { opacity: 0.22 }, { opacity: 1, ease: 'none', stagger: 0.1, scrollTrigger: { trigger: '#verse', start: 'top 78%', end: 'bottom 42%', scrub: true } });
+    ScrollTrigger.create({ trigger: '#savdhan', start: 'top 82%', once: true, onEnter: () => burst(24) });
+
+    const rsvpSvg = document.querySelector('#rsvp .med svg');
+    gsap.set(rsvpSvg.querySelectorAll('.f-line'), { strokeDasharray: 1, strokeDashoffset: 1 });
+    gsap.set(rsvpSvg.querySelectorAll('.f-eye, .f-in'), { scale: 0, transformOrigin: '50% 50%' });
+  });
+
+  addEventListener('load', () => ScrollTrigger.refresh());
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => ScrollTrigger.refresh());
+})();
+</script>

@@ -1,84 +1,132 @@
 # Phase 2 — Design
 
-**Design canvas:** https://claude.ai/artifact/SGiypJevJt1eNSEZsSa3fx (private until shared from its Share menu)
+- **Design canvas:** https://claude.ai/artifact/SGiypJevJt1eNSEZsSa3fx
+- **Scroll-motion prototype:** https://claude.ai/artifact/PHnbz3mYgvhdaqpMkC4VWZ. Its source is in `design/prototype/`.
+
+Both are private until shared from their Share menus.
 
 ## What the couple decided
 
 | | |
 |---|---|
 | **Names** | Shreyansh Shrey · श्रेयांश श्रेय — Mrunalini Waghmare · मृणालिनी वाघमारे |
-| **Haldi** | Tuesday 8 Dec 2026, 12:00 pm · Haveli Banquet, Ranchi · wear yellow |
-| **Sangeet** | Tuesday 8 Dec 2026, 8:00 pm · Haveli Banquet, Ranchi · formals |
-| **Shaadi** | Wednesday 9 Dec 2026, 8:00 pm · Haveli Banquet, Ranchi · traditional (our wording below) |
+| **Haldi** | Tuesday 8 Dec 2026, 12 noon · Haveli Banquet, Ranchi · wear yellow |
+| **Sangeet** | Tuesday 8 Dec 2026, 8 pm · Haveli Banquet, Ranchi · formals |
+| **Shaadi** | Wednesday 9 Dec 2026, 8 pm · Haveli Banquet, Ranchi · traditional (our wording below) |
 | **Groom's-side art** | Madhubani |
 | **Languages** | English, Marathi and Hindi |
-| **Direction** | The recommended mix (below) |
+| **Direction** | **A · the peacock pair: Paithani meets Madhubani** (chosen after v1) |
 
-## The direction: "Two walls, one chowk"
-- **The look:** two painted walls meet in one chowk.
-  - Her side is **Warli**: white rice-paste figures on a red-ochre wall.
-  - His side is **Madhubani**: bold double-line art on handmade paper.
-  - They meet in a **Lagna Chowk** with the couple's names at the centre.
-- **The story:** the **Pune → Hatia train (22845)**. The wedding is in Ranchi, so the bride's family really does make this journey. The three events are its stations.
-- **The details:** a woven Paithani-style border, grains of akshata, Warli triangle bands, and palash and sal accents.
-- **The opening:** the **Antarpat**. Tap "शुभमंगल सावधान", the cloth drops, akshata bursts, and the shehnai starts on the same tap.
-- **Colours:** named after ritual materials (geru, chuna, kagaz, kajal, sindoor, haldi, neel, sal, palash, mitti). Every text pairing meets 4.5:1 contrast. Haldi and palash are never used for body text.
-- **Type:**
-  - **Eczar** for display. It covers both Latin and Devanagari in one voice.
-  - **Tiro Devanagari Marathi / Hindi** for the invitation text and verses.
-  - **Mukta** for the interface.
-  - On phones, Devanagari body text uses the system font.
+## Feedback on v1, and what changed in v2
+1. **"Text calligraphy can be improved; keep it traditional even in English."**
+   - Before: Eczar and Mukta, which are modern.
+   - Now: **Amita** for names, titles and numbers. It is a calligraphic face whose Latin and Devanagari were drawn with one pen.
+   - All other text uses **Tiro Devanagari**, with italic for flourishes, in all three languages. **There is no sans-serif anywhere.**
+2. **"Schedule and RSVP look disconnected from the landing."**
+   - Both now use the landing's vocabulary: silk, paper, zari, double lines and the peacock medallion.
+   - The generic app cards and sans-serif buttons are gone.
+3. **"I like A with the peacocks; keep the crossing of two cultures."**
+   - A is now the whole system.
+   - Every motif is drawn by both hands: gold on silk on her side, double line on paper on his.
+4. **"Think more about responsiveness and Apple / Framer-style scroll motion."**
+   - A four-frame storyboard of the pinned scroll scene.
+   - Desktop layouts for the hero and schedule, and responsive rules.
+   - A **live scroll prototype** built on the real stack.
 
-## The canvas
-1. **Cover: the Antarpat.** Interactive: tap to drop the cloth.
-2. **Hero:** names in Latin and Devanagari, the date, and the two walls with a gap between them.
-3. **Two walls meet:** the pinned scene that plays as you scroll, shown in its end state.
-4. **Invitation:** interactive switch between English, मराठी and हिंदी. Written to card conventions (चि. / चि. सौ. कां., आयुष्मान् / आयुष्मती, दर्शनाभिलाषी, बाल मनुहार).
-5. **Events:** Haldi, Sangeet and Shaadi as stations on the track. The middle one shows the "focused" state.
-6. **Mangalashtak:** the rivers verse (Godavari and Gandaki) lit word by word, "॥ शुभमंगल सावधान ॥", and a live countdown.
-7. **RSVP:** interactive per-event counts and a thank-you state, with WhatsApp as the fallback and a closing chaupai.
-8. **Desktop hero.**
-9. **Style sheet:** colours, type, and which art is drawn in code vs commissioned.
+## The direction: "The peacock pair"
+- **Concept:** her Paithani (woven silk, Maharashtra) and his Madhubani (painted paper, Bihar) share the peacock. Two peacocks, one from each art, face each other and meet.
+- **The medallion** is one component used everywhere: a circle whose left half is rani silk with a zari ring, and whose right half is paper with a hatched ring. Its **poses tell the story down the page:**
 
-The motion for each screen is written in sticky notes under the phone row. It follows research §2.
+| Pose | Where | Story |
+|---|---|---|
+| Apart | Hero | They see each other |
+| Haldi | Haldi | Across the turmeric bowl |
+| Dance | Sangeet; RSVP after sending | Tails fan open |
+| Garland | Shaadi | The varmala is exchanged |
+| Meet | Cover; RSVP | Beaks touch; a lotus (Mrunalini = lotus) blooms, half silk, half paper |
 
-## Open decision: how Maharashtra meets Madhubani
-**The couple's goal:** "Madhubani meets Maharashtra, like two souls meeting into one."
+- **Colours:**
+  - Hers (Paithani): rani `#A3195B`, mor `#0E5C63`, zari `#C9A04A` (large text and ornament only), chuna `#F5EFE3`.
+  - His (Madhubani): kagaz `#EFE3C8`, kajal `#2B211B`, sindoor `#B3261E`, haldi `#D99A1E` (fills only), neel `#2F3E73`.
+  - All text pairings meet 4.5:1, or 3:1 for text 24px and up.
+- **Shared pieces, so nothing looks like an app:**
+  - Selvedges: zari down her edge and Madhubani hatching down his, on every screen.
+  - A divider that is half zari line, half double line.
+  - A primary button of rani silk with a zari edge.
+  - A secondary button with a Madhubani double line.
+  - Fabric swatches for the dress codes.
+- **Pune in it:**
+  - Paithani itself.
+  - The Ashtavinayak Ganpatis (in the Mangalashtak).
+  - "From Pune to Ranchi" as the schedule's spine.
 
-The first pass under-delivered on this. Warli's thin white lines lose to Madhubani's bold colour. Paithani, the Maharashtrian art Pune families actually treasure, was only a border. Pune itself was absent.
+## Screens (canvas v2)
+1. **Cover:** the Paithani antarpat. Tap शुभमंगल सावधान and the silk drops (interactive).
+2. **Hero:** silk and paper halves; the peacocks apart.
+3. **The meeting:** the pinned scroll scene, as a four-frame storyboard.
+4. **Invitation:** English, मराठी and हिंदी in the new lettering (interactive).
+5. **Schedule:** the peacocks' story. Three medallion chapters joined by twin threads, gold and black.
+6. **Mangalashtak** on peacock-green silk, with medallion-style countdown dials.
+7. **RSVP:** double-line rows, medallion steppers, and a send button with a zari edge. After sending, the peacocks dance (interactive).
+8. **Desktop:** hero (her name under the silk, his under the paper, the medallion between) and a three-column schedule.
+9. **Style sheet**, the medallion component, and the A/B/C options kept for reference.
 
-**The bridge:** Paithani and Madhubani share the same symbols: the peacock (mor), the parrot pair (tota-maina) and the lotus. **Mrunalini (मृणालिनी) means lotus.** One symbol drawn half in each hand becomes the two of them meeting.
+## Motion
+- **Stack:**
+  - GSAP and ScrollTrigger (free, including all plugins).
+  - Lenis for wheel smoothing on desktop only.
+  - Native touch scrolling on phones. Never `syncTouch` or `normalizeScroll`.
+  - `ignoreMobileResize` on.
+- **Tokens:**
+  - Entrances rise 24px with a fade, 0.8–0.9s, `power3.out`, once, when the element is 80–88% of the way up the screen.
+  - Staggers are 40–120ms.
+  - Scroll-driven scenes are linear, with a 1.2s trailing lag on desktop and 0.5s on touch.
+  - Name write-ins are a left-to-right `clip-path` reveal (`power2.inOut`), by word. **Devanagari is never split into letters.**
+  - Only transforms, opacity, stroke-dashoffset and clip-path are animated; there is no blur or filter.
+- **The pinned meeting:** the scene holds for about 2.1 screens of scroll on desktop and 1.5 on phones.
 
-Three hero directions are now on the canvas (top row, beside the style sheet):
+| Scroll | What happens |
+|---|---|
+| 0–35% | Silk and paper slide in from opposite edges; the peacocks walk in, bobbing |
+| 35–70% | The trailing tails fade; feathers fan open, their lines drawing out and the eyes popping one by one |
+| 70–85% | The beaks meet; the garland beads appear over their heads |
+| 85–100% | The names write themselves in |
+| On release | Akshata falls |
 
-| Option | Idea | Maharashtra | Bihar / Mithila |
-|---|---|---|---|
-| **A · Mor pair** | Two peacocks face each other and meet at the beak inside one medallion | Paithani silk: rani pink, peacock green, zari gold | Madhubani double line and hatching |
-| **B · Lotus & sun** | One lotus, half Paithani and half Madhubani, opens to a Madhubani sun | Lotus = her name; Paithani petals and water | The Chhath sun, Bihar's great festival; Madhubani petals and water |
-| **C · Rangoli × Aripan** | The wedding floor seen from above: one circle, half rangoli, half aripan | Colourful rangoli at the door | White rice-paste aripan |
+  It plays in reverse when you scroll back up.
+- **Schedule chapters:**
+  - Each medallion's rings draw themselves in and the peacocks step in from both sides; then the pose plays (the bowl rises, the tail fans, or the garland beads appear).
+  - The twin threads between chapters draw with scroll.
+- **Mangalashtak:** the verse lights up word by word with scroll; akshata bursts on ॥ शुभमंगल सावधान ॥.
+- **Reduced motion:** final states, no pinning, no smooth scroll, no particles.
 
-**Recommendation: B as the soul of the site, plus A's rule on every screen.**
-- The lotus opening to the sun becomes the pinned scroll moment, in place of "two walls".
-- Every motif (peacocks, borders, event icons) is drawn half Paithani, half Madhubani.
-- Warli stays as the dancing crowd (for the Sangeet); rangoli × aripan can be the chowk floor.
+## Responsive rules
 
-**Pune and Ranchi touches to add, whichever option wins:**
-- Paithani colours and a zari border on her side.
-- Ganpati: the Ashtavinayak verse already names Pune's Ganpatis.
-- Shaniwar Wada's gate at the "Pune Jn" station; Pahari Mandir at "Hatia".
-- Sanai-choughada in the music.
-- Optional: a "Things to know" section in the style of a witty Puneri pati signboard, with a Bihari counterpart.
+| Width | Layout |
+|---|---|
+| **Phone (<600px)** | One column; 10px selvedges and a 20px gutter; the medallion is 86vw, max 360–400px; the pinned scene is shorter; fewer particles |
+| **Tablet (600–1024px)** | Medallion about 60vw; the schedule stays stacked |
+| **Desktop (>1024px)** | Split hero with each name under its own art; three-column schedule; the pinned scene is longer, with wheel smoothing |
+
+- **Type is fluid:** names `clamp(40px, 9vw, 96px)`; text 17–20px.
+- **Sizing:** `svh` for full-screen sections; `100svh` for the cover.
+
+## Artwork, for direction A
+The peacocks in the design are code-drawn stand-ins. For the real site:
+- **His Madhubani peacock pair,** from a Mithila artist (see research §9), painted on paper as separate layers: each bird, the tail feathers, the garland and the lotus.
+- **Her Paithani peacock.** Paithani is woven, so the most personal source is **Mrunalini's own Paithani**. Photograph or scan its peacock motif and zari border, and have an illustrator trace them into layers. A textile artist is the alternative.
+- **The Warli Lagna Chowk is no longer needed** in A. Warli can return later as a dancing crowd if wanted.
 
 ## Assumptions to confirm
-- **Groom is named first** throughout, since the wedding is hosted in Ranchi.
-- **Venue name** is written as "Haveli Banquet, Ranchi". Confirm the exact name and send the Google Maps pin.
-- **Dress-code wording:**
-  - Sangeet: "Formals; Indo-western welcome".
+- **The groom is named first** in running text. The **desktop hero puts each name on its own art's side:** Mrunalini under the silk on the left, Shreyansh under the paper on the right. Say if you'd rather flip it.
+- **Venue:** written as "Haveli Banquet, Ranchi". Confirm the exact name and send the Maps pin.
+- **Dress codes:**
+  - Sangeet: "Evening formals; Indo-western welcome".
   - Shaadi: "Traditional finery: Paithani, Banarasi, lehengas, sherwanis. Jewel tones."
 - **Event names:**
-  - Hindi: Sangeet is संगीत संध्या; Shaadi is शुभ विवाह.
-  - Marathi: हळद and लग्न.
-- **Artwork placeholders:** the Madhubani art and the Lagna Chowk are placeholders until the art is commissioned (research §9). The Warli figures are code-drawn by design.
+  - Hindi: संगीत संध्या, शुभ विवाह.
+  - Marathi: हळद, लग्न.
+- **The train glyph is gone.** "From Pune to Ranchi" remains as the schedule's title.
 
 ## Placeholders still in the design
 - Parents' names for both sides, in all three languages.
@@ -90,9 +138,13 @@ Three hero directions are now on the canvas (top row, beside the style sheet):
 - The WhatsApp number.
 
 ## Timeline
-- The wedding is **72 days** from 27 Sep 2026.
-- Invites usually go out 4–6 weeks before, so **around 27 Oct – 10 Nov**.
-- A commissioned art set takes 4–6 weeks. It has to **start this week**, or fall back to buying existing Madhubani originals with permission to scan (1–2 weeks).
+- **Distance to the wedding:** 72 days from 27 Sep 2026.
+- **Invites:** usually 4–6 weeks before, so **around 27 Oct – 10 Nov**.
+- **Artwork:** a Madhubani commission takes 4–6 weeks, so it has to **start this week**. The fallback is buying existing Madhubani peacock originals with permission to scan them (1–2 weeks).
+
+## History
+- **v1, "Two walls, one chowk":** Warli × Madhubani, with the Pune → Hatia train as the story. The couple felt Maharashtra was under-represented.
+- **Options:** B (Lotus & sun) and C (Rangoli × Aripan) stay on the canvas for reference.
 
 ## Next
-Phase 3, `/plan`: the build plan. It covers the stack, the data file, the guest-code scheme, the RSVP pipeline, the motion implementation and the launch checklist.
+Phase 3, `/plan`: the build plan. It covers the stack, one data file, the guest-code scheme, the RSVP pipeline (Apps Script → Sheet, with WhatsApp as fallback), porting the prototype's motion, the artwork pipeline, and the launch checklist.
