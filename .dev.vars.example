@@ -1,0 +1,5 @@
+# Copy to .dev.vars for `npm run dev:edge`. Never commit .dev.vars.
+APPS_SCRIPT_URL=http://127.0.0.1:8799/exec
+APPS_SCRIPT_SECRET=local-test-secret
+WA_BRIDE=910000000001
+WA_GROOM=910000000002

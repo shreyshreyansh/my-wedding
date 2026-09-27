@@ -10,6 +10,8 @@ import '../styles/schedule.css';
 import '../styles/mangal.css';
 import '../styles/curtain.css';
 import '../styles/rsvp.css';
+import '../styles/invite.css';
+import '../styles/controls.css';
 import '../styles/footer.css';
 import '../styles/gentle.css';
 import Cover from '../components/Cover.astro';
@@ -21,17 +23,20 @@ import Mangal from '../components/Mangal.astro';
 import Countdown from '../components/Countdown.astro';
 import Rsvp from '../components/Rsvp.astro';
 import Footer from '../components/Footer.astro';
+import Invitation from '../components/Invitation.astro';
+import Controls from '../components/Controls.astro';
+import SeoHead from '../components/SeoHead.astro';
 import { assertComplete } from '../data/schema';
 import { copy } from '../data/wedding';
 
 assertComplete();
 ---
 <!doctype html>
-<html lang="en" data-knot-busy={copy.rites.knotBusy}>
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shreyansh & Mrunalini</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<SeoHead />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&amp;family=Tiro+Devanagari+Hindi:ital@0;1&amp;family=Tiro+Devanagari+Marathi:ital@0;1&amp;display=swap">
 <script is:inline>(function(d){var h=d.documentElement;if(!('noModule' in d.createElement('script')))return;h.className+=' js locked';var p=null;try{p=localStorage.getItem('sm-motion')}catch(e){}if(p==='gentle'||(p!=='full'&&window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))h.className+=' still'})(document);</script>
 </head>
@@ -42,11 +47,13 @@ assertComplete();
 <div id="akshata" aria-hidden="true"></div>
 
 <Cover />
+<Controls />
 
 <main>
   <Hero />
   <Ribbons />
   <Meeting />
+  <Invitation />
   <Schedule />
   <Mangal />
   <div class="curtain">
@@ -57,6 +64,7 @@ assertComplete();
 
 <Footer />
 
+<script type="application/json" id="labels" set:html={JSON.stringify({ knotBusy: copy.rites.knotBusy, rsvp: { send: copy.rsvp.send, sending: copy.rsvp.sending, none: copy.rsvp.none } })}></script>
 <script is:inline>(function(){var d=document,h=d.documentElement,c=d.getElementById('cover');function un(){h.className=h.className.replace(/\s?locked/g,'')}if(!c){un();return}c.addEventListener('click',function(){if(window.__smBooted)return;un();if(c.parentNode)c.parentNode.removeChild(c)})})();</script>
 <script>
   import '../scripts/main';

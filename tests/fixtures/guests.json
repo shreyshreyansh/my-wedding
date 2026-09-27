@@ -1,0 +1,8 @@
+{
+  "abc234": { "label": "the Sharma family", "label_dev": "शर्मा परिवार", "lang": "hi", "side": "groom", "ev": ["haldi", "sangeet", "shaadi"], "party": 4 },
+  "mrw567": { "label": "Waghmare kaka and family", "label_dev": "वाघमारे काका आणि कुटुंब", "lang": "mr", "side": "bride", "ev": ["sangeet", "shaadi"], "party": 3 },
+  "pqr789": { "label": "Priya", "lang": "en", "side": "bride", "ev": ["shaadi"], "party": 1 },
+  "hdy345": { "label": "the Verma family", "lang": "en", "side": "groom", "ev": ["haldi"], "party": 2 },
+  "xng456": { "label": "the extended Srivastava and Deshpande families of Ranchi and Pune", "lang": "en", "side": "groom", "ev": ["haldi", "shaadi"], "party": 6, "max": 8 },
+  "tst222": { "label": "Test family", "lang": "en", "side": "groom", "ev": ["haldi", "sangeet", "shaadi"], "party": 2, "test": true }
+}

@@ -29,12 +29,14 @@ export function interactions() {
   app.hooks.bump = (out, d) => { gsap.fromTo(out, { yPercent: d > 0 ? 40 : -40, opacity: 0.3 }, { yPercent: 0, opacity: 1, duration: 0.3, ease: 'power2.out' }); };
   app.hooks.tick = (el) => { gsap.fromTo(el, { yPercent: -45, opacity: 0.4 }, { yPercent: 0, opacity: 1, duration: 0.38, ease: 'power2.out' }); };
   app.hooks.burst = burst;
-  app.hooks.sent = (form, thanks, show) => {
-    const svg = document.querySelector('#rsvp .med svg');
-    gsap.timeline()
-      .to(form, { autoAlpha: 0, y: -12, duration: 0.3, ease: 'power2.in', onComplete: show })
-      .to(svg ? svg.querySelectorAll('.rice') : [], { y: () => '-=' + rand(60, 120).toFixed(1), x: () => '+=' + rand(-60, 60).toFixed(1), rotation: () => '+=' + rand(-200, 200).toFixed(0), opacity: 0, duration: 1.1, ease: 'power2.out', stagger: 0.012 }, 0.1)
-      .add(() => burst(26), 0.25)
-      .from(thanks, { autoAlpha: 0, y: 16, duration: 0.6, ease: 'power3.out' }, 0.45);
+  /* the rice leaves the thali and the akshata falls; the next toss puts the rice back first */
+  let toss: gsap.core.Timeline | null = null;
+  app.hooks.toss = () => {
+    toss?.revert();
+    const rice = document.querySelectorAll('#rsvp .med .rice');
+    toss = gsap.timeline()
+      .to(rice, { y: () => '-=' + rand(60, 120).toFixed(1), x: () => '+=' + rand(-60, 60).toFixed(1), rotation: () => '+=' + rand(-200, 200).toFixed(0), opacity: 0, duration: 1.1, ease: 'power2.out', stagger: 0.012 }, 0)
+      .add(() => burst(26), 0.15);
   };
+  app.hooks.reveal = (el) => { gsap.from(el, { autoAlpha: 0, y: 16, duration: 0.6, ease: 'power3.out', clearProps: 'all' }); };
 }

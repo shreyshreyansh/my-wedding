@@ -11,16 +11,16 @@ export const fine = matchMedia('(pointer: fine)').matches;
 export const isStill = () => root.classList.contains('still');
 
 export interface Hooks {
-  /** build the cover's entrance; returns false if it is too late to play it */
-  coverIntro?: () => void;
   /** play the opening; call done when the cloth has fallen */
   open?: (done: () => void) => void;
   /** after the cover is gone: start smooth scroll, refresh triggers, play the hero */
   afterOpen?: () => void;
   bump?: (el: HTMLElement, dir: number) => void;
   tick?: (el: HTMLElement) => void;
-  /** play the akshata toss over the RSVP; call show when the thank-you card should appear */
-  sent?: (from: HTMLElement, to: HTMLElement, show: () => void) => void;
+  /** the akshata toss, the moment the guest taps Send */
+  toss?: () => void;
+  /** bring a newly shown panel in */
+  reveal?: (el: HTMLElement) => void;
   knot?: (rite: HTMLElement) => void;
   burst?: (n: number, petals?: boolean) => void;
 }

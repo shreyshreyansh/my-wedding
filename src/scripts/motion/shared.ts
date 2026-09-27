@@ -5,7 +5,8 @@ export const rand = (a: number, b: number) => a + Math.random() * (b - a);
 
 export const shared = {
   heroIntro: null as Timeline | null,
-  lenis: null as null | { start(): void; stop(): void; destroy(): void }
+  lenis: null as null | { start(): void; stop(): void; destroy(): void },
+  lenisTick: null as null | ((t: number) => void)
 };
 
 export interface Run {

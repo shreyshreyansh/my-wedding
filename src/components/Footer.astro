@@ -1,12 +1,13 @@
 ---
 import Band from './Band.astro';
-import { chaupai, copy } from '../data/wedding';
+import { chaupai, copy, music } from '../data/wedding';
 ---
 <footer class="plate">
   <Band />
   <div class="foot">
     <p lang="hi" class="chaupai">{chaupai[0]}<br>{chaupai[1]}</p>
     <p class="cal love">{copy.footer.love}</p>
-    <slot />
+    {music.src && (music.title || music.credit) && <p class="credit">♪ {[music.title, music.credit].filter(Boolean).join(' · ')}</p>}
+    <button type="button" class="gentle" id="motionBtn" aria-pressed="false"><span class="dot" aria-hidden="true"></span><span>{copy.controls.gentle}</span> · <span lang="hi">{copy.controls.gentleDev}</span></button>
   </div>
 </footer>

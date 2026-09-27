@@ -28,7 +28,7 @@ import { couple, copy, dates, venue } from '../data/wedding';
   <div class="hero-plate plate">
     <h1 id="heroTitle" tabindex="-1" class="cal nm" aria-label={couple.groom.en + ' and ' + couple.bride.en}><span class="letters wave" aria-hidden="true" set:html={letters(couple.groom.en, false)}></span> <span class="amp" aria-hidden="true">&amp;</span> <span class="letters wave" aria-hidden="true" set:html={letters(couple.bride.en, false)}></span></h1>
     <span lang="hi" class="cal dn"><span class="write">{couple.bothDev}</span></span>
-    <span class="hero-date">{dates.long} · {venue.full}</span>
+    <span class="hero-date"><span data-dates-long>{dates.long}</span> · {venue.full}</span>
   </div>
   <div class="floaters back" id="flBack" aria-hidden="true" set:html={floaters('back')}></div>
   <div class="floaters front" id="flFront" aria-hidden="true" set:html={floaters('front')}></div>

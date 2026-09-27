@@ -1,0 +1,13 @@
+# Cloudflare Pages: the static site in dist/, the functions in functions/.
+# Setup is in docs/04-runbook.md. Secrets (APPS_SCRIPT_SECRET) go in the dashboard, never here.
+name = "shreyansh-mrunalini"
+pages_build_output_dir = "dist"
+compatibility_date = "2025-09-01"
+
+# APPS_SCRIPT_URL, APPS_SCRIPT_SECRET, WA_BRIDE and WA_GROOM are set as encrypted secrets
+# (`npx wrangler pages secret put NAME`), so no number or URL is in the repo. Locally they come from .dev.vars.
+
+[[kv_namespaces]]
+binding = "GUESTS"
+# `npx wrangler kv namespace create GUESTS` prints the id to paste here.
+id = "00000000000000000000000000000000"

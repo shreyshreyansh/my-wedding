@@ -3,18 +3,48 @@
 .rsvp{padding:48px var(--gut) 56px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
 .rsvp .med{width:min(48vw,200px)}
 .rsvp h2{margin:0;font-size:clamp(36px,7vw,52px);line-height:1.15;font-weight:700}
-.rsvp form{width:min(100%,460px);display:flex;flex-direction:column;gap:14px;margin-top:10px;text-align:left}
+
+/* one panel at a time: the edge (and the page, as you reply) sets data-rsvp */
+.r-panel{display:none;width:min(100%,460px)}
+#rsvp[data-rsvp="nocode"] .r-nocode,#rsvp[data-rsvp="replied"] .r-thanks,#rsvp[data-rsvp="closed"] .r-closed{display:block}
+#rsvp[data-rsvp="form"] .r-form,#rsvp[data-rsvp="sending"] .r-form,#rsvp[data-rsvp="failed"] .r-form{display:flex}
+#rsvp[data-closed] .r-change{display:none}
+.r-nocode,.r-closed{padding:20px;background:var(--chuna);border:3px double var(--kajal);font-style:italic}
+.r-nocode p,.r-closed p{margin:0}
+.r-nocode .r-bad{margin-bottom:10px;color:var(--deep)}
+.r-closed .btn{margin-top:14px}
+
+.rsvp form{flex-direction:column;gap:14px;margin-top:10px;text-align:left}
+.r-ask{margin:0;font-style:italic;text-align:center}
 .row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;background:var(--chuna);border:3px double var(--kajal)}
 .row .ev{display:flex;flex-direction:column}
 .row .ev b{font-family:Amita,"Tiro Devanagari Hindi",Georgia,serif;font-size:1.5rem;line-height:1.2}
-.row .ev i{font-size:.9rem;color:var(--sal)}
-.step{display:flex;align-items:center;gap:6px}
-.step button{width:44px;height:44px;border-radius:50%;border:0;background:transparent;color:var(--kajal);cursor:pointer;display:grid;place-items:center;box-shadow:inset 0 0 0 2px var(--zari),inset 0 0 0 4px var(--chuna),inset 0 0 0 5.5px var(--kajal);transition:background .18s ease}
+.row .ev i{font-size:1rem;color:var(--sal)}
+.step{display:flex;align-items:center;gap:4px}
+.step button{width:48px;height:48px;border-radius:50%;border:0;background:transparent;color:var(--kajal);cursor:pointer;display:grid;place-items:center;box-shadow:inset 0 0 0 2px var(--zari),inset 0 0 0 4px var(--chuna),inset 0 0 0 5.5px var(--kajal);transition:background .18s ease}
 .step button:hover{background:var(--kagaz)}
-.step output{display:inline-block;min-width:30px;text-align:center;font-family:Amita,"Tiro Devanagari Hindi",Georgia,serif;font-size:1.7rem;font-weight:700}
+.step button:disabled{opacity:.35;cursor:default}
+.count{width:2.2em;min-height:48px;padding:0;border:0;background:transparent;text-align:center;font-family:Amita,"Tiro Devanagari Hindi",Georgia,serif;font-size:1.7rem;font-weight:700;color:var(--kajal);-moz-appearance:textfield;appearance:textfield}
+.count::-webkit-inner-spin-button,.count::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+html:not(.js) .step button{display:none}
+html:not(.js) .count{width:3.2em;border-bottom:3px double var(--kajal)}
 .field{display:flex;flex-direction:column;gap:2px}
-.field label{font-style:italic;color:var(--sal);font-size:.95rem}
-.field input{min-height:48px;padding:8px 2px;border:0;border-bottom:3px double var(--kajal);background:transparent;font:inherit;font-size:1.1rem;color:var(--kajal)}
-.thanks{width:min(100%,460px);padding:24px 20px;background:var(--chuna);border:3px double var(--kajal)}
+.field label{font-style:italic;color:var(--sal);font-size:1rem}
+.field input,.field textarea{min-height:48px;padding:8px 2px;border:0;border-bottom:3px double var(--kajal);background:transparent;font:inherit;font-size:1.1rem;color:var(--kajal);resize:vertical}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.r-send{min-height:60px;font-size:1.25rem}
+.r-send .cal{font-weight:700}
+#rsvp[data-rsvp="sending"] .r-send{opacity:.75;pointer-events:none}
+.r-failed{display:flex;flex-direction:column;gap:10px;padding:16px;background:var(--chuna);border:3px double var(--sindoor);text-align:center}
+.r-failed[hidden]{display:none}
+.r-failed p{margin:0;font-style:italic}
+.btn-wa{border:0;background:#1F7A4D;color:#fff;box-shadow:inset 0 0 0 3px #1F7A4D,inset 0 0 0 5px var(--zari)}
+.btn-wa:hover{background:#18633E}
+
+.thanks{padding:24px 20px;background:var(--chuna);border:3px double var(--kajal)}
+.thanks:focus{outline:none}
 .thanks .dhanyavad{font-size:2rem;font-weight:700;color:var(--rani);margin:0}
-.note{font-size:.9rem;font-style:italic;color:var(--deep)}
+.r-thanks-title{font-size:1.8rem;font-weight:700;margin:0}
+.r-summary{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:2px;font-size:1.1rem}
+.r-seeyou{margin:8px 0 14px;font-style:italic}
+.note{font-size:1rem;font-style:italic;color:var(--deep)}

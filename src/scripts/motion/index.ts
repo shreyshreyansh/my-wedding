@@ -29,7 +29,8 @@ export function start({ intro }: { intro: boolean }) {
       if (!root.classList.contains('motion')) return;
       const lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
       lenis.on('scroll', ScrollTrigger.update);
-      gsap.ticker.add((t) => lenis.raf(t * 1000));
+      shared.lenisTick = (t: number) => lenis.raf(t * 1000);
+      gsap.ticker.add(shared.lenisTick);
       gsap.ticker.lagSmoothing(0);
       if (document.getElementById('cover')) lenis.stop();
       shared.lenis = lenis;
@@ -70,8 +71,10 @@ export function start({ intro }: { intro: boolean }) {
 export function stop() {
   mm?.revert();
   mm = null;
+  if (shared.lenisTick) gsap.ticker.remove(shared.lenisTick);
   shared.lenis?.destroy();
   shared.lenis = null;
+  shared.lenisTick = null;
   shared.heroIntro = null;
   root.classList.remove('motion');
   app.hooks = {};

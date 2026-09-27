@@ -13,7 +13,7 @@ html.locked,html.locked body{overflow:hidden}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
 .lenis.lenis-stopped{overflow:hidden}
-body{margin:0;background:var(--kagaz);color:var(--kajal);font-family:"Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif;font-size:clamp(17px,.45vw + 15px,20px);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+body{margin:0;background:var(--kagaz);color:var(--kajal);font-family:"Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif;font-size:clamp(18px,.4vw + 16.5px,20px);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
 .cal{font-family:Amita,"Tiro Devanagari Hindi",Georgia,serif}
 .mr{font-family:"Tiro Devanagari Marathi","Noto Serif Devanagari",Georgia,serif}
 h1,h2,h3{text-wrap:balance}

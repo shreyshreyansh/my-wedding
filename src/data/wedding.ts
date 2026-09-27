@@ -74,9 +74,22 @@ export const events: WeddingEvent[] = [
   }
 ];
 
+const DAY = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', weekday: 'long', day: 'numeric' });
+const dayOf = (iso: string) => iso.slice(0, 10);
+
+/** "8 & 9 December 2026" and "Tuesday 8 & Wednesday 9 December 2026" for the events a guest is invited to. */
+export function datesFor(ids: readonly string[]) {
+  const days = [...new Set(events.filter((e) => ids.includes(e.id)).map((e) => dayOf(e.start)))].sort();
+  const noon = (d: string) => new Date(d + 'T12:00:00+05:30');
+  const short = days.map((d) => String(Number(d.slice(8, 10)))).join(' & ') + ' December 2026';
+  const long = days.map((d) => DAY.format(noon(d)).replace(/^(\d+) (\w+)$/, '$2 $1')).join(' & ') + ' December 2026';
+  return { short, long };
+}
+
+export const countWords = ['no celebrations', 'one celebration', 'two celebrations', 'three celebrations'];
+
 export const dates = {
-  short: '8 & 9 December 2026',
-  long: 'Tuesday 8 & Wednesday 9 December 2026',
+  ...datesFor(['haldi', 'sangeet', 'shaadi']),
   /** the muhurat the countdown runs to */
   countdown: '2026-12-09T20:00:00+05:30',
   countdownLabel: 'Wednesday, 9 December 2026 · 8 in the evening'
@@ -174,11 +187,12 @@ export const rsvp = {
 
 /* ---------- music: the couple's own recording, made with `npm run audio -- input.wav` ---------- */
 export const music = {
-  /** set to '/audio/invite.m4a' once the file exists in public/audio */
-  src: null as string | null,
+  /** set to '/audio/invite.m4a?v=1' once the file exists in public/audio (MUSIC_SRC overrides it, for tests) */
+  src: ((globalThis as { process?: { env: Record<string, string | undefined> } }).process?.env.MUSIC_SRC || null) as string | null,
   loop: false,
-  title: todo('Music: title of the recording'),
-  credit: todo('Music: who sang or played it')
+  /** shown small in the footer when set, e.g. 'Mangalashtak' and 'sung by Aaji' */
+  title: '',
+  credit: ''
 };
 
 /* ---------- words used across the page ---------- */
@@ -199,7 +213,7 @@ export const copy = {
     'Tails open, feather by feather',
     'They meet, and the garland is exchanged'
   ],
-  invite: { eyebrowDev: 'निमंत्रण', eyebrow: 'the invitation', title: 'You are invited', choose: 'Read it in' },
+  invite: { eyebrowDev: 'निमंत्रण', eyebrow: 'the invitation', title: 'You are invited', choose: 'Read the invitation in', manuhar: 'बाल मनुहार' },
   schedule: { eyebrowDev: 'कार्यक्रम', eyebrow: 'the celebrations', title: 'From Pune to Ranchi,', titleEm: 'three celebrations' },
   rites: {
     wayDev: 'रस्ता दाखवा', way: 'Find your way to us',
