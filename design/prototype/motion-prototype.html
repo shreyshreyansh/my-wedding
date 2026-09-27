@@ -148,6 +148,8 @@ a{color:inherit}
 .chapters{display:grid;grid-template-columns:1fr;gap:0;padding-block:40px 56px}
 .chapter{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;max-width:440px;margin-inline:auto;width:100%;transform-origin:50% 40%}
 .chapter .med{width:min(64vw,250px)}
+.medbtn{padding:0;border:0;background:none;cursor:pointer;border-radius:50%;display:block}
+.medbtn:focus-visible{outline-offset:6px}
 .chapter h3{margin:10px 0 0;font-size:clamp(38px,8vw,48px);line-height:1.15;font-weight:700;cursor:default}
 .chapter .dn{font-size:1.4rem;line-height:1.4;color:var(--rani)}
 .chapter .story{font-style:italic;color:var(--deep)}
@@ -267,9 +269,9 @@ footer{position:relative;z-index:3;text-align:center}
     <li><a href="#hero"><b>1 · The names arrive</b><span>Letters rise one by one; feathers drift at different depths. Move your mouse on a laptop.</span></a></li>
     <li><a href="#ribbons"><b>2 · Two ribbons cross</b><span>Paithani gold and Madhubani paper cross; scroll faster and they race.</span></a></li>
     <li><a href="#meeting"><b>3 · The peacocks meet</b><span>Pinned scene: scroll slowly down, then back up.</span></a></li>
-    <li><a href="#schedule"><b>4 · Their story</b><span>A marigold toran sways; each chapter draws itself; the one in the middle stays sharp. Hover the event names.</span></a></li>
+    <li><a href="#schedule"><b>4 · Haldi, Sangeet, Shaadi</b><span>Mango leaves dip into turmeric; the dholak beats and sa-re-ga-ma floats up (tap it); the knot is tied over the fire and seven diyas light.</span></a></li>
     <li><a href="#mangal"><b>5 · The blessing</b><span>The verse lights up word by word; gold specks drift; the zari glints.</span></a></li>
-    <li><a href="#rsvp"><b>6 · The curtain and RSVP</b><span>The RSVP slides over the countdown; after sending, the peacocks dance.</span></a></li>
+    <li><a href="#rsvp"><b>6 · The curtain and RSVP</b><span>The RSVP slides over the countdown; send it and the akshata is tossed.</span></a></li>
   </ol>
 </nav>
 
@@ -337,11 +339,11 @@ footer{position:relative;z-index:3;text-align:center}
     <div class="band"><div class="zari"></div><div class="hatch"></div></div>
     <div class="paper">
       <div class="wrap chapters">
-        <article class="chapter" data-pose="haldi">
-          <div class="med" data-pose="haldi"></div>
+        <article class="chapter" data-event="haldi">
+          <div class="med" data-event="haldi"></div>
           <h3 class="cal letters wave">Haldi</h3>
           <div class="cal dn reveal"><span lang="mr">हळद</span> · <span lang="hi">हल्दी</span></div>
-          <p class="story reveal" style="margin:0">They see each other across the turmeric.</p>
+          <p class="story reveal" style="margin:0">Turmeric in a brass bowl, mango leaves and marigolds.</p>
           <dl class="reveal">
             <dt>When</dt><dd>Tuesday, 8 December 2026 · 12 noon</dd>
             <dt>Where</dt><dd>Haveli Banquet, Ranchi</dd>
@@ -353,11 +355,11 @@ footer{position:relative;z-index:3;text-align:center}
           </div>
           <svg class="threads" viewBox="0 0 60 130" width="60" height="130" aria-hidden="true"><path pathLength="1" d="M30 0C54 22 6 44 30 65S6 108 30 130" fill="none" stroke="#C9A04A" stroke-width="3"/><path pathLength="1" d="M30 0C6 22 54 44 30 65S54 108 30 130" fill="none" stroke="#2B211B" stroke-width="1.6"/></svg>
         </article>
-        <article class="chapter" data-pose="dance">
-          <div class="med" data-pose="dance"></div>
+        <article class="chapter" data-event="sangeet">
+          <button type="button" class="med medbtn" data-event="sangeet" aria-label="Play the dholak"></button>
           <h3 class="cal letters wave">Sangeet</h3>
           <div class="cal dn reveal"><span lang="mr">संगीत</span> · <span lang="hi">संगीत संध्या</span></div>
-          <p class="story reveal" style="margin:0">They dance, tails open.</p>
+          <p class="story reveal" style="margin:0">The dholak plays and the ghungroo answer.</p>
           <dl class="reveal">
             <dt>When</dt><dd>Tuesday, 8 December 2026 · 8 in the evening</dd>
             <dt>Where</dt><dd>Haveli Banquet, Ranchi</dd>
@@ -369,11 +371,11 @@ footer{position:relative;z-index:3;text-align:center}
           </div>
           <svg class="threads" viewBox="0 0 60 130" width="60" height="130" aria-hidden="true"><path pathLength="1" d="M30 0C54 22 6 44 30 65S6 108 30 130" fill="none" stroke="#C9A04A" stroke-width="3"/><path pathLength="1" d="M30 0C6 22 54 44 30 65S54 108 30 130" fill="none" stroke="#2B211B" stroke-width="1.6"/></svg>
         </article>
-        <article class="chapter" data-pose="garland">
-          <div class="med" data-pose="garland"></div>
+        <article class="chapter" data-event="shaadi">
+          <div class="med" data-event="shaadi"></div>
           <h3 class="cal letters wave">Shaadi</h3>
           <div class="cal dn reveal"><span lang="mr">लग्न</span> · <span lang="hi">शुभ विवाह</span></div>
-          <p class="story reveal" style="margin:0">They meet, and the garland is exchanged.</p>
+          <p class="story reveal" style="margin:0">Seven steps around the fire; the knot is tied.</p>
           <dl class="reveal">
             <dt>When</dt><dd>Wednesday, 9 December 2026 · 8 in the evening</dd>
             <dt>Where</dt><dd>Haveli Banquet, Ranchi</dd>
@@ -414,7 +416,7 @@ footer{position:relative;z-index:3;text-align:center}
   <section id="rsvp" class="paper" aria-labelledby="rsvpTitle">
     <div class="band"><div class="zari"></div><div class="hatch"></div></div>
     <div class="rsvp">
-      <div class="med" data-pose="meet" data-fan="closed"></div>
+      <div class="med" data-event="blessing"></div>
       <p class="eyebrow reveal" style="color:var(--deep)"><span lang="hi">उत्तराकांक्षी</span> · awaiting your reply</p>
       <h2 id="rsvpTitle" class="cal letters wave">Will you join us?</h2>
       <p class="reveal" style="margin:0;font-style:italic">[Guest name] family, how many of you will come to each celebration?</p>
@@ -449,7 +451,7 @@ footer{position:relative;z-index:3;text-align:center}
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
 <script>
 (() => {
-  const C = { rani:'#A3195B', mor:'#0E5C63', zari:'#C9A04A', chuna:'#F5EFE3', kagaz:'#EFE3C8', kajal:'#2B211B', sindoor:'#B3261E', haldi:'#D99A1E', neel:'#2F3E73', sal:'#5E6B3A' };
+  const C = { rani:'#A3195B', mor:'#0E5C63', zari:'#C9A04A', chuna:'#F5EFE3', kagaz:'#EFE3C8', kajal:'#2B211B', sindoor:'#B3261E', haldi:'#D99A1E', neel:'#2F3E73', sal:'#5E6B3A', deep:'#7A3522' };
   const BODY = 'M34 118C28 96 44 80 64 84C66 70 62 52 74 44C80 39 90 40 93 46C96 52 90 57 86 60C80 66 80 76 84 86C92 100 86 118 70 124C54 130 38 128 34 118Z';
   const TAIL = 'M36 112C20 118 6 128 2 142C10 150 24 156 40 156C44 144 46 132 44 122Z';
   const BEAK = 'M93 44 104 47 93 50Z';
@@ -533,6 +535,135 @@ footer{position:relative;z-index:3;text-align:center}
       '<path class="ring-draw" pathLength="1" d="M160 26A134 134 0 0 0 160 294" fill="none" stroke="' + C.zari + '" stroke-width="2"/>' +
       garland + peacock('p', pl, fanMode) + peacock('m', pr, fanMode) + center + '</g></svg>';
   }
+  /* ---------- event props: drawn half Paithani (gold on silk), half Madhubani (double line on paper) ---------- */
+  let clipUid = 0;
+  function frame() {
+    return '<path class="disc" d="M160 12A148 148 0 0 0 160 308Z" fill="' + C.rani + '"/>' +
+      '<path class="disc" d="M160 12A148 148 0 0 1 160 308Z" fill="' + C.kagaz + '"/>' +
+      '<path class="ring-draw" pathLength="1" d="M160 18A142 142 0 0 0 160 302" fill="none" stroke="' + C.zari + '" stroke-width="8"/>' +
+      '<path class="ring-m" d="M160 18A142 142 0 0 1 160 302" fill="none" stroke="' + C.kajal + '" stroke-width="9" stroke-dasharray="1.6 3.2"/>' +
+      '<path class="ring-draw" pathLength="1" d="M160 10A150 150 0 0 1 160 310" fill="none" stroke="' + C.kajal + '" stroke-width="2.5"/>' +
+      '<path class="ring-draw" pathLength="1" d="M160 26A134 134 0 0 1 160 294" fill="none" stroke="' + C.kajal + '" stroke-width="2.5"/>' +
+      '<path class="ring-draw" pathLength="1" d="M160 10A150 150 0 0 0 160 310" fill="none" stroke="' + C.zari + '" stroke-width="2"/>' +
+      '<path class="ring-draw" pathLength="1" d="M160 26A134 134 0 0 0 160 294" fill="none" stroke="' + C.zari + '" stroke-width="2"/>';
+  }
+  const HALDI_Y = '#E8B326';
+  const ART = {
+    haldi: (clip) =>
+      '<g clip-path="url(#' + clip + ')">' + Array.from({ length: 11 }, (_, i) => '<ellipse class="petal" cx="' + (58 + (i * 23) % 204) + '" cy="' + (40 + (i * 29) % 90) + '" rx="4" ry="6.5" fill="' + (i % 2 ? '#E27A1B' : C.haldi) + '"/>').join('') + '</g>' +
+      '<path d="M84 256c6-6 16-6 22-2s10 2 14-2" fill="none" stroke="' + C.zari + '" stroke-width="7" stroke-linecap="round"/>' +
+      '<path d="M198 256c6-4 14-6 20-2s10 2 14-1" fill="none" stroke="' + C.kajal + '" stroke-width="9" stroke-linecap="round"/><path d="M198 256c6-4 14-6 20-2s10 2 14-1" fill="none" stroke="' + C.haldi + '" stroke-width="5.4" stroke-linecap="round"/>' +
+      '<g class="bowl"><path d="M160 212H110A50 34 0 0 0 160 246Z" fill="' + C.zari + '"/><path d="M160 212H210A50 34 0 0 1 160 246Z" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="2.6" stroke-linejoin="round"/>' +
+      '<path d="M114 212C122 198 140 192 160 192V212Z" fill="' + HALDI_Y + '"/><path d="M160 192C180 192 198 198 206 212H160Z" fill="' + HALDI_Y + '" stroke="' + C.kajal + '" stroke-width="2"/>' +
+      '<path d="M106 212H160" stroke="' + C.zari + '" stroke-width="3.2" stroke-linecap="round"/><path d="M160 212H214" stroke="' + C.kajal + '" stroke-width="3.2" stroke-linecap="round"/>' +
+      '<circle cx="124" cy="226" r="2.4" fill="' + C.rani + '"/><circle cx="138" cy="232" r="2.4" fill="' + C.rani + '"/><circle cx="152" cy="235" r="2.4" fill="' + C.rani + '"/>' +
+      '<path d="M172 222l5 11M184 220l5 11M196 217l4 9" stroke="' + C.kajal + '" stroke-width="1.4" stroke-linecap="round"/></g>' +
+      [[130, 188], [121, 182], [139, 179]].map(([x, y]) => '<circle class="splash sl" cx="' + x + '" cy="' + y + '" r="3.2" fill="' + HALDI_Y + '"/>').join('') +
+      [[190, 188], [199, 182], [181, 179]].map(([x, y]) => '<circle class="splash sr" cx="' + x + '" cy="' + y + '" r="3.2" fill="' + HALDI_Y + '" stroke="' + C.kajal + '" stroke-width="1"/>').join('') +
+      '<g class="leaf-l" transform="translate(100 92)"><path d="M0 0C24 12 44 44 44 90C22 74 4 40 0 0Z" fill="' + C.zari + '"/><path d="M0 0C18 28 34 58 44 90" fill="none" stroke="' + C.rani + '" stroke-width="1.6"/><path d="M14 22 24 20M22 40 34 40M30 58 40 60" stroke="' + C.rani + '" stroke-width="1.2"/><path d="M36 76C40 82 43 86 44 90C41 86 38 82 36 76Z" fill="' + HALDI_Y + '"/></g>' +
+      '<g class="leaf-r" transform="translate(220 92)"><path d="M0 0C-24 12 -44 44 -44 90C-22 74 -4 40 0 0Z" fill="' + C.sal + '" stroke="' + C.kajal + '" stroke-width="3" stroke-linejoin="round"/><path d="M0 0C-24 12 -44 44 -44 90C-22 74 -4 40 0 0Z" fill="none" stroke="' + C.kagaz + '" stroke-width="1"/><path d="M0 0C-18 28 -34 58 -44 90" fill="none" stroke="' + C.kajal + '" stroke-width="1.6"/><path d="M-14 22 -24 20M-22 40 -34 40M-30 58 -40 60" stroke="' + C.kajal + '" stroke-width="1.2"/><path d="M-36 76C-40 82 -43 86 -44 90C-41 86 -38 82 -36 76Z" fill="' + HALDI_Y + '"/></g>',
+
+    sangeet: (clip) =>
+      '<g clip-path="url(#' + clip + ')">' + ['सा', 'रे', 'ग', 'म', 'प', 'ध', 'नि'].map((t, i) => { const x = 110 + i * 16.7; return '<text class="note" lang="hi" x="' + f(x) + '" y="' + (118 - (i % 3) * 14) + '" text-anchor="middle" font-family="Amita, \'Tiro Devanagari Hindi\', serif" font-weight="700" font-size="20" fill="' + (x < 160 ? C.zari : C.kajal) + '">' + t + '</text>'; }).join('') + '</g>' +
+      '<g class="dholak">' +
+      '<path d="M96 142C116 132 140 130 160 130V210C140 210 116 208 96 198Z" fill="' + C.mor + '"/>' +
+      '<path d="M160 130C180 130 204 132 224 142V198C204 208 180 210 160 210Z" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="3" stroke-linejoin="round"/>' +
+      '<path d="M160 130C180 130 204 132 224 142V198C204 208 180 210 160 210Z" fill="none" stroke="' + C.kagaz + '" stroke-width="1"/>' +
+      '<path d="M100 146 118 196 134 146 150 196" fill="none" stroke="' + C.zari + '" stroke-width="1.8" stroke-linejoin="round"/>' +
+      '<path d="M112 137V203M140 132V208" stroke="' + C.zari + '" stroke-width="3.2"/>' +
+      '<path d="M170 146 186 196 202 146 218 196" fill="none" stroke="' + C.kajal + '" stroke-width="1.8" stroke-linejoin="round"/>' +
+      '<path d="M180 132V208M184 132V208M206 136V204M210 137V203" stroke="' + C.kajal + '" stroke-width="1.4"/>' +
+      '<ellipse cx="94" cy="170" rx="10" ry="29" fill="' + C.chuna + '" stroke="' + C.zari + '" stroke-width="3"/>' +
+      '<ellipse cx="226" cy="170" rx="10" ry="29" fill="' + C.kagaz + '" stroke="' + C.kajal + '" stroke-width="3"/></g>' +
+      '<path d="M68 214C88 228 108 234 130 236" fill="none" stroke="' + C.zari + '" stroke-width="2"/>' +
+      [[74, 219], [86, 226], [98, 231], [110, 234], [122, 235]].map(([x, y]) => '<g class="bell"><circle cx="' + x + '" cy="' + (y + 6) + '" r="5.2" fill="' + C.zari + '"/><path d="M' + (x - 3) + ' ' + (y + 8) + 'H' + (x + 3) + '" stroke="' + C.rani + '" stroke-width="1.2"/></g>').join('') +
+      '<path d="M190 236C212 234 232 228 252 214" fill="none" stroke="' + C.kajal + '" stroke-width="2"/>' +
+      [[198, 235], [210, 234], [222, 231], [234, 226], [246, 219]].map(([x, y]) => '<g class="bell"><circle cx="' + x + '" cy="' + (y + 6) + '" r="5.2" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="1.6"/><path d="M' + (x - 3) + ' ' + (y + 8) + 'H' + (x + 3) + '" stroke="' + C.kajal + '" stroke-width="1.2"/></g>').join(''),
+
+    shaadi: () =>
+      Array.from({ length: 7 }, (_, i) => {
+        const a = (215 + i * 18.33) * Math.PI / 180, x = 160 + 104 * Math.cos(a), y = 160 + 104 * Math.sin(a), left = x < 159;
+        return '<g class="diya" transform="translate(' + f(x) + ' ' + f(y) + ')"><path d="M-9 0C-9 7 9 7 9 0Z" fill="' + (left ? C.zari : C.haldi) + '"' + (left ? '' : ' stroke="' + C.kajal + '" stroke-width="1.6"') + '/><path class="dflame" d="M0 -1C-3.5 -6 -1.5 -10 0 -13C1.5 -10 3.5 -6 0 -1Z" fill="' + (left ? C.haldi : C.sindoor) + '"/></g>';
+      }).join('') +
+      '<g class="kalash-l"><path d="M86 184C78 176 70 172 60 172C66 181 76 185 86 184Z" fill="' + C.sal + '"/><path d="M86 184C94 176 102 172 112 172C106 181 96 185 86 184Z" fill="' + C.sal + '"/><circle cx="86" cy="174" r="9" fill="' + C.deep + '"/>' +
+      '<path d="M72 184H100L104 192C112 204 108 226 86 228C64 226 60 204 68 192Z" fill="' + C.zari + '"/><path d="M70 192H102" stroke="' + C.rani + '" stroke-width="2.4"/><circle cx="80" cy="210" r="2.4" fill="' + C.rani + '"/><circle cx="92" cy="210" r="2.4" fill="' + C.rani + '"/><circle cx="86" cy="218" r="2.4" fill="' + C.rani + '"/></g>' +
+      '<g class="kalash-r"><path d="M234 184C226 176 218 172 208 172C214 181 224 185 234 184Z" fill="' + C.sal + '" stroke="' + C.kajal + '" stroke-width="1.8"/><path d="M234 184C242 176 250 172 260 172C254 181 244 185 234 184Z" fill="' + C.sal + '" stroke="' + C.kajal + '" stroke-width="1.8"/><circle cx="234" cy="174" r="9" fill="' + C.deep + '" stroke="' + C.kajal + '" stroke-width="1.8"/>' +
+      '<path d="M220 184H248L252 192C260 204 256 226 234 228C212 226 208 204 216 192Z" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="3" stroke-linejoin="round"/><path d="M220 184H248L252 192C260 204 256 226 234 228C212 226 208 204 216 192Z" fill="none" stroke="' + C.kagaz + '" stroke-width="1"/><path d="M216 194H252" stroke="' + C.sindoor + '" stroke-width="3"/><path d="M224 206l4 8M234 204l4 9M244 206l3 7" stroke="' + C.kajal + '" stroke-width="1.4" stroke-linecap="round"/></g>' +
+      '<g class="kund"><path d="M116 238H160V270H132Z" fill="' + C.zari + '"/><path d="M120 248H160M125 259H160" stroke="' + C.rani + '" stroke-width="1.8"/><path d="M160 238H204L188 270H160Z" fill="' + C.kagaz + '" stroke="' + C.kajal + '" stroke-width="2.6" stroke-linejoin="round"/><path d="M160 248H200M160 252H199M160 259H195M160 263H194" stroke="' + C.kajal + '" stroke-width="1.1"/></g>' +
+      '<path class="flame" d="M140 238C128 230 132 216 140 204C148 216 152 230 140 238Z" fill="' + C.haldi + '"/>' +
+      '<path class="flame" d="M180 238C168 230 172 216 180 204C188 216 192 230 180 238Z" fill="' + C.haldi + '"/>' +
+      '<path class="flame" d="M160 238C136 222 146 196 160 170C174 196 184 222 160 238Z" fill="' + C.haldi + '"/>' +
+      '<path class="flame" d="M160 236C150 226 152 210 160 196C168 210 170 226 160 236Z" fill="' + C.sindoor + '"/>' +
+      '<g class="cloth"><path class="cl" pathLength="1" d="M36 150C70 110 120 100 156 116" fill="none" stroke="' + C.zari + '" stroke-width="11" stroke-linecap="round"/><path class="cl" pathLength="1" d="M36 150C70 110 120 100 156 116" fill="none" stroke="' + C.rani + '" stroke-width="6.5" stroke-linecap="round"/>' +
+      '<path class="cl" pathLength="1" d="M284 150C250 110 200 100 164 116" fill="none" stroke="' + C.kajal + '" stroke-width="11" stroke-linecap="round"/><path class="cl" pathLength="1" d="M284 150C250 110 200 100 164 116" fill="none" stroke="' + C.haldi + '" stroke-width="6.5" stroke-linecap="round"/></g>' +
+      '<g class="knot"><path d="M160 116C150 102 138 108 144 118C150 126 158 122 160 116Z" fill="' + C.rani + '" stroke="' + C.zari + '" stroke-width="2"/><path d="M160 116C170 102 182 108 176 118C170 126 162 122 160 116Z" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="2.2"/>' +
+      '<path d="M158 120C154 132 150 140 150 152" fill="none" stroke="' + C.rani + '" stroke-width="5" stroke-linecap="round"/><path d="M162 120C166 132 170 140 170 152" fill="none" stroke="' + C.kajal + '" stroke-width="7" stroke-linecap="round"/><path d="M162 120C166 132 170 140 170 152" fill="none" stroke="' + C.haldi + '" stroke-width="4" stroke-linecap="round"/></g>',
+
+    blessing: () => {
+      let rice = '';
+      for (let r = 0, k = 0; r < 5; r++) {
+        const n = 8 - r;
+        for (let j = 0; j < n; j++, k++) {
+          const x = 128 + (j - (n - 1) / 2) * 5.6 + ((k * 7) % 3) - 1, y = 206 - r * 4.4 + ((k * 5) % 3) - 1, rot = (k * 47) % 180;
+          rice += '<ellipse class="rice" cx="' + f(x) + '" cy="' + f(y) + '" rx="1.8" ry="3.4" transform="rotate(' + rot + ' ' + f(x) + ' ' + f(y) + ')" fill="' + (k % 4 === 0 ? C.haldi : C.chuna) + '" stroke="' + C.kajal + '" stroke-width=".5"/>';
+        }
+      }
+      return '<path d="M160 184A104 30 0 0 0 160 244Z" fill="' + C.zari + '"/><path d="M160 184A104 30 0 0 1 160 244Z" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="2.8"/>' +
+        '<path d="M160 192A84 22 0 0 0 160 236" fill="none" stroke="' + C.rani + '" stroke-width="2.4"/><path d="M160 192A84 22 0 0 1 160 236" fill="none" stroke="' + C.kajal + '" stroke-width="1.4"/><path d="M160 196A78 18 0 0 1 160 232" fill="none" stroke="' + C.kajal + '" stroke-width="1.2"/>' +
+        '<path d="M180 206H208A14 9 0 0 1 180 206Z" fill="' + C.kagaz + '" stroke="' + C.kajal + '" stroke-width="2"/><path d="M183 206C186 199 202 199 205 206Z" fill="' + C.sindoor + '"/>' +
+        '<path d="M146 204C146 214 174 214 174 204Z" fill="' + C.zari + '" stroke="' + C.kajal + '" stroke-width="1.6"/>' +
+        '<path class="flame" d="M160 202C152 192 156 182 160 174C164 182 168 192 160 202Z" fill="' + C.haldi + '"/><path class="flame" d="M160 201C156 195 158 189 160 184C162 189 164 195 160 201Z" fill="' + C.sindoor + '"/>' +
+        rice;
+    }
+  };
+  function eventArt(ev) {
+    const clip = 'evclip' + (++clipUid);
+    return '<svg viewBox="0 0 320 320" aria-hidden="true"><defs><clipPath id="' + clip + '"><circle cx="160" cy="160" r="133"/></clipPath></defs><g class="medal">' + frame() + '<g class="art">' + ART[ev](clip) + '</g></g></svg>';
+  }
+
+  /* loops: each plays only while its event is on screen */
+  function haldiLoop(svg) {
+    const master = gsap.timeline({ paused: true });
+    const L = svg.querySelector('.leaf-l'), R = svg.querySelector('.leaf-r');
+    gsap.set(svg.querySelectorAll('.splash'), { scale: 0, transformOrigin: '50% 50%' });
+    const dip = gsap.timeline({ repeat: -1, repeatDelay: 0.5 })
+      .to(L, { rotation: 8, y: '+=8', svgOrigin: '100 92', duration: 0.5, ease: 'power2.inOut' })
+      .fromTo(svg.querySelectorAll('.sl'), { scale: 0, opacity: 1 }, { scale: 1.5, opacity: 0, duration: 0.55, stagger: 0.05, ease: 'power2.out' })
+      .to(L, { rotation: 0, y: '-=8', svgOrigin: '100 92', duration: 0.55, ease: 'power2.inOut' }, '<')
+      .to(R, { rotation: -8, y: '+=8', svgOrigin: '220 92', duration: 0.5, ease: 'power2.inOut' }, '+=0.2')
+      .fromTo(svg.querySelectorAll('.sr'), { scale: 0, opacity: 1 }, { scale: 1.5, opacity: 0, duration: 0.55, stagger: 0.05, ease: 'power2.out' })
+      .to(R, { rotation: 0, y: '-=8', svgOrigin: '220 92', duration: 0.55, ease: 'power2.inOut' }, '<');
+    master.add(dip, 0);
+    svg.querySelectorAll('.petal').forEach((p, i) => master.add(gsap.fromTo(p, { y: -150, x: 0, rotation: 0 }, { y: 200, x: rand(-26, 26), rotation: rand(140, 380), transformOrigin: '50% 50%', duration: rand(4.5, 7.5), ease: 'none', repeat: -1 }), (i % 5) * 0.8));
+    return master;
+  }
+  function sangeetLoop(svg) {
+    const master = gsap.timeline({ paused: true });
+    const drum = svg.querySelector('.dholak'), bells = svg.querySelectorAll('.bell');
+    gsap.set(bells, { transformOrigin: '50% 0%' });
+    const beat = gsap.timeline({ repeat: -1, repeatDelay: 0.4 });
+    [0, 0.3].forEach((t) => {
+      beat.to(drum, { scaleX: 1.05, scaleY: 0.97, svgOrigin: '160 170', duration: 0.08, ease: 'power2.out' }, t)
+        .to(drum, { scaleX: 1, scaleY: 1, svgOrigin: '160 170', duration: 0.24, ease: 'power3.out' }, t + 0.08)
+        .to(bells, { rotation: (i) => (i % 2 ? 14 : -14), duration: 0.08, ease: 'power2.out', stagger: 0.012 }, t)
+        .to(bells, { rotation: 0, duration: 0.4, ease: 'power3.out', stagger: 0.012 }, t + 0.1);
+    });
+    master.add(beat, 0);
+    svg.querySelectorAll('.note').forEach((n, i) => master.add(gsap.fromTo(n, { y: 20, opacity: 0 }, { keyframes: { y: [20, -6, -34, -60], opacity: [0, 1, 1, 0] }, duration: 2.8, ease: 'none', repeat: -1 }), i * 0.4));
+    return master;
+  }
+  function shaadiLoop(svg) {
+    const master = gsap.timeline({ paused: true });
+    svg.querySelectorAll('.flame').forEach((fl, i) => master.add(gsap.to(fl, { scaleY: rand(1.06, 1.14), scaleX: rand(0.92, 0.97), skewX: rand(-4, 4), transformOrigin: '50% 100%', duration: rand(0.18, 0.32), ease: 'sine.inOut', yoyo: true, repeat: -1 }), i * 0.05));
+    svg.querySelectorAll('.dflame').forEach((fl, i) => master.add(gsap.to(fl, { scaleY: 1.18, transformOrigin: '50% 100%', duration: rand(0.25, 0.45), ease: 'sine.inOut', yoyo: true, repeat: -1 }), i * 0.07));
+    master.add(gsap.to(svg.querySelector('.knot'), { rotation: 3, svgOrigin: '160 116', duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: -1 }), 0);
+    return master;
+  }
+  function blessingLoop(svg) {
+    const master = gsap.timeline({ paused: true });
+    svg.querySelectorAll('.flame').forEach((fl, i) => master.add(gsap.to(fl, { scaleY: 1.12, scaleX: 0.95, skewX: rand(-3, 3), transformOrigin: '50% 100%', duration: rand(0.2, 0.34), ease: 'sine.inOut', yoyo: true, repeat: -1 }), i * 0.06));
+    return master;
+  }
   function featherSvg(P) {
     return '<svg viewBox="0 0 40 120" aria-hidden="true">' +
       '<path d="M20 118C20 90 20 50 20 12" stroke="' + (P ? C.zari : C.kajal) + '" stroke-width="1.6" fill="none"/>' +
@@ -546,6 +677,7 @@ footer{position:relative;z-index:3;text-align:center}
   function grainSvg(c) { return '<svg viewBox="0 0 10 20" aria-hidden="true"><ellipse cx="5" cy="10" rx="4" ry="8" fill="' + c + '"/></svg>'; }
 
   document.querySelectorAll('.med').forEach((el) => {
+    if (el.dataset.event) { el.innerHTML = eventArt(el.dataset.event); return; }
     const pose = el.dataset.pose;
     const fanMode = pose === 'dance' ? 'open' : (el.dataset.fan === 'closed' ? 'closed' : 'none');
     el.innerHTML = medallion(pose, fanMode);
@@ -720,12 +852,11 @@ footer{position:relative;z-index:3;text-align:center}
     const form = e.currentTarget, thanks = document.getElementById('thanks');
     const svg = document.querySelector('#rsvp .med svg');
     const finish = () => { form.hidden = true; thanks.hidden = false; };
-    if (!hasGsap || reduce) { svg.querySelectorAll('.tail').forEach((t) => (t.style.display = 'none')); svg.querySelectorAll('.feather').forEach((t) => { t.style.opacity = 1; t.style.visibility = 'visible'; }); if (hasGsap) { gsap.set(svg.querySelectorAll('.f-line'), { strokeDashoffset: 0 }); gsap.set(svg.querySelectorAll('.f-eye, .f-in'), { scale: 1 }); } finish(); return; }
-    gsap.timeline({ onComplete: () => burst(22) })
+    if (!hasGsap || reduce) { finish(); return; }
+    gsap.timeline()
       .to(form, { autoAlpha: 0, y: -12, duration: 0.3, ease: 'power2.in', onComplete: finish })
-      .to(svg.querySelectorAll('.tail'), { autoAlpha: 0, duration: 0.25 }, 0.1)
-      .to(svg.querySelectorAll('.f-line'), { strokeDashoffset: 0, duration: 0.5, stagger: 0.03, ease: 'power2.out' }, 0.2)
-      .to(svg.querySelectorAll('.f-eye, .f-in'), { scale: 1, duration: 0.45, stagger: 0.015, ease: 'back.out(1.4)' }, 0.3)
+      .to(svg.querySelectorAll('.rice'), { y: () => '-=' + rand(60, 120).toFixed(1), x: () => '+=' + rand(-60, 60).toFixed(1), rotation: () => '+=' + rand(-200, 200).toFixed(0), opacity: 0, duration: 1.1, ease: 'power2.out', stagger: 0.012 }, 0.1)
+      .add(() => burst(26), 0.25)
       .from(thanks, { autoAlpha: 0, y: 16, duration: 0.6, ease: 'power3.out' }, 0.45);
   });
 
@@ -749,7 +880,6 @@ footer{position:relative;z-index:3;text-align:center}
       gsap.set('#mL, #mR', { xPercent: 0 });
       gsap.set('#meeting .cap', { autoAlpha: 0 });
       gsap.set('#meeting .cap:last-child', { autoAlpha: 1 });
-      gsap.set('#rsvp .feather', { autoAlpha: 0 });
       return;
     }
 
@@ -855,23 +985,38 @@ footer{position:relative;z-index:3;text-align:center}
     gsap.from('#toran .strand', { yPercent: -100, autoAlpha: 0, duration: 0.9, ease: 'back.out(1.4)', stagger: 0.05, scrollTrigger: { trigger: '#schedule', start: 'top 85%', once: true } });
 
     gsap.utils.toArray('.chapter').forEach((ch) => {
-      const svg = ch.querySelector('.med svg');
+      const svg = ch.querySelector('.med svg'), ev = ch.dataset.event;
       const rings = svg.querySelectorAll('.ring-draw');
       gsap.set(rings, { strokeDasharray: 1 });
-      const tl = gsap.timeline({ scrollTrigger: { trigger: ch, start: 'top 80%', once: true }, defaults: { ease: 'power3.out' } });
+      const loop = ev === 'haldi' ? haldiLoop(svg) : ev === 'sangeet' ? sangeetLoop(svg) : shaadiLoop(svg);
+      let ready = false, vis = false;
+      const tl = gsap.timeline({ scrollTrigger: { trigger: ch, start: 'top 80%', once: true }, defaults: { ease: 'power3.out' }, onComplete: () => { ready = true; if (vis) loop.play(); } });
       tl.fromTo(rings, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut', stagger: 0.06 })
         .from(svg.querySelectorAll('.disc, .ring-m'), { autoAlpha: 0, duration: 0.6 }, 0.1)
-        .from(svg.querySelector('.pk-l'), { x: -40, autoAlpha: 0, duration: 0.9 }, 0.35)
-        .from(svg.querySelector('.pk-r'), { x: 40, autoAlpha: 0, duration: 0.9 }, 0.43)
+        .from(svg.querySelector('.art'), { scale: 0.86, autoAlpha: 0, transformOrigin: '50% 50%', duration: 0.8 }, 0.35)
         .from(ch.querySelectorAll('h3 .ch'), { yPercent: 70, rotationX: -50, transformPerspective: 400, autoAlpha: 0, duration: 0.7, ease: 'back.out(1.6)', stagger: 0.05 }, 0.5);
-      if (ch.dataset.pose === 'dance') {
-        gsap.set(svg.querySelectorAll('.f-line'), { strokeDasharray: 1 });
-        tl.fromTo(svg.querySelectorAll('.f-line'), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.5, stagger: 0.04 }, 0.9)
-          .from(svg.querySelectorAll('.f-eye, .f-in'), { scale: 0, transformOrigin: '50% 50%', duration: 0.45, ease: 'back.out(1.4)', stagger: 0.02 }, 1.0);
+      if (ev === 'haldi') tl.from(svg.querySelectorAll('.leaf-l, .leaf-r'), { y: '-=40', autoAlpha: 0, duration: 0.7, stagger: 0.12 }, 0.6);
+      if (ev === 'sangeet') tl.from(svg.querySelectorAll('.bell'), { y: -10, autoAlpha: 0, duration: 0.4, stagger: 0.04 }, 0.7);
+      if (ev === 'shaadi') {
+        gsap.set(svg.querySelectorAll('.cl'), { strokeDasharray: 1 });
+        tl.fromTo(svg.querySelectorAll('.cl'), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut' }, 0.7)
+          .from(svg.querySelector('.knot'), { scale: 0, transformOrigin: '50% 30%', duration: 0.6, ease: 'back.out(2)' }, 1.65)
+          .from(svg.querySelectorAll('.diya'), { opacity: 0.25, duration: 0.3, stagger: 0.18 }, 1.2)
+          .from(svg.querySelectorAll('.dflame'), { scale: 0, transformOrigin: '50% 100%', duration: 0.4, stagger: 0.18, ease: 'back.out(2)' }, 1.2);
       }
-      if (ch.dataset.pose === 'garland') tl.from(svg.querySelectorAll('.bead'), { scale: 0, transformOrigin: '50% 50%', duration: 0.35, stagger: 0.03 }, 0.95);
-      if (ch.dataset.pose === 'haldi') tl.from(svg.querySelector('.bowl'), { y: 18, autoAlpha: 0, duration: 0.7 }, 0.8);
       tl.from(ch.querySelectorAll('.reveal'), { y: 24, autoAlpha: 0, duration: 0.8, stagger: 0.07 }, 0.65);
+      ScrollTrigger.create({ trigger: ch, start: 'top bottom', end: 'bottom top', onToggle: (s) => { vis = s.isActive; if (ready) (vis ? loop.play() : loop.pause()); } });
+
+      if (ev === 'sangeet') {
+        const drum = svg.querySelector('.dholak'), bells = svg.querySelectorAll('.bell');
+        ch.querySelector('.medbtn').addEventListener('click', () => {
+          gsap.timeline()
+            .to(drum, { scaleX: 1.09, scaleY: 0.94, svgOrigin: '160 170', duration: 0.07, ease: 'power2.out' })
+            .to(drum, { scaleX: 1, scaleY: 1, svgOrigin: '160 170', duration: 0.35, ease: 'power3.out' })
+            .to(bells, { rotation: (i) => (i % 2 ? 20 : -20), transformOrigin: '50% 0%', duration: 0.07, stagger: 0.01 }, 0)
+            .to(bells, { rotation: 0, duration: 0.5, ease: 'power3.out', stagger: 0.01 }, 0.08);
+        });
+      }
 
       if (!desk) {
         gsap.timeline({ scrollTrigger: { trigger: ch, start: 'top bottom', end: 'bottom top', scrub: true } })
@@ -906,9 +1051,8 @@ footer{position:relative;z-index:3;text-align:center}
     ScrollTrigger.create({ trigger: '#count', start: 'bottom bottom', end: () => '+=' + Math.round(innerHeight * 0.9), pin: true, pinSpacing: false, invalidateOnRefresh: true });
     gsap.from('#rsvp h2 .ch', { yPercent: 70, rotationX: -50, transformPerspective: 400, autoAlpha: 0, duration: 0.7, ease: 'back.out(1.6)', stagger: 0.03, scrollTrigger: { trigger: '#rsvp h2', start: 'top 88%', once: true } });
 
-    const rsvpSvg = document.querySelector('#rsvp .med svg');
-    gsap.set(rsvpSvg.querySelectorAll('.f-line'), { strokeDasharray: 1, strokeDashoffset: 1 });
-    gsap.set(rsvpSvg.querySelectorAll('.f-eye, .f-in'), { scale: 0, transformOrigin: '50% 50%' });
+    const thaliLoop = blessingLoop(document.querySelector('#rsvp .med svg'));
+    ScrollTrigger.create({ trigger: '#rsvp .med', start: 'top bottom', end: 'bottom top', onToggle: (s) => (s.isActive ? thaliLoop.play() : thaliLoop.pause()) });
     return () => cleanups.forEach((fn) => fn());
   });
 

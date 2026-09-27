@@ -35,16 +35,18 @@ Both are private until shared from their Share menus.
 
 ## The direction: "The peacock pair"
 - **Concept:** her Paithani (woven silk, Maharashtra) and his Madhubani (painted paper, Bihar) share the peacock. Two peacocks, one from each art, face each other and meet.
-- **The medallion** is one component used everywhere: a circle whose left half is rani silk with a zari ring, and whose right half is paper with a hatched ring. Its **poses tell the story down the page:**
+- **The medallion** is one frame used everywhere: a circle whose left half is rani silk with a zari ring, and whose right half is paper with a hatched ring. **What's inside changes down the page:**
+  - **Peacocks open the invitation:** they are apart in the hero and meet under a garland in the pinned scene. After that they step aside, so they don't repeat.
+  - **Each celebration brings its own props.** Every prop is drawn half Paithani (gold on silk) and half Madhubani (double line on paper):
 
-| Pose | Where | Story |
+| Event | Props | Motion |
 |---|---|---|
-| Apart | Hero | They see each other |
-| Haldi | Haldi | Across the turmeric bowl |
-| Dance | Sangeet; RSVP after sending | Tails fan open |
-| Garland | Shaadi | The varmala is exchanged |
-| Meet | Cover; RSVP | Beaks touch; a lotus (Mrunalini = lotus) blooms, half silk, half paper |
+| **Haldi** | Brass bowl of turmeric, **mango leaves** (used to apply haldi), turmeric roots, marigolds | Mango leaves take turns dipping into the bowl and turmeric splashes; marigold petals drift down |
+| **Sangeet** | **Dholak** (the Maharashtrian dholki, the Bihari dholak), **ghungroo**, sargam | The dholak beats *dha-dha*; the ghungroo jingle; सा रे ग म प ध नि float up. **Tap the dholak to play it.** |
+| **Shaadi** | **Gathbandhan** (her silk tied to his cloth), agni kund, two kalash, **seven diyas for the saptapadi** | The two cloths draw in and tie the knot over the fire; the seven diyas light one by one; the flames flicker |
+| **RSVP** | **Akshata thali** with rice, kumkum and a diya | The diya flickers; on Send the akshata is tossed as a blessing |
 
+  Each loop plays only while its event is on screen, and only after the event's entrance has finished.
 - **Colours:**
   - Hers (Paithani): rani `#A3195B`, mor `#0E5C63`, zari `#C9A04A` (large text and ornament only), chuna `#F5EFE3`.
   - His (Madhubani): kagaz `#EFE3C8`, kajal `#2B211B`, sindoor `#B3261E`, haldi `#D99A1E` (fills only), neel `#2F3E73`.
@@ -109,7 +111,7 @@ The references feel alive because text and art move together in layers. The prot
 | Hero depth | Paithani and Madhubani **feathers and akshata grains float at five depths**, some behind the names and some in front. Each drifts and moves at its own scroll speed; on desktop they also follow the mouse. | Meenaya's lanterns |
 | Crossing ribbons | A Paithani zari ribbon and a Madhubani paper ribbon cross in an X, with text in both scripts. They drift constantly, **race when you scroll fast**, and reverse when you scroll up. | Framer / Awwwards scroll-speed text bands |
 | The meeting | The pinned, scroll-driven peacock scene | City-3's ship, extended |
-| Schedule | A **marigold toran** drops in and sways. On phones, the chapter nearest mid-screen stays sharp while the others recede. On desktop, a chapter lifts and its medallion turns on hover. Event names ripple on hover. | MyShaadhi Link's toran and focus band |
+| Schedule | A **marigold toran** drops in and sways. Each event's props play their own loop (see the table above). On phones, the chapter nearest mid-screen stays sharp while the others recede. On desktop, a chapter lifts and its medallion turns on hover. Event names ripple on hover. | MyShaadhi Link's toran and focus band |
 | Mangalashtak | The verse lights up word by word as you scroll; **gold specks drift**; a zari glint sweeps across ॥ शुभमंगल सावधान ॥. | MyShaadhi Link's specks |
 | Countdown | A live **seconds** dial; each changed digit drops in. | MyShaadhi Link's countdown |
 | Curtain | The countdown pins, and the **RSVP slides up over it like a curtain**. | Missing Piece's curtain hand-off |
@@ -130,7 +132,9 @@ A **Moments** guide (bottom left, after opening) jumps to each moment with a not
 
 ## Artwork, for direction A
 The peacocks in the design are code-drawn stand-ins. For the real site:
-- **His Madhubani peacock pair,** from a Mithila artist (see research §9), painted on paper as separate layers: each bird, the tail feathers, the garland and the lotus.
+- **His Madhubani side,** from a Mithila artist (see research §9), painted on paper as separate layers:
+  - the peacock pair (each bird, the tail feathers and the garland);
+  - the event props: the haldi bowl and mango leaf, the dholak and ghungroo, the kalash, the gathbandhan cloth, the diya and the thali.
 - **Her Paithani peacock.** Paithani is woven, so the most personal source is **Mrunalini's own Paithani**. Photograph or scan its peacock motif and zari border, and have an illustrator trace them into layers. A textile artist is the alternative.
 - **The Warli Lagna Chowk is no longer needed** in A. Warli can return later as a dancing crowd if wanted.
 
