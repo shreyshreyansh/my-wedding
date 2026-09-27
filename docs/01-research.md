@@ -276,7 +276,105 @@ This is the biggest production risk, so it gets its own plan.
 
 **Timeline implication:** artwork is the long pole. If the invites need to go out by a certain date, the commission has to start **6+ weeks before that**.
 
-## 10. Open questions for the couple
+## 10. Invitation wording, Mangalashtak and music
+
+Elders read an invite through the conventions of a printed card. Getting these right is what makes the site feel like *their* invitation and not a template.
+
+### Marathi लग्नपत्रिका: the order of a card
+1. **Invocation:** ॥ श्री गणेशाय नमः ॥ (or ॥ श्री गजानन प्रसन्न ॥).
+2. **Family deity:** one line per deity, e.g. ॥ श्री [कुलदैवत] प्रसन्न ॥ / ॥ श्री कुलस्वामिनी [नाव] प्रसन्न ॥.
+3. **Greeting:** सप्रेम नमस्कार वि. वि., then श्री कुलस्वामिनी कृपेने…
+4. **The couple:**
+   - **चि.** [groom] (श्री. … यांचा ज्येष्ठ सुपुत्र).
+   - **चि. सौ. कां.** [bride] (सौ. … व श्री. … यांची सुकन्या).
+   - The host family's child is named first.
+5. **Muhurta:** ॥ यांचा शुभविवाह ॥, with the tithi and शके date, and the time.
+6. **Request:** …सहकुटुंब, सहपरिवार अगत्य उपस्थित राहून वधूवरांस शुभाशीर्वाद द्यावेत ही नम्र विनंती.
+7. **Ceremonies**, then the **venue** (विवाह स्थळ).
+8. **Inviters:** आपले नम्र / आपले आगमनाभिलाषी / निमंत्रक. Grandparents come first; deceased elders are written **कै.** (or स्व.).
+9. **Close:** समस्त [surname] परिवार. Optionally *फक्त आशीर्वाद* ("blessings only, no gifts").
+
+**Name convention:** a man is written as given name + father's name + surname. A married woman takes her husband's name as her middle name.
+
+### Hindi / Bihari शादी कार्ड: the order of a card
+1. **Invocations:**
+   - ॥ श्री गणेशाय नमः ॥
+   - the shloka **वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥**
+   - and/or **मङ्गलं भगवान् विष्णुः मङ्गलं गरुडध्वजः। मङ्गलं पुण्डरीकाक्षः मङ्गलायतनो हरिः॥**
+   - **Printed cards often misspell both shlokas; ours won't.**
+2. **The programme panel**, e.g. तिलक, हल्दी, मटकोर, बारात प्रस्थान, जयमाला, कन्यादान, सिंदूरदान, कोहबर, विदाई.
+3. **Opening:** मान्यवर, परमपिता परमेश्वर की असीम अनुकम्पा से…
+4. **The couple:**
+   - **चि. / आयुष्मान्** [groom], सुपौत्र / सुपुत्र [elders].
+   - **संग**.
+   - **सौ. कां. / आयुष्मती** [bride], सुपौत्री / सुपुत्री.
+   - Deceased elders are written **स्व.**
+5. **Request:** …के शुभ विवाह के मांगलिक अवसर पर आप सपरिवार सादर आमंत्रित हैं।
+6. **Role blocks:** **दर्शनाभिलाषी** (relatives longing to see you), **स्वागतोत्सुक** (eager to welcome), and **बाल मनुहार**, the children's plea in baby-talk ("मेले चाचा की छादी मे जलूल आना").
+7. **Sender:** **विनीत / निवेदक**.
+
+**Traps to avoid:**
+- **Never call the bride सौभाग्यवती.** That word is for married women such as mothers and aunts. The bride is सौ. कां. (सौभाग्यकांक्षिणी).
+- **गं. भा.** for widows became contested in 2023; many families now write श्रीमती.
+
+**Made for a web invite:**
+- *"समयाभाव के कारण निमंत्रण पत्रिका को ही मनुहार की मान्यता प्रदान कर अनुगृहीत करें"*, a traditional line meaning "please accept this card as our personal visit."
+- **उत्तराकांक्षी** (literally "awaiting your reply") could label the RSVP. That RSVP use is our own idea, so check it with an elder.
+
+**Regional notes:**
+- Bihar and Jharkhand cards may open with **"श्री श्री 108 बाबा बैद्यनाथ एवं माता पार्वती की असीम अनुकम्पा से"** (Deoghar, Jharkhand).
+- Maithil families call the invitation **हकार**.
+- Ranchi's local language is Nagpuri (Sadri), but Bihari-origin families usually print their cards in standard Hindi.
+
+### Mangalashtak: the verse to reveal as you scroll
+**How it works at the ceremony:**
+- The antarpat is held between the couple. After each stanza everyone calls **"शुभमंगल सावधान!"** ("auspicious moment, be attentive!") and throws akshata.
+- After the last verse the antarpat drops, garlands are exchanged, and the sanai-choughada starts ("वाजवा रे वाजवा").
+- **That's exactly the choreography of our opening.**
+- The first verse is always the Ashtavinayak invocation and the last is always "तदेव लग्नं…".
+
+**Verse 1: Ashtavinayak.** Five of these eight Ganesha temples are in Pune district, so this is the bride's side:
+> स्वस्ति श्री गणनायकं गजमुखं मोरेश्वरं सिद्धिदम्।
+> बल्लाळं मुरुडं विनायकमहं चिन्तामणिं थेवरम्॥
+> लेण्याद्रिं गिरिजात्मजं सुवरदं विघ्नेश्वरं ओझरम्।
+> ग्रामे रांजणनामके गणपतिः कुर्यात् सदा मङ्गलम्॥
+
+**The rivers verse: both families in one line.** It names the **Godavari** (Maharashtra) and the **Gandaki** (Bihar):
+> गङ्गा सिन्धु सरस्वती च यमुना गोदावरी नर्मदा
+> कावेरी सरयू महेन्द्रतनया चर्मण्वती वेदिका।
+> शिप्रा वेत्रवती महासुरनदी ख्याता च या गण्डकी
+> पूर्णाः पुण्यजलैः समुद्रसहिताः कुर्वन्तु वो मङ्गलम्॥
+
+**The final verse:**
+> तदेव लग्नं सुदिनं तदेव ताराबलं चन्द्रबलं तदेव।
+> विद्याबलं दैवबलं तदेव लक्ष्मीपते तेऽङ्घ्रियुगं स्मरामि॥
+
+**The groom's side (Ramcharitmanas, public domain):**
+- **मंगल भवन अमंगल हारी। द्रवउ सो दसरथ अजिर बिहारी॥**
+- **सीय राममय सब जग जानी। करउँ प्रनाम जोरि जुग पानी॥** Sita's Mithila makes this a lovely Bihari counterpart.
+
+**Reveal rule:** reveal by word (§2), keeping compound words whole. End each verse on ॥ शुभमंगल सावधान ॥ with an akshata burst.
+
+### Music
+- **Famous recordings are off-limits without a licence.** That includes Sharda Sinha's vivah geet (Saregama / T-Series), film songs, Bismillah Khan's shehnai and Mangalashtak recordings on YouTube. The copyright exemption for weddings covers the ceremony itself, not a website. The YouTube Audio Library is licensed for videos, not sites.
+- **Best free option:** Pixabay Music's shehnai and wedding tracks. They are free with no attribution; keep the licence certificate.
+- **Free Music Archive:** check each track's licence (CC BY is fine).
+- **Most personal option:** **record a family elder singing the Ashtavinayak verse and "तदेव लग्नं"**. You'd own it, and it can play as the Mangalashtak scene finishes.
+- **File spec:**
+  - Format: AAC (`.m4a`) at 96 kbps, or 64–80 kbps mono for a solo shehnai.
+  - Length: a 60–90s seamless loop, **under 1.5 MB**.
+  - Loading: `preload="none"`, started from the tap on the cover, with a visible mute button.
+
+### Needs a family elder or purohit to confirm
+- Both families' **kuladaivat and kulaswamini** names.
+- **चि. सौ. कां.** or चि. for both; **कै.** or स्व.
+- The **tithi / शके** date from the purohit's panchang.
+- **Which Mangalashtak variants** your purohit sings, so the site matches the ceremony.
+- The groom's roots (Bhojpuri, Magahi or Maithili), which decide हकार and the Baidyanath line.
+- Every Maithili sentence (none were verified).
+- **उत्तराकांक्षी** as the RSVP label.
+
+## 11. Open questions for the couple
 
 1. **The references.** What exactly do you like in Meenaya, City-3 and MyShaadhi Link? For example: City-3's gold paintings, the carved countdown, the tap-to-open cover, or the personal guest links. Screenshots help.
 2. **The basics.**
@@ -290,6 +388,12 @@ This is the biggest production risk, so it gets its own plan.
 7. **Direction.** A, B, C, or the recommended mix?
 8. **Logistics.** The date you want to send invites, a custom domain, and where RSVPs should land.
 9. **Artwork.** Which budget tier (low, mid or high; see §9)? Are you happy to commission artists? Should the elders be asked about using Kohbar imagery?
+10. **For the card wording (§10).**
+    - Both families' kuladaivat / kulaswamini.
+    - Honorific choices (चि. सौ. कां., कै. / स्व.).
+    - The tithi date from your purohit.
+    - Which Mangalashtak variants they sing.
+    - Would an elder record the Ashtavinayak verse for the site?
 
 ---
 
@@ -302,6 +406,12 @@ This is the biggest production risk, so it gets its own plan.
 - Kohbar symbolism: https://theprint.in/pageturner/excerpt/maithil-weddings-arent-fixed-using-horoscope-a-phallic-kohbar-painting-is-more-important/2273044/
 - AI and Indian cultural imagery: https://impressions.manipal.edu/open-access-archive/11412/ · https://community.adobe.com/questions-32/images-are-overwhelmingly-ai-generated-1497463
 - Artist moral rights (India): https://www.intepat.com/blog/moral-rights-copyright-law
+- Marathi lagna patrika format and honorifics: https://happyinvites.co/wordings/lagna-patrika-format-in-marathi/ · https://www.marathisrushti.com/articles/chi-sau-kan/ · https://www.mumbaitak.in/political-news/story/why-widow-women-are-called-ganga-bhagirathi-what-is-the-real-reason-828346-2023-04-14
+- Hindi / Bihari card format: https://hindiyatra.com/wedding-card-matter-in-hindi/ · https://milanmantra.com/wedding-card-matter-in-hindi/ · https://happyinvites.co/wordings/wedding-card-matter-in-hindi/ · https://www.aajtak.in/visualstories/education/indian-wedding-card-chi-before-groom-sau-before-bride-name-wedding-card-glossary-viral-pvpw-209544-15-02-2025
+- Shlokas: https://shlokam.org/shloka/vakrathunda-mahakaya.htm · https://www.ramcharit.in/6032-2/
+- Mangalashtak: https://mr.wikipedia.org/wiki/मंगलाष्टक · https://en.wikipedia.org/wiki/Mangal_Ashtaka · https://marathi.webdunia.com/article/hinduism-marathi/mangalashtak-in-marathi-121101200030_1.html · https://en.wikipedia.org/wiki/Ashtavinayaka
+- Maithil and Bihari rites: https://en.wikipedia.org/wiki/Maithil_Vivah · https://www.weddingwire.in/wedding-tips/bihari-wedding--c2615 · https://www.hindwidictionary.com/maithili/meaning-of-hakaar
+- Music rights and format: https://pixabay.com/service/license-summary/ · https://freemusicarchive.org/License_Guide · https://support.google.com/youtube/answer/3376882 · https://lawgist.in/copyright-act/27 · https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Audio_codecs · https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay
 - Meenaya product page: https://www.missingpieceinvites.com/product-cards/product-card-meenaya
 - City template page: https://www.missingpieceinvites.com/product-cards/product-card-city
 - Warli Lagna Chowk and Palaghata: https://www.memeraki.com/blogs/posts/warli-paintings-different-types-styles · https://www.astaguru.com/blogs/from-tribal-homes-to-canvas-the-tale-of-warli-painting-725
