@@ -12,6 +12,7 @@
   color-scheme:light;
 }
 *{box-sizing:border-box}
+html{touch-action:manipulation}
 html.locked,html.locked body{overflow:hidden}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
@@ -625,8 +626,8 @@ footer{position:relative;z-index:3;text-align:center}
   const ART = {
     haldi: (clip) =>
       '<g clip-path="url(#' + clip + ')">' + Array.from({ length: 11 }, (_, i) => '<ellipse class="petal" cx="' + (58 + (i * 23) % 204) + '" cy="' + (40 + (i * 29) % 90) + '" rx="4" ry="6.5" fill="' + (i % 2 ? '#E27A1B' : C.haldi) + '"/>').join('') + '</g>' +
-      '<path d="M84 256c6-6 16-6 22-2s10 2 14-2" fill="none" stroke="' + C.zari + '" stroke-width="7" stroke-linecap="round"/>' +
-      '<path d="M198 256c6-4 14-6 20-2s10 2 14-1" fill="none" stroke="' + C.kajal + '" stroke-width="9" stroke-linecap="round"/><path d="M198 256c6-4 14-6 20-2s10 2 14-1" fill="none" stroke="' + C.haldi + '" stroke-width="5.4" stroke-linecap="round"/>' +
+      '<path d="M84 258C84 252 92 250 100 252C106 250 114 251 118 255C119 259 114 262 106 261C98 263 88 263 84 258Z" fill="' + C.zari + '"/><path d="M96 252C96 246 101 244 104 247C105 250 102 252 100 252Z" fill="' + C.zari + '"/><path d="M94 253C93 256 93 259 94 262M106 252C105 255 105 258 106 261" fill="none" stroke="' + C.rani + '" stroke-width="1.2"/>' +
+      '<path d="M236 258C236 252 228 250 220 252C214 250 206 251 202 255C201 259 206 262 214 261C222 263 232 263 236 258Z" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="1.8" stroke-linejoin="round"/><path d="M224 252C224 246 219 244 216 247C215 250 218 252 220 252Z" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="1.6" stroke-linejoin="round"/><path d="M226 253C227 256 227 259 226 262M214 252C215 255 215 258 214 261" fill="none" stroke="' + C.kajal + '" stroke-width="1.2"/>' +
       '<g class="bowl"><path d="M160 212H110A50 34 0 0 0 160 246Z" fill="' + C.zari + '"/><path d="M160 212H210A50 34 0 0 1 160 246Z" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="2.6" stroke-linejoin="round"/>' +
       '<path d="M114 212C122 198 140 192 160 192V212Z" fill="' + HALDI_Y + '"/><path d="M160 192C180 192 198 198 206 212H160Z" fill="' + HALDI_Y + '" stroke="' + C.kajal + '" stroke-width="2"/>' +
       '<path d="M106 212H160" stroke="' + C.zari + '" stroke-width="3.2" stroke-linecap="round"/><path d="M160 212H214" stroke="' + C.kajal + '" stroke-width="3.2" stroke-linecap="round"/>' +
@@ -654,24 +655,56 @@ footer{position:relative;z-index:3;text-align:center}
       '<path d="M190 236C212 234 232 228 252 214" fill="none" stroke="' + C.kajal + '" stroke-width="2"/>' +
       [[198, 235], [210, 234], [222, 231], [234, 226], [246, 219]].map(([x, y]) => '<g class="bell"><circle cx="' + x + '" cy="' + (y + 6) + '" r="5.2" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="1.6"/><path d="M' + (x - 3) + ' ' + (y + 8) + 'H' + (x + 3) + '" stroke="' + C.kajal + '" stroke-width="1.2"/></g>').join(''),
 
-    shaadi: () =>
-      Array.from({ length: 7 }, (_, i) => {
-        const a = (215 + i * 18.33) * Math.PI / 180, x = 160 + 104 * Math.cos(a), y = 160 + 104 * Math.sin(a), left = x < 159;
-        return '<g class="diya" transform="translate(' + f(x) + ' ' + f(y) + ')"><path d="M-9 0C-9 7 9 7 9 0Z" fill="' + (left ? C.zari : C.haldi) + '"' + (left ? '' : ' stroke="' + C.kajal + '" stroke-width="1.6"') + '/><path class="dflame" d="M0 -1C-3.5 -6 -1.5 -10 0 -13C1.5 -10 3.5 -6 0 -1Z" fill="' + (left ? C.haldi : C.sindoor) + '"/></g>';
-      }).join('') +
-      '<g class="kalash-l"><path d="M86 184C78 176 70 172 60 172C66 181 76 185 86 184Z" fill="' + C.sal + '"/><path d="M86 184C94 176 102 172 112 172C106 181 96 185 86 184Z" fill="' + C.sal + '"/><circle cx="86" cy="174" r="9" fill="' + C.deep + '"/>' +
-      '<path d="M72 184H100L104 192C112 204 108 226 86 228C64 226 60 204 68 192Z" fill="' + C.zari + '"/><path d="M70 192H102" stroke="' + C.rani + '" stroke-width="2.4"/><circle cx="80" cy="210" r="2.4" fill="' + C.rani + '"/><circle cx="92" cy="210" r="2.4" fill="' + C.rani + '"/><circle cx="86" cy="218" r="2.4" fill="' + C.rani + '"/></g>' +
-      '<g class="kalash-r"><path d="M234 184C226 176 218 172 208 172C214 181 224 185 234 184Z" fill="' + C.sal + '" stroke="' + C.kajal + '" stroke-width="1.8"/><path d="M234 184C242 176 250 172 260 172C254 181 244 185 234 184Z" fill="' + C.sal + '" stroke="' + C.kajal + '" stroke-width="1.8"/><circle cx="234" cy="174" r="9" fill="' + C.deep + '" stroke="' + C.kajal + '" stroke-width="1.8"/>' +
-      '<path d="M220 184H248L252 192C260 204 256 226 234 228C212 226 208 204 216 192Z" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="3" stroke-linejoin="round"/><path d="M220 184H248L252 192C260 204 256 226 234 228C212 226 208 204 216 192Z" fill="none" stroke="' + C.kagaz + '" stroke-width="1"/><path d="M216 194H252" stroke="' + C.sindoor + '" stroke-width="3"/><path d="M224 206l4 8M234 204l4 9M244 206l3 7" stroke="' + C.kajal + '" stroke-width="1.4" stroke-linecap="round"/></g>' +
-      '<g class="kund"><path d="M116 238H160V270H132Z" fill="' + C.zari + '"/><path d="M120 248H160M125 259H160" stroke="' + C.rani + '" stroke-width="1.8"/><path d="M160 238H204L188 270H160Z" fill="' + C.kagaz + '" stroke="' + C.kajal + '" stroke-width="2.6" stroke-linejoin="round"/><path d="M160 248H200M160 252H199M160 259H195M160 263H194" stroke="' + C.kajal + '" stroke-width="1.1"/></g>' +
-      '<path class="flame" d="M140 238C128 230 132 216 140 204C148 216 152 230 140 238Z" fill="' + C.haldi + '"/>' +
-      '<path class="flame" d="M180 238C168 230 172 216 180 204C188 216 192 230 180 238Z" fill="' + C.haldi + '"/>' +
-      '<path class="flame" d="M160 238C136 222 146 196 160 170C174 196 184 222 160 238Z" fill="' + C.haldi + '"/>' +
-      '<path class="flame" d="M160 236C150 226 152 210 160 196C168 210 170 226 160 236Z" fill="' + C.sindoor + '"/>' +
-      '<g class="cloth"><path class="cl" pathLength="1" d="M36 150C70 110 120 100 156 116" fill="none" stroke="' + C.zari + '" stroke-width="11" stroke-linecap="round"/><path class="cl" pathLength="1" d="M36 150C70 110 120 100 156 116" fill="none" stroke="' + C.rani + '" stroke-width="6.5" stroke-linecap="round"/>' +
-      '<path class="cl" pathLength="1" d="M284 150C250 110 200 100 164 116" fill="none" stroke="' + C.kajal + '" stroke-width="11" stroke-linecap="round"/><path class="cl" pathLength="1" d="M284 150C250 110 200 100 164 116" fill="none" stroke="' + C.haldi + '" stroke-width="6.5" stroke-linecap="round"/></g>' +
-      '<g class="knot"><path d="M160 116C150 102 138 108 144 118C150 126 158 122 160 116Z" fill="' + C.rani + '" stroke="' + C.zari + '" stroke-width="2"/><path d="M160 116C170 102 182 108 176 118C170 126 162 122 160 116Z" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="2.2"/>' +
-      '<path d="M158 120C154 132 150 140 150 152" fill="none" stroke="' + C.rani + '" stroke-width="5" stroke-linecap="round"/><path d="M162 120C166 132 170 140 170 152" fill="none" stroke="' + C.kajal + '" stroke-width="7" stroke-linecap="round"/><path d="M162 120C166 132 170 140 170 152" fill="none" stroke="' + C.haldi + '" stroke-width="4" stroke-linecap="round"/></g>',
+    shaadi: (clip) => {
+      const diyas = Array.from({ length: 7 }, (_, i) => {
+        const a = (222 + i * 16) * Math.PI / 180, x = 160 + 106 * Math.cos(a), y = 160 + 106 * Math.sin(a), side = x < 158 ? 'l' : x > 162 ? 'r' : 'm';
+        const her = '<path d="M-10 0C-10 7 0 7.5 0 7.5V0Z" fill="' + C.zari + '"/><path d="M0 0V7.5C0 7.5 10 7 10 0Z" fill="' + C.zari + '"/><path d="M-10 0H10" stroke="' + C.mor + '" stroke-width="1.6"/>';
+        const his = '<path d="M-10 0C-10 7 10 7 10 0Z" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="1.6" stroke-linejoin="round"/>';
+        const both = '<path d="M-10 0C-10 7 0 7.5 0 7.5V0Z" fill="' + C.zari + '"/><path d="M0 0V7.5C4 7.5 10 7 10 0Z" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="1.6" stroke-linejoin="round"/>';
+        return '<g class="diya" transform="translate(' + f(x) + ' ' + f(y) + ')">' + (side === 'l' ? her : side === 'r' ? his : both) +
+          '<g class="dflame"><path d="M0 -1C-4 -6 -2 -11 0 -14C2 -11 4 -6 0 -1Z" fill="' + HALDI_Y + '"/><path d="M0 -2C-1.6 -4.5 -1 -7 0 -8.5C1 -7 1.6 -4.5 0 -2Z" fill="' + C.sindoor + '"/></g></g>';
+      }).join('');
+      const kalash = (cx, his) => {
+        const k = his ? ' stroke="' + C.kajal + '" stroke-width="2" stroke-linejoin="round"' : '';
+        const leaf = (d) => '<path d="' + d + '" fill="' + C.sal + '"' + (his ? ' stroke="' + C.kajal + '" stroke-width="1.4" stroke-linejoin="round"' : '') + '/>';
+        const belly = 'M-7 188C-28 194 -28 226 -12 234H12C28 226 28 194 7 188Z';
+        return '<g transform="translate(' + cx + ' 0)">' +
+          leaf('M0 178C-10 172 -20 170 -28 172C-20 178 -10 181 0 178Z') + leaf('M0 178C-6 168 -12 162 -20 158C-16 168 -8 176 0 178Z') +
+          leaf('M0 178C6 168 12 162 20 158C16 168 8 176 0 178Z') + leaf('M0 178C10 172 20 170 28 172C20 178 10 181 0 178Z') +
+          '<path d="M-4 160 0 151 4 160Z" fill="' + C.deep + '"/><ellipse cx="0" cy="168" rx="9" ry="11" fill="' + C.deep + '"' + k + '/>' +
+          '<path d="M-9 180H9L7 188H-7Z" fill="' + (his ? C.haldi : C.zari) + '"' + k + '/>' +
+          '<path d="' + belly + '" fill="' + (his ? C.haldi : C.zari) + '"' + k + '/>' +
+          (his ? '<path d="' + belly + '" fill="none" stroke="' + C.kagaz + '" stroke-width=".9"/>' : '') +
+          '<path d="M-10 234H10L7 240H-7Z" fill="' + (his ? C.haldi : C.zari) + '"' + k + '/>' +
+          '<path d="M-14 178H14" stroke="' + (his ? C.kajal : C.zari) + '" stroke-width="4" stroke-linecap="round"/>' +
+          (his
+            ? '<path d="M-21 203H21V210H-21Z" fill="' + C.sindoor + '"/><path d="M-20 206.5H20" stroke="' + C.kajal + '" stroke-width="7" stroke-dasharray="1 3"/><path d="M-21 203H21M-21 210H21" stroke="' + C.kajal + '" stroke-width="1.4"/>' +
+              [-12, -6, 0, 6, 12].map((x) => '<circle cx="' + x + '" cy="219" r="1.4" fill="' + C.kajal + '"/>').join('')
+            : '<path d="M-21 203H21V210H-21Z" fill="' + C.mor + '"/>' + [-12, 0, 12].map((x) => '<path d="M' + x + ' 203.8 ' + (x + 2.8) + ' 206.5 ' + x + ' 209.2 ' + (x - 2.8) + ' 206.5Z" fill="' + C.rani + '"/>').join('') +
+              '<path d="M-18 222H18" stroke="' + C.rani + '" stroke-width="1.4"/>') +
+          '</g>';
+      };
+      const ticks = (x0, x1, y0, y1) => { let d = ''; for (let x = x0; x <= x1; x += 6) d += 'M' + x + ' ' + y0 + 'V' + y1; return d; };
+      return diyas +
+        '<g class="kalash-l">' + kalash(84, false) + '</g><g class="kalash-r">' + kalash(236, true) + '</g>' +
+        '<g class="kund"><path d="M118 214H160V222H118ZM126 222H160V232H126ZM134 232H160V244H134Z" fill="' + C.zari + '"/><path d="M118 222H160M126 232H160" stroke="' + C.mor + '" stroke-width="1.6"/>' +
+        '<path d="M160 214H202V222H160ZM160 222H194V232H160ZM160 232H186V244H160Z" fill="' + C.kagaz + '" stroke="' + C.kajal + '" stroke-width="2" stroke-linejoin="round"/>' +
+        '<path d="' + ticks(166, 196, 216.5, 219.5) + ticks(166, 190, 224.5, 229.5) + ticks(166, 182, 234.5, 241.5) + '" stroke="' + C.kajal + '" stroke-width="1"/></g>' +
+        '<path class="flame" d="M140 216C128 206 130 190 140 180C146 192 152 204 140 216Z" fill="' + HALDI_Y + '"/>' +
+        '<path class="flame" d="M180 216C192 206 190 190 180 180C174 192 168 204 180 216Z" fill="' + HALDI_Y + '"/>' +
+        '<path class="flame" d="M160 216C138 202 142 176 160 150C178 176 182 202 160 216Z" fill="#E27A1B"/>' +
+        '<path class="flame" d="M160 214C148 204 150 186 160 170C170 186 172 204 160 214Z" fill="' + HALDI_Y + '"/>' +
+        '<g clip-path="url(#' + clip + ')">' +
+        '<g class="drape-l"><path d="M14 104Q82 150 150 110L151 124Q80 166 14 120Z" fill="' + C.zari + '"/><path d="M14 115Q80 160 150 119" fill="none" stroke="' + C.mor + '" stroke-width="2.4"/>' +
+        [[47.7, 126.5], [81.6, 133], [116, 129]].map(([x, y]) => '<circle cx="' + x + '" cy="' + y + '" r="2" fill="' + C.rani + '"/>').join('') + '</g>' +
+        '<g class="drape-r"><path d="M306 104Q238 150 170 110L169 124Q240 166 306 120Z" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="2" stroke-linejoin="round"/>' +
+        '<path d="M306 115Q240 160 170 119" fill="none" stroke="' + C.kajal + '" stroke-width="5" stroke-dasharray="1 2.6"/><path d="M306 108Q238 153 170 113" fill="none" stroke="' + C.kagaz + '" stroke-width=".9"/></g>' +
+        '</g>' +
+        '<g class="knot"><g transform="translate(160 112) scale(1.25) translate(-160 -112)"><path d="M156 120C152 132 150 142 147 150L154 152C156 142 158 132 161 122Z" fill="' + C.zari + '"/><circle cx="150.5" cy="153" r="2.6" fill="' + C.rani + '"/>' +
+        '<path d="M164 120C168 132 170 142 173 150L166 152C164 142 162 132 159 122Z" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="1.4" stroke-linejoin="round"/><circle cx="169.5" cy="153" r="2.6" fill="' + C.sindoor + '" stroke="' + C.kajal + '" stroke-width="1"/>' +
+        '<path d="M160 104C150 104 146 112 148 118C150 124 156 126 160 126Z" fill="' + C.zari + '"/><path d="M160 104C170 104 174 112 172 118C170 124 164 126 160 126Z" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="1.8" stroke-linejoin="round"/>' +
+        '<path d="M149 112C153 115 157 115 160 114" fill="none" stroke="' + C.mor + '" stroke-width="1.6"/><path d="M160 114C163 115 167 115 171 112" fill="none" stroke="' + C.kajal + '" stroke-width="1.6"/></g></g>';
+    },
 
     blessing: () => {
       let rice = '';
@@ -730,7 +763,7 @@ footer{position:relative;z-index:3;text-align:center}
     const master = gsap.timeline({ paused: true });
     svg.querySelectorAll('.flame').forEach((fl, i) => master.add(gsap.to(fl, { scaleY: rand(1.06, 1.14), scaleX: rand(0.92, 0.97), skewX: rand(-4, 4), transformOrigin: '50% 100%', duration: rand(0.18, 0.32), ease: 'sine.inOut', yoyo: true, repeat: -1 }), i * 0.05));
     svg.querySelectorAll('.dflame').forEach((fl, i) => master.add(gsap.to(fl, { scaleY: 1.18, transformOrigin: '50% 100%', duration: rand(0.25, 0.45), ease: 'sine.inOut', yoyo: true, repeat: -1 }), i * 0.07));
-    master.add(gsap.to(svg.querySelector('.knot'), { rotation: 3, svgOrigin: '160 116', duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: -1 }), 0);
+    master.add(gsap.fromTo(svg.querySelector('.knot'), { rotation: -2.5 }, { rotation: 2.5, svgOrigin: '160 106', duration: 1.8, ease: 'sine.inOut', yoyo: true, repeat: -1 }), 0);
     return master;
   }
   function blessingLoop(svg) {
@@ -1176,9 +1209,9 @@ footer{position:relative;z-index:3;text-align:center}
       if (ev === 'haldi') tl.from(svg.querySelectorAll('.leaf-l, .leaf-r'), { y: '-=40', autoAlpha: 0, duration: 0.7, stagger: 0.12 }, 0.6);
       if (ev === 'sangeet') tl.from(svg.querySelectorAll('.bell'), { y: -10, autoAlpha: 0, duration: 0.4, stagger: 0.04 }, 0.7);
       if (ev === 'shaadi') {
-        gsap.set(svg.querySelectorAll('.cl'), { strokeDasharray: 1 });
-        tl.fromTo(svg.querySelectorAll('.cl'), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut' }, 0.7)
-          .from(svg.querySelector('.knot'), { scale: 0, transformOrigin: '50% 30%', duration: 0.6, ease: 'back.out(2)' }, 1.65)
+        tl.from(svg.querySelector('.drape-l'), { x: -150, duration: 1.1, ease: 'power3.out' }, 0.7)
+          .from(svg.querySelector('.drape-r'), { x: 150, duration: 1.1, ease: 'power3.out' }, 0.7)
+          .from(svg.querySelector('.knot'), { scale: 0, svgOrigin: '160 114', duration: 0.6, ease: 'back.out(2)' }, 1.55)
           .from(svg.querySelectorAll('.diya'), { opacity: 0.25, duration: 0.3, stagger: 0.18 }, 1.2)
           .from(svg.querySelectorAll('.dflame'), { scale: 0, transformOrigin: '50% 100%', duration: 0.4, stagger: 0.18, ease: 'back.out(2)' }, 1.2);
       }

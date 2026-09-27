@@ -43,7 +43,7 @@ Both are private until shared from their Share menus.
 |---|---|---|
 | **Haldi** | Brass bowl of turmeric, **mango leaves** (used to apply haldi), turmeric roots, marigolds | Mango leaves take turns dipping into the bowl and turmeric splashes; marigold petals drift down |
 | **Sangeet** | **Dholak** (the Maharashtrian dholki, the Bihari dholak), **ghungroo**, sargam | The dholak beats *dha-dha*; the ghungroo jingle; सा रे ग म प ध नि float up. **Tap the dholak to play it.** |
-| **Shaadi** | **Gathbandhan** (her silk tied to his cloth), agni kund, two kalash, **seven diyas for the saptapadi** | The two cloths draw in and tie the knot over the fire; the seven diyas light one by one; the flames flicker |
+| **Shaadi** | **Gathbandhan**: her zari-and-mor Paithani cloth and his yellow pitambar with a hatched Madhubani border, swagged from the rim and tied in one knot whose two ends hang over the fire. Also a stepped **agni kund**, two **kalash** (coconut and mango leaves; banded, never with dot "faces"), and **seven diyas for the saptapadi** | The two cloths slide in from opposite rims and the knot is tied; the seven diyas light one by one; the flames flicker and the knot's ends sway |
 | **RSVP** | **Akshata thali** with rice, kumkum and a diya | The diya flickers; on Send the akshata is tossed as a blessing |
 
   Each loop plays only while its event is on screen, and only after the event's entrance has finished.
@@ -137,6 +137,7 @@ The first screen is the **antarpat**, the cloth held between the couple while th
 - **Tap anywhere:** tapping anywhere on the cloth also opens it; the seal is the accessible button.
 - **Entrance:** about 2.5s, and it waits for the fonts (up to 0.9s) so nothing jumps. The heartbeat starts only when the entrance ends. A tap during the entrance skips straight to the opening.
 - **Reduced motion:** everything is static. The seal gets a fixed zari outline instead of the pulse, and the tap opens at once.
+- **No accidental zoom:** the page uses `touch-action: manipulation`, so quick taps (the dholak, the seal) don't trigger iOS double-tap zoom. Pinch zoom still works.
 - **Short phones (≤720px tall):** smaller names and swastik, and the explanation line is hidden. Checked on 375×667, 390×844 and 1440×900.
 - **Cultural notes:**
   - The swastik is the antarpat's own mark, drawn in kumkum ([WeddingWire India](https://www.weddingwire.in/wedding-tips/mangalashtak-in-marriage--c4807), [Vedic Vaani](https://vedicvaani.com/lagna-antarpath-wedding)).
@@ -192,6 +193,7 @@ The peacocks in the design are code-drawn stand-ins. For the real site:
 - **Options:** B (Lotus & sun) and C (Rangoli × Aripan) stay on the canvas for reference.
 - **v3, event props:** peacocks only open the invitation; Haldi, Sangeet, Shaadi and the RSVP each got their own props and loops.
 - **v4, the cover:** the couple asked for a more obvious tap and a richer first screen. That brought the toran, the doorway arch, the kumkum swastik, the pallu and the heartbeat seal.
+- **v4.1, Shaadi redraw:** seen zoomed in on a phone, the gathbandhan read as two broken pipes and one kalash looked like a face. The cloths are now proper swags with one tied knot, the kalash are banded, the kund is stepped, the Haldi roots are real turmeric shapes, and double-tap zoom is off.
 
 ## Next
 Phase 3, `/plan`: the build plan. It covers the stack, one data file, the guest-code scheme, the RSVP pipeline (Apps Script → Sheet, with WhatsApp as fallback), porting the prototype's motion, the artwork pipeline, and the launch checklist.
