@@ -1,5 +1,7 @@
-// Bindings and variables the Pages Functions receive (wrangler.toml, and the Cloudflare dashboard for secrets).
+// Bindings and variables the Worker receives (wrangler.toml, and the Cloudflare dashboard for secrets).
 export interface Env {
+  /** the built site (dist/), served by Cloudflare's static assets */
+  ASSETS: Fetcher;
   /** Workers KV: `guests` (the list, published from the Sheet), `r:<code>` (each family's latest reply), `fail:<code>` (replies the Sheet hasn't got yet) */
   GUESTS: KVNamespace;
   /** the Apps Script web app's /exec URL, and the shared secret it checks */

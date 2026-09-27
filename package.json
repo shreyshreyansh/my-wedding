@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "build": "astro build && node scripts/postbuild.mjs && node scripts/budget.mjs",
     "preview": "astro preview",
-    "dev:edge": "npm run build && wrangler pages dev dist --port 8788",
+    "dev:edge": "npm run build && wrangler dev --port 8788",
     "guests:push": "node scripts/guests-push.mjs",
     "rsvp:resync": "node scripts/rsvp-resync.mjs",
     "codes": "node scripts/codes.mjs",
@@ -19,7 +19,8 @@
     "golden:capture": "node tests/golden/capture.mjs",
     "golden:compare": "node tests/golden/compare.mjs",
     "golden": "npm run golden:capture -- prototype tests/golden/out/prototype && npm run golden:capture -- build tests/golden/out/build && npm run golden:compare -- tests/golden/out/prototype tests/golden/out/build",
-    "pretest": "MUSIC_SRC=/audio/test.wav npm run build && node tests/tools/tone.mjs"
+    "pretest": "MUSIC_SRC=/audio/test.wav npm run build && node tests/tools/tone.mjs",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "gsap": "3.13.0",

@@ -1,14 +1,13 @@
 // GET / — the invitation. With ?g=<code> it becomes that family's own; if anything fails, everyone gets the generic page.
-import type { Env } from '../server/env';
-import { now } from '../server/env';
-import { deadlines, findGuest, findReply, normaliseCode, waNumber } from '../server/guests';
-import { withPrivate } from '../server/headers';
-import { personalize, type View } from '../server/personalize';
+import type { Env } from './env';
+import { now } from './env';
+import { deadlines, findGuest, findReply, normaliseCode, waNumber } from './guests';
+import { withPrivate } from './headers';
+import { personalize, type View } from './personalize';
 
-export const onRequestGet: PagesFunction<Env> = async ({ request, env, next }) => {
-  const url = new URL(request.url);
-  const page = await next();
+export async function invitation(request: Request, env: Env, page: Response): Promise<Response> {
   if (!(page.headers.get('content-type') || '').includes('text/html')) return page;
+  const url = new URL(request.url);
   const raw = url.searchParams.get('g');
   try {
     const code = normaliseCode(raw);
@@ -24,4 +23,4 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env, next }) =
   } catch {
     return withPrivate(page);
   }
-};
+}

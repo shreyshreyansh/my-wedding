@@ -1,13 +1,21 @@
-# Cloudflare Pages: the static site in dist/, the functions in functions/.
-# Setup is in docs/04-runbook.md. Secrets (APPS_SCRIPT_SECRET) go in the dashboard, never here.
+# Cloudflare Workers: the static site in dist/, with the Worker in worker/index.ts in front of / and /api/*.
+# Setup is in docs/04-runbook.md. Secrets (APPS_SCRIPT_URL, APPS_SCRIPT_SECRET, WA_BRIDE, WA_GROOM) are set
+# in the dashboard or with `npx wrangler secret put NAME`, never here. Locally they come from .dev.vars.
 name = "ranchiwedspune"
-pages_build_output_dir = "dist"
+main = "worker/index.ts"
 compatibility_date = "2025-09-01"
+workers_dev = true
 
-# APPS_SCRIPT_URL, APPS_SCRIPT_SECRET, WA_BRIDE and WA_GROOM are set as encrypted secrets
-# (`npx wrangler pages secret put NAME`), so no number or URL is in the repo. Locally they come from .dev.vars.
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "404-page"
+run_worker_first = ["/", "/api/*"]
 
 [[kv_namespaces]]
 binding = "GUESTS"
 # ranchiwedspune-guests (created 27 Sep 2026)
 id = "7c5e859d143f4f3a918ce34b68ea889b"
+
+[observability]
+enabled = true

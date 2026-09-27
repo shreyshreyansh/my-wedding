@@ -4,7 +4,8 @@ The wedding invitation: one page, personal for each family, in English, 啶ぐ啶
 
 - `src/data/wedding.ts`: every word on the page. `src/art`: the peacocks and event art, drawn in code.
 - `src/components`, `src/styles`, `src/scripts` (essentials) and `src/scripts/motion` (animation, loaded after).
-- `functions` + `server`: Cloudflare Pages Functions for personal links and RSVPs. `apps-script`: the family's Google Sheet.
+- `worker` + `server`: the Cloudflare Worker in front of the static site, for personal links and RSVPs. `apps-script`: the family's Google Sheet.
+- Live at https://ranchiwedspune.in, deployed by Cloudflare Workers Builds on every push to `main`.
 - `tests`: unit and end-to-end tests (`npm test`), and the golden checks against the approved prototype in `design/prototype`.
 
 Docs: [research](docs/01-research.md) 路 [design](docs/02-design.md) 路 [build plan](docs/03-build-plan.md) 路 [runbook](docs/04-runbook.md).
@@ -12,5 +13,5 @@ Docs: [research](docs/01-research.md) 路 [design](docs/02-design.md) 路 [build p
 ```sh
 npm install
 npm run build     # static site in dist/, with a size and privacy check
-npm test          # everything, against local Cloudflare Pages and a mock Sheet
+npm test          # everything, against the Worker locally and a mock Sheet
 ```

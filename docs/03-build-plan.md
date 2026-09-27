@@ -227,6 +227,7 @@ The WhatsApp numbers are Cloudflare env vars (`WA_BRIDE`, `WA_GROOM`), not in th
 - Added a 404 page (without one, Cloudflare Pages answers every unknown address with the invitation).
 - The motion code is split by section, with fewer files than the list above (the curtain lives with the Mangalashtak; the small touches share one module).
 - WhatsApp numbers and the Sheet's address are encrypted Cloudflare secrets, so the repo holds no numbers.
+- **Workers instead of Pages (28 Sep).** Cloudflare now sets up new sites as Workers with static assets and lists Pages as legacy. The three Pages Functions became one Worker (`worker/index.ts`) that runs first only for `/` and `/api/*`; everything else is served straight from the static files, with the same `_headers`. Deployed by Workers Builds from `main`.
 
 **Still to do (needs the family or their accounts)**
 - Content marked `todo()` in `src/data/wedding.ts` (parents' names ×3 languages, kulaswamini, tithi, inviters, बाल मनुहार), the Maps pin, and the audio file.

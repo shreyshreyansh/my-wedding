@@ -1,6 +1,6 @@
 // Backup to the Sheet's "Wedding → Publish guest list": publish a CSV export of the Guests tab to KV.
 //   npm run guests:push -- private/guests.csv            (to Cloudflare; needs CF_* in the environment or .dev.vars)
-//   npm run guests:push -- private/guests.csv --local    (to the local test KV used by `wrangler pages dev`)
+//   npm run guests:push -- private/guests.csv --local    (to the local KV used by `npm run dev:edge`)
 import { readFileSync, writeFileSync, mkdtempSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';

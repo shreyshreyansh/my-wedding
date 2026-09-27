@@ -16,24 +16,23 @@ The guest list never goes into this repository. Keep exports in `private/`, whic
 
 ## One-time setup (developer)
 
-### 1. Cloudflare Pages and ranchiwedspune.in
-Already done from the repo: the KV store `ranchiwedspune-guests` exists and its id is in `wrangler.toml`; the site's address is `https://ranchiwedspune.in`; Node 22 comes from `.node-version`.
+### 1. Cloudflare Workers and ranchiwedspune.in
+The site runs as a Cloudflare Worker with static assets (the free plan is plenty). Already done from the repo: the KV store `ranchiwedspune-guests` exists and its id is in `wrangler.toml`; the site's address is `https://ranchiwedspune.in`; Node 22 comes from `.node-version`.
 
-1. **Move the domain's DNS to Cloudflare** (the domain stays registered at GoDaddy).
-   - Cloudflare → **Domains → Onboard a domain** → `ranchiwedspune.in` → **Free** plan. Cloudflare shows two nameservers (like `xxx.ns.cloudflare.com`).
-   - In the DNS records Cloudflare imported, delete GoDaddy's parking records for `@` and `www` (A or CNAME records); Pages adds its own.
-   - GoDaddy → **My Products → ranchiwedspune.in → DNS → Nameservers → Change nameservers → I'll use my own**, enter the two Cloudflare nameservers, save. If GoDaddy has DNSSEC on for the domain, turn it off first.
+1. **Move the domain's DNS to Cloudflare** (the domain stays registered at GoDaddy). *Done 28 Sep.*
+   - Cloudflare → **Domains → Onboard a domain** → `ranchiwedspune.in` → **Free**; no records needed; Cloudflare shows two nameservers.
+   - GoDaddy → **ranchiwedspune.in → DNS → Nameservers → Change → I'll use my own** → the two Cloudflare nameservers.
    - Cloudflare emails when the domain is active: usually within an hour, sometimes up to a day.
-2. **Connect the repository.** Cloudflare → **Workers & Pages → Create → Pages → Import an existing Git repository** → connect GitHub and allow the Cloudflare app on `shreyshreyansh/my-wedding` → pick the repo, then:
-   - Project name `ranchiwedspune` (the same as `name` in `wrangler.toml`).
-   - Production branch `claude/focused-hawking-zo7huq` (the repo has no `main` yet; change it here if you add one later).
-   - Framework preset **None**, build command `npm run build`, output directory `dist`. **Save and Deploy.**
-   - Settings → **Builds → Branch control**: set preview deployments to **None**, so other branches don't publish.
-3. **Attach the domain** once it is active: the project → **Custom domains → Set up a custom domain** → `ranchiwedspune.in`, then again for `www.ranchiwedspune.in`. Optionally add a redirect rule `www` → apex (Rules → Redirect Rules, 301).
-4. **Secrets**, once the Sheet exists (step 2 below): the project → **Settings → Variables and Secrets → Add** (type **Secret**, production): `APPS_SCRIPT_URL`, `APPS_SCRIPT_SECRET` (any long random string; the same goes in the Sheet), `WA_BRIDE` and `WA_GROOM` (digits with country code, e.g. `919812345678`). Then **Deployments → Retry deployment** on the latest one so they take effect. Until then, replies are kept in KV and marked for `npm run rsvp:resync`, and the WhatsApp button lets the guest pick the contact.
-5. Optional, **Security → WAF → Rate limiting rules** (the free plan has one): URI path equals `/api/rsvp`, method POST, 10 requests per 10 seconds per IP, block for 10 seconds.
+2. **Connect the repository.** Cloudflare → **Workers & Pages → Create → Continue with GitHub** → allow the Cloudflare app on `shreyshreyansh/my-wedding` → select it → **Next**, then:
+   - Project name `ranchiwedspune` (it must match `name` in `wrangler.toml`, or the build fails).
+   - Build command `npm run build`; deploy command `npx wrangler deploy` (the default); preview command as it is. **Deploy.**
+   - It builds the repo's default branch, `main`. To check or change: the Worker → **Settings → Build → Branch control**; untick preview builds there so other branches don't publish.
+   - The site is then live at `ranchiwedspune.<your subdomain>.workers.dev`.
+3. **Attach the domain** once it is active: the Worker → **Settings → Domains & Routes → Add → Custom domain** → `ranchiwedspune.in`, then again for `www.ranchiwedspune.in`. Cloudflare creates the DNS records and certificates.
+4. **Secrets**, once the Sheet exists (step 2 below): the Worker → **Settings → Variables and Secrets → Add**, type **Secret**: `APPS_SCRIPT_URL`, `APPS_SCRIPT_SECRET` (any long random string; the same goes in the Sheet), `WA_BRIDE` and `WA_GROOM` (digits with country code, e.g. `919812345678`). Secrets take effect at once and survive later deploys. Until then, replies are kept in KV and marked for `npm run rsvp:resync`, and the WhatsApp button lets the guest pick the contact.
+5. Optional, the domain → **Security → WAF → Rate limiting rules** (the free plan has one): URI path equals `/api/rsvp`, method POST, 10 requests per 10 seconds per IP, block for 10 seconds.
 
-Every push to the production branch redeploys the site in about two minutes.
+Every push to `main` redeploys the site in about two minutes.
 
 ### 2. The Google Sheet
 1. With the family's Google account, create a new Sheet. **Extensions → Apps Script**, paste `apps-script/Code.gs`, save.
@@ -117,8 +116,8 @@ The backup to the menu, from a CSV export of the Guests tab: `npm run codes -- p
 
 ```sh
 npm run build          # build + budget check (sizes, preview tags, nothing private in dist)
-npm run dev:edge       # the whole site locally with the edge, on :8788 (seed KV: npm run guests:push -- file.csv --local)
-npm test               # builds, then runs everything against local Cloudflare Pages and a mock Sheet
+npm run dev:edge       # the whole site locally (Worker + static files) on :8788 (seed KV: npm run guests:push -- file.csv --local)
+npm test               # builds, then runs everything against the Worker locally (wrangler dev) and a mock Sheet
 npm run test:unit
 npx playwright test visual --update-snapshots   # after an intended visual change; look at tests/__golden__ before committing
 npm run fonts          # after changing text: re-cut the fonts to the page (needs Python: pip install fonttools brotli)
