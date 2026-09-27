@@ -24,10 +24,10 @@ The site runs as a Cloudflare Worker with static assets (the free plan is plenty
    - GoDaddy → **ranchiwedspune.in → DNS → Nameservers → Change → I'll use my own** → the two Cloudflare nameservers.
    - Cloudflare emails when the domain is active: usually within an hour, sometimes up to a day.
 2. **Connect the repository.** Cloudflare → **Workers & Pages → Create → Continue with GitHub** → allow the Cloudflare app on `shreyshreyansh/my-wedding` → select it → **Next**, then:
-   - Project name `ranchiwedspune` (it must match `name` in `wrangler.toml`, or the build fails).
+   - Project name `my-wedding` (it must match `name` in `wrangler.toml`, or the build fails).
    - Build command `npm run build`; deploy command `npx wrangler deploy` (the default); preview command as it is. **Deploy.**
-   - It builds the repo's default branch, `main`. To check or change: the Worker → **Settings → Build → Branch control**; untick preview builds there so other branches don't publish.
-   - The site is then live at `ranchiwedspune.<your subdomain>.workers.dev`.
+   - Production branch: the Worker → **Settings → Build → Branch control** → `main` (a new Worker takes whatever was the repo's default branch when it was created); untick preview builds there so other branches don't publish.
+   - The site is then live at `my-wedding.<your subdomain>.workers.dev`.
 3. **Attach the domain** once it is active: the Worker → **Settings → Domains & Routes → Add → Custom domain** → `ranchiwedspune.in`, then again for `www.ranchiwedspune.in`. Cloudflare creates the DNS records and certificates.
 4. **Secrets**, once the Sheet exists (step 2 below): the Worker → **Settings → Variables and Secrets → Add**, type **Secret**: `APPS_SCRIPT_URL`, `APPS_SCRIPT_SECRET` (any long random string; the same goes in the Sheet), `WA_BRIDE` and `WA_GROOM` (digits with country code, e.g. `919812345678`). Secrets take effect at once and survive later deploys. Until then, replies are kept in KV and marked for `npm run rsvp:resync`, and the WhatsApp button lets the guest pick the contact.
 5. Optional, the domain → **Security → WAF → Rate limiting rules** (the free plan has one): URI path equals `/api/rsvp`, method POST, 10 requests per 10 seconds per IP, block for 10 seconds.

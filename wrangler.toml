@@ -1,7 +1,7 @@
 # Cloudflare Workers: the static site in dist/, with the Worker in worker/index.ts in front of / and /api/*.
 # Setup is in docs/04-runbook.md. Secrets (APPS_SCRIPT_URL, APPS_SCRIPT_SECRET, WA_BRIDE, WA_GROOM) are set
 # in the dashboard or with `npx wrangler secret put NAME`, never here. Locally they come from .dev.vars.
-name = "ranchiwedspune"
+name = "my-wedding"
 main = "worker/index.ts"
 compatibility_date = "2025-09-01"
 workers_dev = true
