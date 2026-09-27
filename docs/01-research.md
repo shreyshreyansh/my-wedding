@@ -2,27 +2,84 @@
 
 **Brief:** a responsive wedding invitation website. It should feel earthy and rooted in culture and in both hometowns: the bride's **Pune (Maharashtra)** and the groom's **Ranchi (Bihar / Jharkhand)**.
 
-**Reference:** [Meenaya by Missing Piece](https://www.missingpieceinvites.com/demos/meenaya)
+**References:**
+- [Meenaya](https://www.missingpieceinvites.com/demos/meenaya) (Missing Piece)
+- [City-3](https://www.missingpieceinvites.com/demos/city-3) (Missing Piece)
+- [Vijay & Rashmika, Temple Theme](https://myshaadhilink.in/invitation/vijay-rashmika-wedding-invitation?to=Guest&demo=true) (MyShaadhi Link)
+- The web-design skills in [MengTo/Skills](https://github.com/MengTo/Skills/tree/main/agent-skills/web-design), studied for how the site should move.
 
-Status: first pass. Still needed: the couple's own inspiration notes and assets, plus the open questions at the end.
+Status: second pass. The references have been studied from their page code and artwork. Still needed: the couple's own notes on what they like, their assets, and answers to the open questions at the end.
 
 ---
 
-## 1. The reference: Meenaya (Missing Piece)
+## 1. The references
 
-The demo host is blocked from our build environment, so this is from the product listing, not a hands-on teardown. See the open questions for what we need to fill the gap.
+### How we studied them
+All three demos load from our build environment. Content, artwork, fonts, colours and motion settings were read from each page's code and files.
 
-- A paid **Framer** template, marketed for South Indian weddings. The same studio also sells "City", "Laavan", "Mountain" and "Beach".
-- It works like a web page, not a video or PDF, and is shared as a WhatsApp link.
-- **Features the template family ships with** (our minimum baseline):
-  - Event cards, with the option to send **different guests different event combinations**, or separate pages for the bride's and groom's families.
-  - RSVP through **WhatsApp** or Google Forms.
-  - Venue opens in **Google Maps**.
-  - Instagram link.
-  - A **Lord Ganesha motif with space for a mantra**.
-  - An "**elder-friendly**" design: big, readable, no tiny videos to squint at.
-  - Details can be edited after sending, and everyone sees the update without the link being re-shared.
-- **Takeaway:** people like it for the feel (illustrated and warm) and the ease (one link, obvious buttons). We build an original site in that spirit and **do not copy its illustrations or layout**, since it's a commercial product.
+**Not yet seen:** the pages actually moving in a browser. The browser setup for this was blocked by the environment's safety check, so motion is documented from code, not from watching it.
+
+**Rule:** all three are commercial products. We borrow structure, features and motion ideas, **never their artwork, code or copy**.
+
+### Missing Piece: Meenaya and City-3 (Framer, ₹3,999)
+Both are **one template with different artwork**: identical sections, fonts, music and features. The whole page is one long scroll, about 13,000px on desktop and 14,000px on a phone.
+
+**Section order** (our baseline):
+1. Hero with names.
+2. "ॐ श्री गणेशाय नम" and blessings from grandparents.
+3. The invite line, naming the couple and parents.
+4. Event cards (date, venue, time, **See the route**), then a map.
+5. "Meet the bride and groom", a personal note.
+6. **RSVP**: one button that opens a WhatsApp chat.
+7. **Things to know**: hashtag, weather, where to put up staff, parking.
+8. Instagram.
+9. **Countdown**.
+10. Closing note.
+
+**Fonts:** Cormorant (serif display), Manrope (sans) and Gotu (Devanagari). **Music:** background music with a play button.
+
+**Artwork:**
+- **Meenaya** (Tamil): an oil-paint blue sky with floating pink sky lanterns, and a colourful temple tower rising from the bottom.
+- **City-3** (Rajasthani): a starry indigo night over a lamp-lit palace courtyard; **one painting per event**, all in the same gold-ochre miniature style with blank faces; sky backdrops in several moods (night, pink sunset, dusk blue); a Mughal-garden flower strip with a peacock; gold and silver frames for photos.
+
+**Demo slips:** the invocation drops the visarga (नम instead of नमः), and the countdown sits at 00:00:00:00 because the demo dates have passed.
+
+**Takeaway:** **one painted style carried through the whole page, with a painting per event.** For us that style is Warli / Khovar / Kohbar.
+
+### MyShaadhi Link: "Temple Theme" (Next.js, ₹3,999)
+A different product. It is richer in features and more physical in feel.
+
+**Page order:**
+1. A **cover card** ("The Wedding of … · Open Invitation") that guests tap to open.
+2. || Shree Ganeshay Namah ||, then the **names appear one letter at a time**.
+3. The couple, with both sets of parents.
+4. A **countdown carved into a wooden wall with elephant pillars** ("Our Muhurtham in").
+5. "**The Wedding Journey**: function to function, to the sacred hour", the event timeline.
+6. An "Our Story" video in a carved frame.
+7. A "Before the Vows" gallery under a ceremonial umbrella.
+8. An **RSVP form** on the page (attending / not attending).
+9. A closing blessing in Telugu, **శుభమస్తు**.
+
+**Ideas worth taking:**
+- **`?to=<name>` personal links.** The guest's name travels in the URL and is used on the page.
+- **Ritual objects as event icons**: a haldi bowl, a mehendi cone, a nadaswaram and drum.
+- **Everyday parts look like real objects.** The countdown is carved wood and the gallery sits under a ceremonial umbrella.
+- **The music button is a temple bell.**
+- **Each section can be switched on or off**, including livestream, video and gallery.
+- **The closing blessing is in the regional language.**
+
+**Palette:** parchment `#fbeeb8`, maroon `#9a1b41`, gold `#c9932f`, dark brown ink `#2b1608`, leaf green `#3f4a26`. **Fonts:** Cormorant Garamond, Marcellus, Cinzel, and Great Vibes (a script).
+
+### What all three share, and what we add
+**The shared baseline:** Ganesha invocation → blessings and parents → events with Maps → countdown → RSVP → music with an on/off button → hashtag / Instagram.
+
+**Features in the product listings** (not shown in the demos):
+- Different guests can get different sets of events.
+- RSVP through WhatsApp or Google Forms.
+- An "**elder-friendly**" design.
+- Details can be edited after sending, without re-sharing the link.
+
+**How ours differs:** a story that belongs to the two of you (two walls, two cities, one line of track), folk art as the one visual language, and scroll motion with real choreography. The motion is covered in §2.
 
 ## 2. Cultural core
 
