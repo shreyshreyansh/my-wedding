@@ -353,7 +353,7 @@ footer{position:relative;z-index:3;text-align:center}
   <ol id="momList" hidden>
     <li><a href="#hero"><b>1 · The names arrive</b><span>Letters rise one by one; feathers drift at different depths. Move your mouse on a laptop.</span></a></li>
     <li><a href="#ribbons"><b>2 · Two ribbons cross</b><span>Paithani gold and Madhubani paper cross; scroll faster and they race.</span></a></li>
-    <li><a href="#meeting"><b>3 · The peacocks meet</b><span>Pinned scene: scroll slowly down, then back up.</span></a></li>
+    <li><a href="#meeting"><b>3 · The varmala</b><span>Pinned scene: the couple arrive, the peacocks dance, the garlands cross. Scroll slowly down, then back up.</span></a></li>
     <li><a href="#schedule"><b>4 · Haldi, Sangeet, Shaadi</b><span>Mango leaves dip into turmeric; the dholak beats and sa-re-ga-ma floats up (tap it); the knot is tied over the fire and seven diyas light.</span></a></li>
     <li><a href="#mangal"><b>5 · The blessing</b><span>The verse lights up word by word; gold specks drift; the zari glints.</span></a></li>
     <li><a href="#rsvp"><b>6 · The curtain and RSVP</b><span>The RSVP slides over the countdown; send it and the akshata is tossed.</span></a></li>
@@ -373,7 +373,7 @@ footer{position:relative;z-index:3;text-align:center}
           <span class="cal nm letters wave">Mrunalini</span>
           <span lang="mr" class="cal dn write">मृणालिनी</span>
         </div>
-        <div class="med" data-pose="apart"></div>
+        <div class="med" data-couple="hero" role="img" aria-label="Mrunalini and Shreyansh face each other with folded hands: she in a Paithani nauvari with nath and mundavalya, he in a Mithila paag"></div>
         <div class="hero-side his">
           <span class="lbl">Madhubani · from his Bihar</span>
           <span class="cal nm letters wave">Shreyansh</span>
@@ -396,15 +396,15 @@ footer{position:relative;z-index:3;text-align:center}
     <div class="ribbon rib-m"><div class="track" id="trackM"></div></div>
   </section>
 
-  <section id="meeting" aria-label="The two peacocks meet">
+  <section id="meeting" aria-label="The varmala: garlands are exchanged">
     <div class="stage">
       <div class="half l silk" id="mL"></div>
       <div class="half r paper" id="mR"></div>
       <div class="caps">
         <p class="cap"><span>They see each other. Keep scrolling.</span></p>
         <p class="cap"><span>Silk from her side, paper from his</span></p>
-        <p class="cap"><span>Tails open, feather by feather</span></p>
-        <p class="cap"><span>They meet, and the garland is exchanged</span></p>
+        <p class="cap"><span>The peacocks dance for them</span></p>
+        <p class="cap"><span><b lang="hi" style="font-weight:400">वरमाला</b> · the garlands are exchanged</span></p>
       </div>
       <svg id="meetSvg" viewBox="0 0 400 300" aria-hidden="true"></svg>
       <div class="meet-names plate">
@@ -752,6 +752,109 @@ footer{position:relative;z-index:3;text-align:center}
     return '<svg viewBox="0 0 320 320" aria-hidden="true"><defs><clipPath id="' + clip + '"><circle cx="160" cy="160" r="133"/></clipPath></defs><g class="medal">' + frame() + '<g class="art">' + ART[ev](clip) + '</g></g></svg>';
   }
 
+  /* ---------- the couple: her in Paithan chitrakathi manner (woven gold on silk), him in Madhubani (double line on paper) ---------- */
+  const SKIN_P = '#D9AE5F';
+  // her profile, facing right; his is the mirror image (x -> 320 - x) with his own attire
+  const FACE = 'M101 92C114 92 124 101 126 113C127 119 129 124 134 131C136 133 135 136 131 136C131 138 132 139 131 140C133 141 132 143 129 143.5C130 145 131 147 128 149C126 153 121 156 114 156C106 156 100 152 98 146L98 100Z';
+  const mx = (d) => d.replace(/(-?\d+(?:\.\d+)?)[ ,](-?\d+(?:\.\d+)?)/g, (m, x, y) => f(320 - x) + ' ' + y);
+  function eyeSet(his) {
+    const e = his ? mx : (d) => d;
+    const c = his ? 320 - 116 : 116;
+    return '<g class="eye" style="transform-box:fill-box;transform-origin:50% 50%">' +
+      '<path d="' + e('M104 119C108 113 118 112 124 117C119 122 110 123 104 119Z') + '" fill="' + C.chuna + '" stroke="' + C.kajal + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<circle cx="' + c + '" cy="117.4" r="2.9" fill="' + C.kajal + '"/>' +
+      '<path d="' + e('M104 119 97 116.5') + '" stroke="' + C.kajal + '" stroke-width="1.4" stroke-linecap="round"/>' +
+      '<path d="' + e('M104 118.5C108 112.5 118 111.5 124 117') + '" fill="none" stroke="' + C.kajal + '" stroke-width="2.2" stroke-linecap="round"/></g>' +
+      '<path d="' + e('M102 109C109 104.5 118 104.5 125 108.5') + '" fill="none" stroke="' + C.kajal + '" stroke-width="1.8" stroke-linecap="round"/>';
+  }
+  function pearls(pts, r, fill) { return pts.map(([x, y]) => '<circle cx="' + f(x) + '" cy="' + f(y) + '" r="' + r + '" fill="' + fill + '"/>').join(''); }
+  function along(p0, p1, p2, n) {
+    const out = [];
+    for (let i = 0; i <= n; i++) { const t = i / n, u = 1 - t; out.push([u * u * p0[0] + 2 * u * t * p1[0] + t * t * p2[0], u * u * p0[1] + 2 * u * t * p1[1] + t * t * p2[1]]); }
+    return out;
+  }
+  function bride() {
+    return '<g class="fig fig-l">' +
+      // body: nauvari Paithani in peacock green, zari border across the chest, buttis
+      '<path d="M104 170C92 175 70 182 58 198C46 216 40 250 40 300H176C174 262 166 224 150 202C140 190 128 180 120 172Z" fill="' + C.mor + '"/>' +
+      pearls([[62, 232], [78, 214], [74, 262], [96, 246], [58, 282], [92, 284], [112, 270]], 2.2, C.zari) +
+      '<path d="M120 172C136 186 150 200 160 222L148 236C136 214 124 196 108 184Z" fill="' + C.zari + '"/>' +
+      '<path d="M113 181C127 193 139 207 150 228" fill="none" stroke="' + C.rani + '" stroke-width="2"/>' +
+      '<path d="M104 170C96 176 84 180 74 186" fill="none" stroke="' + C.zari + '" stroke-width="3"/>' +
+      // neck and face
+      '<path d="M104 150V176H120L118 150Z" fill="' + SKIN_P + '"/>' +
+      '<path d="' + FACE + '" fill="' + SKIN_P + '"/>' +
+      '<path d="M127 141C129 140 131 140 131.5 141.5C131 143 129 144.5 127 144Z" fill="' + C.rani + '"/>' +
+      // hair, ambada bun with gajra
+      '<path d="M120 100C110 86 90 84 80 96C72 106 74 124 80 136C84 144 90 150 98 152C98 140 97 120 100 106C104 101 111 99 120 100Z" fill="' + C.kajal + '"/>' +
+      '<circle cx="79" cy="131" r="15" fill="' + C.kajal + '"/>' +
+      pearls(Array.from({ length: 14 }, (_, i) => { const a = i / 14 * Math.PI * 2; return [79 + 17 * Math.cos(a), 131 + 17 * Math.sin(a)]; }), 2.4, C.chuna) +
+      eyeSet(false) +
+      // chandrakor bindi, nath, mundavalya
+      '<path d="M114.5 103.5A3.6 3.6 0 0 0 121.5 103.5A4.6 3.2 0 0 1 114.5 103.5Z" fill="' + C.sindoor + '"/>' +
+      '<g class="nath"><path d="M130.5 134.5C124.5 134.5 121.5 139 124 143C125.5 145.5 129 145.5 130.5 143.5" fill="none" stroke="' + C.chuna + '" stroke-width="1.1"/>' +
+      pearls(along([130, 134.6], [118.5, 137.5], [127.2, 145], 5), 1.15, C.chuna) + '<circle cx="130.6" cy="143.4" r="1.6" fill="' + C.rani + '"/></g>' +
+      '<g class="munda">' + pearls(along([121, 99.5], [108, 95], [96, 98], 6), 1.6, C.chuna) +
+      pearls(along([98, 101], [90.5, 132], [96, 164], 11), 1.6, C.chuna) + pearls(along([93, 104], [86, 132], [90.5, 160], 10), 1.3, C.zari) + '</g>' +
+      // thushi choker
+      pearls(along([104, 166], [111, 172], [119, 166], 6), 1.7, C.zari) + pearls(along([105, 170], [112, 177], [120, 170], 6), 1.5, C.rani) +
+      // namaste: forearm with green bangles, palms pressed together, thumb toward the chest
+      '<path d="M100 266L130 226L142 234L114 274Z" fill="' + C.rani + '"/><path d="M127.5 229.5 139.5 237.5" stroke="' + C.zari + '" stroke-width="2.4"/>' +
+      '<path d="M128 229L136 219L146 226L139 237Z" fill="' + SKIN_P + '"/>' +
+      '<path d="M129 230.5 139 238M131.5 227 141.5 234.5M134 223.5 144 231" stroke="' + C.sal + '" stroke-width="2.4"/>' +
+      '<path d="M139 226C137 213 141 200 149 190C153 186 157.5 188.5 156.5 194.5C155.5 204 152 215 147 227Z" fill="' + SKIN_P + '"/>' +
+      '<path d="M140.5 222C136.5 219 136 212 140.5 210.5C142.5 212 143 217 142 222Z" fill="' + SKIN_P + '" stroke="' + C.deep + '" stroke-width=".7"/>' +
+      '<path d="M151 194C148.5 203 146.5 212 145 222M154 195.5C152 204 150 213 148.5 222" fill="none" stroke="' + C.deep + '" stroke-width=".7"/>' +
+      '</g>';
+  }
+  function groom() {
+    const k = ' stroke="' + C.kajal + '" stroke-width="2.4" stroke-linejoin="round"';
+    const face = 'M219 92C206 92 196 101 194 113C193 119 191 124 186 131C184 133 185 136 189 136C189 138 188 139 189 140C187 141 188 143 191 143.5C190 145 189 147 192 149C194 153.5 199 156.5 206 156.5C214 156.5 220 152 222.5 146C230 140 236 126 235 110C234 98 228 92 219 92Z';
+    return '<g class="fig fig-r">' +
+      // kurta in haldi with his red dupatta, double line and bharni
+      '<path d="M216 170C228 175 250 182 262 198C274 216 280 250 280 300H144C146 262 154 224 170 202C180 190 192 180 200 172Z" fill="' + C.haldi + '"' + k + '/>' +
+      '<path d="M216 170C228 175 250 182 262 198C274 216 280 250 280 300H144C146 262 154 224 170 202C180 190 192 180 200 172Z" fill="none" stroke="' + C.kagaz + '" stroke-width=".9" transform="translate(0 3)"/>' +
+      '<path d="M218 172C236 186 250 214 256 250L240 256C236 222 224 196 204 180Z" fill="' + C.sindoor + '"' + k + '/>' +
+      '<path d="M213 178C229 192 241 216 247 252" fill="none" stroke="' + C.kajal + '" stroke-width="6" stroke-dasharray="1 2.6"/>' +
+      '<path d="M176 212 192 204M172 228 186 222M170 246 182 242" stroke="' + C.kajal + '" stroke-width="1.2" stroke-linecap="round"/>' +
+      // neck, face, ear
+      '<path d="M216 150V176H200L202 150Z" fill="' + C.kagaz + '" stroke="' + C.kajal + '" stroke-width="2"/>' +
+      '<path d="' + face + '" fill="' + C.kagaz + '"' + k + '/>' +
+      '<path d="M189 139.6C192 138.6 195.5 139.2 198 141.6" fill="none" stroke="' + C.kajal + '" stroke-width="2" stroke-linecap="round"/>' +
+      '<path d="M193 141C191 140 189 140 188.5 141.5C189 143 191 144.5 193 144Z" fill="' + C.sindoor + '"/>' +
+      eyeSet(true) +
+      '<path d="M199 104.5V111" stroke="' + C.sindoor + '" stroke-width="2.6" stroke-linecap="round"/>' +
+      // Mithila paag: dome with the raised front crescent, red with zari rings
+      '<path d="M236 112C238 90 228 74 208 72C192 71 182 80 180 96L196 100C204 98 222 102 236 112Z" fill="' + C.sindoor + '"' + k + '/>' +
+      '<path d="M183 98C174 84 180 64 198 58C193 70 193 86 199 99Z" fill="' + C.sindoor + '"' + k + '/>' +
+      '<path d="M186 95C181 84 184 71 194 65" fill="none" stroke="' + C.haldi + '" stroke-width="2"/>' +
+      pearls([[206, 84], [220, 88], [214, 98], [228, 100], [200, 94]], 3.2, C.haldi) +
+      '<path d="M180 96C198 100 220 102 236 112" fill="none" stroke="' + C.haldi + '" stroke-width="3"/>' +
+      '<path d="M234.5 110C237 124 234 138 225 146C221 140 221 126 223 112Z" fill="' + C.kajal + '"/>' +
+      '<path d="M222 117C230 116 232 131 223 134" fill="' + C.kagaz + '" stroke="' + C.kajal + '" stroke-width="2"/><path d="M224.5 121C227 123 227 127 224.5 129" fill="none" stroke="' + C.kajal + '" stroke-width="1"/>' +
+      // namaste
+      '<path d="M220 266L190 226L178 234L206 274Z" fill="' + C.haldi + '"' + k + '/>' +
+      '<path d="M192 229L184 219L174 226L181 237Z" fill="' + C.kagaz + '"' + k + '/>' +
+      '<path d="M189.5 231 179.5 238.5M187 227 177 234.5" stroke="' + C.sindoor + '" stroke-width="2.2"/>' +
+      '<path d="M181 226C183 213 179 200 171 190C167 186 162.5 188.5 163.5 194.5C164.5 204 168 215 173 227Z" fill="' + C.kagaz + '"' + k + '/>' +
+      '<path d="M179.5 222C183.5 219 184 212 179.5 210.5C177.5 212 177 217 178 222Z" fill="' + C.kagaz + '" stroke="' + C.kajal + '" stroke-width="1.4"/>' +
+      '<path d="M169 194C171.5 203 173.5 212 175 222" fill="none" stroke="' + C.kajal + '" stroke-width="1"/>' +
+      '</g>';
+  }
+  function coupleArt(clip) {
+    return '<g clip-path="url(#' + clip + ')">' + bride() + groom() + '</g>';
+  }
+  function coupleMedallion() {
+    const clip = 'cpclip' + (++clipUid);
+    return '<svg viewBox="0 0 320 320" aria-hidden="true"><defs><clipPath id="' + clip + '"><circle cx="160" cy="160" r="133"/></clipPath></defs><g class="medal">' + frame() + '<g class="art">' + coupleArt(clip) + '</g></g></svg>';
+  }
+  // a marigold varmala as a U of flowers hanging between two neck points
+  function varmala(cls, p0, p1, p2, n) {
+    return '<g class="' + cls + '">' + along(p0, p1, p2, n).map(([x, y], i) =>
+      '<circle cx="' + f(x) + '" cy="' + f(y) + '" r="' + (i % 3 === 1 ? 4.6 : 4) + '" fill="' + (i % 2 ? '#E27A1B' : C.haldi) + '" stroke="' + C.kajal + '" stroke-width=".6"/>').join('') +
+      '<circle cx="' + f(along(p0, p1, p2, 2)[1][0]) + '" cy="' + f(along(p0, p1, p2, 2)[1][1] + 6) + '" r="4.2" fill="' + C.rani + '"/></g>';
+  }
+
   /* chapter actions drawn as tokens: kumkum footprints ("show the way") and a tied knot ("tie a knot to remember") */
   function riteDisc() {
     return '<path d="M30 3A27 27 0 0 0 30 57Z" fill="' + C.rani + '"/><path d="M30 3A27 27 0 0 1 30 57Z" fill="' + C.kagaz + '"/>' +
@@ -834,14 +937,21 @@ footer{position:relative;z-index:3;text-align:center}
 
   document.querySelectorAll('.med').forEach((el) => {
     if (el.dataset.event) { el.innerHTML = eventArt(el.dataset.event); return; }
+    if (el.dataset.couple) { el.innerHTML = coupleMedallion(); return; }
     const pose = el.dataset.pose;
     const fanMode = pose === 'dance' ? 'open' : (el.dataset.fan === 'closed' ? 'closed' : 'none');
     el.innerHTML = medallion(pose, fanMode);
   });
   document.getElementById('meetSvg').innerHTML =
-    beads([150, 94], [200, -6], [250, 94], 12, 4.6) +
-    peacock('p', 'translate(85.6 44) scale(1.1)', 'closed') +
-    peacock('m', 'translate(314.4 44) scale(-1.1 1.1)', 'closed');
+    '<defs><clipPath id="meetClip"><rect x="-40" y="-40" width="480" height="340"/></clipPath></defs>' +
+    peacock('p', 'translate(-6 150) scale(.78)', 'closed') +
+    peacock('m', 'translate(406 150) scale(-.78 .78)', 'closed') +
+    '<g clip-path="url(#meetClip)"><g transform="translate(40 0)">' + bride() + groom() +
+    varmala('vm vm-his', [224, 168], [208, 262], [194, 171], 15) +
+    varmala('vm vm-her', [96, 168], [112, 262], [126, 171], 15) + '</g></g>' +
+    '<rect x="-40" y="292" width="240" height="8" fill="' + C.zari + '"/><rect x="200" y="292" width="240" height="8" fill="' + C.kagaz + '"/>' +
+    '<path d="M-40 292H440" stroke="' + C.kajal + '" stroke-width="1.6"/>' + Array.from({ length: 40 }, (_, i) => '<path d="M' + (202 + i * 6) + ' 300 ' + (208 + i * 6) + ' 293" stroke="' + C.kajal + '" stroke-width="1.2"/>').join('') +
+    Array.from({ length: 34 }, (_, i) => '<path d="M' + (-40 + i * 7) + ' 296 ' + (-36.5 + i * 7) + ' 293 ' + (-33 + i * 7) + ' 296 ' + (-36.5 + i * 7) + ' 299Z" fill="' + C.mor + '"/>').join('');
 
   /* hero floaters: [x%, y%, width px, depth, kind]; depth > 1 sits in front of the names */
   const FLOAT = [
@@ -1197,8 +1307,8 @@ footer{position:relative;z-index:3;text-align:center}
       .from('#hero .half.l', { xPercent: -100, duration: 0.9 })
       .from('#hero .half.r', { xPercent: 100, duration: 0.9 }, '<')
       .from('#hero .med svg', { scale: 0.9, autoAlpha: 0, duration: 0.8, transformOrigin: '50% 50%' }, '-=0.5')
-      .from('#hero .pk-l', { x: -40, duration: 1 }, '<0.1')
-      .from('#hero .pk-r', { x: 40, duration: 1 }, '<0.08')
+      .from('#hero .fig-l', { x: -36, autoAlpha: 0, duration: 1 }, '<0.1')
+      .from('#hero .fig-r', { x: 36, autoAlpha: 0, duration: 1 }, '<0.08')
       .fromTo('#hero .letters .ch', Object.assign({ yPercent: 70, rotationX: -50, transformPerspective: 400, autoAlpha: 0 }, blur ? { filter: 'blur(8px)' } : {}), Object.assign({ yPercent: 0, rotationX: 0, autoAlpha: 1, duration: 0.8, ease: 'back.out(1.6)', stagger: 0.045 }, blur ? { filter: 'blur(0px)' } : {}), '-=0.7')
       .from('#hero .amp', { scale: 0, autoAlpha: 0, duration: 0.4, ease: 'back.out(2)' }, '-=0.5')
       .from('#hero .write', { clipPath: 'inset(0% 100% 0% 0%)', duration: 1.1, ease: 'power2.inOut', stagger: 0.12 }, '-=0.4')
@@ -1209,8 +1319,12 @@ footer{position:relative;z-index:3;text-align:center}
     /* floaters: ambient drift + scroll parallax by depth + pointer depth on desktop */
     const floaters = gsap.utils.toArray('#hero .fl');
     const drift = floaters.map((el, i) => gsap.to(el.firstChild, { y: rand(-14, 14), x: rand(-8, 8), rotation: rand(-12, 12), duration: rand(3, 6), ease: 'sine.inOut', yoyo: true, repeat: -1, delay: i * 0.2, paused: true }));
-    const crest = gsap.to('#hero .crest', { y: -1.6, duration: 1.4, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: 0.5, paused: true });
-    ScrollTrigger.create({ trigger: '#hero', start: 'top bottom', end: 'bottom top', onToggle: (s) => [...drift, crest].forEach((t) => (s.isActive ? t.play() : t.pause())) });
+    const crest = gsap.timeline({ repeat: -1, paused: true })
+      .to('#hero .eye', { scaleY: 0.12, duration: 0.07, yoyo: true, repeat: 1, stagger: 0.05 }, 2.6)
+      .to('#hero .eye', { scaleY: 0.12, duration: 0.07, yoyo: true, repeat: 1, stagger: 0.08 }, 6.2)
+      .to({}, { duration: 1.2 }, 6.4);
+    const sway = gsap.to('#hero .munda, #hero .nath', { rotation: 2.2, svgOrigin: '104 100', duration: 1.8, ease: 'sine.inOut', yoyo: true, repeat: -1, paused: true });
+    ScrollTrigger.create({ trigger: '#hero', start: 'top bottom', end: 'bottom top', onToggle: (s) => [...drift, crest, sway].forEach((t) => (s.isActive ? t.play() : t.pause())) });
     floaters.forEach((el) => {
       const d = Number(el.dataset.depth);
       gsap.to(el, { y: () => -innerHeight * 0.35 * d, ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true, invalidateOnRefresh: true } });
@@ -1266,9 +1380,11 @@ footer{position:relative;z-index:3;text-align:center}
     });
     meet.fromTo('#mL', { xPercent: -60 }, { xPercent: 0, duration: 0.35 }, 0)
       .fromTo('#mR', { xPercent: 60 }, { xPercent: 0, duration: 0.35 }, 0)
-      .fromTo('#meetSvg .pk-l', { x: -110 }, { x: -24, duration: 0.35 }, 0)
-      .fromTo('#meetSvg .pk-r', { x: 110 }, { x: 24, duration: 0.35 }, 0)
-      .to('#meetSvg .pk', { keyframes: { y: [0, -4, 0, -4, 0] }, duration: 0.35 }, 0)
+      .fromTo('#meetSvg .fig-l', { x: -90, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.33 }, 0)
+      .fromTo('#meetSvg .fig-r', { x: 90, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.33 }, 0)
+      .fromTo('#meetSvg .pk-l', { x: -90 }, { x: 0, duration: 0.35 }, 0.06)
+      .fromTo('#meetSvg .pk-r', { x: 90 }, { x: 0, duration: 0.35 }, 0.06)
+      .to('#meetSvg .pk', { keyframes: { y: [0, -4, 0, -4, 0] }, duration: 0.35 }, 0.06)
       .to(caps[0], { autoAlpha: 0, duration: 0.04 }, 0.18)
       .to(caps[1], { autoAlpha: 1, duration: 0.04 }, 0.2)
       .to('#meetSvg .tail', { autoAlpha: 0, duration: 0.08 }, 0.38)
@@ -1276,11 +1392,12 @@ footer{position:relative;z-index:3;text-align:center}
       .fromTo('#meetSvg .f-eye, #meetSvg .f-in', { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.1, stagger: 0.006 }, 0.42)
       .to(caps[1], { autoAlpha: 0, duration: 0.04 }, 0.37)
       .to(caps[2], { autoAlpha: 1, duration: 0.04 }, 0.39)
-      .to('#meetSvg .pk-l', { x: 0, duration: 0.15 }, 0.7)
-      .to('#meetSvg .pk-r', { x: 0, duration: 0.15 }, 0.7)
-      .fromTo('#meetSvg .bead', { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.08, stagger: 0.008 }, 0.76)
-      .to(caps[2], { autoAlpha: 0, duration: 0.04 }, 0.72)
-      .to(caps[3], { autoAlpha: 1, duration: 0.04 }, 0.74)
+      .fromTo('#meetSvg .vm-his', { x: -56, y: 30, autoAlpha: 0 }, { x: -24, y: -42, autoAlpha: 1, duration: 0.1, ease: 'power1.out' }, 0.54)
+      .to('#meetSvg .vm-his', { x: 0, y: 0, duration: 0.09, ease: 'power1.in' }, 0.64)
+      .fromTo('#meetSvg .vm-her', { x: 56, y: 30, autoAlpha: 0 }, { x: 24, y: -42, autoAlpha: 1, duration: 0.1, ease: 'power1.out' }, 0.6)
+      .to('#meetSvg .vm-her', { x: 0, y: 0, duration: 0.09, ease: 'power1.in' }, 0.7)
+      .to(caps[2], { autoAlpha: 0, duration: 0.04 }, 0.5)
+      .to(caps[3], { autoAlpha: 1, duration: 0.04 }, 0.52)
       .fromTo('#meeting .write', { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.14, stagger: 0.03 }, 0.86);
 
     /* schedule: head reveals, chapters draw themselves, focus band on narrow screens, hover lift on desktop */

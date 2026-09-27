@@ -68,14 +68,38 @@ Both are private until shared from their Share menus.
 
 ## Screens (canvas v2)
 1. **Cover:** the antarpat under a Madhubani toran, with a doorway arch, the kumkum swastik and a Paithani pallu. The seal beats until you tap it, and then the silk drops (interactive). See "The cover" below.
-2. **Hero:** silk and paper halves; the peacocks apart.
-3. **The meeting:** the pinned scroll scene, as a four-frame storyboard.
+2. **Hero:** silk and paper halves, and **the couple** face each other with folded hands. When the antarpat falls, this is who you see.
+3. **The varmala:** the pinned scroll scene, as a four-frame storyboard. The couple arrive on their own halves, the peacocks dance for them, and the garlands cross and land.
 4. **Invitation:** English, मराठी and हिंदी in the new lettering (interactive).
 5. **Schedule:** the peacocks' story. Three medallion chapters joined by twin threads, gold and black.
 6. **Mangalashtak** on peacock-green silk, with medallion-style countdown dials.
 7. **RSVP:** double-line rows, medallion steppers, and a send button with a zari edge. After sending, the peacocks dance (interactive).
 8. **Desktop:** hero (her name under the silk, his under the paper, the medallion between) and a three-column schedule.
 9. **Style sheet**, the medallion component, and the A/B/C options kept for reference.
+
+## The couple
+The invite was all peacocks and no people. Now Mrunalini and Shreyansh are the main characters, drawn by the same rule as everything else: **each in their own art**, facing each other across the seam.
+
+| | Mrunalini (her half: silk) | Shreyansh (his half: paper) |
+|---|---|---|
+| **Art** | In the manner of **Paithan chitrakathi**: Maharashtra's painted storytelling, from the same town as the Paithani. Profile, flowing line, flat colour. | **Madhubani**: kajal double line, bharni hatching, the fish-shaped eye |
+| **Material** | Woven gold: face and hands in gold, no outlines | Paper: face in kagaz with a double line |
+| **Wears** | Paithani **nauvari** in peacock green with a zari border; **nath**, **chandrakor**, **mundavalya**, a gajra on the ambada, a thushi choker, green bangles | Mithila **paag** in red with haldi rings; a pitambar-yellow kurta; a red dupatta with a hatched border; tilak; a mauli thread at the wrist |
+
+- **Where they appear:**
+  - **Hero:** hands folded, they see each other. They blink now and then, and her mundavalya and nath sway.
+  - **The varmala:** the pinned scene. The peacocks become their attendants and fan their tails; then the marigold garlands rise, cross and land on each other's shoulders.
+- **Next poses, once this look is approved:**
+  - Haldi: seated on paats, turmeric on their cheeks.
+  - Sangeet: she with the dholki, he with the manjira.
+  - Shaadi: the pheras, gathbandhan tied, around the agni.
+  - RSVP: namaste, welcoming the guest.
+- **The peacocks stay:** in the cover's pallu, the ribbons, the floating feathers, and beside the couple in the varmala.
+- **For the real site:** the figures are code-drawn stand-ins. They serve as the layout for the artists, who paint on matching sheets from this sketch so the two halves meet at the seam.
+  - A Madhubani artist paints him, plus the props.
+  - A Pinguli chitrakathi artist paints her, or the same Madhubani artist working from Marathi references.
+  - Faces stay stylised, not portraits, unless the couple want a likeness.
+  - The canvas has a character sheet for the brief.
 
 ## Motion
 - **Stack:**
@@ -169,6 +193,8 @@ The peacocks in the design are code-drawn stand-ins. For the real site:
 
 ## Assumptions to confirm
 - **The groom is named first** in running text. The **desktop hero puts each name on its own art's side:** Mrunalini under the silk on the left, Shreyansh under the paper on the right. Say if you'd rather flip it.
+- **The groom's headwear:** the Mithila paag is drawn, which suits a Maithil family; the alternatives are a maur crown or a safa. The Shaadi pose could switch him to the maur.
+- **Crossing traditions:** Marathi grooms also wear the mundavalya. Should Shreyansh wear it too, as a nod to her side?
 - **Venue:** written as "Haveli Banquet, Ranchi". Confirm the exact name and send the Maps pin.
 - **Calendar end times** (for "Save the date"): Haldi 12–3 pm, Sangeet 8–11:30 pm, Shaadi 8 pm–midnight, all IST. Say if the muhurat or timings differ.
 - **Dress codes:**
@@ -201,6 +227,10 @@ The peacocks in the design are code-drawn stand-ins. For the real site:
 - **v4.1, Shaadi redraw:** seen zoomed in on a phone, the gathbandhan read as two broken pipes and one kalash looked like a face. The cloths are now proper swags with one tied knot, the kalash are banded, the kund is stepped, the Haldi roots are real turmeric shapes, and double-tap zoom is off.
 - **v4.2, the curtain:** a phone recording showed the countdown pinned at the bottom of the screen while the Mangalashtak kept scrolling above it. That opened an empty teal gap, and the RSVP ate the dials from below. The countdown now sits in its own wrapper with the RSVP and uses `position: sticky; top: 0`. It rides up with the page, stops at the top, and the RSVP covers it with no gap. It is native CSS, so iOS doesn't jitter, and it has extra top padding so the Claude app's title bar doesn't hide the label.
 - **v4.3, tokens:** "Open in Maps" and "Add to calendar" felt formal and app-like, so they became the two tokens above, and "Add to calendar" now works. The same pass fixed every line-draw on the page (medallion rings, the swastik, the feathers, the twin threads). GSAP rounds pixel CSS values, and our dashes run from 1 to 0, so lines snapped on at the halfway point instead of drawing. They now use `autoRound: false`, and the twin threads draw smoothly as you scroll.
+- **v5, the couple:** the references all showed the couple, so they were added.
+  - She is drawn in Paithan chitrakathi style (woven gold on silk) and he in Madhubani (double line on paper).
+  - The hero shows them facing each other, and the meeting became the varmala, with the peacocks as attendants.
+  - The canvas gained a Couple component and a character sheet.
 
 ## Next
 Phase 3, `/plan`: the build plan. It covers the stack, one data file, the guest-code scheme, the RSVP pipeline (Apps Script → Sheet, with WhatsApp as fallback), porting the prototype's motion, the artwork pipeline, and the launch checklist.
