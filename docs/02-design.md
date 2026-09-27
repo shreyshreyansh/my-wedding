@@ -201,6 +201,11 @@ The peacocks in the design are code-drawn stand-ins. For the real site:
 - **v4.1, Shaadi redraw:** seen zoomed in on a phone, the gathbandhan read as two broken pipes and one kalash looked like a face. The cloths are now proper swags with one tied knot, the kalash are banded, the kund is stepped, the Haldi roots are real turmeric shapes, and double-tap zoom is off.
 - **v4.2, the curtain:** a phone recording showed the countdown pinned at the bottom of the screen while the Mangalashtak kept scrolling above it. That opened an empty teal gap, and the RSVP ate the dials from below. The countdown now sits in its own wrapper with the RSVP and uses `position: sticky; top: 0`. It rides up with the page, stops at the top, and the RSVP covers it with no gap. It is native CSS, so iOS doesn't jitter, and it has extra top padding so the Claude app's title bar doesn't hide the label.
 - **v4.3, tokens:** "Open in Maps" and "Add to calendar" felt formal and app-like, so they became the two tokens above, and "Add to calendar" now works. The same pass fixed every line-draw on the page (medallion rings, the swastik, the feathers, the twin threads). GSAP rounds pixel CSS values, and our dashes run from 1 to 0, so lines snapped on at the halfway point instead of drawing. They now use `autoRound: false`, and the twin threads draw smoothly as you scroll.
+- **v4.4, motion that can't silently switch off:**
+  - **What happened:** motion stopped on a phone, although a full scroll test here showed all 29 scroll animations working.
+  - **The two likely causes:** the CDN for the animation library failing on that network, or the phone's Reduce Motion setting (which the page honours).
+  - **Fix 1:** the prototype now ships GSAP, ScrollTrigger and Lenis with the page (`design/prototype/vendor/`). The build should self-host them too.
+  - **Fix 2:** the Moments menu says whether motion is on. With Reduce Motion on, it offers **Play the motion anyway**, for this preview only. Guests with that setting still get the still version.
 
 ## Next
 Phase 3, `/plan`: the build plan. It covers the stack, one data file, the guest-code scheme, the RSVP pipeline (Apps Script → Sheet, with WhatsApp as fallback), porting the prototype's motion, the artwork pipeline, and the launch checklist.
