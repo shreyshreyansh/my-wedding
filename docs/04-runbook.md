@@ -32,7 +32,7 @@ The site runs as a Cloudflare Worker with static assets (the free plan is plenty
 4. **Secrets**, once the Sheet exists (step 2 below): the Worker → **Settings → Variables and Secrets → Add**, type **Secret**: `APPS_SCRIPT_URL`, `APPS_SCRIPT_SECRET` (any long random string; the same goes in the Sheet), `WA_BRIDE` and `WA_GROOM` (digits with country code, e.g. `919812345678`). Secrets take effect at once and survive later deploys. Until then, replies are kept in KV and marked for `npm run rsvp:resync`, and the WhatsApp button lets the guest pick the contact.
 5. Optional, the domain → **Security → WAF → Rate limiting rules** (the free plan has one): URI path equals `/api/rsvp`, method POST, 10 requests per 10 seconds per IP, block for 10 seconds.
 
-Every push to `main` redeploys the site in about two minutes.
+Every push to `main` redeploys the site in about two minutes. **Retry build** in the dashboard re-runs the same commit on the same branch; after changing a setting, push a commit to `main` instead.
 
 ### 2. The Google Sheet
 1. With the family's Google account, create a new Sheet. **Extensions → Apps Script**, paste `apps-script/Code.gs`, save.
