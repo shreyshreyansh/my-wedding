@@ -1,6 +1,7 @@
 <title>Shreyansh & Mrunalini</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Tiro+Devanagari+Hindi:ital@0;1&family=Tiro+Devanagari+Marathi:ital@0;1&display=swap">
 <noscript><style>#cover{display:none}</style></noscript>
+<script>document.documentElement.classList.add('js')</script>
 <style>
 :root{
   --rani:#A3195B; --rani-deep:#8A1450; --mor:#0E5C63; --zari:#C9A04A; --zari-hi:#F2D98C; --chuna:#F5EFE3;
@@ -33,7 +34,7 @@ a{color:inherit}
 .band{display:flex;height:22px}
 .band>div{flex:1}
 .band>.hatch{border-left:2px solid var(--kajal)}
-.selv{position:fixed;top:0;bottom:0;width:var(--selv);z-index:40;pointer-events:none}
+.selv{position:fixed;top:0;bottom:0;width:var(--selv);z-index:52;pointer-events:none}
 .selv.l{left:0}
 .selv.r{right:0;border-left:2px solid var(--kajal)}
 #progress{position:fixed;top:0;bottom:0;left:var(--selv);width:3px;background:var(--rani);transform:scaleY(0);transform-origin:top;z-index:41;pointer-events:none}
@@ -53,22 +54,62 @@ a{color:inherit}
 .btn-line:hover{background:var(--chuna)}
 .ic{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
-/* cover */
-#cover{position:fixed;inset:0;z-index:50;overflow:hidden}
-#cover .cloth{position:absolute;inset:0;display:flex;flex-direction:column;color:var(--chuna)}
-#cover .cloth-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;padding:clamp(24px,5vh,48px) var(--gut)}
-#cover .zb{height:30px}
-#cover .mb{height:6px;background:var(--mor)}
-.cv-names{display:flex;flex-direction:column;align-items:center;gap:6px}
-.cv-names .nm{font-size:clamp(44px,11vw,84px);line-height:1.1;font-weight:700}
-.cv-names .amp{font-size:clamp(26px,6vw,44px);line-height:1;color:var(--zari)}
-.cv-names .dn{font-size:clamp(26px,6vw,40px);line-height:1.4;color:var(--zari)}
-.seal{position:relative;overflow:hidden;width:min(100%,320px);min-height:78px;border:0;background:var(--zari);color:var(--kajal);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:inset 0 0 0 4px var(--zari),inset 0 0 0 6px var(--kajal),0 0 0 2px var(--mor);font:inherit}
+/* cover: the antarpat, with a Madhubani toran above and a Paithani pallu below */
+#cover{position:fixed;inset:0;z-index:50;overflow:hidden;--hang:16px}
+#cover .cloth{position:absolute;inset:0;display:flex;flex-direction:column;color:var(--chuna);overflow:hidden}
+#cover .cloth::after{content:"";position:absolute;top:-10%;bottom:-10%;left:0;width:55%;background:linear-gradient(100deg,transparent 15%,rgba(255,228,184,.11) 50%,transparent 85%);transform:translateX(-120%) skewX(-14deg);animation:sheen 8s ease-in-out 2.4s infinite;pointer-events:none;z-index:2}
+@keyframes sheen{0%{transform:translateX(-120%) skewX(-14deg)}50%,100%{transform:translateX(260%) skewX(-14deg)}}
+#cover .hem{flex-shrink:0;position:relative;z-index:1}
+#cover .hem .zb{height:12px}
+#cover .mb{height:4px;background:var(--mor)}
+#cover .cloth-body{position:relative;z-index:1;flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:clamp(10px,2svh,22px);text-align:center;padding:clamp(84px,13svh,120px) var(--gut) 0}
+.tw-layer{position:absolute;inset:0;pointer-events:none;z-index:0}
+.tw{position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;opacity:0;animation:twinkle var(--d,5s) ease-in-out var(--dl,0s) infinite}
+.tw svg{display:block;width:100%;height:100%}
+@keyframes twinkle{0%,58%,100%{opacity:0;transform:scale(.2) rotate(0)}74%{opacity:1;transform:scale(1) rotate(45deg)}}
+.cv-guest{display:flex;flex-direction:column;align-items:center}
+.cv-eyebrow{font-style:italic;font-size:.92rem;color:var(--zari-hi)}
+.cv-guestname{font-size:clamp(22px,5.8vw,30px);line-height:1.3;font-weight:700}
+.cv-door{--R:clamp(72px,11svh,112px);--arch:1;position:relative;flex:1;width:min(100%,max(420px,58svh));display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:clamp(12px,2.4svh,26px);padding:calc(var(--R) * .62) clamp(12px,4vw,28px) clamp(14px,2.4svh,24px)}
+.cv-door::before,.cv-door::after{content:"";position:absolute;inset:0;border-radius:50% 50% 0 0/var(--R) var(--R) 0 0;border-bottom:0;pointer-events:none}
+.cv-door::before{border:2px solid var(--zari);border-bottom:0;clip-path:inset(calc(100% - var(--arch) * 100%) 50% 0 -4px)}
+.cv-door::after{border:4px double var(--chuna);border-bottom:0;opacity:.85;clip-path:inset(calc(100% - var(--arch) * 100%) -4px 0 50%)}
+.cv-apex{position:absolute;left:50%;top:0;width:18px;height:18px;margin:-9px 0 0 -9px;display:block}
+.cv-center{display:flex;flex-direction:column;align-items:center;gap:clamp(4px,1svh,10px)}
+.cv-inv{margin:0;font-size:1.05rem}
+.cv-mark{display:flex;align-items:center;gap:10px}
+.cv-rule{display:block;width:clamp(44px,15vw,120px)}
+.cv-rule.l{border-top:2px solid var(--zari);transform-origin:100% 50%}
+.cv-rule.r{height:5px;border-top:1px solid var(--chuna);border-bottom:1px solid var(--chuna);transform-origin:0 50%}
+.swastik{display:block;width:clamp(60px,min(18vw,11svh),96px);height:auto;overflow:visible}
+.cv-names{margin:0;display:flex;flex-direction:column;align-items:center}
+.cv-names .nm{font-size:clamp(40px,min(11.5vw,7svh),84px);line-height:1.08;font-weight:700}
+.cv-names .amp{font-size:clamp(24px,min(6vw,4svh),44px);line-height:1;color:var(--zari)}
+.cv-center .dn{font-size:clamp(24px,min(6vw,4.2svh),40px);line-height:1.4;color:var(--zari)}
+.cv-cta{display:flex;flex-direction:column;align-items:center;gap:10px;width:100%}
+.seal-wrap{position:relative;width:min(100%,330px);display:grid}
+.seal-wrap .ring{position:absolute;inset:0;border:3px solid var(--zari-hi);opacity:0;pointer-events:none}
+.seal-wrap .halo{position:absolute;inset:-26px -30px;background:radial-gradient(closest-side,rgba(242,217,140,.55),rgba(242,217,140,0));opacity:.35;pointer-events:none}
+.seal{position:relative;overflow:hidden;width:100%;min-height:78px;border:0;background:var(--zari);color:var(--kajal);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:inset 0 0 0 4px var(--zari),inset 0 0 0 6px var(--kajal),0 0 0 2px var(--mor),0 10px 26px rgba(43,33,27,.35);font:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .seal .big{font-size:1.65rem;line-height:1.25;font-weight:700}
 .seal .small{font-size:.95rem;font-style:italic}
+.seal .glint{position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,246,214,.7) 50%,transparent 70%);transform:translateX(-120%);pointer-events:none}
+.cv-why{font-size:.85rem;font-style:italic;opacity:.88}
+.pallu{flex-shrink:0;position:relative;z-index:1}
+.pl-motif{height:clamp(40px,6svh,52px);background-color:var(--zari);background-repeat:repeat-x;background-position:center;background-size:auto 100%;border-top:2px solid var(--zari-hi);border-bottom:2px solid var(--zari-hi)}
+.pallu .zb{height:18px}
+.cv-toran{position:absolute;left:var(--selv);right:var(--selv);top:var(--hang);display:flex;align-items:flex-start;justify-content:space-between;padding:0 6px;pointer-events:none;z-index:3}
+.cv-toran::before{content:"";position:absolute;left:0;right:0;top:-2px;height:5px;background:repeating-linear-gradient(135deg,var(--sindoor) 0 4px,var(--haldi) 4px 8px);box-shadow:0 1px 0 rgba(43,33,27,.6)}
+.hang{position:relative;display:block;transform-origin:50% 0}
+.hang svg{display:block;transform-origin:50% 2px;animation:sway var(--d,5s) ease-in-out var(--dl,0s) infinite}
+.js #cover:not(.ready) .cv-in{visibility:hidden;animation:cvsafe 0s 3s forwards}
+@keyframes cvsafe{to{visibility:visible}}
+@media (max-height:720px){.cv-why{display:none}#cover .cloth-body{padding-top:76px}.cv-door{--R:64px;padding-top:40px;gap:12px}.cv-center{gap:4px}.cv-names .nm{font-size:clamp(34px,6svh,60px)}.swastik{width:56px}.cv-guestname{font-size:22px}.seal{min-height:68px}.seal .big{font-size:1.45rem}}
+@media (max-height:560px){.cv-mark,.cv-eyebrow{display:none}.cv-names .nm{font-size:34px}.cloth-body{padding-top:72px}}
 
 #akshata{position:fixed;inset:0;pointer-events:none;z-index:60;overflow:hidden}
 .grain{position:absolute;width:5px;height:10px;border-radius:50%}
+.grain.petal{width:9px;height:12px;border-radius:70% 0 70% 0}
 
 /* floaters: feathers, grains at several depths */
 .floaters{position:absolute;inset:0;pointer-events:none;overflow:hidden}
@@ -221,8 +262,10 @@ footer{position:relative;z-index:3;text-align:center}
 #momList span{font-size:.88rem;font-style:italic;color:var(--deep);line-height:1.35}
 
 @media (prefers-reduced-motion:reduce){
-  .strand svg,.savdhan{animation:none}
+  .strand svg,.savdhan,.hang svg,.tw,#cover .cloth::after{animation:none}
+  .tw,#cover .cloth::after{display:none}
   .btn-primary::after,.seal::after{display:none}
+  .seal-wrap .halo + .ring{opacity:.9;inset:-7px}
 }
 </style>
 
@@ -233,32 +276,63 @@ footer{position:relative;z-index:3;text-align:center}
 
 <div id="cover" role="dialog" aria-modal="true" aria-labelledby="cvTitle">
   <div class="cloth silk">
-    <div class="zb zari"></div><div class="mb"></div>
+    <div class="tw-layer" id="cvTw" aria-hidden="true"></div>
+    <div class="hem"><div class="zb zari"></div><div class="mb"></div></div>
     <div class="cloth-body">
-      <div class="cv-text" style="display:flex;flex-direction:column;align-items:center;gap:2px;font-style:italic">
-        <span>Dear [Guest name] family</span>
-        <span lang="hi">प्रिय [अतिथि] परिवार</span>
+      <div class="cv-text cv-in cv-guest">
+        <span class="cv-eyebrow"><span lang="hi">सस्नेह निमंत्रण</span> · with love, for</span>
+        <span class="cal cv-guestname">the [Guest name] family</span>
       </div>
-      <div class="cv-text cv-names">
-        <p lang="hi" style="margin:0;font-size:1.1rem">॥ श्री गणेशाय नमः ॥</p>
-        <svg class="divider" viewBox="0 0 220 16" width="200" height="15" aria-hidden="true"><path d="M0 8H96" stroke="#C9A04A" stroke-width="2"/><path d="M124 6H220M124 10H220" stroke="#F5EFE3" stroke-width="1.2"/><path d="M110 0 101 8 110 16Z" fill="#C9A04A"/><path d="M110 0 119 8 110 16Z" fill="#F5EFE3"/></svg>
-        <p id="cvTitle" style="margin:0;display:flex;flex-direction:column;align-items:center">
-          <span class="cal nm">Shreyansh</span>
-          <span class="cal amp">&amp;</span>
-          <span class="cal nm">Mrunalini</span>
+      <div class="cv-door cv-in">
+        <svg class="cv-apex" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 0 0 9 9 18Z" fill="#C9A04A"/><path d="M9 0 18 9 9 18Z" fill="#F5EFE3"/></svg>
+      <div class="cv-text cv-in cv-center">
+        <p lang="hi" class="cv-inv">॥ श्री गणेशाय नमः ॥</p>
+        <div class="cv-mark" aria-hidden="true">
+          <span class="cv-rule l"></span>
+          <svg class="swastik" viewBox="0 0 100 100">
+            <path class="sw-disc" d="M50 4A46 46 0 0 0 50 96Z" fill="#F5EFE3"/>
+            <path class="sw-disc" d="M50 4A46 46 0 0 1 50 96Z" fill="#EFE3C8"/>
+            <path class="sw-hatch" d="M50 4A46 46 0 0 1 50 96" fill="none" stroke="#2B211B" stroke-width="4.4" stroke-dasharray="1.2 2.6"/>
+            <path class="sw-ring" pathLength="1" d="M50 1.5A48.5 48.5 0 0 0 50 98.5" fill="none" stroke="#C9A04A" stroke-width="3"/>
+            <path class="sw-ring" pathLength="1" d="M50 7A43 43 0 0 0 50 93" fill="none" stroke="#C9A04A" stroke-width="1.6"/>
+            <path class="sw-ring" pathLength="1" d="M50 1.5A48.5 48.5 0 0 1 50 98.5" fill="none" stroke="#2B211B" stroke-width="1.8"/>
+            <path class="sw-ring" pathLength="1" d="M50 7A43 43 0 0 1 50 93" fill="none" stroke="#2B211B" stroke-width="1.8"/>
+            <g fill="none" stroke="#B3261E" stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round">
+              <path class="sw-line" pathLength="1" d="M50 30V70"/>
+              <path class="sw-line" pathLength="1" d="M30 50H70"/>
+              <path class="sw-line" pathLength="1" d="M50 30H64"/>
+              <path class="sw-line" pathLength="1" d="M70 50V64"/>
+              <path class="sw-line" pathLength="1" d="M50 70H36"/>
+              <path class="sw-line" pathLength="1" d="M30 50V36"/>
+            </g>
+            <g fill="#B3261E"><circle class="sw-dot" cx="39" cy="39" r="3.3"/><circle class="sw-dot" cx="61" cy="39" r="3.3"/><circle class="sw-dot" cx="61" cy="61" r="3.3"/><circle class="sw-dot" cx="39" cy="61" r="3.3"/></g>
+          </svg>
+          <span class="cv-rule r"></span>
+        </div>
+        <p id="cvTitle" class="cv-names">
+          <span class="cal nm cv-nm">Shreyansh</span>
+          <span class="cal amp cv-amp">&amp;</span>
+          <span class="cal nm cv-nm">Mrunalini</span>
         </p>
-        <span lang="hi" class="cal dn">श्रेयांश · मृणालिनी</span>
-        <span>8 &amp; 9 December 2026 · Ranchi</span>
+        <span lang="hi" class="cal dn cv-dn">श्रेयांश · मृणालिनी</span>
+        <span class="cv-date">8 &amp; 9 December 2026 · Ranchi</span>
       </div>
-      <div class="cv-text" style="display:flex;flex-direction:column;align-items:center;gap:12px;width:100%">
-        <button type="button" class="seal" id="openBtn">
-          <span lang="mr" class="cal big">शुभमंगल सावधान</span>
-          <span class="small">Tap to open your invitation</span>
-        </button>
+      <div class="cv-text cv-in cv-cta">
+        <div class="seal-wrap">
+          <span class="halo" aria-hidden="true"></span><span class="ring" aria-hidden="true"></span><span class="ring" aria-hidden="true"></span><span class="ring" aria-hidden="true"></span>
+          <button type="button" class="seal" id="openBtn">
+            <span class="glint" aria-hidden="true"></span>
+            <span lang="mr" class="cal big">शुभमंगल सावधान</span>
+            <span class="small">Tap to open your invitation</span>
+          </button>
+        </div>
+        <span class="cv-why">At these words, the antarpat is lowered</span>
+      </div>
       </div>
     </div>
-    <div class="mb"></div><div class="zb zari"></div>
+    <div class="pallu" aria-hidden="true"><div class="mb"></div><div class="pl-motif" id="cvPallu"></div><div class="mb"></div><div class="zb zari"></div></div>
   </div>
+  <div class="cv-toran cv-in" id="cvToran" aria-hidden="true"></div>
 </div>
 
 <nav id="moments" aria-label="Motion moments" hidden>
@@ -718,6 +792,46 @@ footer{position:relative;z-index:3;text-align:center}
     '<path d="M11 66C4 72 5 82 11 87C17 82 18 72 11 66Z" fill="' + C.sal + '"/></svg></span>'
   ).join('');
 
+  /* cover: a Madhubani toran (mango leaves, marigold strands, a mauli thread), zari buttis that twinkle, a Paithani pallu */
+  const cvW = innerWidth;
+  const nHang = Math.max(11, Math.min(41, Math.round(cvW / 34) | 1)), hc = (nHang - 1) / 2, maxF = phoneWidth ? 7 : 8;
+  const leafSvg = '<svg width="22" height="56" viewBox="0 0 22 56" aria-hidden="true"><path d="M11 0V8" stroke="' + C.kajal + '" stroke-width="1"/>' +
+    '<path d="M11 6C2 16 2 40 11 55C20 40 20 16 11 6Z" fill="' + C.sal + '" stroke="' + C.kajal + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+    '<path d="M11 10.5C5.5 19 5.5 38 11 50C16.5 38 16.5 19 11 10.5Z" fill="none" stroke="' + C.kagaz + '" stroke-width=".8" opacity=".75"/>' +
+    '<path d="M11 10V52M11 20 7.5 16.5M11 20 14.5 16.5M11 29 7 25M11 29 15 25M11 38 7.5 34.5M11 38 14.5 34.5" fill="none" stroke="' + C.kajal + '" stroke-width=".9"/></svg>';
+  const strandSvg = (n, k) => {
+    const ly = 14 + (n - 1) * 13 + 6;
+    let g = '<path d="M11 0V' + ly + '" stroke="' + C.kajal + '" stroke-width=".9"/>';
+    for (let j = 0; j < n; j++) {
+      const y = 14 + j * 13;
+      g += '<circle cx="11" cy="' + y + '" r="6.4" fill="' + ((j + k) % 2 ? '#E27A1B' : C.haldi) + '" stroke="' + C.kajal + '" stroke-width=".9"/>' +
+        '<circle cx="11" cy="' + y + '" r="3.4" fill="none" stroke="' + C.kajal + '" stroke-width=".7" stroke-dasharray="1.1 1.1"/><circle cx="11" cy="' + y + '" r="1.5" fill="' + C.sindoor + '"/>';
+    }
+    g += n >= 5
+      ? '<path d="M11 ' + ly + 'C6 ' + (ly + 2) + ' 5 ' + (ly + 8) + ' 4 ' + (ly + 13) + 'H18C17 ' + (ly + 8) + ' 16 ' + (ly + 2) + ' 11 ' + ly + 'Z" fill="' + C.zari + '" stroke="' + C.kajal + '" stroke-width=".9"/><circle cx="11" cy="' + (ly + 15) + '" r="1.9" fill="' + C.kajal + '"/>'
+      : '<path d="M11 ' + ly + 'C5 ' + (ly + 6) + ' 6 ' + (ly + 14) + ' 11 ' + (ly + 18) + 'C16 ' + (ly + 14) + ' 17 ' + (ly + 6) + ' 11 ' + ly + 'Z" fill="' + C.sal + '" stroke="' + C.kajal + '" stroke-width="1"/>';
+    return '<svg width="22" height="' + (ly + 19) + '" viewBox="0 0 22 ' + (ly + 19) + '" aria-hidden="true">' + g + '</svg>';
+  };
+  document.getElementById('cvToran').innerHTML = Array.from({ length: nHang }, (_, i) => {
+    const off = Math.abs(i - hc);
+    const inner = off % 2 ? strandSvg(2 + Math.round((maxF - 2) * Math.pow(off / hc, 2.6)), i) : leafSvg;
+    return '<span class="hang" style="--d:' + (4.2 + (i % 5) * 0.55).toFixed(2) + 's;--dl:-' + ((i * 0.73) % 4).toFixed(2) + 's">' + inner + '</span>';
+  }).join('');
+  const twCols = Math.floor(cvW / 26), twRows = Math.floor(innerHeight / 26);
+  document.getElementById('cvTw').innerHTML = Array.from({ length: phoneWidth ? 12 : 22 }, () =>
+    '<span class="tw" style="left:' + 26 * (1 + Math.floor(Math.random() * (twCols - 1))) + 'px;top:' + 26 * (2 + Math.floor(Math.random() * (twRows - 3))) + 'px;--d:' + rand(4, 7).toFixed(2) + 's;--dl:-' + rand(0, 7).toFixed(2) + 's">' +
+    '<svg viewBox="0 0 12 12"><path d="M6 0 7 5 12 6 7 7 6 12 5 7 0 6 5 5Z" fill="#F2D98C"/></svg></span>').join('');
+  const pk = (tx, sx) => '<g transform="translate(' + tx + ' -2.8) scale(' + sx + ' .28)"><path d="' + TAIL + '" fill="' + C.mor + '"/>' +
+    '<circle cx="16" cy="142" r="5.5" fill="' + C.rani + '"/><circle cx="16" cy="142" r="2.2" fill="#F2D98C"/><circle cx="30" cy="149" r="5" fill="' + C.rani + '"/><circle cx="30" cy="149" r="2" fill="#F2D98C"/>' +
+    '<path d="' + BODY + '" fill="' + C.mor + '"/><ellipse cx="58" cy="104" rx="17" ry="11" fill="' + C.rani + '"/><path d="' + BEAK + '" fill="' + C.kajal + '"/>' +
+    '<path d="' + CREST + '" stroke="' + C.mor + '" stroke-width="3.2" stroke-linecap="round"/><circle cx="80" cy="30" r="3.4" fill="' + C.rani + '"/><circle cx="88" cy="28" r="3.4" fill="' + C.rani + '"/><circle cx="96" cy="30" r="3.4" fill="' + C.rani + '"/>' +
+    '<circle cx="87" cy="47" r="3" fill="' + C.chuna + '"/><path d="' + LEGS + '" stroke="' + C.kajal + '" stroke-width="3.4" stroke-linecap="round"/></g>';
+  const lotus = ['M60 38C54 31 55 20 60 11C65 20 66 31 60 38Z', 'M60 38C52 37 47 30 48 22C54 24 58 30 60 38Z', 'M60 38C68 37 73 30 72 22C66 24 62 30 60 38Z']
+    .map((d) => '<path d="' + d + '" fill="' + C.rani + '" stroke="' + C.mor + '" stroke-width=".9"/>').join('') + '<path d="M50 40.5H70" stroke="' + C.mor + '" stroke-width="1.6" stroke-linecap="round"/>';
+  const palluSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="120" height="46" viewBox="0 0 120 46"><path d="M0 2.5H120M0 43.5H120" stroke="' + C.mor + '" stroke-width="1.2" stroke-dasharray="2 2"/>' +
+    pk(14, 0.28) + lotus + pk(106, -0.28) + '</svg>';
+  document.getElementById('cvPallu').style.backgroundImage = 'url("data:image/svg+xml,' + encodeURIComponent(palluSvg) + '")';
+
   /* gold specks */
   document.getElementById('specks').innerHTML = Array.from({ length: 16 }, (_, i) =>
     '<span class="speck" style="left:' + ((i * 37) % 96 + 2) + '%;top:' + ((i * 53) % 88 + 6) + '%"></span>').join('');
@@ -789,16 +903,17 @@ footer{position:relative;z-index:3;text-align:center}
     }
   }
 
-  function burst(n) {
+  function burst(n, petals) {
     if (!hasGsap || reduce) return;
     const layer = document.getElementById('akshata');
     const W = innerWidth, H = innerHeight;
     for (let i = 0; i < n; i++) {
       const g = document.createElement('i');
-      g.className = 'grain';
+      const petal = petals && i % 3 === 2;
+      g.className = petal ? 'grain petal' : 'grain';
       g.style.left = (W * (0.12 + Math.random() * 0.76)) + 'px';
       g.style.top = '-14px';
-      g.style.background = [C.zari, C.chuna, C.haldi][i % 3];
+      g.style.background = petal ? (i % 2 ? '#E27A1B' : C.haldi) : [C.zari, C.chuna, C.haldi][i % 3];
       layer.appendChild(g);
       gsap.fromTo(g, { y: 0, rotation: Math.random() * 180 }, {
         y: H * (0.35 + Math.random() * 0.55), x: (Math.random() - 0.5) * 90, rotation: '+=' + (200 + Math.random() * 300),
@@ -835,16 +950,79 @@ footer{position:relative;z-index:3;text-align:center}
     const h = document.getElementById('heroTitle');
     if (h) h.focus({ preventScroll: true });
   }
-  let opened = false;
-  document.getElementById('openBtn').addEventListener('click', () => {
+  /* cover: entrance, the seal's dha-dha heartbeat, the antarpat's tug, and the opening */
+  const seal = document.getElementById('openBtn');
+  let cvIntro = null, pulse = null, nudgeCall = null, nudges = 0, opened = false;
+  function sealPulse() {
+    const wrap = seal.parentNode, rings = wrap.querySelectorAll('.ring'), halo = wrap.querySelector('.halo'), gap = 28;
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: 1.3 });
+    [0, 0.3].forEach((t, i) => {
+      tl.to(seal, { scale: i ? 1.03 : 1.05, duration: 0.12, ease: 'power2.out' }, t)
+        .to(seal, { scale: 1, duration: 0.24, ease: 'power2.in' }, t + 0.12)
+        .to(halo, { opacity: i ? 0.75 : 1, scale: i ? 1.04 : 1.08, duration: 0.12, ease: 'power2.out' }, t)
+        .to(halo, { opacity: 0.35, scale: 1, duration: 0.6, ease: 'power2.inOut' }, t + 0.12)
+        .fromTo(rings[i], { scaleX: 1, scaleY: 1, opacity: 0.95 }, { scaleX: () => 1 + (2 * gap) / wrap.offsetWidth, scaleY: () => 1 + (2 * gap) / wrap.offsetHeight, opacity: 0, duration: 1.2, ease: 'power2.out' }, t);
+    });
+    return tl.fromTo(seal.querySelector('.glint'), { xPercent: -120 }, { xPercent: 120, duration: 0.9, ease: 'power2.inOut' }, 0.75);
+  }
+  function tug() {
+    if (opened) return;
+    gsap.timeline()
+      .to('#cover .cloth', { y: 14, duration: 0.22, ease: 'power2.in' })
+      .to('#cover .cloth', { y: 0, duration: 1.2, ease: 'elastic.out(1, 0.35)' })
+      .to('#cvToran .hang', { rotation: (i) => (i % 2 ? 7 : -7), duration: 0.2, ease: 'power2.out' }, 0)
+      .to('#cvToran .hang', { rotation: 0, duration: 1.5, ease: 'elastic.out(1, 0.3)' }, 0.2);
+    burst(6);
+    if (++nudges < 3) nudgeCall = gsap.delayedCall(6.5, tug);
+  }
+  if (hasGsap && !reduce) {
+    const nameIn = { clipPath: 'inset(-30% 100% -30% -12%)' }, nameOut = { clipPath: 'inset(-30% -12% -30% -12%)', ease: 'power2.inOut', duration: 0.9 };
+    cvIntro = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' }, onComplete: () => { if (opened) return; pulse = sealPulse(); nudgeCall = gsap.delayedCall(3, tug); } })
+      .from('#cvToran .hang', { yPercent: -115, duration: 0.9, ease: 'back.out(1.4)', stagger: { each: 0.04, from: 'center' } }, 0)
+      .from('#cover .cv-guest', { y: 12, autoAlpha: 0, duration: 0.6 }, 0.2)
+      .fromTo('#cover .cv-door', { '--arch': 0 }, { '--arch': 1, duration: 1.1, ease: 'power2.inOut' }, 0.25)
+      .from('#cover .cv-apex', { scale: 0, rotation: -90, transformOrigin: '50% 50%', duration: 0.45, ease: 'back.out(3)' }, 1.3)
+      .from('#cover .cv-inv', { autoAlpha: 0, duration: 0.5 }, 0.35)
+      .from('#cover .sw-disc', { scale: 0.4, autoAlpha: 0, svgOrigin: '50 50', duration: 0.6, ease: 'back.out(1.8)' }, 0.4)
+      .from('#cover .sw-hatch', { autoAlpha: 0, duration: 0.4 }, 0.8)
+      .fromTo('#cover .sw-ring', { strokeDasharray: '1 2', strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.7, ease: 'power2.inOut' }, 0.45)
+      .from('#cover .cv-rule', { scaleX: 0, duration: 0.7, ease: 'power2.inOut' }, 0.55)
+      .fromTo('#cover .sw-line', { strokeDasharray: '1 2', strokeDashoffset: 1, opacity: 0 }, { strokeDashoffset: 0, opacity: 1, duration: 0.24, ease: 'power1.inOut', stagger: 0.2 }, 0.75)
+      .from('#cover .sw-dot', { scale: 0, transformOrigin: '50% 50%', duration: 0.3, ease: 'back.out(3)', stagger: 0.08 }, 1.95)
+      .fromTo('#cover .cv-nm', { ...nameIn }, { ...nameOut, stagger: 0.3 }, 0.8)
+      .from('#cover .cv-amp', { scale: 0, autoAlpha: 0, duration: 0.4, ease: 'back.out(2)' }, 1.15)
+      .fromTo('#cover .cv-dn', { ...nameIn }, { ...nameOut }, 1.4)
+      .from('#cover .cv-date', { y: 10, autoAlpha: 0, duration: 0.5 }, 1.7)
+      .from('#cover .cv-cta', { y: 26, autoAlpha: 0, duration: 0.7 }, 1.75);
+    const fontsOk = document.fonts && document.fonts.ready ? Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 900))]) : Promise.resolve();
+    fontsOk.then(() => { if (!opened) cvIntro.play(); });
+  }
+  cover.classList.add('ready');
+
+  function openCover() {
     if (opened) return;
     opened = true;
+    try { if (navigator.vibrate) navigator.vibrate([14, 70, 20]); } catch (e) { /* no haptics */ }
     if (!hasGsap || reduce) { unlock(); return; }
+    if (cvIntro) cvIntro.progress(1, true).kill();
+    if (pulse) pulse.kill();
+    if (nudgeCall) nudgeCall.kill();
+    gsap.killTweensOf('#cover .cloth, #cvToran .hang');
     gsap.timeline({ onComplete: unlock })
-      .to('#cover .cv-text', { y: -18, autoAlpha: 0, duration: 0.35, ease: 'power2.in', stagger: 0.05 })
-      .to('#cover .cloth', { yPercent: 104, duration: 0.95, ease: 'power2.inOut' }, '-=0.1')
-      .add(() => burst(30), '-=0.55');
-  });
+      .to(seal, { scale: 0.95, duration: 0.09, ease: 'power2.out' })
+      .to(seal, { scale: 1.07, duration: 0.22, ease: 'back.out(3)' })
+      .fromTo(seal.parentNode.querySelectorAll('.ring'), { scaleX: 1, scaleY: 1, opacity: 1 }, { scaleX: 1.3, scaleY: 1.9, opacity: 0, duration: 0.8, ease: 'power2.out', stagger: 0.1 }, 0.09)
+      .to(seal.parentNode.querySelector('.halo'), { opacity: 1, scale: 1.3, duration: 0.3, ease: 'power2.out' }, 0.09)
+      .fromTo(seal.querySelector('.glint'), { xPercent: -120 }, { xPercent: 120, duration: 0.5, ease: 'power2.inOut' }, 0.09)
+      .to('#cvToran .hang', { rotation: (i) => (i % 2 ? 12 : -12), duration: 0.3, ease: 'power2.out' }, 0.1)
+      .to('#cover .cv-text', { y: -18, autoAlpha: 0, duration: 0.35, ease: 'power2.in', stagger: 0.05 }, 0.3)
+      .to('#cover .cloth', { yPercent: 104, y: 0, duration: 0.95, ease: 'power2.in' }, 0.5)
+      .add(() => burst(36, true), 0.85)
+      .add(() => { if (heroIntro) heroIntro.play(); }, 1.05)
+      .to('#cvToran', { yPercent: -130, scale: 1.12, autoAlpha: 0, transformOrigin: '50% 0%', duration: 0.6, ease: 'power2.in' }, 1.0);
+  }
+  seal.addEventListener('click', openCover);
+  cover.querySelector('.cloth').addEventListener('click', (e) => { if (!seal.contains(e.target)) openCover(); });
 
   document.getElementById('rsvpForm').addEventListener('submit', (e) => {
     e.preventDefault();

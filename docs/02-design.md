@@ -63,7 +63,7 @@ Both are private until shared from their Share menus.
   - "From Pune to Ranchi" as the schedule's spine.
 
 ## Screens (canvas v2)
-1. **Cover:** the Paithani antarpat. Tap शुभमंगल सावधान and the silk drops (interactive).
+1. **Cover:** the antarpat under a Madhubani toran, with a doorway arch, the kumkum swastik and a Paithani pallu. The seal beats until you tap it, and then the silk drops (interactive). See "The cover" below.
 2. **Hero:** silk and paper halves; the peacocks apart.
 3. **The meeting:** the pinned scroll scene, as a four-frame storyboard.
 4. **Invitation:** English, मराठी and हिंदी in the new lettering (interactive).
@@ -119,6 +119,30 @@ The references feel alive because text and art move together in layers. The prot
 
 A **Moments** guide (bottom left, after opening) jumps to each moment with a note on what to watch for.
 
+### The cover (prototype v4, after "make the tap evident, and make it more awesome")
+The first screen is the **antarpat**, the cloth held between the couple while the Mangalashtak is sung. At **शुभमंगल सावधान** it is lowered and they see each other. The cover now reads as that exact moment, with both cultures in it from the first second:
+
+| Element | What it is | Motion |
+|---|---|---|
+| **Toran** (his) | Mango leaves and marigold strands in Madhubani double line, on a red-and-yellow **mauli** thread. Strands are short over the text and long at the edges, ending in small brass bells. | Drops in from the centre outwards and sways. It swings when the cloth is tugged and lifts away as you pass under it on opening. |
+| **Doorway arch** | Her zari line on the left and his chuna double line on the right, meeting at a half-zari, half-chuna gem at the apex. | The two lines **rise from the ground and meet at the top**, and then the gem appears. |
+| **Kumkum swastik** | Drawn on a split disc (her chuna silk and his paper with a hatched ring), as it is on a real antarpat. One sign across both halves. | Drawn stroke by stroke, like a finger dipped in kumkum; the four dots follow. |
+| **Guest line** | सस्नेह निमंत्रण · "with love, for **the [Guest name] family**", in calligraphy like a hand-addressed envelope. | Fades up. |
+| **Names** | As before. | Written in left to right, then the Devanagari. |
+| **Seal** (the tap target) | Zari with a kajal double border: शुभमंगल सावधान and "Tap to open your invitation". Underneath is one line for guests who don't know the ritual: *At these words, the antarpat is lowered.* | **Heartbeat, *dha-dha*:** it swells twice every 2.4s, two zari ripples spread out, a glow pulses and a glint crosses it. If nobody taps, the **cloth tugs down and springs back** (after 3s, then every 6.5s, three times at most), the toran jiggles and a few akshata fall. |
+| **Pallu** (hers) | A woven Paithani border: **pairs of peacocks facing each other across a lotus**, between mor lines and the narli zigzag. | Still: it is woven. |
+| **Silk** | Rani with zari buttis. | A slow sheen crosses it every 8s, and a few buttis twinkle. |
+
+- **The tap:** the seal squashes and bursts (three ripples plus a glint) and the toran swings. The text lifts away and **the silk falls with gravity** (`power2.in`). Akshata and marigold petals shower, the hero starts playing behind the falling cloth, and the toran lifts off. Android phones also give a *dha-dha* buzz.
+- **Tap anywhere:** tapping anywhere on the cloth also opens it; the seal is the accessible button.
+- **Entrance:** about 2.5s, and it waits for the fonts (up to 0.9s) so nothing jumps. The heartbeat starts only when the entrance ends. A tap during the entrance skips straight to the opening.
+- **Reduced motion:** everything is static. The seal gets a fixed zari outline instead of the pulse, and the tap opens at once.
+- **Short phones (≤720px tall):** smaller names and swastik, and the explanation line is hidden. Checked on 375×667, 390×844 and 1440×900.
+- **Cultural notes:**
+  - The swastik is the antarpat's own mark, drawn in kumkum ([WeddingWire India](https://www.weddingwire.in/wedding-tips/mangalashtak-in-marriage--c4807), [Vedic Vaani](https://vedicvaani.com/lagna-antarpath-wedding)).
+  - The swastik is easy to swap if the family prefers another sign, such as a kalash or श्री.
+- **Checked in a browser:** captured from a real Chromium render, not just read from code. The reference recording and a still are in `design/prototype/`.
+
 ## Responsive rules
 
 | Width | Layout |
@@ -166,6 +190,8 @@ The peacocks in the design are code-drawn stand-ins. For the real site:
 ## History
 - **v1, "Two walls, one chowk":** Warli × Madhubani, with the Pune → Hatia train as the story. The couple felt Maharashtra was under-represented.
 - **Options:** B (Lotus & sun) and C (Rangoli × Aripan) stay on the canvas for reference.
+- **v3, event props:** peacocks only open the invitation; Haldi, Sangeet, Shaadi and the RSVP each got their own props and loops.
+- **v4, the cover:** the couple asked for a more obvious tap and a richer first screen. That brought the toran, the doorway arch, the kumkum swastik, the pallu and the heartbeat seal.
 
 ## Next
 Phase 3, `/plan`: the build plan. It covers the stack, one data file, the guest-code scheme, the RSVP pipeline (Apps Script → Sheet, with WhatsApp as fallback), porting the prototype's motion, the artwork pipeline, and the launch checklist.
