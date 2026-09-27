@@ -77,3 +77,15 @@ test('focus: the seal first, then the names once the cover opens', async ({ page
   await expect(page.locator('#cover')).toHaveCount(0);
   await expect(page.locator('#heroTitle')).toBeFocused();
 });
+
+test('focus rings show for keyboard users, not after a tap', async ({ page }) => {
+  await page.goto('/');
+  const outline = (sel: string) => page.locator(sel).evaluate((el) => getComputedStyle(el).outlineStyle);
+  await expect(page.locator('#openBtn')).toBeFocused();
+  expect(await outline('#openBtn')).toBe('none');
+  await page.keyboard.press('Shift');
+  expect(await outline('#openBtn')).toBe('solid');
+  await page.locator('#openBtn').click();
+  await expect(page.locator('#heroTitle')).toBeFocused();
+  expect(await outline('#heroTitle')).toBe('none');
+});

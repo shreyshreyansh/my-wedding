@@ -39,3 +39,5 @@
   .hero-plate .dn,.art-labels{display:none}
   .hero-plate .nm{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 }
+/* the names take focus after the cover opens so screen readers start there; a heading is not a control, so no ring */
+#heroTitle:focus{outline:none}

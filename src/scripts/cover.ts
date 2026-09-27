@@ -11,6 +11,8 @@ export function initCover(onTap: () => void) {
   $('#cvTw')!.innerHTML = twinkles(innerWidth, innerHeight, phone);
   root.classList.add('locked');
   const seal = $('#openBtn') as HTMLButtonElement;
+  /* the seal's focus ring is for keyboard users: show it only once a key is pressed */
+  addEventListener('keydown', () => root.classList.add('kbd'), { once: true });
 
   function unlock() {
     root.classList.remove('locked');

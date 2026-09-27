@@ -54,3 +54,5 @@
 #akshata{position:fixed;inset:0;pointer-events:none;z-index:60;overflow:hidden}
 .grain{position:absolute;width:5px;height:10px;border-radius:50%}
 .grain.petal{width:9px;height:12px;border-radius:70% 0 70% 0}
+/* focus lands on the seal when the cover appears; its ring shows for keyboard users only (html.kbd, set on the first key press) */
+html:not(.kbd) #openBtn:focus-visible{outline:none}
