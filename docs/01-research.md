@@ -8,7 +8,7 @@
 - [Vijay & Rashmika, Temple Theme](https://myshaadhilink.in/invitation/vijay-rashmika-wedding-invitation?to=Guest&demo=true) (MyShaadhi Link)
 - The web-design skills in [MengTo/Skills](https://github.com/MengTo/Skills/tree/main/agent-skills/web-design), studied for how the site should move.
 
-Status: second pass. The references have been studied from their page code and artwork. Still needed: the couple's own notes on what they like, their assets, and answers to the open questions at the end.
+**Status: research complete on our side** (see the checklist in §13). The next step, design, now waits on the couple's answers to the open questions in §12 and on their assets.
 
 ---
 
@@ -115,14 +115,15 @@ The relevant skills are `animation-systems`, `cinematic-gsap-lenis-motion-system
 - **Pinned, scroll-controlled scenes only for story moments.** Scroll position is the single source of truth; it must work forwards, backwards and with a fast flick. **Never hijack scrolling.**
 - **Performance:** animate only `transform` and `opacity`; blur only small things; pause everything off-screen; cap canvas resolution.
 - **Reduced motion:** show the final state instantly, with no Lenis, no pinning and no loops. The page must read fine with all motion removed.
-- **Artwork warning:** don't use AI- or code-drawn illustrations; use real, licensed or commissioned art. Warli's circles-and-triangles grammar is a reasonable exception for patterns and small figures. Madhubani and Khovar are not (see the illustration research).
+- **Artwork warning:** don't use AI- or code-drawn illustrations; use real, licensed or commissioned art. Warli's circles-and-triangles grammar is a reasonable exception for patterns and small figures. Madhubani and Khovar are not (see §9).
 
 ### Draft motion tokens for us
 | Token | Value |
 |---|---|
-| Smooth scroll | Lenis on **mouse wheel only** (~1.1s glide); native touch scrolling on phones, as both references do |
+| Smooth scroll | Lenis **on desktop only** (~1.1s glide on the mouse wheel); native touch scrolling on phones, as both references do. Never `syncTouch` or `normalizeScroll`. |
+| Engine | **CSS scroll-driven animations** (`animation-timeline: view()`) for reveals and parallax: they run off the main thread and work in Chrome, Samsung Internet and iOS 26+. Wrapped in `@supports`, with a fallback that adds a class when an element comes into view. **GSAP ScrollTrigger only for the 2–3 pinned scenes**, with `ignoreMobileResize` and `anticipatePin`. |
 | Entrance | rise 24–36px + fade, 0.9s, `power3.out` (CSS `cubic-bezier(.22,1,.36,1)`), trigger at 82% of screen height, **once** |
-| Text | **by word**, 50ms apart, 6–8px blur to sharp |
+| Text | **by word**, 50ms apart. The blur-to-sharp effect is desktop only; on phones use fade + rise, because blur is expensive on budget Androids. |
 | Scroll-controlled scenes | linear (`ease: none`), `scrub: 1–1.4` for a slight trailing lag |
 | Parallax | backgrounds at 30–70% of scroll speed, or a ±3–12% drift |
 | Background loops | `sine.inOut`, 4–60s, paused off-screen |
@@ -140,7 +141,13 @@ The relevant skills are `animation-systems`, `cinematic-gsap-lenis-motion-system
 6. **Background.** Palash petals or sal leaves tumble down (the `falling-leaves` technique) in one or two sections, not the whole page.
 7. **Everything else** (countdown, RSVP, travel) gets calm, once-only reveals. Borrow Missing Piece's **curtain hand-off** between chapters, with artwork hanging over each seam.
 
-**Phones:** native touch scrolling; shorter pinned scenes; half the particles; everything pauses off-screen. Test on a real ₹10k Android before calling it done.
+**Phones:**
+- Native touch scrolling; at most 2–3 pinned scenes, sized in `svh` (never `dvh`).
+- Animate only `transform` and `opacity` (no blur, shadows or filters).
+- Particles on a canvas at ≤1.5× pixel density, with a lighter version on phones with ≤4 cores or ≤4 GB RAM.
+- Everything pauses off-screen.
+- Consider a visible "less motion" switch for elders.
+- Test on a real ₹10k Android (Helio G81/G99 class) before calling it done. §11 has the details.
 
 ## 3. Cultural core
 
@@ -218,7 +225,7 @@ Final values will be set in Phase 2 and checked for contrast.
 
 - **Must:** mobile-first; readable for elders; event cards (time, venue, dress code, **Open in Maps**); RSVP; countdown; **WhatsApp link preview** (image + title); fast on mobile data.
 - **Should:**
-  - Links per family or guest, which greet them by name and show **only their events**.
+  - Links per family or guest, which greet them by name and show **only their events**. The links use short opaque codes (`?g=k7p2`), not names (§11).
   - Add to calendar.
   - Music with a clear mute button.
   - English plus Marathi/Hindi.
@@ -226,12 +233,14 @@ Final values will be set in Phase 2 and checked for contrast.
 
 ## 8. Tech notes (carried into Phase 3)
 
-- A static site: no backend, free hosting (GitHub Pages, Vercel, Netlify or Cloudflare Pages), optional custom domain.
+- A static site on **Cloudflare** with a custom **`.in` domain** (~₹700–1,100 a year). A small Cloudflare function handles guest codes and RSVP forwarding if needed.
 - All wedding details in **one data file**. Editing it and pushing updates the live link, the same "edit after sending" benefit Framer offers.
-- **Motion:** GSAP + ScrollTrigger (now fully free) with Lenis smoothing the mouse wheel only; native touch scrolling on phones. Full reduced-motion mode. See §2.
+- **Motion:** CSS scroll-driven animations for most effects; GSAP + ScrollTrigger (free) for 2–3 pinned scenes; Lenis on desktop only; a full reduced-motion mode. See §2.
 - **Artwork:** code-drawn SVG only for Warli patterns and small figures. Everything else comes from real artwork, commissioned or licensed, in separate layers so it can be animated.
-- RSVP through a WhatsApp deep link (zero setup) or a Google Form / Sheet (collects data).
-- Images in AVIF/WebP, lazy-loaded; audio loads only when a guest turns it on.
+- **RSVP:** a form on the site, prefilled from the guest's code, that posts to Google Apps Script and then a Google Sheet. If that fails, a "Reply on WhatsApp" button composes the same message.
+- **Budget:** **≤300 KB for the first view** from our own domain; music ≤1 MB, loaded on the tap; ≤3 MB in total. The hero image is AVIF, the rest WebP; everything lower down loads lazily.
+- **Fonts:** Hindi and Marathi body text uses the phone's built-in Devanagari font (0 KB). Display headings use 1–2 web fonts cut down to only the characters used (e.g. 37 KB → 14 KB).
+- **Privacy:** hidden from search engines; no home address; guest codes, not names. See §11.
 
 ## 9. Artwork: who makes it
 
@@ -374,7 +383,76 @@ Elders read an invite through the conventions of a printed card. Getting these r
 - Every Maithili sentence (none were verified).
 - **उत्तराकांक्षी** as the RSVP label.
 
-## 11. Open questions for the couple
+## 11. Guests' phones, RSVP, privacy and hosting
+
+### How guests will open it
+- **A link sent person to person opens in the phone's full browser**, not inside WhatsApp:
+  - Chrome is ~88% of Indian mobile browsing; iPhones are ~7%.
+  - WhatsApp's own in-app browser is only used for business-template buttons.
+  - If you send through a bulk business service, test that path separately.
+- **Music:** browsers block sound until a tap. On iPhone, `audio.play()` must run *directly* inside the tap handler, so the cover's tap starts it. Use a normal `<audio>` element and pause it when the guest leaves the tab.
+- **Screen height:** size the cover with `100svh`, so the "tap to open" button is never hidden under the browser toolbar.
+- **Scrolling and navigation:**
+  - Sticky elements break inside `overflow: hidden`; use `overflow-x: clip`.
+  - Don't add a history entry per section, or Back won't return to WhatsApp.
+- **Older browsers:** UC Browser (~2%) lacks modern CSS, so everything essential must work without JavaScript or new CSS.
+
+### WhatsApp link preview
+- Meta requires `og:title`, `og:description` and `og:url`. They must sit within the **first 300 KB** of the HTML, so don't inline big SVG before them.
+- **Image:** 1200×630 JPEG, **≤300 KB**. Meta says 600 KB, but previews are reported to drop above ~300 KB.
+- **Text:** title ≤2 lines; description about 80 characters.
+- **Previews are cached for days.** Add `?v=2` to the image URL to force a refresh.
+- **Every guest link shows the same preview** (the page is static). Keep `og:url` as the plain address.
+- WhatsApp fetches the preview while you're typing the message, so the site must be live and fast when you send.
+
+### A ₹10k phone, and the budget
+- **The typical phone:** Helio G81/G99 or Unisoc class, 3–4 GB RAM, often a 90–120 Hz screen.
+- **The typical connection:** India's slower-quartile mobile speed is ~6 Mbps down, 85 ms round trip.
+- **Budget:** ≤300 KB for the first view, ~70 KB of JavaScript loaded after the page (GSAP + ScrollTrigger ≈ 46 KB), a ≤1 MB music loop loaded on the tap, and ≤3 MB in total.
+- **Targets:** the main image shown within 2.5s, taps answered within 200ms, and a page that doesn't jump while loading.
+- **Library support:**
+  - **CSS scroll-driven animations** work in Chrome 115+, Samsung Internet 23+ and iOS 26+ (~81% of Indian iPhones). They run off the main thread, so they stay smooth on slow phones.
+  - **GSAP** is free, including every plugin (since April 2025).
+  - **Lenis:** keep `syncTouch` off; it is capped at 60 fps on Safari.
+
+### RSVP
+| Option | Verdict |
+|---|---|
+| **Form on the site → Google Apps Script → Google Sheet** | **Recommended.** Free; shows counts only for the guest's own events; stays inside our design; responses land in your Sheet. Send it as plain text to avoid cross-site request errors. Guard it with the guest code plus a hidden spam trap. |
+| **WhatsApp pre-filled message** (`wa.me`) | **Fallback.** The easiest for elders, but you count replies by hand. Shown automatically if the form can't send. |
+| Google Forms | Leaves our design and can't hide events per guest. |
+| Formspree / Forminit / Web3Forms | Small free quotas and no Sheets on free plans. |
+| Supabase | **Was blocked by Indian ISPs in Feb–Mar 2026.** Avoid. |
+| Cloudflare D1 | Works, but you'd need an export to read it in a sheet. |
+
+### Privacy and safety
+- **Hidden from search engines:** a `noindex` meta tag plus a `noindex` response header. Don't also block the page in `robots.txt` (Google then can't see the noindex). No sitemap, and no posting on public socials.
+- **Guest codes, not names** (`?g=k7p2`):
+  - Names in links travel with forwarded messages and sit in logs.
+  - **Don't ship the full guest list in the site files.** If the repo or site is public, the list is too. Look codes up in a small Cloudflare function.
+- **No home address**, and don't pair it with the dates. Police have linked wedding-day burglaries to "gone to a wedding" posts. Details of events at home show only to guests whose code includes them.
+- **Guests are wary of links:** police warn about fake wedding-card downloads. So:
+  - Send from saved family numbers.
+  - **Include an image card with the link.**
+  - Use a readable custom domain.
+  - Never ask anyone to download anything or enter an OTP.
+  - No UPI QR code on the page.
+- **Photos:** strip location data from photos; avoid photos of children.
+- Collect as little as possible and delete the RSVP sheet after the wedding.
+
+### Hosting and calendar
+- **Cloudflare**, with a custom **`.in` domain** (~₹700–1,100 a year; check the renewal price):
+  - Static files are free and unlimited.
+  - Data centres in 22 Indian cities.
+  - Its functions cover guest codes and RSVP.
+  - A custom domain also protects against Indian ISPs blocking a shared platform domain.
+- **Why not the others:**
+  - **Vercel Hobby** is non-commercial only (a paid freelancer build breaks that), and there are reports of it failing on Jio.
+  - **Netlify Free** pauses every site when its credits run out.
+  - **GitHub Pages** needs a public repo on the free plan and has no functions.
+- **Add to calendar:** lead with **Google Calendar** on Android and an **`.ics` file** on iPhone, with both always available, and only for the guest's own events. Use IST converted to UTC.
+
+## 12. Open questions for the couple
 
 1. **The references.** What exactly do you like in Meenaya, City-3 and MyShaadhi Link? For example: City-3's gold paintings, the carved countdown, the tap-to-open cover, or the personal guest links. Screenshots help.
 2. **The basics.**
@@ -394,6 +472,27 @@ Elders read an invite through the conventions of a printed card. Getting these r
     - The tithi date from your purohit.
     - Which Mangalashtak variants they sing.
     - Would an elder record the Ashtavinayak verse for the site?
+11. **Sending and the guest list (§11).**
+    - Will you send from your own WhatsApp numbers, or through a bulk business service?
+    - Keep the guest list in a private sheet, not in this repo. Is this repo public or private?
+
+## 13. Research status
+
+| Area | Status | Where |
+|---|---|---|
+| Culture: both sides, and the threads that tie them together | ✅ Done | §3 |
+| Reference sites: layout, artwork, features | ✅ Done | §1 |
+| Reference sites: motion (from code) | ✅ Done | §2 |
+| Motion playbook and tokens (MengTo skills) | ✅ Done | §2 |
+| Artwork sourcing, ethics and budget | ✅ Done | §9 |
+| Card wording, Mangalashtak, music | ✅ Done; family must confirm the details | §10 |
+| Guest phones, link preview, performance budget | ✅ Done | §11 |
+| RSVP, privacy, hosting, calendar | ✅ Done | §11 |
+| Palette and fonts | 🟡 Draft; final values set in design | §5, §6 |
+| **Seeing the references move in a real browser** | ⛔ Blocked by the environment's safety check. Motion was read from code instead. | §1 |
+| **The couple's content, assets and choices** | ⏳ Waiting | §12 |
+
+**Deliberately not researched further:** more reference sites (the pattern is clear), and final colours and fonts (those belong to design).
 
 ---
 
@@ -411,6 +510,12 @@ Elders read an invite through the conventions of a printed card. Getting these r
 - Shlokas: https://shlokam.org/shloka/vakrathunda-mahakaya.htm · https://www.ramcharit.in/6032-2/
 - Mangalashtak: https://mr.wikipedia.org/wiki/मंगलाष्टक · https://en.wikipedia.org/wiki/Mangal_Ashtaka · https://marathi.webdunia.com/article/hinduism-marathi/mangalashtak-in-marathi-121101200030_1.html · https://en.wikipedia.org/wiki/Ashtavinayaka
 - Maithil and Bihari rites: https://en.wikipedia.org/wiki/Maithil_Vivah · https://www.weddingwire.in/wedding-tips/bihari-wedding--c2615 · https://www.hindwidictionary.com/maithili/meaning-of-hakaar
+- WhatsApp previews and in-app browser: https://developers.facebook.com/documentation/business-messaging/whatsapp/link-previews/ · https://support.wati.io/en/articles/12867737-meta-introduces-in-app-browser-iab-experience-for-whatsapp · https://gs.statcounter.com/browser-market-share/mobile/india
+- Mobile motion: https://github.com/darkroomengineering/lenis · https://gsap.com/docs/v3/Plugins/ScrollTrigger/static.config()/ · https://gsap.com/docs/v3/Plugins/ScrollTrigger/static.normalizeScroll()/ · https://webflow.com/blog/gsap-becomes-free · https://github.com/mdn/browser-compat-data/blob/main/css/properties/animation-timeline.json · https://web.dev/blog/viewport-units · https://developer.chrome.com/blog/autoplay · https://webkit.org/blog/6784/new-video-policies-for-ios/
+- Devices and budget: https://infrequently.org/2025/11/performance-inequality-gap-2026/ · https://web.dev/articles/vitals · https://github.com/GoogleChrome/lighthouse/blob/main/docs/throttling.md · https://developers.google.com/fonts/docs/getting_started
+- RSVP: https://developers.google.com/apps-script/guides/content · https://developers.google.com/apps-script/guides/services/quotas · https://faq.whatsapp.com/5913398998672934 · https://www.techcrunch.com/2026/02/27/india-disrupts-access-to-popular-developer-platform-supabase-with-blocking-order/
+- Privacy: https://developers.google.com/search/docs/crawling-indexing/block-indexing · https://www.tribuneindia.com/news/punjab/out-of-town-think-before-you-post-on-social-media-warns-muktsar-police-after-wedding-day-burglary · https://www.tribuneindia.com/news/himachal/invited-to-wedding-police-say-check-the-link-before-you-click · https://www.dpdpa.com/dpdpa2023/chapter-1/section3.html
+- Hosting and calendar: https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/ · https://vercel.com/docs/limits/fair-use-guidelines · https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/how-credits-work/ · https://www.registry.in/tariff · https://support.google.com/calendar/answer/37118
 - Music rights and format: https://pixabay.com/service/license-summary/ · https://freemusicarchive.org/License_Guide · https://support.google.com/youtube/answer/3376882 · https://lawgist.in/copyright-act/27 · https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Audio_codecs · https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay
 - Meenaya product page: https://www.missingpieceinvites.com/product-cards/product-card-meenaya
 - City template page: https://www.missingpieceinvites.com/product-cards/product-card-city
