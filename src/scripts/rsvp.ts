@@ -18,6 +18,7 @@ const store = {
 
 /** POST with an 8s timeout and one retry (same rid, so the server never counts it twice). */
 async function send(p: Payload): Promise<Reply> {
+  let waits = 0;
   for (let attempt = 0; attempt < 2; attempt++) {
     const ctrl = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), 8000);
@@ -26,6 +27,8 @@ async function send(p: Payload): Promise<Reply> {
       if (res.status === 410) throw new Stop('closed');
       if (res.status === 404) throw new Stop('code');
       const j = await res.json();
+      /* sent within moments of the page opening: the server asks for a short wait */
+      if (res.status === 429 && waits++ < 3) { await sleep(Math.min(5000, (Number(j.wait) || 1500) + 250)); attempt--; continue; }
       if (j.ok && j.reply) return j.reply as Reply;
     } catch (e) {
       if (e instanceof Stop) throw e;
@@ -44,7 +47,7 @@ export function initRsvp(labels: { send: string; sending: string; none: string }
   try { guest = JSON.parse(data.textContent || ''); } catch { return; }
   const pendingKey = 'sm-pending:' + guest.code;
   const thanks = $('.r-thanks', sec)!, failed = $('.r-failed', form)!, sendLabel = $('.r-send .cal', form)!;
-  const inputs = $$<HTMLInputElement>('input.count', form);
+  const inputs = $$<HTMLInputElement>('input.r-count', form);
   const setState = (s: string) => { sec.dataset.rsvp = s; };
   const max = (i: HTMLInputElement) => Number(i.max) || guest.max || 20;
   const nameOf = (i: HTMLInputElement) => i.closest('.row')!.querySelector('b')!.textContent!;
@@ -71,7 +74,7 @@ export function initRsvp(labels: { send: string; sending: string; none: string }
     const f = new FormData(form);
     const n: Record<string, number> = {};
     inputs.forEach((i) => { n[i.name.slice(2)] = Number(i.value); });
-    return { g: guest.code, t: String(f.get('t') || guest.t), rid, name: String(f.get('name') || '').trim(), note: String(f.get('note') || '').trim(), hp: String(f.get('website') || ''), n, base: guest.reply?.rev ?? 0 };
+    return { g: guest.code, t: String(f.get('t') || guest.t), rid, name: String(f.get('name') || '').trim(), note: String(f.get('note') || '').trim(), hp: '', n, base: guest.reply?.rev ?? 0 };
   };
 
   function showReplied(reply: Reply, focus = true) {

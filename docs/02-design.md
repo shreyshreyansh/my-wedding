@@ -209,4 +209,4 @@ The peacocks in the design are code-drawn stand-ins. For the real site:
 - **v4.5, aligned schedule:** on desktop the three columns now share rows (CSS subgrid), so every title, story, detail block and token row lines up. Hover only tilts the medallion; it no longer lifts the column. Shaadi's dress line was shortened to match the others.
 
 ## Next
-Phase 3 is done: the approved build plan is in `docs/03-build-plan.md`. Phase 4 is the build, starting with milestone M0: the scaffold, a golden baseline and a verbatim port of the prototype.
+Phase 4, the build, is done up to the family's content and the deploy: see **Build status** at the end of `docs/03-build-plan.md`, and `docs/04-runbook.md` for running it. The design above is unchanged, apart from the invitation card (new, from the canvas board), the RSVP states, and fixes found by the tests.

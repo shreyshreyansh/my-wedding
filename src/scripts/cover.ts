@@ -11,13 +11,15 @@ export function initCover(onTap: () => void) {
   $('#cvTw')!.innerHTML = twinkles(innerWidth, innerHeight, phone);
   root.classList.add('locked');
   const seal = $('#openBtn') as HTMLButtonElement;
-  seal.focus({ preventScroll: true });
 
   function unlock() {
     root.classList.remove('locked');
     cover!.remove();
     app.hooks.afterOpen?.();
-    $('#heroTitle')?.focus({ preventScroll: true });
+    /* a link to #rsvp (the reminder message) lands on the RSVP once the cloth falls */
+    const target = location.hash.length > 1 ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+    if (target) target.scrollIntoView({ block: 'start' });
+    else $('#heroTitle')?.focus({ preventScroll: true, focusVisible: false } as FocusOptions);
     document.dispatchEvent(new CustomEvent('invite:open'));
   }
   function open() {
@@ -30,5 +32,6 @@ export function initCover(onTap: () => void) {
   }
   seal.addEventListener('click', open);
   cover.querySelector('.cloth')!.addEventListener('click', (e) => { if (!seal.contains(e.target as Node)) open(); });
-  return { show: () => cover.classList.add('ready') };
+  /* the dialog's one action takes focus as soon as it can (hidden elements can't) */
+  return { show: () => { cover.classList.add('ready'); seal.focus({ preventScroll: true, focusVisible: false } as FocusOptions); } };
 }

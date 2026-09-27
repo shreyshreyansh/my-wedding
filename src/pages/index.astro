@@ -1,4 +1,5 @@
 ---
+import '../styles/fonts.css';
 import '../styles/base.css';
 import '../styles/textiles.css';
 import '../styles/buttons.css';
@@ -28,6 +29,7 @@ import Controls from '../components/Controls.astro';
 import SeoHead from '../components/SeoHead.astro';
 import { assertComplete } from '../data/schema';
 import { copy } from '../data/wedding';
+import fonts from '../data/fonts.json';
 
 assertComplete();
 ---
@@ -37,7 +39,7 @@ assertComplete();
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <SeoHead />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&amp;family=Tiro+Devanagari+Hindi:ital@0;1&amp;family=Tiro+Devanagari+Marathi:ital@0;1&amp;display=swap">
+{fonts.preload.map((href) => <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />)}
 <script is:inline>(function(d){var h=d.documentElement;if(!('noModule' in d.createElement('script')))return;h.className+=' js locked';var p=null;try{p=localStorage.getItem('sm-motion')}catch(e){}if(p==='gentle'||(p!=='full'&&window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))h.className+=' still'})(document);</script>
 </head>
 <body>

@@ -36,3 +36,5 @@
   .chapter .rites{align-self:end}
   .threads{display:none}
 }
+/* the sa-re-ga-ma over the dholak, drawn small and slanted as approved in the prototype */
+.med .note{font-size:.9rem;font-style:italic}

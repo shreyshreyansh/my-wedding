@@ -1,8 +1,177 @@
 {
-  "abc234": { "label": "the Sharma family", "label_dev": "शर्मा परिवार", "lang": "hi", "side": "groom", "ev": ["haldi", "sangeet", "shaadi"], "party": 4 },
-  "mrw567": { "label": "Waghmare kaka and family", "label_dev": "वाघमारे काका आणि कुटुंब", "lang": "mr", "side": "bride", "ev": ["sangeet", "shaadi"], "party": 3 },
-  "pqr789": { "label": "Priya", "lang": "en", "side": "bride", "ev": ["shaadi"], "party": 1 },
-  "hdy345": { "label": "the Verma family", "lang": "en", "side": "groom", "ev": ["haldi"], "party": 2 },
-  "xng456": { "label": "the extended Srivastava and Deshpande families of Ranchi and Pune", "lang": "en", "side": "groom", "ev": ["haldi", "shaadi"], "party": 6, "max": 8 },
-  "tst222": { "label": "Test family", "lang": "en", "side": "groom", "ev": ["haldi", "sangeet", "shaadi"], "party": 2, "test": true }
+  "abc234": {
+    "label": "the Sharma family",
+    "label_dev": "शर्मा परिवार",
+    "lang": "hi",
+    "side": "groom",
+    "ev": [
+      "haldi",
+      "sangeet",
+      "shaadi"
+    ],
+    "party": 4
+  },
+  "mrw567": {
+    "label": "Waghmare kaka and family",
+    "label_dev": "वाघमारे काका आणि कुटुंब",
+    "lang": "mr",
+    "side": "bride",
+    "ev": [
+      "sangeet",
+      "shaadi"
+    ],
+    "party": 3
+  },
+  "pqr789": {
+    "label": "Priya",
+    "lang": "en",
+    "side": "bride",
+    "ev": [
+      "shaadi"
+    ],
+    "party": 1
+  },
+  "hdy345": {
+    "label": "the Verma family",
+    "lang": "en",
+    "side": "groom",
+    "ev": [
+      "haldi"
+    ],
+    "party": 2
+  },
+  "xng456": {
+    "label": "the extended Srivastava and Deshpande families of Ranchi and Pune",
+    "lang": "en",
+    "side": "groom",
+    "ev": [
+      "haldi",
+      "shaadi"
+    ],
+    "party": 6,
+    "max": 8
+  },
+  "tst222": {
+    "label": "Test family",
+    "lang": "en",
+    "side": "groom",
+    "ev": [
+      "haldi",
+      "sangeet",
+      "shaadi"
+    ],
+    "party": 2,
+    "test": true
+  },
+  "rsv222": {
+    "label": "the RSV222 family",
+    "lang": "en",
+    "side": "groom",
+    "ev": [
+      "haldi",
+      "sangeet",
+      "shaadi"
+    ],
+    "party": 3
+  },
+  "rsv333": {
+    "label": "the RSV333 family",
+    "lang": "en",
+    "side": "bride",
+    "ev": [
+      "haldi",
+      "shaadi"
+    ],
+    "party": 3
+  },
+  "rsv444": {
+    "label": "the RSV444 family",
+    "lang": "en",
+    "side": "groom",
+    "ev": [
+      "sangeet",
+      "shaadi"
+    ],
+    "party": 3
+  },
+  "rsv555": {
+    "label": "the RSV555 family",
+    "lang": "en",
+    "side": "bride",
+    "ev": [
+      "shaadi"
+    ],
+    "party": 3
+  },
+  "rsv666": {
+    "label": "the RSV666 family",
+    "lang": "en",
+    "side": "groom",
+    "ev": [
+      "haldi",
+      "sangeet"
+    ],
+    "party": 3
+  },
+  "rsv777": {
+    "label": "the RSV777 family",
+    "lang": "en",
+    "side": "groom",
+    "ev": [
+      "shaadi"
+    ],
+    "party": 3
+  },
+  "rsv888": {
+    "label": "the RSV888 family",
+    "lang": "en",
+    "side": "bride",
+    "ev": [
+      "haldi",
+      "shaadi"
+    ],
+    "party": 3
+  },
+  "mus234": {
+    "label": "the MUS234 family",
+    "lang": "en",
+    "side": "groom",
+    "ev": [
+      "shaadi"
+    ],
+    "party": 3
+  },
+  "rsv999": {
+    "label": "the RSV999 family",
+    "lang": "en",
+    "side": "groom",
+    "ev": [
+      "haldi",
+      "sangeet",
+      "shaadi"
+    ],
+    "party": 3
+  },
+  "vis234": {
+    "label": "the Mehta family",
+    "lang": "en",
+    "side": "groom",
+    "ev": [
+      "haldi",
+      "sangeet",
+      "shaadi"
+    ],
+    "party": 2
+  },
+  "vsf234": {
+    "label": "the Kulkarni family",
+    "lang": "mr",
+    "label_dev": "कुलकर्णी कुटुंब",
+    "side": "bride",
+    "ev": [
+      "sangeet",
+      "shaadi"
+    ],
+    "party": 4
+  }
 }

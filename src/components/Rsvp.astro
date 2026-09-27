@@ -28,7 +28,7 @@ const wa = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><
           <div class="ev"><b>{ev.name.en}</b><i>{ev.short}</i></div>
           <div class="step">
             <button type="button" data-d="-1" aria-label={'One fewer guest for ' + ev.name.en} set:html={minus}></button>
-            <input class="count" type="number" inputmode="numeric" name={'n_' + ev.id} id={'n-' + ev.id} min="0" max={rsvp.maxPerEvent} value="0" aria-label={'Guests for ' + ev.name.en}>
+            <input class="r-count" type="number" inputmode="numeric" name={'n_' + ev.id} id={'n-' + ev.id} min="0" max={rsvp.maxPerEvent} value="0" aria-label={'Guests for ' + ev.name.en}>
             <button type="button" data-d="1" aria-label={'One more guest for ' + ev.name.en} set:html={plus}></button>
           </div>
         </div>

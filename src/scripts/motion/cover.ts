@@ -7,8 +7,9 @@ import type { Timeline, Tween } from './types';
 
 export function coverMotion(intro: boolean) {
   const cover = document.getElementById('cover');
-  const seal = document.getElementById('openBtn');
-  if (!cover || !seal || app.opened) return;
+  const found = document.getElementById('openBtn');
+  if (!cover || !found || app.opened) return;
+  const seal: HTMLElement = found;
   const wrap = seal.parentNode as HTMLElement;
   let cvIntro: Timeline | null = null, pulse: Timeline | null = null, nudgeCall: Tween | null = null, nudges = 0;
 
@@ -54,7 +55,7 @@ export function coverMotion(intro: boolean) {
       .from('#cover .cv-amp', { scale: 0, autoAlpha: 0, duration: 0.4, ease: 'back.out(2)' }, 1.15)
       .fromTo('#cover .cv-dn', { ...nameIn }, { ...nameOut }, 1.4)
       .from('#cover .cv-date', { y: 10, autoAlpha: 0, duration: 0.5 }, 1.7)
-      .from('#cover .cv-cta', { y: 26, autoAlpha: 0, duration: 0.7 }, 1.75);
+      .from('#cover .cv-cta', { y: 26, opacity: 0, duration: 0.7 }, 1.75);
     const fontsOk = document.fonts?.ready ? Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 900))]) : Promise.resolve();
     fontsOk.then(() => { if (!app.opened) cvIntro!.play(); });
   } else {

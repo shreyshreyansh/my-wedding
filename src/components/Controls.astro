@@ -5,7 +5,7 @@ import { copy, music } from '../data/wedding';
 {music.src && (
   <div class="controls" id="controls" hidden>
     <audio id="music" preload="none" src={music.src} data-loop={music.loop ? '1' : ''}></audio>
-    <button type="button" class="bell" id="bellBtn" aria-label={copy.controls.muteOff} data-on={copy.controls.muteOff} data-off={copy.controls.muteOn}>
+    <button type="button" class="bell-btn" id="bellBtn" aria-label={copy.controls.muteOff} data-on={copy.controls.muteOff} data-off={copy.controls.muteOn}>
       <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true">
         <path d="M16 3v3" stroke="#C9A04A" stroke-width="2" stroke-linecap="round"/>
         <path d="M16 6c-5 0-8 4-8 9v5l-2 3h20l-2-3v-5c0-5-3-9-8-9Z" fill="#C9A04A"/>

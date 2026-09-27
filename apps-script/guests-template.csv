@@ -1,0 +1,3 @@
+code,family,family_dev,lang,side,inv_haldi,inv_sangeet,inv_shaadi,party,max,phone,sender,notes,link,message,send,sent_on,replied,test
+,Test family (groom's side),टेस्ट परिवार,hi,groom,TRUE,TRUE,TRUE,4,,,Shreyansh,rehearsal row,,,,,,yes
+,Test family (bride's side),टेस्ट कुटुंब,mr,bride,FALSE,TRUE,TRUE,2,,,Mrunalini,rehearsal row,,,,,,yes

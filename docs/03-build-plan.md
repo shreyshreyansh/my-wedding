@@ -209,3 +209,26 @@ The WhatsApp numbers are Cloudflare env vars (`WA_BRIDE`, `WA_GROOM`), not in th
 ## Critical files
 - `design/prototype/motion-prototype.html`: the source to port. Reuse its functions: `frame`, `ART`, `eventArt`, `medallion`, `peacock`, `riteIcon`, `burst`, `sealPulse`, `tug`, `openCover`, `CAL`/`gcal`/`downloadIcs`, the loops and the matchMedia sections.
 - `src/data/wedding.ts`, `functions/index.ts`, `server/personalize.ts`, `functions/api/rsvp.ts`, `apps-script/Code.gs`, `scripts/budget.mjs`, `tests/e2e/*`.
+
+## Build status (27 Sep)
+
+**Built, and tested locally against Cloudflare Pages (wrangler) with a mock Sheet:** M0 to M3 in code. The golden check showed the restructured build pixel-identical to the approved prototype before the intentional changes.
+
+**Measured**
+- First view on a phone: 264 KB of 300 (HTML 19, JS 52, cover fonts). JS on a phone: 52 KB of 75. Whole site: about 1 MB.
+- Throttled phone (6 Mbps, 85 ms, CPU ×4): LCP about 1.2–1.5 s, CLS 0, tap to next frame about 112 ms.
+- Tests: 11 unit and 55 end-to-end (phone and desktop), all passing: guest links, RSVP (send, change, fallback, Sheet down, closed, clamping, idempotency), no-JS, music, SEO and privacy headers, accessibility (axe, lang, 48 px targets, 18 px text, no sideways scroll, history), motion (every trigger moves and finishes; Gentle motion), glyphs, performance, and still frames of every section and RSVP state at four sizes.
+
+**Changes from the plan, and why**
+- **Too-fast replies wait instead of vanishing.** The server's "faster than a person" check would have silently dropped a real reply sent from a `#rsvp` reminder link with prefilled counts. It now answers "wait", and the page retries by itself.
+- **Fonts:** Latin files stay whole (names can be anything); Devanagari is cut to what each face draws, except Amita Bold, which draws the families' names on the cover. Hints are dropped: phones ignore them and they double the size. The glyph test compares with hinting off, against Google's own files.
+- **Calendar choice happens in the browser** (Apple gets the `.ics`, others Google Calendar), not at the edge: same result, one less thing on the server.
+- **Gentle motion is the still page**, the same one Reduce Motion gets, and it switches live without a reload.
+- Added a 404 page (without one, Cloudflare Pages answers every unknown address with the invitation).
+- The motion code is split by section, with fewer files than the list above (the curtain lives with the Mangalashtak; the small touches share one module).
+- WhatsApp numbers and the Sheet's address are encrypted Cloudflare secrets, so the repo holds no numbers.
+
+**Still to do (needs the family or their accounts)**
+- Content marked `todo()` in `src/data/wedding.ts` (parents' names ×3 languages, kulaswamini, tithi, inviters, बाल मनुहार), the Maps pin, and the audio file.
+- Cloudflare account, domain, KV namespace id, secrets; the Google Sheet and its script. Steps in `docs/04-runbook.md`.
+- M4: the dry run on real phones with test families.

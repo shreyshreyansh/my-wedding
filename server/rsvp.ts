@@ -50,11 +50,11 @@ export async function handleRsvp(req: Request, env: Env, waitUntil: (p: Promise<
   const code = normaliseCode(String(body.g ?? ''));
   const back = (hash: string) => new Response(null, { status: 303, headers: { ...PRIVATE, Location: '/?g=' + (code ?? '') + hash } });
 
-  /* bots: pretend it worked, keep nothing */
-  const t = Number(body.t);
-  if (clean(body.hp, 100) || (Number.isFinite(t) && t > 0 && now(env) - t < rules.minMs)) {
-    return form ? back('#rsvp') : json({ ok: true });
-  }
+  /* a filled honeypot is a bot: pretend it worked, keep nothing */
+  if (clean(body.hp, 100)) return form ? back('#rsvp') : json({ ok: true });
+  /* faster than a person reads: ask the page to try again in a moment (it does, by itself) */
+  const t = Number(body.t), early = rules.minMs - (now(env) - t);
+  if (Number.isFinite(t) && t > 0 && early > 0) return form ? back('#rsvp') : json({ ok: false, error: 'wait', wait: early }, 429);
 
   const guest = await findGuest(env, code);
   if (!code || !guest) return form ? back('#rsvp') : json({ ok: false, error: 'code' }, 404);
