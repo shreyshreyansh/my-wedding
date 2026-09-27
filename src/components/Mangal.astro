@@ -1,0 +1,17 @@
+---
+import Band from './Band.astro';
+import { specks, verse } from '../art/decor';
+import { copy, mangal } from '../data/wedding';
+---
+<section id="mangal" class="morsilk" aria-labelledby="mgTitle">
+  <div class="specks" id="specks" aria-hidden="true" set:html={specks()}></div>
+  <Band />
+  <div class="mg-inner">
+    <p class="eyebrow reveal"><span lang="mr" class="mr">{copy.mangal.eyebrowDev}</span> · {copy.mangal.eyebrow}</p>
+    <h2 id="mgTitle" class="cal reveal">{copy.mangal.title} <span>{copy.mangal.titleEm}</span></h2>
+    <div class="verse mr" lang="sa" id="verse" set:html={verse(mangal.verse, mangal.rivers)}></div>
+    <p class="gloss reveal">{mangal.gloss}</p>
+    <p lang="mr" class="cal savdhan" id="savdhan">{mangal.savdhan}</p>
+  </div>
+  <Band />
+</section>

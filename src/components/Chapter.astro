@@ -1,0 +1,25 @@
+---
+import RiteTokens from './RiteTokens.astro';
+import { eventArt } from '../art/events';
+import { letters } from '../art/decor';
+import type { WeddingEvent } from '../data/schema';
+import { venue } from '../data/wedding';
+interface Props { ev: WeddingEvent; last: boolean }
+const { ev, last } = Astro.props;
+const art = eventArt(ev.id);
+---
+<article class="chapter" data-event={ev.id}>
+  {ev.playable
+    ? <button type="button" class="med medbtn" aria-label={ev.playable} set:html={art}></button>
+    : <div class="med" set:html={art}></div>}
+  <h3 class="cal letters wave" set:html={letters(ev.name.en)}></h3>
+  <div class="cal dn reveal">{ev.dn.map((d, i) => <Fragment>{i > 0 && ' · '}<span lang={d.lang}>{d.text}</span></Fragment>)}</div>
+  <p class="story reveal" style="margin:0">{ev.story}</p>
+  <dl class="reveal">
+    <dt>When</dt><dd>{ev.when}</dd>
+    <dt>Where</dt><dd>{venue.full}</dd>
+    <dt>Wear</dt><dd><span class="swatch" style={'background:' + ev.swatch.bg + ';--edge:' + ev.swatch.edge}></span>{ev.dress}</dd>
+  </dl>
+  <RiteTokens ev={ev} />
+  {!last && <svg class="threads" viewBox="0 0 60 130" width="60" height="130" aria-hidden="true"><path pathLength="1" d="M30 0C54 22 6 44 30 65S6 108 30 130" fill="none" stroke="#C9A04A" stroke-width="3"/><path pathLength="1" d="M30 0C6 22 54 44 30 65S54 108 30 130" fill="none" stroke="#2B211B" stroke-width="1.6"/></svg>}
+</article>

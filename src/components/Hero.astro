@@ -1,0 +1,35 @@
+---
+import Band from './Band.astro';
+import { medallion } from '../art/peacock';
+import { floaters, letters } from '../art/decor';
+import { couple, copy, dates, venue } from '../data/wedding';
+---
+<section id="hero" aria-labelledby="heroTitle">
+  <Band />
+  <div class="hero-top">
+    <div class="half l silk"></div>
+    <div class="half r paper"></div>
+    <p lang="hi" class="invocation">॥ श्री गणेशाय नमः ॥</p>
+    <div class="hero-grid">
+      <div class="hero-side her" aria-hidden="true">
+        <span class="lbl">{copy.hero.her}</span>
+        <span class="cal nm letters wave" set:html={letters(couple.bride.en, false)}></span>
+        <span lang="mr" class="cal dn write">{couple.bride.dev}</span>
+      </div>
+      <div class="med" set:html={medallion('apart', 'none')}></div>
+      <div class="hero-side his" aria-hidden="true">
+        <span class="lbl">{copy.hero.his}</span>
+        <span class="cal nm letters wave" set:html={letters(couple.groom.en, false)}></span>
+        <span lang="hi" class="cal dn write">{couple.groom.dev}</span>
+      </div>
+    </div>
+    <div class="art-labels" aria-hidden="true"><span class="l">{couple.bride.art} · <span lang="mr" class="cal">{couple.bride.artDev}</span></span><span>{couple.groom.art} · <span lang="hi" class="cal">{couple.groom.artDev}</span></span></div>
+  </div>
+  <div class="hero-plate plate">
+    <h1 id="heroTitle" tabindex="-1" class="cal nm" aria-label={couple.groom.en + ' and ' + couple.bride.en}><span class="letters wave" aria-hidden="true" set:html={letters(couple.groom.en, false)}></span> <span class="amp" aria-hidden="true">&amp;</span> <span class="letters wave" aria-hidden="true" set:html={letters(couple.bride.en, false)}></span></h1>
+    <span lang="hi" class="cal dn"><span class="write">{couple.bothDev}</span></span>
+    <span class="hero-date">{dates.long} · {venue.full}</span>
+  </div>
+  <div class="floaters back" id="flBack" aria-hidden="true" set:html={floaters('back')}></div>
+  <div class="floaters front" id="flFront" aria-hidden="true" set:html={floaters('front')}></div>
+</section>

@@ -1,0 +1,30 @@
+---
+import Band from './Band.astro';
+import { eventArt } from '../art/events';
+import { letters } from '../art/decor';
+import { copy, events } from '../data/wedding';
+const minus = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="ic" d="M6 12h12"/></svg>';
+const plus = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="ic" d="M6 12h12M12 6v12"/></svg>';
+---
+<section id="rsvp" class="paper" aria-labelledby="rsvpTitle">
+  <Band />
+  <div class="rsvp">
+    <div class="med" set:html={eventArt('blessing')}></div>
+    <p class="eyebrow reveal" style="color:var(--deep)"><span lang="hi">{copy.rsvp.eyebrowDev}</span> · {copy.rsvp.eyebrow}</p>
+    <h2 id="rsvpTitle" class="cal letters wave" set:html={letters(copy.rsvp.title)}></h2>
+    <p class="reveal" style="margin:0;font-style:italic">[Guest name] family, {copy.rsvp.ask}</p>
+    <form id="rsvpForm" class="reveal" novalidate>
+      {events.map((ev) => (
+        <div class="row"><div class="ev"><b>{ev.name.en}</b><i>{ev.short}</i></div><div class="step"><button type="button" data-k={ev.id} data-d="-1" aria-label={'One fewer guest for ' + ev.name.en} set:html={minus}></button><output id={'n-' + ev.id}>2</output><button type="button" data-k={ev.id} data-d="1" aria-label={'One more guest for ' + ev.name.en} set:html={plus}></button></div></div>
+      ))}
+      <div class="field"><label for="rsvpName">{copy.rsvp.name}</label><input id="rsvpName" type="text" autocomplete="name" placeholder="[Guest name]"></div>
+      <button type="submit" class="btn btn-primary" style="min-height:60px;font-size:1.2rem"><span class="cal" style="font-weight:700">{copy.rsvp.send}</span>&nbsp;·&nbsp;<span id="total">6</span>&nbsp;guests</button>
+      <p class="note" style="margin:0;text-align:center">Prototype: replies aren't sent anywhere yet.</p>
+    </form>
+    <div class="thanks" id="thanks" hidden>
+      <p lang="hi" class="cal dhanyavad">{copy.rsvp.thanksDev}</p>
+      <p class="cal" style="font-size:1.8rem;font-weight:700;margin:0">{copy.rsvp.thanks}</p>
+      <p style="margin:6px 0 0;font-style:italic">We’ve noted <span id="total2">6</span> guests across the celebrations. {copy.rsvp.seeYou}</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,12 @@
+---
+import Band from './Band.astro';
+import { chaupai, copy } from '../data/wedding';
+---
+<footer class="plate">
+  <Band />
+  <div class="foot">
+    <p lang="hi" class="chaupai">{chaupai[0]}<br>{chaupai[1]}</p>
+    <p class="cal love">{copy.footer.love}</p>
+    <slot />
+  </div>
+</footer>

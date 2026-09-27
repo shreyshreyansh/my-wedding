@@ -1,0 +1,20 @@
+---
+import Band from './Band.astro';
+import Chapter from './Chapter.astro';
+import { scheduleToran } from '../art/decor';
+import { copy, events } from '../data/wedding';
+---
+<section id="schedule" aria-labelledby="schedTitle">
+  <div class="sched-head silk">
+    <div class="toran" id="toran" aria-hidden="true" set:html={scheduleToran()}></div>
+    <p class="eyebrow reveal"><span lang="mr" class="mr">{copy.schedule.eyebrowDev}</span> · {copy.schedule.eyebrow}</p>
+    <h2 id="schedTitle" class="cal reveal">{copy.schedule.title} <span>{copy.schedule.titleEm}</span></h2>
+    <svg class="divider reveal" viewBox="0 0 220 16" width="200" height="15" aria-hidden="true"><path d="M0 8H96" stroke="#C9A04A" stroke-width="2"/><path d="M124 6H220M124 10H220" stroke="#F5EFE3" stroke-width="1.2"/><path d="M110 0 101 8 110 16Z" fill="#C9A04A"/><path d="M110 0 119 8 110 16Z" fill="#F5EFE3"/></svg>
+  </div>
+  <Band />
+  <div class="paper">
+    <div class="wrap chapters">
+      {events.map((ev, i) => <Chapter ev={ev} last={i === events.length - 1} />)}
+    </div>
+  </div>
+</section>

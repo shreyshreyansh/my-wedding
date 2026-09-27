@@ -1,0 +1,22 @@
+---
+// A chapter's two actions, drawn as tokens: kumkum footprints open Maps; the knot saves the date.
+import { riteIcon } from '../art/rites';
+import type { WeddingEvent } from '../data/schema';
+import { copy, venue } from '../data/wedding';
+interface Props { ev: WeddingEvent }
+const { ev } = Astro.props;
+const gcal = calendarLink(ev);
+function calendarLink(e: WeddingEvent) {
+  const utc = (iso: string) => new Date(iso).toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+  return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(e.name.en + ' · Shreyansh & Mrunalini') +
+    '&dates=' + utc(e.start) + '/' + utc(e.end) + '&location=' + encodeURIComponent(venue.full) + '&details=' + encodeURIComponent('Wear: ' + e.dress + '. Times are in IST.') + '&ctz=Asia/Kolkata';
+}
+---
+<div class="rites reveal">
+  <a class="rite" data-rite="way" href={venue.maps} target="_blank" rel="noopener" aria-label={'Find your way to ' + venue.full + ' (opens Google Maps)'}>
+    <span class="rite-ic" set:html={riteIcon('way')}></span><b lang="mr">{copy.rites.wayDev}</b><i>{copy.rites.way}</i>
+  </a>
+  <a class="rite" data-rite="knot" data-cal={ev.id} data-ics={'/cal/' + ev.id + '.ics'} href={gcal} target="_blank" rel="noopener" aria-label={'Save the ' + ev.name.en + ' date to your calendar'}>
+    <span class="rite-ic" set:html={riteIcon('knot')}></span><b lang="hi">{copy.rites.knotDev}</b><i>{copy.rites.knot}</i>
+  </a>
+</div>

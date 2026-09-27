@@ -87,8 +87,8 @@ for (const vp of VIEWPORTS) {
   for (let y = 0; y < H; y += 300) { await m.pg.evaluate((y) => window.scrollTo(0, y), y); await m.pg.waitForTimeout(90); }
   await m.pg.waitForTimeout(800);
   metrics[tag] = await m.pg.evaluate(() => ({
-    triggers: window.ScrollTrigger ? ScrollTrigger.getAll().length : 0,
-    pinned: window.ScrollTrigger ? ScrollTrigger.getAll().filter((s) => s.pin).length : 0,
+    triggers: (window.ScrollTrigger || window.__motion?.ScrollTrigger)?.getAll().length ?? 0,
+    pinned: (window.ScrollTrigger || window.__motion?.ScrollTrigger)?.getAll().filter((s) => s.pin).length ?? 0,
     chapterTitles: [...document.querySelectorAll('.chapter h3 .ch')].every((c) => getComputedStyle(c).opacity === '1'),
     verseLit: [...document.querySelectorAll('#verse .vw')].every((c) => +getComputedStyle(c).opacity > 0.99),
     threadsDrawn: [...document.querySelectorAll('.threads path')].every((p) => parseFloat(p.style.strokeDashoffset || '0') < 0.01),

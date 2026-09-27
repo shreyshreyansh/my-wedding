@@ -1,0 +1,12 @@
+/* meeting */
+#meeting{position:relative}
+.stage{position:relative;height:100vh;height:100svh;overflow:hidden;background:var(--kajal);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(8px,2vh,20px);padding:0 var(--gut)}
+.stage .half{z-index:0}
+.caps{position:relative;z-index:1;height:2em;width:100%;text-align:center}
+.cap{position:absolute;inset:0;margin:0;font-style:italic;font-size:1.05rem;color:var(--chuna)}
+.cap span{background:var(--kajal);padding:3px 12px}
+#meetSvg{position:relative;z-index:1;width:min(94vw,760px);max-height:58svh;height:auto;overflow:visible}
+.meet-names{position:relative;z-index:1;padding:14px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;box-shadow:0 0 0 2px var(--zari)}
+.meet-names .nm{font-size:clamp(32px,7vw,64px);line-height:1.15;font-weight:700}
+.meet-names .amp{color:var(--zari)}
+.meet-names .dn{font-size:clamp(20px,4vw,30px);color:var(--zari);line-height:1.4}

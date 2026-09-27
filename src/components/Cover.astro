@@ -1,0 +1,65 @@
+---
+// The antarpat: a silk cloth held between the families until the guest taps the seal.
+import { palluBackground } from '../art/cover';
+import { couple, copy, dates, venue } from '../data/wedding';
+---
+<div id="cover" role="dialog" aria-modal="true" aria-labelledby="cvTitle">
+  <div class="cloth silk">
+    <div class="tw-layer" id="cvTw" aria-hidden="true"></div>
+    <div class="hem"><div class="zb zari"></div><div class="mb"></div></div>
+    <div class="cloth-body">
+      <div class="cv-text cv-in cv-guest">
+        <span class="cv-eyebrow"><span lang="hi">{copy.cover.eyebrowDev}</span> · {copy.cover.eyebrow}</span>
+        <span class="cal cv-guestname" data-guest-name>{copy.cover.guestDefault}</span>
+      </div>
+      <div class="cv-door cv-in">
+        <svg class="cv-apex" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 0 0 9 9 18Z" fill="#C9A04A"/><path d="M9 0 18 9 9 18Z" fill="#F5EFE3"/></svg>
+      <div class="cv-text cv-in cv-center">
+        <p lang="hi" class="cv-inv">{copy.cover.invocation}</p>
+        <div class="cv-mark" aria-hidden="true">
+          <span class="cv-rule l"></span>
+          <svg class="swastik" viewBox="0 0 100 100">
+            <path class="sw-disc" d="M50 4A46 46 0 0 0 50 96Z" fill="#F5EFE3"/>
+            <path class="sw-disc" d="M50 4A46 46 0 0 1 50 96Z" fill="#EFE3C8"/>
+            <path class="sw-hatch" d="M50 4A46 46 0 0 1 50 96" fill="none" stroke="#2B211B" stroke-width="4.4" stroke-dasharray="1.2 2.6"/>
+            <path class="sw-ring" pathLength="1" d="M50 1.5A48.5 48.5 0 0 0 50 98.5" fill="none" stroke="#C9A04A" stroke-width="3"/>
+            <path class="sw-ring" pathLength="1" d="M50 7A43 43 0 0 0 50 93" fill="none" stroke="#C9A04A" stroke-width="1.6"/>
+            <path class="sw-ring" pathLength="1" d="M50 1.5A48.5 48.5 0 0 1 50 98.5" fill="none" stroke="#2B211B" stroke-width="1.8"/>
+            <path class="sw-ring" pathLength="1" d="M50 7A43 43 0 0 1 50 93" fill="none" stroke="#2B211B" stroke-width="1.8"/>
+            <g fill="none" stroke="#B3261E" stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round">
+              <path class="sw-line" pathLength="1" d="M50 30V70"/>
+              <path class="sw-line" pathLength="1" d="M30 50H70"/>
+              <path class="sw-line" pathLength="1" d="M50 30H64"/>
+              <path class="sw-line" pathLength="1" d="M70 50V64"/>
+              <path class="sw-line" pathLength="1" d="M50 70H36"/>
+              <path class="sw-line" pathLength="1" d="M30 50V36"/>
+            </g>
+            <g fill="#B3261E"><circle class="sw-dot" cx="39" cy="39" r="3.3"/><circle class="sw-dot" cx="61" cy="39" r="3.3"/><circle class="sw-dot" cx="61" cy="61" r="3.3"/><circle class="sw-dot" cx="39" cy="61" r="3.3"/></g>
+          </svg>
+          <span class="cv-rule r"></span>
+        </div>
+        <p id="cvTitle" class="cv-names">
+          <span class="cal nm cv-nm">{couple.groom.en}</span>
+          <span class="cal amp cv-amp">&amp;</span>
+          <span class="cal nm cv-nm">{couple.bride.en}</span>
+        </p>
+        <span lang="hi" class="cal dn cv-dn">{couple.bothDev}</span>
+        <span class="cv-date">{dates.short} · {venue.city}</span>
+      </div>
+      <div class="cv-text cv-in cv-cta">
+        <div class="seal-wrap">
+          <span class="halo" aria-hidden="true"></span><span class="ring" aria-hidden="true"></span><span class="ring" aria-hidden="true"></span><span class="ring" aria-hidden="true"></span>
+          <button type="button" class="seal" id="openBtn">
+            <span class="glint" aria-hidden="true"></span>
+            <span lang="mr" class="cal big">{copy.cover.seal}</span>
+            <span class="small">{copy.cover.tap}</span>
+          </button>
+        </div>
+        <span class="cv-why">{copy.cover.why}</span>
+      </div>
+      </div>
+    </div>
+    <div class="pallu" aria-hidden="true"><div class="mb"></div><div class="pl-motif" id="cvPallu" style={'background-image:' + palluBackground()}></div><div class="mb"></div><div class="zb zari"></div></div>
+  </div>
+  <div class="cv-toran cv-in" id="cvToran" aria-hidden="true"></div>
+</div>
