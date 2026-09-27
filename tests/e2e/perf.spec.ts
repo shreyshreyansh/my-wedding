@@ -3,8 +3,7 @@ import { expect, test } from '@playwright/test';
 
 test.use({ contextOptions: { reducedMotion: 'no-preference' } });
 
-test('loads fast, holds still, and answers the tap quickly', async ({ page }, info) => {
-  test.skip(info.project.name !== 'phone');
+test('loads fast, holds still, and answers the tap quickly', async ({ page }) => {
   const cdp = await page.context().newCDPSession(page);
   await cdp.send('Network.enable');
   await cdp.send('Network.setCacheDisabled', { cacheDisabled: true });
