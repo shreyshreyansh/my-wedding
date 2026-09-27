@@ -81,7 +81,68 @@ A different product. It is richer in features and more physical in feel.
 
 **How ours differs:** a story that belongs to the two of you (two walls, two cities, one line of track), folk art as the one visual language, and scroll motion with real choreography. The motion is covered in §2.
 
-## 2. Cultural core
+## 2. Motion: smooth, Apple-like scroll
+
+**The brief:** motion as you scroll, smooth and polished like Apple's product pages.
+
+### What the references actually do
+All of this was read from their code, not watched: exact timings and easing curves, with nothing guessed.
+
+| | Missing Piece (Framer) | MyShaadhi Link (GSAP + Lenis) |
+|---|---|---|
+| **Smooth scroll** | Lenis on Meenaya only (a 1s glide on the mouse wheel). City-3 uses normal scrolling. | Lenis (1.18s, ease-out). |
+| **On phones** | Normal native touch scrolling (smoothing is off for touch). | Same. |
+| **Opening** | No cover. Everything rises together on page load on very long, soft springs (5–6s, 90% there by about 2s). The lanterns tilt and settle like they're floating. | **Tap-to-open cover**, a 1.5s timeline: the text lifts away, a warm glow blooms, the card zooms past, the veil fades, *then* the music starts. |
+| **Names** | Three lines rise 400–600px with a tilt and settle. | **Letter by letter**: each letter rises 40px out of an 8px blur, 50ms apart, with a small overshoot. |
+| **Scroll reveals** | **None** on content; sections are static. | Every block fades and rises 22–36px **once**, as it crosses 75–90% of the screen height. 0.8–1s, `power3.out`, 90–120ms apart. |
+| **Parallax** | **Whole-page parallax**: the lanterns move at 30–70% of scroll speed, which creates depth. | The hero video drifts and slowly zooms. Gallery photos shift ±3.5% inside their frames. The umbrella travels down its section. |
+| **Scroll-controlled / pinned** | A "**curtain hand-off**": each section's main button stays pinned for about 700px while the next section slides over it, with artwork (a car, a ship) hanging over the seam. City-3's **ship sails in, tied to scroll**. That's the only truly scroll-controlled element in either product. | No pinning. A "**focus band**": the event nearest the middle of the screen is sharp while the others shrink (scale .94) and fade (.38). The page leans up to 2.5° during fast scrolls. Footprints appear along a winding path. |
+| **Background loops** | The music button pulses, ring buttons breathe, the ship rocks 1°, petals fall on a canvas (60 of them, 30 on phones). | Glows breathe (4.6s), birds cross the sky (38–60s), a string of decorations sways ±0.45°, gold specks drift. **All pause off-screen.** |
+| **Countdown** | Plain text that changes once a minute. | Each changed number drops in (0.38s). |
+| **Reduced motion** | Ignored. | Partly respected. |
+
+**Verdict:** neither is really "Apple-like".
+- **Missing Piece** feels smooth because of long soft springs and parallax.
+- **MyShaadhi Link** feels polished because its entrance reveals are well choreographed.
+
+Apple's signature move is a section that **pins in place while scrolling plays a transformation forwards and back**. That only appears in City-3's ship. **That's the room we have to stand out.**
+
+### The playbook (MengTo web-design skills)
+The relevant skills are `animation-systems`, `cinematic-gsap-lenis-motion-system`, `cinematic-scroll-storytelling`, `scroll-scrubbed-visual-sequence`, `scroll-scrubbed-word-reveal`, `scroll-progress-timeline`, `ambient-section-particles`, `falling-leaves`, `scroll-world-storytelling` and `build-awwwards-quality-sites`.
+
+- **Restraint:** one strong hero moment, with everything else supporting it. The main element moves first and the rest follow with a small stagger. No bounce, elastic or big jumps in scale.
+- **Stack:** GSAP + ScrollTrigger, plus **one** smooth-scroll engine (Lenis), driven by GSAP's ticker.
+- **Pinned, scroll-controlled scenes only for story moments.** Scroll position is the single source of truth; it must work forwards, backwards and with a fast flick. **Never hijack scrolling.**
+- **Performance:** animate only `transform` and `opacity`; blur only small things; pause everything off-screen; cap canvas resolution.
+- **Reduced motion:** show the final state instantly, with no Lenis, no pinning and no loops. The page must read fine with all motion removed.
+- **Artwork warning:** don't use AI- or code-drawn illustrations; use real, licensed or commissioned art. Warli's circles-and-triangles grammar is a reasonable exception for patterns and small figures. Madhubani and Khovar are not (see the illustration research).
+
+### Draft motion tokens for us
+| Token | Value |
+|---|---|
+| Smooth scroll | Lenis on **mouse wheel only** (~1.1s glide); native touch scrolling on phones, as both references do |
+| Entrance | rise 24–36px + fade, 0.9s, `power3.out` (CSS `cubic-bezier(.22,1,.36,1)`), trigger at 82% of screen height, **once** |
+| Text | **by word**, 50ms apart, 6–8px blur to sharp |
+| Scroll-controlled scenes | linear (`ease: none`), `scrub: 1–1.4` for a slight trailing lag |
+| Parallax | backgrounds at 30–70% of scroll speed, or a ±3–12% drift |
+| Background loops | `sine.inOut`, 4–60s, paused off-screen |
+| Taps and hovers | 0.18–0.22s |
+| Cover exit | ~1.5s timeline; the music starts from the tap |
+
+**Devanagari rule: never split Hindi or Marathi text into letters.** Wrapping single characters in separate animated elements breaks conjuncts (न्द) and vowel signs (ि), which then render wrongly. Animate Devanagari **by word**. Letter-by-letter is safe only for Latin names.
+
+### Where the motion goes (proposal, to settle in design)
+1. **Antarpat opening (tap).** The cloth drops, akshata rains down, and the music starts from the same tap. This is MyShaadhi Link's cover pattern, made ours.
+2. **Hero.** A layered folk scene with gentle parallax; names rise by word.
+3. **"Two walls meet": the Apple moment.** Pinned and controlled by scroll. The Warli wall slides in from one side and Khovar/Kohbar from the other; they join into the Lagna Chowk with the couple at the centre. It plays in reverse when you scroll back up.
+4. **Mangalashtak.** A verse lights up word by word as you scroll, landing on **"शुभमंगल सावधान"**.
+5. **Events as the Pune → Hatia line.** A track fills as you scroll and a train moves along it. The current "station" is in focus while the others recede (MyShaadhi Link's focus band).
+6. **Background.** Palash petals or sal leaves tumble down (the `falling-leaves` technique) in one or two sections, not the whole page.
+7. **Everything else** (countdown, RSVP, travel) gets calm, once-only reveals. Borrow Missing Piece's **curtain hand-off** between chapters, with artwork hanging over each seam.
+
+**Phones:** native touch scrolling; shorter pinned scenes; half the particles; everything pauses off-screen. Test on a real ₹10k Android before calling it done.
+
+## 3. Cultural core
 
 ### Her side: Pune, Maharashtra
 
@@ -113,7 +174,7 @@ These are the strongest findings, and they give the site its story:
 4. **Ganesha opens both.** "॥ श्री गणेशाय नमः ॥" heads invitations on both sides, and Pune is the Ganpati city.
 5. **A real line between the two cities.** Train **22845 / 22846, the Pune–Hatia Superfast Express**, runs about 1,769 km from Pune Jn to Hatia (Ranchi). That's a charming spine for "two cities" storytelling.
 
-## 3. Design directions (to pick or mix in Phase 2)
+## 4. Design directions (to pick or mix in Phase 2)
 
 **A. "Lagna Chowk × Kohbar": folk walls** *(most earthy)*
 The page is a painted mud wall. Warli figures in white lines on geru for her side, Khovar comb-cut and Kohbar motifs for his, meeting in a shared wedding square. Warli's geometric grammar suits code-drawn SVG, so figures can **draw themselves, dance in the tarpa circle, and respond to scroll** without heavy image files.
@@ -129,7 +190,7 @@ Everything is drawn in one folk line style, including the city landmarks. Paitha
 
 **Signature opening, recommended: the Antarpat.** The site opens on a cloth curtain, the one held between the couple. Guests tap **"शुभमंगल सावधान"**, the curtain drops, and akshata rains down to reveal the couple. Only a Maharashtrian wedding has this moment, and the rice shower brings in the Bihari chumawan too.
 
-## 4. Palette draft: colours named after ritual materials
+## 5. Palette draft: colours named after ritual materials
 
 Final values will be set in Phase 2 and checked for contrast.
 
@@ -145,7 +206,7 @@ Final values will be set in Phase 2 and checked for contrast.
 | Sal | sal leaf | `#5E6B3A` |
 | Mor | Paithani peacock, accent only | `#245B57` |
 
-## 5. Type candidates (all on Google Fonts, all support Devanagari)
+## 6. Type candidates (all on Google Fonts, all support Devanagari)
 
 - **Devanagari display:** Tiro Devanagari Marathi / Hindi (refined, bookish) · Yatra One (brush, folk) · Rozha One (high-contrast poster).
 - **Latin display:** Fraunces (warm, soft serif) paired with a Devanagari face.
@@ -153,7 +214,7 @@ Final values will be set in Phase 2 and checked for contrast.
 - **Handwritten notes:** Kalam (Devanagari and Latin).
 - **Elder-friendly rule:** body text at least 18px on mobile, strong contrast, tap targets at least 48px.
 
-## 6. Feature baseline
+## 7. Feature baseline
 
 - **Must:** mobile-first; readable for elders; event cards (time, venue, dress code, **Open in Maps**); RSVP; countdown; **WhatsApp link preview** (image + title); fast on mobile data.
 - **Should:**
@@ -163,17 +224,18 @@ Final values will be set in Phase 2 and checked for contrast.
   - English plus Marathi/Hindi.
 - **Could:** our story, gallery, travel and stay guide (two cities, one venue), FAQ, livestream link for faraway family, Instagram hashtag.
 
-## 7. Tech notes (carried into Phase 3)
+## 8. Tech notes (carried into Phase 3)
 
 - A static site: no backend, free hosting (GitHub Pages, Vercel, Netlify or Cloudflare Pages), optional custom domain.
 - All wedding details in **one data file**. Editing it and pushing updates the live link, the same "edit after sending" benefit Framer offers.
-- SVG for the folk art, GSAP for motion (now fully free, including ScrollTrigger), and `prefers-reduced-motion` respected.
+- **Motion:** GSAP + ScrollTrigger (now fully free) with Lenis smoothing the mouse wheel only; native touch scrolling on phones. Full reduced-motion mode. See §2.
+- **Artwork:** code-drawn SVG only for Warli patterns and small figures. Everything else comes from real artwork, commissioned or licensed, in separate layers so it can be animated.
 - RSVP through a WhatsApp deep link (zero setup) or a Google Form / Sheet (collects data).
 - Images in AVIF/WebP, lazy-loaded; audio loads only when a guest turns it on.
 
-## 8. Open questions for the couple
+## 9. Open questions for the couple
 
-1. **Meenaya.** What exactly do you like in it (colours, illustrations, the opening, a specific section)? Send 3–5 screenshots, or allow `missingpieceinvites.com` in the environment's network settings so it can be studied directly.
+1. **The references.** What exactly do you like in Meenaya, City-3 and MyShaadhi Link? For example: City-3's gold paintings, the carved countdown, the tap-to-open cover, or the personal guest links. Screenshots help.
 2. **The basics.**
    - Names, as you want them written in English and Devanagari.
    - Wedding date(s).
@@ -188,6 +250,8 @@ Final values will be set in Phase 2 and checked for contrast.
 ---
 
 ### Sources
+- Reference demos: https://www.missingpieceinvites.com/demos/meenaya · https://www.missingpieceinvites.com/demos/city-3 · https://myshaadhilink.in/invitation/vijay-rashmika-wedding-invitation?to=Guest&demo=true
+- Motion playbook: https://github.com/MengTo/Skills/tree/main/agent-skills/web-design
 - Meenaya product page: https://www.missingpieceinvites.com/product-cards/product-card-meenaya
 - City template page: https://www.missingpieceinvites.com/product-cards/product-card-city
 - Warli Lagna Chowk and Palaghata: https://www.memeraki.com/blogs/posts/warli-paintings-different-types-styles · https://www.astaguru.com/blogs/from-tribal-homes-to-canvas-the-tale-of-warli-painting-725
