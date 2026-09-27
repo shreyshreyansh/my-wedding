@@ -114,7 +114,7 @@ The references feel alive because text and art move together in layers. The prot
 | Schedule | A **marigold toran** drops in and sways. Each event's props play their own loop (see the table above). On phones, the chapter nearest mid-screen stays sharp while the others recede. On desktop, a chapter lifts and its medallion turns on hover. Event names ripple on hover. | MyShaadhi Link's toran and focus band |
 | Mangalashtak | The verse lights up word by word as you scroll; **gold specks drift**; a zari glint sweeps across ॥ शुभमंगल सावधान ॥. | MyShaadhi Link's specks |
 | Countdown | A live **seconds** dial; each changed digit drops in. | MyShaadhi Link's countdown |
-| Curtain | The countdown pins, and the **RSVP slides up over it like a curtain**. | Missing Piece's curtain hand-off |
+| Curtain | The countdown **sticks at the top of the screen** (CSS `position: sticky`, not a scroll pin), and the **RSVP slides up over it like a curtain**, with a shadow on its leading edge. | Missing Piece's curtain hand-off |
 | Details | A rani progress thread grows down the zari edge. Buttons get a zari glint on hover. The seal button is magnetic on desktop. Steppers roll their numbers. | MengTo skills |
 
 A **Moments** guide (bottom left, after opening) jumps to each moment with a note on what to watch for.
@@ -194,6 +194,7 @@ The peacocks in the design are code-drawn stand-ins. For the real site:
 - **v3, event props:** peacocks only open the invitation; Haldi, Sangeet, Shaadi and the RSVP each got their own props and loops.
 - **v4, the cover:** the couple asked for a more obvious tap and a richer first screen. That brought the toran, the doorway arch, the kumkum swastik, the pallu and the heartbeat seal.
 - **v4.1, Shaadi redraw:** seen zoomed in on a phone, the gathbandhan read as two broken pipes and one kalash looked like a face. The cloths are now proper swags with one tied knot, the kalash are banded, the kund is stepped, the Haldi roots are real turmeric shapes, and double-tap zoom is off.
+- **v4.2, the curtain:** a phone recording showed the countdown pinned at the bottom of the screen while the Mangalashtak kept scrolling above it. That opened an empty teal gap, and the RSVP ate the dials from below. The countdown now sits in its own wrapper with the RSVP and uses `position: sticky; top: 0`. It rides up with the page, stops at the top, and the RSVP covers it with no gap. It is native CSS, so iOS doesn't jitter, and it has extra top padding so the Claude app's title bar doesn't hide the label.
 
 ## Next
 Phase 3, `/plan`: the build plan. It covers the stack, one data file, the guest-code scheme, the RSVP pipeline (Apps Script → Sheet, with WhatsApp as fallback), porting the prototype's motion, the artwork pipeline, and the launch checklist.

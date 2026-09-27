@@ -221,7 +221,8 @@ a{color:inherit}
 .gloss{font-style:italic;max-width:34em;margin:0}
 .savdhan{font-size:clamp(30px,6vw,52px);line-height:1.35;font-weight:700;margin:10px 0 0;color:var(--zari);background:linear-gradient(100deg,var(--zari) 40%,var(--zari-hi) 50%,var(--zari) 60%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 5s linear infinite}
 @keyframes shimmer{0%{background-position:100% 0}100%{background-position:-150% 0}}
-.count{position:relative;z-index:1;padding:30px var(--gut) 40px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
+.curtain{position:relative}
+.count{position:sticky;top:0;z-index:1;padding:clamp(36px,11svh,96px) var(--gut) 40px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
 .units{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;width:min(100%,520px)}
 .unit{display:flex;flex-direction:column;align-items:center;gap:6px}
 .dial{width:clamp(66px,19vw,108px);aspect-ratio:1;border-radius:50%;background:var(--kagaz);color:var(--kajal);display:grid;place-items:center;overflow:hidden;box-shadow:-3px 0 0 0 var(--zari),3px 0 0 0 var(--chuna),0 0 0 6px var(--kajal)}
@@ -264,6 +265,7 @@ footer{position:relative;z-index:3;text-align:center}
 
 @media (prefers-reduced-motion:reduce){
   .strand svg,.savdhan,.hang svg,.tw,#cover .cloth::after{animation:none}
+  .count{position:relative}
   .tw,#cover .cloth::after{display:none}
   .btn-primary::after,.seal::after{display:none}
   .seal-wrap .halo + .ring{opacity:.9;inset:-7px}
@@ -476,18 +478,19 @@ footer{position:relative;z-index:3;text-align:center}
       <p lang="mr" class="cal savdhan" id="savdhan">॥ शुभमंगल सावधान ॥</p>
     </div>
     <div class="band"><div class="zari"></div><div class="hatch"></div></div>
-    <div class="count plate" id="count">
-      <p class="eyebrow"><span lang="mr" class="mr">मुहूर्त</span> · the muhurat is in</p>
-      <div class="units">
-        <div class="unit"><div class="dial"><b id="cd-d">–</b></div><i>days</i></div>
-        <div class="unit"><div class="dial"><b id="cd-h">–</b></div><i>hours</i></div>
-        <div class="unit"><div class="dial"><b id="cd-m">–</b></div><i>minutes</i></div>
-        <div class="unit"><div class="dial"><b id="cd-s">–</b></div><i>seconds</i></div>
-      </div>
-      <span>Wednesday, 9 December 2026 · 8 in the evening</span>
-    </div>
   </section>
 
+  <div class="curtain">
+  <div class="count plate" id="count">
+    <p class="eyebrow"><span lang="mr" class="mr">मुहूर्त</span> · the muhurat is in</p>
+    <div class="units">
+      <div class="unit"><div class="dial"><b id="cd-d">–</b></div><i>days</i></div>
+      <div class="unit"><div class="dial"><b id="cd-h">–</b></div><i>hours</i></div>
+      <div class="unit"><div class="dial"><b id="cd-m">–</b></div><i>minutes</i></div>
+      <div class="unit"><div class="dial"><b id="cd-s">–</b></div><i>seconds</i></div>
+    </div>
+    <span>Wednesday, 9 December 2026 · 8 in the evening</span>
+  </div>
   <section id="rsvp" class="paper" aria-labelledby="rsvpTitle">
     <div class="band"><div class="zari"></div><div class="hatch"></div></div>
     <div class="rsvp">
@@ -510,6 +513,7 @@ footer{position:relative;z-index:3;text-align:center}
       </div>
     </div>
   </section>
+  </div>
 </main>
 
 <footer class="plate">
@@ -1258,8 +1262,7 @@ footer{position:relative;z-index:3;text-align:center}
     ScrollTrigger.create({ trigger: '#mangal', start: 'top bottom', end: 'bottom top', onToggle: (s) => specks.forEach((t) => (s.isActive ? t.play() : t.pause())) });
 
     /* countdown ticks only while visible; the RSVP slides over it like a curtain */
-    ScrollTrigger.create({ trigger: '#count', start: 'top bottom', end: 'bottom top', onToggle: (s) => (cdVisible = s.isActive) });
-    ScrollTrigger.create({ trigger: '#count', start: 'bottom bottom', end: () => '+=' + Math.round(innerHeight * 0.9), pin: true, pinSpacing: false, invalidateOnRefresh: true });
+    ScrollTrigger.create({ trigger: '.curtain', start: 'top bottom', endTrigger: '#rsvp', end: 'top top', onToggle: (s) => (cdVisible = s.isActive) });
     gsap.from('#rsvp h2 .ch', { yPercent: 70, rotationX: -50, transformPerspective: 400, autoAlpha: 0, duration: 0.7, ease: 'back.out(1.6)', stagger: 0.03, scrollTrigger: { trigger: '#rsvp h2', start: 'top 88%', once: true } });
 
     const thaliLoop = blessingLoop(document.querySelector('#rsvp .med svg'));
