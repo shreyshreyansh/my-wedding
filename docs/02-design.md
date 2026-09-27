@@ -100,6 +100,23 @@ Both are private until shared from their Share menus.
 - **Mangalashtak:** the verse lights up word by word with scroll; akshata bursts on ॥ शुभमंगल सावधान ॥.
 - **Reduced motion:** final states, no pinning, no smooth scroll, no particles.
 
+### Layered motion (prototype v2, after "make it as vibrant as the references")
+The references feel alive because text and art move together in layers. The prototype now does the same in our own vocabulary:
+
+| Moment | Motion | Taken from |
+|---|---|---|
+| Hero names | English names rise **letter by letter** with a 3D flip and small overshoot, plus blur-to-sharp on desktop. Devanagari writes in by word. **Hover or tap** a name and its letters ripple. | MyShaadhi Link's letter reveal |
+| Hero depth | Paithani and Madhubani **feathers and akshata grains float at five depths**, some behind the names and some in front. Each drifts and moves at its own scroll speed; on desktop they also follow the mouse. | Meenaya's lanterns |
+| Crossing ribbons | A Paithani zari ribbon and a Madhubani paper ribbon cross in an X, with text in both scripts. They drift constantly, **race when you scroll fast**, and reverse when you scroll up. | Framer / Awwwards scroll-speed text bands |
+| The meeting | The pinned, scroll-driven peacock scene | City-3's ship, extended |
+| Schedule | A **marigold toran** drops in and sways. On phones, the chapter nearest mid-screen stays sharp while the others recede. On desktop, a chapter lifts and its medallion turns on hover. Event names ripple on hover. | MyShaadhi Link's toran and focus band |
+| Mangalashtak | The verse lights up word by word as you scroll; **gold specks drift**; a zari glint sweeps across ॥ शुभमंगल सावधान ॥. | MyShaadhi Link's specks |
+| Countdown | A live **seconds** dial; each changed digit drops in. | MyShaadhi Link's countdown |
+| Curtain | The countdown pins, and the **RSVP slides up over it like a curtain**. | Missing Piece's curtain hand-off |
+| Details | A rani progress thread grows down the zari edge. Buttons get a zari glint on hover. The seal button is magnetic on desktop. Steppers roll their numbers. | MengTo skills |
+
+A **Moments** guide (bottom left, after opening) jumps to each moment with a note on what to watch for.
+
 ## Responsive rules
 
 | Width | Layout |
