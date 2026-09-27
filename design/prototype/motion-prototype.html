@@ -199,8 +199,16 @@ a{color:inherit}
 .chapter dt{font-style:italic;color:var(--sal)}
 .chapter dd{margin:0}
 .swatch{display:inline-block;width:30px;height:20px;vertical-align:-3px;margin-right:10px;box-shadow:inset 0 0 0 2px var(--edge),0 0 0 1px var(--kajal)}
-.actions{display:flex;gap:10px;width:100%;margin-top:14px}
-.actions>*{flex:1}
+.rites{position:relative;display:grid;grid-template-columns:1fr 1fr;width:100%;margin-top:16px}
+.rites::before{content:"";position:absolute;left:50%;top:10px;bottom:10px;border-left:2px dashed rgba(43,33,27,.28)}
+@media (max-width:1023px){.chapter:has(.threads) .rites::before{bottom:-26px}}
+.rite{display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 6px 8px;border:0;background:none;font:inherit;color:var(--kajal);text-decoration:none;text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.rite-ic{display:block;width:60px;height:60px;margin-bottom:6px;transition:transform .45s cubic-bezier(.22,1,.36,1)}
+.rite-ic svg{display:block;width:100%;height:100%;overflow:visible}
+.rite b{font-family:Amita,"Tiro Devanagari Hindi",Georgia,serif;font-size:1.3rem;line-height:1.3;font-weight:700;color:var(--rani)}
+.rite i{font-size:.95rem;line-height:1.35;color:var(--deep)}
+.rite:hover .rite-ic{transform:translateY(-3px) rotate(-6deg)}
+.rite:focus-visible{outline:3px solid var(--zari);outline-offset:2px}
 .threads{display:block;margin:22px auto}
 @media (min-width:1024px){
   .chapters{grid-template-columns:repeat(3,minmax(0,1fr));gap:56px;align-items:start}
@@ -426,9 +434,13 @@ footer{position:relative;z-index:3;text-align:center}
             <dt>Where</dt><dd>Haveli Banquet, Ranchi</dd>
             <dt>Wear</dt><dd><span class="swatch" style="background:#D99A1E;--edge:#E8C06A"></span>Yellow, in turmeric shades</dd>
           </dl>
-          <div class="actions reveal">
-            <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Haveli+Banquet+Ranchi" target="_blank" rel="noopener">Open in Maps</a>
-            <button type="button" class="btn btn-primary">Add to calendar</button>
+          <div class="rites reveal">
+            <a class="rite" data-rite="way" href="https://www.google.com/maps/search/?api=1&amp;query=Haveli+Banquet+Ranchi" target="_blank" rel="noopener" aria-label="Find your way to Haveli Banquet, Ranchi (opens Google Maps)">
+              <span class="rite-ic"></span><b lang="mr">रस्ता दाखवा</b><i>Find your way to us</i>
+            </a>
+            <a class="rite" data-rite="knot" data-cal="haldi" href="https://calendar.google.com/calendar/" target="_blank" rel="noopener" aria-label="Save the Haldi date to your calendar">
+              <span class="rite-ic"></span><b lang="hi">गाँठ बाँध लीजिए</b><i>Save the date</i>
+            </a>
           </div>
           <svg class="threads" viewBox="0 0 60 130" width="60" height="130" aria-hidden="true"><path pathLength="1" d="M30 0C54 22 6 44 30 65S6 108 30 130" fill="none" stroke="#C9A04A" stroke-width="3"/><path pathLength="1" d="M30 0C6 22 54 44 30 65S54 108 30 130" fill="none" stroke="#2B211B" stroke-width="1.6"/></svg>
         </article>
@@ -442,9 +454,13 @@ footer{position:relative;z-index:3;text-align:center}
             <dt>Where</dt><dd>Haveli Banquet, Ranchi</dd>
             <dt>Wear</dt><dd><span class="swatch" style="background:#2F3E73;--edge:#C9A04A"></span>Evening formals; Indo-western welcome</dd>
           </dl>
-          <div class="actions reveal">
-            <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Haveli+Banquet+Ranchi" target="_blank" rel="noopener">Open in Maps</a>
-            <button type="button" class="btn btn-primary">Add to calendar</button>
+          <div class="rites reveal">
+            <a class="rite" data-rite="way" href="https://www.google.com/maps/search/?api=1&amp;query=Haveli+Banquet+Ranchi" target="_blank" rel="noopener" aria-label="Find your way to Haveli Banquet, Ranchi (opens Google Maps)">
+              <span class="rite-ic"></span><b lang="mr">रस्ता दाखवा</b><i>Find your way to us</i>
+            </a>
+            <a class="rite" data-rite="knot" data-cal="sangeet" href="https://calendar.google.com/calendar/" target="_blank" rel="noopener" aria-label="Save the Sangeet date to your calendar">
+              <span class="rite-ic"></span><b lang="hi">गाँठ बाँध लीजिए</b><i>Save the date</i>
+            </a>
           </div>
           <svg class="threads" viewBox="0 0 60 130" width="60" height="130" aria-hidden="true"><path pathLength="1" d="M30 0C54 22 6 44 30 65S6 108 30 130" fill="none" stroke="#C9A04A" stroke-width="3"/><path pathLength="1" d="M30 0C6 22 54 44 30 65S54 108 30 130" fill="none" stroke="#2B211B" stroke-width="1.6"/></svg>
         </article>
@@ -458,9 +474,13 @@ footer{position:relative;z-index:3;text-align:center}
             <dt>Where</dt><dd>Haveli Banquet, Ranchi</dd>
             <dt>Wear</dt><dd><span class="swatch" style="background:#A3195B;--edge:#C9A04A"></span>Traditional finery: Paithani, Banarasi, lehengas, sherwanis. Jewel tones.</dd>
           </dl>
-          <div class="actions reveal">
-            <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Haveli+Banquet+Ranchi" target="_blank" rel="noopener">Open in Maps</a>
-            <button type="button" class="btn btn-primary">Add to calendar</button>
+          <div class="rites reveal">
+            <a class="rite" data-rite="way" href="https://www.google.com/maps/search/?api=1&amp;query=Haveli+Banquet+Ranchi" target="_blank" rel="noopener" aria-label="Find your way to Haveli Banquet, Ranchi (opens Google Maps)">
+              <span class="rite-ic"></span><b lang="mr">रस्ता दाखवा</b><i>Find your way to us</i>
+            </a>
+            <a class="rite" data-rite="knot" data-cal="shaadi" href="https://calendar.google.com/calendar/" target="_blank" rel="noopener" aria-label="Save the Shaadi date to your calendar">
+              <span class="rite-ic"></span><b lang="hi">गाँठ बाँध लीजिए</b><i>Save the date</i>
+            </a>
           </div>
         </article>
       </div>
@@ -730,6 +750,31 @@ footer{position:relative;z-index:3;text-align:center}
   function eventArt(ev) {
     const clip = 'evclip' + (++clipUid);
     return '<svg viewBox="0 0 320 320" aria-hidden="true"><defs><clipPath id="' + clip + '"><circle cx="160" cy="160" r="133"/></clipPath></defs><g class="medal">' + frame() + '<g class="art">' + ART[ev](clip) + '</g></g></svg>';
+  }
+
+  /* chapter actions drawn as tokens: kumkum footprints ("show the way") and a tied knot ("tie a knot to remember") */
+  function riteDisc() {
+    return '<path d="M30 3A27 27 0 0 0 30 57Z" fill="' + C.rani + '"/><path d="M30 3A27 27 0 0 1 30 57Z" fill="' + C.kagaz + '"/>' +
+      '<path d="M30 1.5A28.5 28.5 0 0 0 30 58.5" fill="none" stroke="' + C.zari + '" stroke-width="1.2"/><path d="M30 5.5A24.5 24.5 0 0 0 30 54.5" fill="none" stroke="' + C.zari + '" stroke-width="2.4"/>' +
+      '<path d="M30 3.5A26.5 26.5 0 0 1 30 56.5" fill="none" stroke="' + C.kajal + '" stroke-width="2.4" stroke-dasharray=".8 1.8"/>' +
+      '<path d="M30 1.5A28.5 28.5 0 0 1 30 58.5M30 5.5A24.5 24.5 0 0 1 30 54.5" fill="none" stroke="' + C.kajal + '" stroke-width="1.3"/>';
+  }
+  function foot(x, y, rot, mirror, fill, edge) {
+    const st = edge ? ' stroke="' + edge + '" stroke-width=".8"' : '';
+    return '<g class="step" transform="translate(' + x + ' ' + y + ') rotate(' + rot + ')' + (mirror ? ' scale(-1 1)' : '') + '">' +
+      '<path d="M0 -6.5C3.2 -6.5 4.1 -2.8 3.7 .8C3.3 4.6 2.4 7.4 0 7.4C-2.4 7.4 -3.1 3.8 -3.3 .8C-3.6 -2.8 -2.9 -6.5 0 -6.5Z" fill="' + fill + '"' + st + '/>' +
+      [[-2.3, -8.9, 1.15], [-.6, -9.9, 1.2], [1.2, -9.7, 1.1], [2.7, -8.8, 1], [3.8, -7.3, .9]].map(([cx, cy, r]) => '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="' + fill + '"' + st + '/>').join('') + '</g>';
+  }
+  function riteIcon(kind) {
+    const art = kind === 'way'
+      ? foot(22, 37, -10, true, C.zari) + foot(38.5, 24, 10, false, C.sindoor)
+      : '<g class="tie"><path d="M7 33C13 29.5 19 28.5 25 30" fill="none" stroke="' + C.zari + '" stroke-width="2.6" stroke-linecap="round"/>' +
+        '<path d="M53 33C47 29.5 41 28.5 35 30" fill="none" stroke="' + C.kajal + '" stroke-width="4.2" stroke-linecap="round"/><path d="M53 33C47 29.5 41 28.5 35 30" fill="none" stroke="' + C.sindoor + '" stroke-width="2" stroke-linecap="round"/>' +
+        '<path d="M28.4 34.5 25.6 44" stroke="' + C.zari + '" stroke-width="2.4" stroke-linecap="round"/><circle cx="25.2" cy="45.6" r="1.9" fill="' + C.haldi + '"/>' +
+        '<path d="M31.6 34.5 34.4 44" stroke="' + C.kajal + '" stroke-width="4" stroke-linecap="round"/><path d="M31.6 34.5 34.4 44" stroke="' + C.haldi + '" stroke-width="1.8" stroke-linecap="round"/><circle cx="34.8" cy="45.6" r="1.9" fill="' + C.sindoor + '" stroke="' + C.kajal + '" stroke-width=".8"/>' +
+        '<g class="knot-b"><path d="M30 24.5C26.2 24.5 24.4 27.4 24.8 30.2C25.2 33.1 27.4 35.2 30 35.2Z" fill="' + C.zari + '"/><path d="M30 24.5C33.8 24.5 35.6 27.4 35.2 30.2C34.8 33.1 32.6 35.2 30 35.2Z" fill="' + C.haldi + '" stroke="' + C.kajal + '" stroke-width="1.3" stroke-linejoin="round"/>' +
+        '<path d="M25.4 28.6C27 29.8 28.6 30 30 29.6" fill="none" stroke="' + C.mor + '" stroke-width="1"/><path d="M30 29.6C31.4 30 33 29.8 34.6 28.6" fill="none" stroke="' + C.kajal + '" stroke-width="1"/></g></g>';
+    return '<svg viewBox="0 0 60 60" aria-hidden="true">' + riteDisc() + art + '</svg>';
   }
 
   /* loops: each plays only while its event is on screen */
@@ -1022,9 +1067,9 @@ footer{position:relative;z-index:3;text-align:center}
       .from('#cover .cv-inv', { autoAlpha: 0, duration: 0.5 }, 0.35)
       .from('#cover .sw-disc', { scale: 0.4, autoAlpha: 0, svgOrigin: '50 50', duration: 0.6, ease: 'back.out(1.8)' }, 0.4)
       .from('#cover .sw-hatch', { autoAlpha: 0, duration: 0.4 }, 0.8)
-      .fromTo('#cover .sw-ring', { strokeDasharray: '1 2', strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.7, ease: 'power2.inOut' }, 0.45)
+      .fromTo('#cover .sw-ring', { strokeDasharray: '1 2', strokeDashoffset: 1 }, { strokeDashoffset: 0, autoRound: false, duration: 0.7, ease: 'power2.inOut' }, 0.45)
       .from('#cover .cv-rule', { scaleX: 0, duration: 0.7, ease: 'power2.inOut' }, 0.55)
-      .fromTo('#cover .sw-line', { strokeDasharray: '1 2', strokeDashoffset: 1, opacity: 0 }, { strokeDashoffset: 0, opacity: 1, duration: 0.24, ease: 'power1.inOut', stagger: 0.2 }, 0.75)
+      .fromTo('#cover .sw-line', { strokeDasharray: '1 2', strokeDashoffset: 1, opacity: 0 }, { strokeDashoffset: 0, opacity: 1, autoRound: false, duration: 0.24, ease: 'power1.inOut', stagger: 0.2 }, 0.75)
       .from('#cover .sw-dot', { scale: 0, transformOrigin: '50% 50%', duration: 0.3, ease: 'back.out(3)', stagger: 0.08 }, 1.95)
       .fromTo('#cover .cv-nm', { ...nameIn }, { ...nameOut, stagger: 0.3 }, 0.8)
       .from('#cover .cv-amp', { scale: 0, autoAlpha: 0, duration: 0.4, ease: 'back.out(2)' }, 1.15)
@@ -1074,6 +1119,49 @@ footer{position:relative;z-index:3;text-align:center}
       .add(() => burst(26), 0.25)
       .from(thanks, { autoAlpha: 0, y: 16, duration: 0.6, ease: 'power3.out' }, 0.45);
   });
+
+  /* chapter actions: kumkum footprints open Maps; the knot saves the date (.ics, or Google Calendar on Android) */
+  document.querySelectorAll('.rite').forEach((r) => { r.querySelector('.rite-ic').innerHTML = riteIcon(r.dataset.rite); });
+  const CAL = {
+    haldi: { name: 'Haldi', s: '20261208T063000Z', e: '20261208T093000Z', note: 'Wear yellow, in turmeric shades.' },
+    sangeet: { name: 'Sangeet', s: '20261208T143000Z', e: '20261208T180000Z', note: 'Evening formals; Indo-western welcome.' },
+    shaadi: { name: 'Shaadi', s: '20261209T143000Z', e: '20261209T183000Z', note: 'Traditional finery: Paithani, Banarasi, lehengas, sherwanis. Jewel tones.' }
+  };
+  const icsText = (t) => t.replace(/[\\,;]/g, (m) => '\\' + m);
+  const calTitle = (key) => CAL[key].name + ' · Shreyansh & Mrunalini', calWhere = 'Haveli Banquet, Ranchi';
+  const gcal = (key) => 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(calTitle(key)) + '&dates=' + CAL[key].s + '/' + CAL[key].e + '&location=' + encodeURIComponent(calWhere) + '&details=' + encodeURIComponent(CAL[key].note) + '&ctz=Asia/Kolkata';
+  /* an .ics file for Apple Calendar on the live site; inside the Claude viewer (window.claude) and on Android the link goes to Google Calendar */
+  const useIcs = () => !window.claude && !/android/i.test(navigator.userAgent);
+  function downloadIcs(key) {
+    const ev = CAL[key], title = calTitle(key), where = calWhere;
+    const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Shreyansh and Mrunalini//Invitation//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'BEGIN:VEVENT',
+      'UID:' + key + '-2026@shreyansh-mrunalini', 'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, ''),
+      'DTSTART:' + ev.s, 'DTEND:' + ev.e, 'SUMMARY:' + icsText(title), 'LOCATION:' + icsText(where), 'DESCRIPTION:' + icsText(ev.note),
+      'BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsText('Tomorrow: ' + title), 'TRIGGER:-P1D', 'END:VALARM', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+    const url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = key + '-shreyansh-mrunalini.ics';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+  }
+  const walk = (r) => { if (window.gsap && !reduce) gsap.fromTo(r.querySelectorAll('.step'), { opacity: 0.15 }, { opacity: 1, duration: 0.28, stagger: 0.2, ease: 'power2.out' }); };
+  document.querySelectorAll('.rite[data-rite="way"]').forEach((r) => {
+    r.addEventListener('pointerenter', () => walk(r));
+    r.addEventListener('click', () => walk(r));
+  });
+  document.querySelectorAll('.rite[data-rite="knot"]').forEach((r) => { r.href = gcal(r.dataset.cal); });
+  document.querySelectorAll('.rite[data-rite="knot"]').forEach((r) => r.addEventListener('click', (e) => {
+    if (useIcs()) { e.preventDefault(); downloadIcs(r.dataset.cal); }
+    const note = r.querySelector('i');
+    note.textContent = 'Opening your calendar…';
+    setTimeout(() => { note.textContent = 'Save the date'; }, 2600);
+    if (!window.gsap || reduce) return;
+    gsap.fromTo(r.querySelector('.knot-b'), { scale: 1.45 }, { scale: 1, svgOrigin: '30 30', duration: 0.6, ease: 'back.out(3)' });
+    gsap.fromTo(r.querySelector('.tie'), { rotation: -10 }, { rotation: 0, svgOrigin: '30 30', duration: 0.9, ease: 'elastic.out(1, 0.4)' });
+  }));
 
   if (!hasGsap) { moments.hidden = true; return; }
 
@@ -1184,7 +1272,7 @@ footer{position:relative;z-index:3;text-align:center}
       .to(caps[0], { autoAlpha: 0, duration: 0.04 }, 0.18)
       .to(caps[1], { autoAlpha: 1, duration: 0.04 }, 0.2)
       .to('#meetSvg .tail', { autoAlpha: 0, duration: 0.08 }, 0.38)
-      .fromTo('#meetSvg .f-line', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.14, stagger: 0.012 }, 0.36)
+      .fromTo('#meetSvg .f-line', { strokeDashoffset: 1 }, { strokeDashoffset: 0, autoRound: false, duration: 0.14, stagger: 0.012 }, 0.36)
       .fromTo('#meetSvg .f-eye, #meetSvg .f-in', { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.1, stagger: 0.006 }, 0.42)
       .to(caps[1], { autoAlpha: 0, duration: 0.04 }, 0.37)
       .to(caps[2], { autoAlpha: 1, duration: 0.04 }, 0.39)
@@ -1206,7 +1294,7 @@ footer{position:relative;z-index:3;text-align:center}
       const loop = ev === 'haldi' ? haldiLoop(svg) : ev === 'sangeet' ? sangeetLoop(svg) : shaadiLoop(svg);
       let ready = false, vis = false;
       const tl = gsap.timeline({ scrollTrigger: { trigger: ch, start: 'top 80%', once: true }, defaults: { ease: 'power3.out' }, onComplete: () => { ready = true; if (vis) loop.play(); } });
-      tl.fromTo(rings, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut', stagger: 0.06 })
+      tl.fromTo(rings, { strokeDashoffset: 1 }, { strokeDashoffset: 0, autoRound: false, duration: 1.1, ease: 'power2.inOut', stagger: 0.06 })
         .from(svg.querySelectorAll('.disc, .ring-m'), { autoAlpha: 0, duration: 0.6 }, 0.1)
         .from(svg.querySelector('.art'), { scale: 0.86, autoAlpha: 0, transformOrigin: '50% 50%', duration: 0.8 }, 0.35)
         .from(ch.querySelectorAll('h3 .ch'), { yPercent: 70, rotationX: -50, transformPerspective: 400, autoAlpha: 0, duration: 0.7, ease: 'back.out(1.6)', stagger: 0.05 }, 0.5);
@@ -1246,7 +1334,7 @@ footer{position:relative;z-index:3;text-align:center}
     });
 
     gsap.utils.toArray('.threads path').forEach((p) => {
-      gsap.fromTo(p, { strokeDasharray: 1, strokeDashoffset: 1 }, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: p.closest('svg'), start: 'top 88%', end: 'bottom 50%', scrub: true } });
+      gsap.fromTo(p, { strokeDasharray: 1, strokeDashoffset: 1 }, { strokeDashoffset: 0, autoRound: false, ease: 'none', scrollTrigger: { trigger: p.closest('svg'), start: 'top 92%', end: 'center 58%', scrub: true } });
     });
 
     /* mangalashtak: reveals, verse lit word by word, drifting specks */

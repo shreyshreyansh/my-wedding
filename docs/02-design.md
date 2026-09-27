@@ -56,6 +56,10 @@ Both are private until shared from their Share menus.
   - A divider that is half zari line, half double line.
   - A primary button of rani silk with a zari edge.
   - A secondary button with a Madhubani double line.
+  - **Tokens, not buttons,** for the schedule's actions. Each is a small split disc with a calligraphic line:
+    - **रस्ता दाखवा** · *Find your way to us* (Marathi, her side): kumkum footprints, one gold and one sindoor, walking together. It opens Google Maps.
+    - **गाँठ बाँध लीजिए** · *Save the date* (the Hindi idiom "tie a knot to remember", his side): a tied thread like the gathbandhan. It adds the event to the phone's calendar: an `.ics` file with a reminder the day before on iPhone and Mac, and a prefilled Google Calendar link on Android. Inside the Claude app preview it always uses the Google link, because the viewer blocks file downloads. The build should serve real `.ics` files from the domain.
+    - A dashed running stitch (Mithila sujni) separates the two and runs down into the twin threads to the next celebration.
   - Fabric swatches for the dress codes.
 - **Pune in it:**
   - Paithani itself.
@@ -166,6 +170,7 @@ The peacocks in the design are code-drawn stand-ins. For the real site:
 ## Assumptions to confirm
 - **The groom is named first** in running text. The **desktop hero puts each name on its own art's side:** Mrunalini under the silk on the left, Shreyansh under the paper on the right. Say if you'd rather flip it.
 - **Venue:** written as "Haveli Banquet, Ranchi". Confirm the exact name and send the Maps pin.
+- **Calendar end times** (for "Save the date"): Haldi 12–3 pm, Sangeet 8–11:30 pm, Shaadi 8 pm–midnight, all IST. Say if the muhurat or timings differ.
 - **Dress codes:**
   - Sangeet: "Evening formals; Indo-western welcome".
   - Shaadi: "Traditional finery: Paithani, Banarasi, lehengas, sherwanis. Jewel tones."
@@ -195,6 +200,7 @@ The peacocks in the design are code-drawn stand-ins. For the real site:
 - **v4, the cover:** the couple asked for a more obvious tap and a richer first screen. That brought the toran, the doorway arch, the kumkum swastik, the pallu and the heartbeat seal.
 - **v4.1, Shaadi redraw:** seen zoomed in on a phone, the gathbandhan read as two broken pipes and one kalash looked like a face. The cloths are now proper swags with one tied knot, the kalash are banded, the kund is stepped, the Haldi roots are real turmeric shapes, and double-tap zoom is off.
 - **v4.2, the curtain:** a phone recording showed the countdown pinned at the bottom of the screen while the Mangalashtak kept scrolling above it. That opened an empty teal gap, and the RSVP ate the dials from below. The countdown now sits in its own wrapper with the RSVP and uses `position: sticky; top: 0`. It rides up with the page, stops at the top, and the RSVP covers it with no gap. It is native CSS, so iOS doesn't jitter, and it has extra top padding so the Claude app's title bar doesn't hide the label.
+- **v4.3, tokens:** "Open in Maps" and "Add to calendar" felt formal and app-like, so they became the two tokens above, and "Add to calendar" now works. The same pass fixed every line-draw on the page (medallion rings, the swastik, the feathers, the twin threads). GSAP rounds pixel CSS values, and our dashes run from 1 to 0, so lines snapped on at the halfway point instead of drawing. They now use `autoRound: false`, and the twin threads draw smoothly as you scroll.
 
 ## Next
 Phase 3, `/plan`: the build plan. It covers the stack, one data file, the guest-code scheme, the RSVP pipeline (Apps Script → Sheet, with WhatsApp as fallback), porting the prototype's motion, the artwork pipeline, and the launch checklist.
