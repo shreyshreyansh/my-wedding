@@ -134,7 +134,7 @@ The relevant skills are `animation-systems`, `cinematic-gsap-lenis-motion-system
 ### Where the motion goes (proposal, to settle in design)
 1. **Antarpat opening (tap).** The cloth drops, akshata rains down, and the music starts from the same tap. This is MyShaadhi Link's cover pattern, made ours.
 2. **Hero.** A layered folk scene with gentle parallax; names rise by word.
-3. **"Two walls meet": the Apple moment.** Pinned and controlled by scroll. The Warli wall slides in from one side and Khovar/Kohbar from the other; they join into the Lagna Chowk with the couple at the centre. It plays in reverse when you scroll back up.
+3. **"Two walls meet": the Apple moment.** Pinned and controlled by scroll. The Warli wall slides in from one side and Khovar/Kohbar from the other; they join into the Lagna Chowk with the couple at the centre. It plays in reverse when you scroll back up. The chowk itself is commissioned artwork and is revealed with care (see §9).
 4. **Mangalashtak.** A verse lights up word by word as you scroll, landing on **"शुभमंगल सावधान"**.
 5. **Events as the Pune → Hatia line.** A track fills as you scroll and a train moves along it. The current "station" is in focus while the others recede (MyShaadhi Link's focus band).
 6. **Background.** Palash petals or sal leaves tumble down (the `falling-leaves` technique) in one or two sections, not the whole page.
@@ -233,7 +233,50 @@ Final values will be set in Phase 2 and checked for contrast.
 - RSVP through a WhatsApp deep link (zero setup) or a Google Form / Sheet (collects data).
 - Images in AVIF/WebP, lazy-loaded; audio loads only when a guest turns it on.
 
-## 9. Open questions for the couple
+## 9. Artwork: who makes it
+
+This is the biggest production risk, so it gets its own plan.
+
+### What the research found
+- **Traditional artists work on paper or cloth**, not digitally. The route is paint → courier → scan at 600 dpi → separate into layers.
+- **Khovar on paper is painted with a brush or twig.** The comb-cut texture belongs to the mud walls, so we'd need to scan a real sample for that.
+- **Warli is the only one of the three that code can draw well.** Its whole vocabulary is circles, triangles and lines. Madhubani's double outlines and dense hatching, and Khovar's comb texture, look mechanical when generated.
+- **The Lagna Chowk is sacred.** The marriage can't happen without it, and it stays covered until the ceremony. **Commission it from a Warli woman artist; don't code-generate it.** Our Antarpat reveal mirrors its ritual unveiling, so a *respectful* reveal fits.
+- **Kohbar carries fertility symbolism** and is painted inside the private wedding chamber. **Let the elders decide** whether it belongs in a public hero.
+- **No AI artwork.** Studies show AI simplifies Indian cultural elements. It also gives flat single-layer images and can't stay consistent across a set of 6–8 scenes. And these are GI-tagged community art forms, with livelihoods at stake. Stock sites are full of AI knockoffs; about half of Adobe Stock is now AI-generated.
+
+### Where to find artists
+| Art form | Where | Typical prices |
+|---|---|---|
+| **Warli** (Palghar / Dahanu) | **AYUSH** (a Warli-led NGO, takes custom orders), the **Dhavleri group** (women reviving the chowk painting), Memeraki | Small originals ₹1–4k; named artists ₹22k+ |
+| **Sohrai-Khovar** (Hazaribagh, ~90 km from Ranchi) | **Sanskriti Museum / Tribal Women Artists Cooperative** (Bulu Imam), **Virasat Trust** (database of ~500 artists), Memeraki | On paper ₹2–3k per piece; a set of 4 ~₹12k |
+| **Madhubani / Kohbar** (Mithila) | Memeraki, **Madhubani Art Centre** (Delhi), the Jitwarpur cluster | Apprentice under ₹1.5k; mid-career ₹1.5–5k; named artists ₹10–50k |
+
+**Turnaround:** existing pieces take 1–2 weeks. A custom set of 6–8 pieces takes about 3–6 weeks plus shipping.
+
+### How to commission artwork you can animate
+1. **One element per sheet**, or widely spaced: figures, animals, trees, 12–16 ritual objects, a border's straight run plus a corner (so it tiles), and **a blank sheet of the same paper and wash** for background texture.
+2. Same paper, pigments and scale across the whole set. Ask for 2–3 poses of key figures.
+3. **A written licence** to scan, crop, separate, animate and publish on the site. Under Indian copyright law the artist keeps both the copyright and the right to object to distortion. Show them the animated result before launch.
+4. **Credit the artists on the site**, and say "Warli-inspired" for anything drawn in code.
+
+### Recommendation
+- **Code-drawn Warli** for dancers, the tarpa circle, the procession, borders and the rice shower. It's the most animatable layer and the cheapest.
+- **Commissioned Warli Lagna Chowk**, with the artist also paid to review our code-drawn figures.
+- **Groom's side:**
+  - **Sohrai-Khovar** is the regional fit for Ranchi. It's mostly animals and plants, so use it for the hero wall, borders and flora, and keep the event scenes in Warli.
+  - **Madhubani** if the family is from Mithila. It's narrative, so it can carry the event scenes itself.
+- **Ritual-object icons:** one painted sheet, or Warli line drawings. Licensed icons as a stopgap.
+
+| Tier | What you get | Budget | Time |
+|---|---|---|---|
+| **Low** | Warli in code; buy 2–3 existing small originals with permission to scan; licensed icons | ~₹8–20k | 2–3 weeks |
+| **Mid** *(recommended)* | Commissioned Khovar or Madhubani set (hero + 5 sheets + an object sheet), the Warli Lagna Chowk, and cleanup into layers | ~₹35–80k | 4–6 weeks |
+| **High** | Award-winning artists, large originals kept as décor at the venue, a professional animator, an artists page | ~₹1.5–3 lakh | 8–12 weeks |
+
+**Timeline implication:** artwork is the long pole. If the invites need to go out by a certain date, the commission has to start **6+ weeks before that**.
+
+## 10. Open questions for the couple
 
 1. **The references.** What exactly do you like in Meenaya, City-3 and MyShaadhi Link? For example: City-3's gold paintings, the carved countdown, the tap-to-open cover, or the personal guest links. Screenshots help.
 2. **The basics.**
@@ -246,12 +289,19 @@ Final values will be set in Phase 2 and checked for contrast.
 6. **Assets.** What you have (photos, illustrations, a Ganesha artwork, music, a monogram), pushed to `assets/` in this repo.
 7. **Direction.** A, B, C, or the recommended mix?
 8. **Logistics.** The date you want to send invites, a custom domain, and where RSVPs should land.
+9. **Artwork.** Which budget tier (low, mid or high; see §9)? Are you happy to commission artists? Should the elders be asked about using Kohbar imagery?
 
 ---
 
 ### Sources
 - Reference demos: https://www.missingpieceinvites.com/demos/meenaya · https://www.missingpieceinvites.com/demos/city-3 · https://myshaadhilink.in/invitation/vijay-rashmika-wedding-invitation?to=Guest&demo=true
 - Motion playbook: https://github.com/MengTo/Skills/tree/main/agent-skills/web-design
+- Warli artists and the Lagna Chowk: https://www.adiyuva.in/2020/02/warli-world-art-store-by-ayush.html · https://scroll.in/article/1026111/the-women-who-are-reclaiming-warli-art · http://www.sahapedia.org/warli-painting
+- Sohrai-Khovar artists: https://en.wikipedia.org/wiki/Tribal_Women_Artists_Cooperative · https://villagesquare.in/saving-khovar-and-sohrai-mural-arts-of-hazaribaghs-tribal-villages/ · https://www.folkartopedia.com/folk-painting/khovar-and-sohrai-murals-of-hazaribagh-sk/
+- Madhubani artists and prices: https://www.madhubani.com/ · https://www.myehaat.in/blogs/guide/madhubani-painting-a-buyer-s-guide · https://www.memeraki.com/blogs/art-guides/how-to-get-commissioned-indian-artworks-on-memeraki-right
+- Kohbar symbolism: https://theprint.in/pageturner/excerpt/maithil-weddings-arent-fixed-using-horoscope-a-phallic-kohbar-painting-is-more-important/2273044/
+- AI and Indian cultural imagery: https://impressions.manipal.edu/open-access-archive/11412/ · https://community.adobe.com/questions-32/images-are-overwhelmingly-ai-generated-1497463
+- Artist moral rights (India): https://www.intepat.com/blog/moral-rights-copyright-law
 - Meenaya product page: https://www.missingpieceinvites.com/product-cards/product-card-meenaya
 - City template page: https://www.missingpieceinvites.com/product-cards/product-card-city
 - Warli Lagna Chowk and Palaghata: https://www.memeraki.com/blogs/posts/warli-paintings-different-types-styles · https://www.astaguru.com/blogs/from-tribal-homes-to-canvas-the-tale-of-warli-painting-725
