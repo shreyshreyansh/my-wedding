@@ -209,4 +209,4 @@ The peacocks in the design are code-drawn stand-ins. For the real site:
 - **v4.5, aligned schedule:** on desktop the three columns now share rows (CSS subgrid), so every title, story, detail block and token row lines up. Hover only tilts the medallion; it no longer lifts the column. Shaadi's dress line was shortened to match the others.
 
 ## Next
-Phase 3, `/plan`: the build plan. It covers the stack, one data file, the guest-code scheme, the RSVP pipeline (Apps Script → Sheet, with WhatsApp as fallback), porting the prototype's motion, the artwork pipeline, and the launch checklist.
+Phase 3 is done: the approved build plan is in `docs/03-build-plan.md`. Phase 4 is the build, starting with milestone M0: the scaffold, a golden baseline and a verbatim port of the prototype.

@@ -1,0 +1,24 @@
+{
+  "name": "shreyansh-mrunalini",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "golden:capture": "node tests/golden/capture.mjs",
+    "golden:compare": "node tests/golden/compare.mjs",
+    "golden": "npm run golden:capture -- prototype tests/golden/out/prototype && npm run golden:capture -- build tests/golden/out/build && npm run golden:compare -- tests/golden/out/prototype tests/golden/out/build"
+  },
+  "dependencies": {
+    "gsap": "3.13.0",
+    "lenis": "1.3.11"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1",
+    "astro": "7.3.5"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
