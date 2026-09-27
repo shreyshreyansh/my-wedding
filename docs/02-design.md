@@ -42,6 +42,33 @@
 
 The motion for each screen is written in sticky notes under the phone row. It follows research §2.
 
+## Open decision: how Maharashtra meets Madhubani
+**The couple's goal:** "Madhubani meets Maharashtra, like two souls meeting into one."
+
+The first pass under-delivered on this. Warli's thin white lines lose to Madhubani's bold colour. Paithani, the Maharashtrian art Pune families actually treasure, was only a border. Pune itself was absent.
+
+**The bridge:** Paithani and Madhubani share the same symbols: the peacock (mor), the parrot pair (tota-maina) and the lotus. **Mrunalini (मृणालिनी) means lotus.** One symbol drawn half in each hand becomes the two of them meeting.
+
+Three hero directions are now on the canvas (top row, beside the style sheet):
+
+| Option | Idea | Maharashtra | Bihar / Mithila |
+|---|---|---|---|
+| **A · Mor pair** | Two peacocks face each other and meet at the beak inside one medallion | Paithani silk: rani pink, peacock green, zari gold | Madhubani double line and hatching |
+| **B · Lotus & sun** | One lotus, half Paithani and half Madhubani, opens to a Madhubani sun | Lotus = her name; Paithani petals and water | The Chhath sun, Bihar's great festival; Madhubani petals and water |
+| **C · Rangoli × Aripan** | The wedding floor seen from above: one circle, half rangoli, half aripan | Colourful rangoli at the door | White rice-paste aripan |
+
+**Recommendation: B as the soul of the site, plus A's rule on every screen.**
+- The lotus opening to the sun becomes the pinned scroll moment, in place of "two walls".
+- Every motif (peacocks, borders, event icons) is drawn half Paithani, half Madhubani.
+- Warli stays as the dancing crowd (for the Sangeet); rangoli × aripan can be the chowk floor.
+
+**Pune and Ranchi touches to add, whichever option wins:**
+- Paithani colours and a zari border on her side.
+- Ganpati: the Ashtavinayak verse already names Pune's Ganpatis.
+- Shaniwar Wada's gate at the "Pune Jn" station; Pahari Mandir at "Hatia".
+- Sanai-choughada in the music.
+- Optional: a "Things to know" section in the style of a witty Puneri pati signboard, with a Bihari counterpart.
+
 ## Assumptions to confirm
 - **Groom is named first** throughout, since the wedding is hosted in Ranchi.
 - **Venue name** is written as "Haveli Banquet, Ranchi". Confirm the exact name and send the Google Maps pin.
