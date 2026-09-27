@@ -173,7 +173,7 @@ The peacocks in the design are code-drawn stand-ins. For the real site:
 - **Calendar end times** (for "Save the date"): Haldi 12–3 pm, Sangeet 8–11:30 pm, Shaadi 8 pm–midnight, all IST. Say if the muhurat or timings differ.
 - **Dress codes:**
   - Sangeet: "Evening formals; Indo-western welcome".
-  - Shaadi: "Traditional finery: Paithani, Banarasi, lehengas, sherwanis. Jewel tones."
+  - Shaadi: "Traditional finery, in jewel tones" (shortened so the three columns match).
 - **Event names:**
   - Hindi: संगीत संध्या, शुभ विवाह.
   - Marathi: हळद, लग्न.
@@ -206,6 +206,7 @@ The peacocks in the design are code-drawn stand-ins. For the real site:
   - **The two likely causes:** the CDN for the animation library failing on that network, or the phone's Reduce Motion setting (which the page honours).
   - **Fix 1:** the prototype now ships GSAP, ScrollTrigger and Lenis with the page (`design/prototype/vendor/`). The build should self-host them too.
   - **Fix 2:** the Moments menu says whether motion is on. With Reduce Motion on, it offers **Play the motion anyway**, for this preview only. Guests with that setting still get the still version.
+- **v4.5, aligned schedule:** on desktop the three columns now share rows (CSS subgrid), so every title, story, detail block and token row lines up. Hover only tilts the medallion; it no longer lifts the column. Shaadi's dress line was shortened to match the others.
 
 ## Next
 Phase 3, `/plan`: the build plan. It covers the stack, one data file, the guest-code scheme, the RSVP pipeline (Apps Script → Sheet, with WhatsApp as fallback), porting the prototype's motion, the artwork pipeline, and the launch checklist.

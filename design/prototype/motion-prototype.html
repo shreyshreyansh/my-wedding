@@ -211,7 +211,9 @@ a{color:inherit}
 .rite:focus-visible{outline:3px solid var(--zari);outline-offset:2px}
 .threads{display:block;margin:22px auto}
 @media (min-width:1024px){
-  .chapters{grid-template-columns:repeat(3,minmax(0,1fr));gap:56px;align-items:start}
+  .chapters{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(6,auto);gap:8px 56px;align-items:start}
+  .chapter{display:grid;grid-row:span 6;grid-template-rows:subgrid;row-gap:8px;justify-items:center;align-content:start}
+  .chapter .rites{align-self:end}
   .threads{display:none}
 }
 
@@ -475,7 +477,7 @@ footer{position:relative;z-index:3;text-align:center}
           <dl class="reveal">
             <dt>When</dt><dd>Wednesday, 9 December 2026 · 8 in the evening</dd>
             <dt>Where</dt><dd>Haveli Banquet, Ranchi</dd>
-            <dt>Wear</dt><dd><span class="swatch" style="background:#A3195B;--edge:#C9A04A"></span>Traditional finery: Paithani, Banarasi, lehengas, sherwanis. Jewel tones.</dd>
+            <dt>Wear</dt><dd><span class="swatch" style="background:#A3195B;--edge:#C9A04A"></span>Traditional finery, in jewel tones</dd>
           </dl>
           <div class="rites reveal">
             <a class="rite" data-rite="way" href="https://www.google.com/maps/search/?api=1&amp;query=Haveli+Banquet+Ranchi" target="_blank" rel="noopener" aria-label="Find your way to Haveli Banquet, Ranchi (opens Google Maps)">
@@ -1147,7 +1149,7 @@ footer{position:relative;z-index:3;text-align:center}
   const CAL = {
     haldi: { name: 'Haldi', s: '20261208T063000Z', e: '20261208T093000Z', note: 'Wear yellow, in turmeric shades.' },
     sangeet: { name: 'Sangeet', s: '20261208T143000Z', e: '20261208T180000Z', note: 'Evening formals; Indo-western welcome.' },
-    shaadi: { name: 'Shaadi', s: '20261209T143000Z', e: '20261209T183000Z', note: 'Traditional finery: Paithani, Banarasi, lehengas, sherwanis. Jewel tones.' }
+    shaadi: { name: 'Shaadi', s: '20261209T143000Z', e: '20261209T183000Z', note: 'Traditional finery, in jewel tones.' }
   };
   const icsText = (t) => t.replace(/[\\,;]/g, (m) => '\\' + m);
   const calTitle = (key) => CAL[key].name + ' · Shreyansh & Mrunalini', calWhere = 'Haveli Banquet, Ranchi';
@@ -1351,8 +1353,8 @@ footer{position:relative;z-index:3;text-align:center}
           .to(ch, { scale: 0.95, opacity: 0.6, duration: 0.35, ease: 'none' });
       } else if (fine) {
         const medal = svg.querySelector('.medal');
-        ch.addEventListener('pointerenter', () => { gsap.to(ch, { y: -8, duration: 0.5, ease: 'power3.out' }); gsap.to(medal, { rotation: 4, scale: 1.03, transformOrigin: '50% 50%', duration: 0.6, ease: 'power3.out' }); });
-        ch.addEventListener('pointerleave', () => { gsap.to(ch, { y: 0, duration: 0.6, ease: 'power3.out' }); gsap.to(medal, { rotation: 0, scale: 1, duration: 0.7, ease: 'power3.out' }); });
+        ch.addEventListener('pointerenter', () => { gsap.to(medal, { rotation: 4, scale: 1.03, transformOrigin: '50% 50%', duration: 0.6, ease: 'power3.out' }); });
+        ch.addEventListener('pointerleave', () => { gsap.to(medal, { rotation: 0, scale: 1, duration: 0.7, ease: 'power3.out' }); });
       }
     });
 
