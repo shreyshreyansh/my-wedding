@@ -201,7 +201,7 @@ The WhatsApp numbers are Cloudflare env vars (`WA_BRIDE`, `WA_GROOM`), not in th
 
 ## Small open decisions (defaults in brackets)
 - **RSVP deadline** [Wed 25 Nov]
-- **Domain name** [to choose, e.g. shreyansh-mrunalini.in]
+- **Domain name**: ranchiwedspune.in (bought at GoDaddy; DNS moves to Cloudflare)
 - **Prefill RSVP counts** [party size]
 - **Music** [play once, not loop, unless the recording is made to loop]
 - **Record "link opened"** [off, for privacy]

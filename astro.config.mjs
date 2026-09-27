@@ -2,8 +2,8 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  // The address guests see (e.g. https://shreyansh-mrunalini.in). Link previews need absolute URLs.
-  site: process.env.SITE_URL || 'https://shreyansh-mrunalini.pages.dev',
+  // The address guests see. Link previews need absolute URLs.
+  site: process.env.SITE_URL || 'https://ranchiwedspune.in',
   output: 'static',
   compressHTML: true,
   prefetch: false,

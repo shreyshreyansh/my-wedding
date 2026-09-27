@@ -16,31 +16,30 @@ The guest list never goes into this repository. Keep exports in `private/`, whic
 
 ## One-time setup (developer)
 
-### 1. Cloudflare Pages
-1. Create a Cloudflare account and add the domain (for example `shreyansh-mrunalini.in`). Point the registrar's nameservers to Cloudflare.
-2. Create the KV namespace and put its id in `wrangler.toml`:
-   ```sh
-   npx wrangler login
-   npx wrangler kv namespace create GUESTS      # paste the id into wrangler.toml
-   ```
-3. **Workers & Pages → Create → Pages → Connect to Git**, pick this repository:
-   - Production branch `main`; build command `npm run build`; output `dist`.
-   - Environment variables: `NODE_VERSION=22`, `SITE_URL=https://<your domain>`.
-4. Secrets (encrypted, never in the repo):
-   ```sh
-   npx wrangler pages secret put APPS_SCRIPT_URL      # from step 2 below
-   npx wrangler pages secret put APPS_SCRIPT_SECRET   # any long random string; the same goes in the Sheet
-   npx wrangler pages secret put WA_BRIDE             # e.g. 919812345678 — who guests on her side reply to
-   npx wrangler pages secret put WA_GROOM
-   ```
-5. **Custom domains**: add the apex and `www`; add a redirect rule `www` → apex (301).
-6. **Security → WAF → Rate limiting** (free: one rule): URI path equals `/api/rsvp`, method POST, 10 requests per 10 seconds per IP, block for 10 seconds.
+### 1. Cloudflare Pages and ranchiwedspune.in
+Already done from the repo: the KV store `ranchiwedspune-guests` exists and its id is in `wrangler.toml`; the site's address is `https://ranchiwedspune.in`; Node 22 comes from `.node-version`.
+
+1. **Move the domain's DNS to Cloudflare** (the domain stays registered at GoDaddy).
+   - Cloudflare → **Domains → Onboard a domain** → `ranchiwedspune.in` → **Free** plan. Cloudflare shows two nameservers (like `xxx.ns.cloudflare.com`).
+   - In the DNS records Cloudflare imported, delete GoDaddy's parking records for `@` and `www` (A or CNAME records); Pages adds its own.
+   - GoDaddy → **My Products → ranchiwedspune.in → DNS → Nameservers → Change nameservers → I'll use my own**, enter the two Cloudflare nameservers, save. If GoDaddy has DNSSEC on for the domain, turn it off first.
+   - Cloudflare emails when the domain is active: usually within an hour, sometimes up to a day.
+2. **Connect the repository.** Cloudflare → **Workers & Pages → Create → Pages → Import an existing Git repository** → connect GitHub and allow the Cloudflare app on `shreyshreyansh/my-wedding` → pick the repo, then:
+   - Project name `ranchiwedspune` (the same as `name` in `wrangler.toml`).
+   - Production branch `claude/focused-hawking-zo7huq` (the repo has no `main` yet; change it here if you add one later).
+   - Framework preset **None**, build command `npm run build`, output directory `dist`. **Save and Deploy.**
+   - Settings → **Builds → Branch control**: set preview deployments to **None**, so other branches don't publish.
+3. **Attach the domain** once it is active: the project → **Custom domains → Set up a custom domain** → `ranchiwedspune.in`, then again for `www.ranchiwedspune.in`. Optionally add a redirect rule `www` → apex (Rules → Redirect Rules, 301).
+4. **Secrets**, once the Sheet exists (step 2 below): the project → **Settings → Variables and Secrets → Add** (type **Secret**, production): `APPS_SCRIPT_URL`, `APPS_SCRIPT_SECRET` (any long random string; the same goes in the Sheet), `WA_BRIDE` and `WA_GROOM` (digits with country code, e.g. `919812345678`). Then **Deployments → Retry deployment** on the latest one so they take effect. Until then, replies are kept in KV and marked for `npm run rsvp:resync`, and the WhatsApp button lets the guest pick the contact.
+5. Optional, **Security → WAF → Rate limiting rules** (the free plan has one): URI path equals `/api/rsvp`, method POST, 10 requests per 10 seconds per IP, block for 10 seconds.
+
+Every push to the production branch redeploys the site in about two minutes.
 
 ### 2. The Google Sheet
 1. With the family's Google account, create a new Sheet. **Extensions → Apps Script**, paste `apps-script/Code.gs`, save.
 2. **Project settings → Script properties**:
    - `SECRET`: the same string as `APPS_SCRIPT_SECRET`.
-   - `SITE_URL`: `https://<your domain>`.
+   - `SITE_URL`: `https://ranchiwedspune.in`.
    - `CF_ACCOUNT_ID`, `CF_NAMESPACE_ID` (the GUESTS id), `CF_API_TOKEN`: a Cloudflare API token with only **Account → Workers KV Storage → Edit**.
 3. **Deploy → New deployment → Web app**: execute as **Me**, access **Anyone**. Copy the `/exec` URL into the `APPS_SCRIPT_URL` secret.
    - After editing the script later, use **Manage deployments → Edit → New version**, so the URL stays the same.

@@ -4,7 +4,7 @@
  *
  * Script properties (Project settings → Script properties):
  *   SECRET          the same value as APPS_SCRIPT_SECRET on Cloudflare
- *   SITE_URL        e.g. https://shreyansh-mrunalini.in
+ *   SITE_URL        https://ranchiwedspune.in
  *   CF_ACCOUNT_ID   Cloudflare account id
  *   CF_NAMESPACE_ID the GUESTS KV namespace id
  *   CF_API_TOKEN    a token with only "Workers KV Storage: Edit"
@@ -87,7 +87,7 @@ function setupSheet() {
     ]);
   }
   var g = sheet(ss, TABS.guests, GUEST_COLS);
-  var site = (props().getProperty('SITE_URL') || 'https://example.pages.dev').replace(/\/$/, '');
+  var site = (props().getProperty('SITE_URL') || 'https://ranchiwedspune.in').replace(/\/$/, '');
   /* link, message and send are formulas, filled down for 600 rows */
   var col = function (name) { return columnLetter(GUEST_COLS.indexOf(name) + 1); };
   var rows = 600, f = [];

@@ -1,6 +1,6 @@
 # Cloudflare Pages: the static site in dist/, the functions in functions/.
 # Setup is in docs/04-runbook.md. Secrets (APPS_SCRIPT_SECRET) go in the dashboard, never here.
-name = "shreyansh-mrunalini"
+name = "ranchiwedspune"
 pages_build_output_dir = "dist"
 compatibility_date = "2025-09-01"
 
@@ -9,5 +9,5 @@ compatibility_date = "2025-09-01"
 
 [[kv_namespaces]]
 binding = "GUESTS"
-# `npx wrangler kv namespace create GUESTS` prints the id to paste here.
-id = "00000000000000000000000000000000"
+# ranchiwedspune-guests (created 27 Sep 2026)
+id = "7c5e859d143f4f3a918ce34b68ea889b"

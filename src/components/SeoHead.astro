@@ -2,7 +2,7 @@
 // The WhatsApp / social preview. It comes first in <head> (preview bots read only the start of the page) and is
 // the same for every guest: the family's name never appears in a preview. Kept out of search engines.
 import { site } from '../data/wedding';
-const base = Astro.site ?? new URL('https://shreyansh-mrunalini.pages.dev');
+const base = Astro.site ?? new URL('https://ranchiwedspune.in');
 const url = new URL('/', base).href;
 const image = new URL('/og/og.jpg?v=' + site.ogVersion, base).href;
 ---
