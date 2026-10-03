@@ -1,12 +1,14 @@
 ---
-// ॥ श्री गणेशाय नमः ॥ — every invitation begins with Ganesha: a Pahari painting of Indra bowing to him, to look into.
+// Two invocations, his family's and hers, side by side and equal, with one blessing beneath that both can say;
+// then a Mithila Ganesha and an Ajanta lotus offering to look into.
 import Tour from './Tour.astro';
 import { copy } from '../data/wedding';
 ---
 <section id="invocation" aria-labelledby="ivTitle">
   <div class="iv-text">
-    <p id="ivTitle" lang="hi" class="iv-inv reveal">{copy.invocation.invocation}</p>
+    <p id="ivTitle" class="iv-pair reveal"><span lang="hi">{copy.invocation.his}</span><span lang="pi">{copy.invocation.hers}</span></p>
+    <p lang="pi" class="iv-inv reveal">{copy.invocation.blessing}</p>
     <p class="iv-line reveal">{copy.invocation.line}</p>
   </div>
-  <Tour id="ganesha" />
+  <Tour id="invocation" />
 </section>

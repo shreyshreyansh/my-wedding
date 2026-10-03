@@ -1,5 +1,5 @@
 // Every screen size, phones to large desktops, tablets and landscape phones included: the cover fits, nothing
-// spills sideways, the names fit their line, and every painting tour really zooms in and shows its words.
+// spills sideways, the names fit their line, and every painting tour (a pair, his and hers) really zooms in and shows its words.
 import { expect, test, type Page } from '@playwright/test';
 import { openCover } from './helpers';
 
@@ -30,7 +30,7 @@ for (const [w, h, name] of SIZES) {
     expect(names, 'the names fit their line').toEqual([true, true]);
 
     const tours = await page.$$eval('.tour', (els) => els.map((t) => ({ top: t.getBoundingClientRect().top + scrollY, len: t.getBoundingClientRect().height - innerHeight, n: JSON.parse((t as HTMLElement).dataset.tour!).length })));
-    expect(tours.length).toBe(4);
+    expect(tours.length).toBe(5);
     for (const [i, t] of tours.entries()) {
       /* the first detail is fully in view about a quarter of the way through */
       const y = t.top + t.len * (1.85 / (0.5 + t.n * 1.7 + 1.3));

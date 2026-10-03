@@ -16,21 +16,30 @@ Every work used is listed in `src/data/art.json` (title, date, place, museum, cr
 
 ## What the page uses
 
-| Where | Work | Museum | Licence |
-|---|---|---|---|
-| Cover | *Gauri Ragini*, a woman in a dark grove full of peacocks, Marwar, c. 1625–30 | National Museum of Asian Art, Smithsonian, S2018.1.49 | CC0 |
-| Invocation (॥ श्री गणेशाय नमः ॥) | *The God Indra Worships Ganesha*, Tehri Garhwal Gita Govinda, Kangra or Guler, c. 1775–80 | The Metropolitan Museum of Art, 659913 | CC0 |
-| Haldi | *Kakubha Ragini*, a woman with two garlands between two peacocks, probably Marwar, c. 1630 | National Museum of Asian Art, Smithsonian, S2018.1.51 | CC0 |
-| Sangeet | *Royal Women Celebrating Diwali*, Lucknow, c. 1760 | The Cleveland Museum of Art, 1971.82 | CC0 |
-| Shaadi | *Wedding Ceremony with Brahma in Attendance*, Ajmer, c. 1680 | National Museum of Asian Art, Smithsonian, S2018.1.29 | CC0 |
-| Mangalashtak friezes | Lotuses from *Vishnu on Ananta*, Chamba, c. 1700 | The Cleveland Museum of Art, 2018.155 | CC0 |
-| Paper texture | Ingres hand-made paper, Canson & Montgolfier sample book, 1922 | Getty Research Institute via Internet Archive | Public domain |
+Each chapter is a pair: a work from his side (Bihar) and one from hers (Maharashtra). The pairs and their captions are in `src/data/tours.json`; the research behind them is in `docs/research/`.
+
+| Where | His side · Bihar | Her side · Maharashtra |
+|---|---|---|
+| Cover | *Gauri Ragini*, Marwar, c. 1625–30 (National Museum of Asian Art, Smithsonian, S2018.1.49, CC0). Not yet replaced. | |
+| Blessing | Ganesha, a Mithila (Madhubani) painting, 20th century (The Cleveland Museum of Art, 2005.84, CC0) | *Offering lotus flowers to the Bodhisattva*, Ajanta Cave 1: Syed Ahmad's 1911 copy for Herringham's *Ajanta Frescoes* (1915), plate X (Smithsonian Libraries via Internet Archive, public domain) |
+| Two homes | A Chhath scene on mica, probably Patna, 19th century (Wellcome Collection, Public Domain Mark) | Two mothers embrace, Paithan, c. 1850 (LACMA, M.82.234.2, public domain) |
+| Haldi | Shiva Dayal Lal, *Four women selling food-grains, vegetables and fruit*, Patna, c. 1850 (V&A IS.66-1949, via Wikimedia Commons, PD-Art) | The bath of King Mahajanaka of Mithila, Ajanta Cave 1: Herringham's *Ajanta Frescoes* (1915), plate XIV (Smithsonian Libraries via Internet Archive, public domain) |
+| Sangeet | *Holi being played in a courtyard*, Patna, c. 1795 (British Library Add.Or.939, via Wikimedia Commons, PD-Art) | *Fugdi*, Chitrashala Press print no. 102, Pune, c. 1880–1900 (Wellcome Collection, Public Domain Mark) |
+| Shaadi | A baraat by night, probably Patna, 19th century (Wellcome Collection, Public Domain Mark) | A bride is blessed by elders, Paithan, c. 1850 (LACMA, M.85.297.6, public domain) |
+| Mangalashtak friezes | Lotuses from *Vishnu on Ananta*, Chamba, c. 1700 (The Cleveland Museum of Art, 2018.155, CC0) | |
+| Paper texture | Ingres hand-made paper, Canson & Montgolfier sample book, 1922 (Getty Research Institute via Internet Archive, public domain) | |
+
+**Licence notes.**
+- The two Commons works are faithful photographs of paintings long out of copyright (PD-Art). The V&A's own terms for its photograph are non-commercial; this is a private, non-commercial invitation either way.
+- Upload.wikimedia.org refuses this pipeline's requests (HTTP 429), so those two `src` links are Commons' own thumbnails (1920 and 3840 px wide).
+- The Ajanta plates come from archive.org's IIIF server, which fails on `max`; the links ask for an explicit width.
+- Plate III of the same book (a copy by Nandalal Bose, d. 1966) is deliberately not used: it may still be protected in life-plus-70 countries.
 
 ## How the images are made
 
 ```sh
 npm run art            # every work in src/data/art.json
-npm run art -- haldi   # one
+npm run art -- holi    # one
 ```
 
 `scripts/art.mjs` downloads each museum master once (kept in `node_modules/.cache/art`). It then writes:
@@ -45,22 +54,20 @@ Commit both. `src/components/Art.astro` renders them as a responsive `<picture>`
 
 **Opening the cover:** a circle of light grows from the seal, and the page shows through it. It is a CSS mask whose radius GSAP animates (`src/scripts/motion/cover.ts`).
 
-*Earlier version, dropped after the family's review:*
-- a silk brocade (Cleveland 1916.1213) as the cover, falling away in a WebGL cloth effect;
-- a Madhubani Ganesha (Cleveland 2005.84).
-
-The cloth looked artificial, the brocade read as a worn fragment, and the Madhubani piece didn't sit with the finer paintings.
+*Earlier versions, dropped after the family's review:*
+- a silk brocade (Cleveland 1916.1213) as the cover, falling away in a WebGL cloth effect: the cloth looked artificial and the brocade read as a worn fragment;
+- court paintings from Rajasthan, the Punjab Hills and Lucknow for the chapters: beautiful, but from neither family's home, so they told no story of theirs. The October 2026 pairs replace them.
 
 **The paper** (`public/art/paper-1922.<hash>.webp`) is the 1922 scan, made grey, with its dark flecks evened out (they read as stray punctuation next to text), and re-toned so its average is exactly the page ivory (#F4EEE3). It tiles without seams and weighs 13 KB.
 
-## Looking into a painting
+## Looking into a pair of paintings
 
-Each event painting, and the Ganesha, is a *tour*:
-- **On scroll** it stays on screen while the view glides to two or three details, with a line of text for each, then back out to the whole painting.
-- **In `src/data/art.json`** the details live under the work's `"tour"`. Each one has a `box` (fractions of the crop: `[x, y, width, height]`) and its words.
-- **Living details** come from `"live"`: gold sparks twinkle in the Sangeet fireworks (`twinkle` areas), and the sacred fire flickers in the Shaadi painting (`fire`, a point). They move only while the painting is on screen.
-- **For sharp details**, the tour paintings have a 1800 px version at a lower quality, used only on screens dense enough to need it.
-- **With Gentle motion, or without JavaScript**, the painting simply appears with its details listed under it.
+Each chapter's art is a *tour* of two works, his side's and hers:
+- **On scroll** the pair stays on screen while the view glides to a detail of each, with a line of text, then out to both together for a closing line that joins them.
+- **In `src/data/tours.json`** each tour lists its two `works` (ids in `art.json`) and its `stops`. A stop has `w` (0 for his work, 1 for hers), a `box` (fractions of that work's crop: `[x, y, width, height]`) and its words. A stop with no `w` shows the whole pair.
+- **Side by side or one above the other:** `Tour.astro` works out both layouts and the boxes for each. A container query stands the pair side by side once the stage is wider than the square root of the two layouts' aspect ratios multiplied, which is where side by side fills more of it. `tour.ts` reads which layout is showing each time the page is measured.
+- **Living details** come from a work's `"live"`: `twinkle` areas get stars, and `fire` points (`[x, y, size]`) flicker. The baraat's sky twinkles and its torches flicker, only while on screen.
+- **With Gentle motion, or without JavaScript**, the two paintings simply appear one above the other, with the lines listed under them.
 
 ## Swapping in the family's own art (recommended)
 

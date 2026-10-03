@@ -27,7 +27,7 @@ async function frames(page: Page) {
     await page.evaluate(() => document.fonts.ready);
     out['invite-' + l] = await page.locator(`.inv-card.c-${l}`).screenshot();
   }
-  for (const s of ['#hero .h-in', '#invocation .iv-text', '.ch-haldi .ch-text', '.ch-sangeet .ch-text', '.ch-shaadi .ch-text', '#mangal .mg-inner', '#rsvp .rsvp', 'footer .foot', '#schedule .sched-head']) {
+  for (const s of ['#hero .h-in', '#invocation .iv-text', '#homes .hm-head', '.ch-haldi .ch-text', '.ch-sangeet .ch-text', '.ch-shaadi .ch-text', '#mangal .mg-inner', '#rsvp .rsvp', 'footer .foot', '#schedule .sched-head']) {
     await page.locator(s).scrollIntoViewIfNeeded();
     await page.evaluate(() => document.fonts.ready);
     out[s] = await page.locator(s).screenshot({ mask: [page.locator('#controls')] });

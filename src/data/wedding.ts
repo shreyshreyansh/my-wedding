@@ -100,7 +100,7 @@ export const invitation: Record<Lang, { label: string; blocks: Block[] }> = {
   en: {
     label: 'English',
     blocks: [
-      { k: 'invocation', t: '॥ Shri Ganeshaya Namah ॥' },
+      { k: 'invocation', t: '॥ Shri Ganeshaya Namah ॥ · ॥ Namo Buddhaya ॥' },
       { k: 'lead', t: 'With the blessings of our elders and the grace of God, we request the pleasure of your company at the wedding of' },
       { k: 'name', t: 'Shreyansh' },
       { k: 'parents', t: 'son of Mr ' + P.groom.father.en + ' & Mrs ' + P.groom.mother.en },
@@ -116,7 +116,7 @@ export const invitation: Record<Lang, { label: string; blocks: Block[] }> = {
   mr: {
     label: 'मराठी',
     blocks: [
-      { k: 'invocation', t: '॥ श्री गणेशाय नमः ॥' },
+      { k: 'invocation', t: '॥ श्री गणेशाय नमः ॥ · ॥ नमो बुद्धाय ॥' },
       { k: 'deity', t: '॥ श्री ' + todo('Kulaswamini, Marathi') + ' प्रसन्न ॥' },
       { k: 'lead', t: 'सप्रेम नमस्कार वि. वि.' },
       { k: 'lead', t: 'श्रीकृपेकरून' },
@@ -135,7 +135,7 @@ export const invitation: Record<Lang, { label: string; blocks: Block[] }> = {
   hi: {
     label: 'हिंदी',
     blocks: [
-      { k: 'invocation', t: '॥ श्री गणेशाय नमः ॥' },
+      { k: 'invocation', t: '॥ श्री गणेशाय नमः ॥ · ॥ नमो बुद्धाय ॥' },
       { k: 'shloka', t: 'वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥' },
       { k: 'lead', t: 'परमपिता परमेश्वर की असीम अनुकम्पा से' },
       { k: 'name', t: 'आयुष्मान् श्रेयांश' },
@@ -195,15 +195,19 @@ export const copy = {
     eyebrow: 'with love, for',
     eyebrowDev: 'सस्नेह निमंत्रण',
     guestDefault: 'our family and friends',
-    invocation: '॥ श्री गणेशाय नमः ॥',
+    invocation: '॥ श्री गणेशाय नमः ॥ · ॥ नमो बुद्धाय ॥',
     seal: 'शुभमंगल सावधान',
     tap: 'Open'
   },
   hero: { eyebrow: 'The wedding of', his: 'Bihar · Madhubani', her: 'Pune · Paithani' },
+  /* his family's invocation and hers, side by side and equal, and one blessing both can say (docs/research/06-story-customs-bridges.md §c) */
   invocation: {
-    invocation: '॥ श्री गणेशाय नमः ॥',
-    line: 'Every invitation begins with Ganesha, who clears the way.'
+    his: '॥ श्री गणेशाय नमः ॥',
+    hers: '॥ नमो बुद्धाय ॥',
+    blessing: '॥ भवतु सब्ब मङ्गलं ॥',
+    line: 'May every blessing be yours.'
   },
+  homes: { eyebrowDev: 'दो घर · दोन घरं', eyebrow: 'two homes', title: 'Bihar and Maharashtra,', titleEm: 'and the old threads between them' },
   invite: { eyebrowDev: 'निमंत्रण', eyebrow: 'the invitation', title: 'You are invited', choose: 'Read the invitation in', manuhar: 'बाल मनुहार' },
   schedule: { eyebrowDev: 'कार्यक्रम', eyebrow: 'the celebrations', title: 'From Pune to Ranchi,', titleEm: 'three celebrations', when: 'When', where: 'Where', wear: 'Wear' },
   rites: {

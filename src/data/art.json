@@ -11,91 +11,288 @@
   "licence": "CC0",
   "alt": "A woman in saffron stands in a dark grove among peacocks and peahens, with red flowers and lotuses at her feet.",
   "crops": {
-   "tall": {"box": [0.055, 0.095, 0.89, 0.875], "widths": [540, 720, 900], "webp": [540], "q": {"avif": 48, "webp": 66}},
-   "wide": {"box": [0.055, 0.095, 0.89, 0.875], "widths": [1200, 1600], "webp": [1200], "q": {"avif": 48, "webp": 66}}
+   "tall": {
+    "box": [0.055, 0.095, 0.89, 0.875],
+    "widths": [540, 720, 900],
+    "webp": [540],
+    "q": {
+     "avif": 48,
+     "webp": 66
+    }
+   },
+   "wide": {
+    "box": [0.055, 0.095, 0.89, 0.875],
+    "widths": [1200, 1600],
+    "webp": [1200],
+    "q": {
+     "avif": 48,
+     "webp": 66
+    }
+   }
   }
  },
- "ganesha": {
-  "src": "https://images.metmuseum.org/CRDImages/as/original/DP372795.jpg",
-  "page": "https://www.metmuseum.org/art/collection/search/659913",
-  "title": "The God Indra Worships Ganesha, from the Tehri Garhwal Gita Govinda",
-  "date": "c. 1775–80",
-  "place": "Kangra or Guler, Punjab Hills",
-  "medium": "Ink and opaque watercolour on paper",
-  "museum": "The Metropolitan Museum of Art",
-  "credit": "The Metropolitan Museum of Art, Gift of Steven Kossak, The Kronos Collections, 2021",
-  "licence": "CC0",
-  "alt": "Ganesha, orange-skinned and crowned, sits on a gold throne under a canopy while Indra kneels and touches his feet.",
-  "tour": [
-   {"box": [0.44, 0.25, 0.38, 0.4], "text": "Ganesha on his throne, the remover of obstacles."},
-   {"box": [0.03, 0.6, 0.42, 0.32], "text": "Indra, king of the gods, bows at his feet."}
-  ],
-  "crops": {
-   "tall": {"box": [0.13, 0.05, 0.58, 0.9], "widths": [600, 900, 1200, 1800], "webp": [600], "q": {"avif": 50, "webp": 70, "big": 40}},
-   "wide": {"box": [0.008, 0.01, 0.985, 0.975], "widths": [1200, 1800], "webp": [1200], "q": {"avif": 50, "webp": 70}}
-  }
- },
- "haldi": {
-  "src": "https://ids.si.edu/ids/iiif/FS-S2018.1.51_001crop/full/!4000,4000/0/default.jpg",
-  "page": "https://asia.si.edu/object/S2018.1.51/",
-  "title": "Kakubha Ragini, folio from a Ragamala",
-  "date": "c. 1630",
-  "place": "probably Marwar, Rajasthan",
-  "medium": "Opaque watercolour on paper",
-  "museum": "National Museum of Asian Art, Smithsonian",
-  "credit": "National Museum of Asian Art, Smithsonian Institution, Purchase and partial gift from the Catherine and Ralph Benkaim Collection, Friends of the National Museum of Asian Art, S2018.1.51",
-  "licence": "CC0",
-  "alt": "A woman holding two garlands stands between two peacocks on a turmeric-yellow ground, under dark trees.",
-  "tour": [
-   {"box": [0.36, 0.16, 0.3, 0.22], "text": "A ragini, a musical mode, painted as a woman waiting in a grove."},
-   {"box": [0.27, 0.39, 0.48, 0.32], "text": "In her hands, two garlands of flowers."},
-   {"box": [0.01, 0.43, 0.32, 0.36], "text": "Peacocks gather round. In Indian poetry they call for the rain, and for love."}
-  ],
-  "crops": {
-   "tall": {"box": [0.05, 0.17, 0.9, 0.76], "widths": [600, 900, 1200, 1800], "webp": [600], "q": {"avif": 50, "webp": 70, "big": 40}}
-  }
- },
- "sangeet": {
-  "src": "https://openaccess-cdn.clevelandart.org/1971.82/1971.82_print.jpg",
-  "page": "https://clevelandart.org/art/1971.82",
-  "title": "Royal Women Celebrating Diwali",
-  "date": "c. 1760",
-  "place": "Lucknow, Uttar Pradesh",
-  "medium": "Gum tempera and gold on paper",
+ "ganesha-mithila": {
+  "src": "https://openaccess-cdn.clevelandart.org/2005.84/2005.84_print.jpg",
+  "page": "https://clevelandart.org/art/2005.84",
+  "title": "Ganesha, a Mithila (Madhubani) painting",
+  "short": "Ganesha, Mithila painting",
+  "side": "his",
+  "date": "20th century",
+  "place": "Mithila, Bihar",
+  "medium": "Ink and colour on paper",
   "museum": "The Cleveland Museum of Art",
-  "credit": "The Cleveland Museum of Art, Andrew R. and Martha Holden Jennings Fund 1971.82",
+  "credit": "The Cleveland Museum of Art, Gift of Pamela Elizabeth Ward in loving memory of her parents, William E. and Evelyn Svec Ward, 2005.84 (catalogued as “Large, multi-armed figure facing out”)",
   "licence": "CC0",
-  "alt": "Women light sparklers on a palace terrace at night; gold fireworks fill the dark sky.",
-  "tour": [
-   {"box": [0.06, 0.0, 0.52, 0.44], "text": "Gold fireworks rise into the night."},
-   {"box": [0, 0.57, 0.46, 0.42], "text": "A lady lights a sparkler on the palace terrace…"},
-   {"box": [0.58, 0.4, 0.42, 0.32], "text": "…and another answers from the balcony."}
-  ],
-  "live": {"twinkle": [[0, 0.02, 1, 0.38], [0.6, 0.42, 0.12, 0.2], [0, 0.6, 0.12, 0.1], [0, 0.82, 1, 0.16]]},
+  "alt": "A magenta Ganesha with many arms sits on a lotus under a canopy, in bright pink, yellow and green, framed by a border of leaves.",
   "crops": {
-   "tall": {"box": [0.38, 0.05, 0.5, 0.82], "widths": [600, 900, 1200, 1800], "webp": [600], "q": {"avif": 50, "webp": 70, "big": 40}},
-   "wide": {"box": [0.045, 0.045, 0.91, 0.885], "widths": [1200, 1800], "webp": [1200], "q": {"avif": 50, "webp": 70}}
+   "main": {
+    "box": [0, 0, 1, 1],
+    "widths": [600, 900, 1200, 1600],
+    "webp": [600],
+    "q": {
+     "avif": 50,
+     "webp": 70,
+     "big": 40
+    }
+   }
   }
  },
- "shaadi": {
-  "src": "https://ids.si.edu/ids/iiif/FS-S2018.1.29_001crop/full/!4000,4000/0/default.jpg",
-  "page": "https://asia.si.edu/object/S2018.1.29/",
-  "title": "Wedding Ceremony with Brahma in Attendance",
-  "date": "c. 1680",
-  "place": "Ajmer, Rajasthan",
-  "medium": "Opaque watercolour on paper",
-  "museum": "National Museum of Asian Art, Smithsonian",
-  "credit": "National Museum of Asian Art, Smithsonian Institution, Purchase and partial gift from the Catherine and Ralph Benkaim Collection, Friends of the National Museum of Asian Art, S2018.1.29",
-  "licence": "CC0",
-  "alt": "A bride and groom sit by the sacred fire under a toran of mango leaves, between towers of painted pots, as Brahma chants.",
-  "tour": [
-   {"box": [0.3, 0.22, 0.48, 0.5], "text": "The bride and groom sit together at the sacred fire."},
-   {"box": [0.04, 0.02, 0.62, 0.22], "text": "Above them, a toran of mango leaves."},
-   {"box": [0.06, 0.63, 0.36, 0.37], "text": "Brahma, the creator, chants the wedding mantras."}
-  ],
-  "live": {"fire": [0.375, 0.545]},
+ "lotus-offering": {
+  "src": "https://iiif.archive.org/image/iiif/2/ajantafrescoes00royaa%2fajantafrescoes00royaa_jp2.zip%2fajantafrescoes00royaa_jp2%2fajantafrescoes00royaa_0012.jp2/pct:18.9,18.7,61.8,53.5/3700,/0/default.jpg",
+  "page": "https://archive.org/details/ajantafrescoes00royaa",
+  "title": "Offering lotus flowers to the Bodhisattva, Ajanta Cave 1",
+  "short": "Lotus offering, Ajanta",
+  "side": "hers",
+  "date": "mural c. 460–480; copy 1911",
+  "place": "Ajanta, Maharashtra",
+  "medium": "Copy of a wall painting, from Ajanta Frescoes (1915), plate X",
+  "museum": "Smithsonian Libraries, via Internet Archive",
+  "credit": "Copy by Syed Ahmad, 1911, for Lady Herringham’s Ajanta Frescoes (India Society, London, 1915), plate X; Smithsonian Libraries scan via Internet Archive",
+  "licence": "public domain",
+  "alt": "A crowned bodhisattva with a pearl necklace; at left, devotees climb towards him carrying a tray heaped with white lotuses.",
   "crops": {
-   "tall": {"box": [0.02, 0.13, 0.96, 0.85], "widths": [600, 900, 1200, 1800], "webp": [600], "q": {"avif": 50, "webp": 70, "big": 40}}
+   "main": {
+    "box": [0, 0, 1, 1],
+    "widths": [600, 900, 1200, 1600],
+    "webp": [600],
+    "q": {
+     "avif": 50,
+     "webp": 70,
+     "big": 40
+    }
+   }
+  }
+ },
+ "chhath": {
+  "src": "https://iiif.wellcomecollection.org/image/V0046195/full/full/0/default.jpg",
+  "page": "https://wellcomecollection.org/works/juq4nm6m",
+  "title": "People bathing and praying in the holy river (a Chhath scene)",
+  "short": "Chhath at the river, Patna style",
+  "side": "his",
+  "date": "19th century",
+  "place": "probably Patna, Bihar",
+  "medium": "Gouache on mica",
+  "museum": "Wellcome Collection",
+  "credit": "Wellcome Collection (catalogued as “People bathing and praying in the holy river Ganga”)",
+  "licence": "public domain",
+  "alt": "Women in white stand in the river raising baskets of bananas, while women in red, pink and yellow sit on the bank with baskets of fruit.",
+  "crops": {
+   "main": {
+    "box": [0, 0.36, 1, 0.64],
+    "widths": [600, 900, 1200, 1600],
+    "webp": [600],
+    "q": {
+     "avif": 50,
+     "webp": 70,
+     "big": 40
+    }
+   }
+  }
+ },
+ "two-mothers": {
+  "src": "https://collections-images.lacma.org/images/39004/39004-1-desktop.jpg",
+  "page": "https://collections.lacma.org/node/39004",
+  "title": "Ghatotkacha embraces his cousin Abhimanyu while the two mothers also embrace, from the Paithan “Marriage of Abhimanyu and Vatsala” set",
+  "short": "Two mothers embrace, Paithan",
+  "side": "hers",
+  "date": "c. 1850",
+  "place": "Paithan, Maharashtra",
+  "medium": "Opaque watercolour on paper",
+  "museum": "Los Angeles County Museum of Art",
+  "credit": "Los Angeles County Museum of Art, M.82.234.2",
+  "licence": "public domain",
+  "alt": "In a Paithan storyteller’s painting, two cousins hug under palm fronds, and at right two veiled mothers in red and yellow saris embrace.",
+  "crops": {
+   "main": {
+    "box": [0.03, 0.035, 0.94, 0.88],
+    "widths": [600, 900, 1200, 1600],
+    "webp": [600],
+    "q": {
+     "avif": 50,
+     "webp": 70,
+     "big": 40
+    }
+   }
+  }
+ },
+ "spice-market": {
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Four_women_selling_food-grains%2C_vegetables_and_fruit.jpg/1920px-Four_women_selling_food-grains%2C_vegetables_and_fruit.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Four_women_selling_food-grains,_vegetables_and_fruit.jpg",
+  "title": "Four women selling food-grains, vegetables and fruit",
+  "short": "A Patna market, Shiva Dayal Lal",
+  "side": "his",
+  "date": "c. 1850",
+  "place": "Patna, Bihar",
+  "medium": "Watercolour",
+  "museum": "Victoria and Albert Museum, via Wikimedia Commons",
+  "credit": "Shiva Dayal Lal (1815–1884). Victoria and Albert Museum, IS.66-1949; image via Wikimedia Commons",
+  "licence": "public domain",
+  "alt": "Four women in bright saris sit and stand behind baskets of grain and spices, yellow turmeric among them, with fruit, vegetables and clay pots.",
+  "crops": {
+   "main": {
+    "box": [0.035, 0.05, 0.93, 0.85],
+    "widths": [600, 900, 1200, 1600],
+    "webp": [600],
+    "q": {
+     "avif": 50,
+     "webp": 70,
+     "big": 40
+    }
+   }
+  }
+ },
+ "royal-bath": {
+  "src": "https://iiif.archive.org/image/iiif/2/ajantafrescoes00royaa%2fajantafrescoes00royaa_jp2.zip%2fajantafrescoes00royaa_jp2%2fajantafrescoes00royaa_0016.jp2/pct:17.6,20.0,64.3,49.2/3840,/0/default.jpg",
+  "page": "https://archive.org/details/ajantafrescoes00royaa",
+  "title": "The bath of King Mahajanaka of Mithila, Ajanta Cave 1",
+  "short": "A king of Mithila is bathed, Ajanta",
+  "side": "hers",
+  "date": "mural c. 460–480; copy 1909–11",
+  "place": "Ajanta, Maharashtra",
+  "medium": "Copy of a wall painting, from Ajanta Frescoes (1915), plate XIV",
+  "museum": "Smithsonian Libraries, via Internet Archive",
+  "credit": "Copy for Lady Herringham’s Ajanta Frescoes (India Society, London, 1915), plate XIV; Smithsonian Libraries scan via Internet Archive",
+  "licence": "public domain",
+  "alt": "In a palace hall hung with pearls, women attend a crowned king seated for his ceremonial bath.",
+  "crops": {
+   "main": {
+    "box": [0, 0, 1, 1],
+    "widths": [600, 900, 1200, 1600],
+    "webp": [600],
+    "q": {
+     "avif": 50,
+     "webp": 70,
+     "big": 40
+    }
+   }
+  }
+ },
+ "holi": {
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/Holi_being_played_in_the_courtyard%2C_ca_1795_painting.jpg/3840px-Holi_being_played_in_the_courtyard%2C_ca_1795_painting.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Holi_being_played_in_the_courtyard,_ca_1795_painting.jpg",
+  "title": "Holi being played in a courtyard",
+  "short": "A celebration in Patna, c. 1795",
+  "side": "his",
+  "date": "c. 1795",
+  "place": "Patna, Bihar",
+  "medium": "Watercolour on paper",
+  "museum": "British Library, via Wikimedia Commons",
+  "credit": "British Library, Add.Or.939; image via Wikimedia Commons",
+  "licence": "public domain",
+  "alt": "In a long hall with a striped floor, a crowd dances with raised arms; drummers play a dhol and a daf and a woman sprays colour from a long pichkari.",
+  "crops": {
+   "main": {
+    "box": [0.02, 0.36, 0.96, 0.62],
+    "widths": [600, 900, 1200, 1600],
+    "webp": [600],
+    "q": {
+     "avif": 50,
+     "webp": 70,
+     "big": 40
+    }
+   }
+  }
+ },
+ "fugdi": {
+  "src": "https://iiif.wellcomecollection.org/image/V0046373/full/max/0/default.jpg",
+  "page": "https://wellcomecollection.org/works/vajz44nr",
+  "title": "Fugdi, print no. 102 of the Chitrashala Press",
+  "short": "Fugdi, Chitrashala Press, Pune",
+  "side": "hers",
+  "date": "c. 1880–1900",
+  "place": "Pune, Maharashtra",
+  "medium": "Chromolithograph",
+  "museum": "Wellcome Collection",
+  "credit": "Chitrashala Press, Pune. Wellcome Collection (catalogued as “A girl and boy dance”)",
+  "licence": "public domain",
+  "alt": "In a garden, two figures in red and gold cross hands and lean back to spin, while two women behind them dance with arms raised.",
+  "crops": {
+   "main": {
+    "box": [0.01, 0.01, 0.98, 0.95],
+    "widths": [600, 900, 1200, 1600],
+    "webp": [600],
+    "q": {
+     "avif": 50,
+     "webp": 70,
+     "big": 40
+    }
+   }
+  }
+ },
+ "baraat": {
+  "src": "https://iiif.wellcomecollection.org/image/V0045452/full/full/0/default.jpg",
+  "page": "https://wellcomecollection.org/works/xjsngwqj",
+  "title": "A wedding procession by night: the groom in a palanquin, with musicians and torch-bearers",
+  "short": "A baraat by night",
+  "side": "his",
+  "date": "19th century",
+  "place": "North India, probably Patna",
+  "medium": "Gouache with watercolour on paper",
+  "museum": "Wellcome Collection",
+  "credit": "Wellcome Collection",
+  "licence": "public domain",
+  "alt": "Under a starry sky, torch-bearers, drummers and trumpeters lead a groom in a crown, seated in a red-canopied palanquin.",
+  "crops": {
+   "main": {
+    "box": [0, 0.15, 1, 0.8],
+    "widths": [600, 900, 1200, 1600],
+    "webp": [600],
+    "q": {
+     "avif": 50,
+     "webp": 70,
+     "big": 40
+    }
+   }
+  },
+  "live": {
+   "twinkle": [[0, 0, 1, 0.28]],
+   "fire": [[0.025, 0.31], [0.165, 0.42], [0.21, 0.4], [0.27, 0.39], [0.835, 0.43]]
+  }
+ },
+ "blessing": {
+  "src": "https://collections-images.lacma.org/images/72352/72352-1-desktop.jpg",
+  "page": "https://collections.lacma.org/node/72352",
+  "title": "Vatsala and Abhimanyu being blessed by elders, from the Paithan “Marriage of Abhimanyu and Vatsala” set",
+  "short": "A bride is blessed, Paithan",
+  "side": "hers",
+  "date": "c. 1850",
+  "place": "Paithan, Maharashtra",
+  "medium": "Opaque watercolour on paper",
+  "museum": "Los Angeles County Museum of Art",
+  "credit": "Los Angeles County Museum of Art, M.85.297.6",
+  "licence": "public domain",
+  "alt": "Under scalloped arches, a veiled bride bows with joined hands while women in nine-yard saris raise their hands to bless her and elders sit beside a crowned king.",
+  "crops": {
+   "main": {
+    "box": [0.01, 0.02, 0.98, 0.9],
+    "widths": [600, 900, 1200, 1600],
+    "webp": [600],
+    "q": {
+     "avif": 50,
+     "webp": 70,
+     "big": 40
+    }
+   }
   }
  },
  "lotus": {
@@ -110,7 +307,15 @@
   "licence": "CC0",
   "alt": "",
   "crops": {
-   "frieze": {"box": [0.03, 0.015, 0.93, 0.13], "widths": [900, 1600], "webp": [900], "q": {"avif": 50, "webp": 70}}
+   "frieze": {
+    "box": [0.03, 0.015, 0.93, 0.13],
+    "widths": [900, 1600],
+    "webp": [900],
+    "q": {
+     "avif": 50,
+     "webp": 70
+    }
+   }
   }
  },
  "paper": {

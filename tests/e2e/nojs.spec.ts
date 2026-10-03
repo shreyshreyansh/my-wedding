@@ -9,7 +9,8 @@ test('the page reads top to bottom without the cover', async ({ page }) => {
   await expect(page.locator('#heroTitle')).toBeVisible();
   await expect(page.locator('.chapter')).toHaveCount(3);
   await expect(page.locator('.chapter .tour-art img').first()).toBeVisible(); /* the paintings need no script */
-  await expect(page.locator('#invocation .tour-art img')).toBeVisible();
+  await expect(page.locator('#invocation .tour-art img')).toHaveCount(2);
+  await expect(page.locator('#homes .tour-art img').first()).toBeVisible();
   await expect(page.locator('.rite[data-rite="knot"]').first()).toHaveAttribute('href', /calendar\.google\.com\/calendar\/render\?action=TEMPLATE/);
   await expect(page.locator('.rite[data-rite="way"]').first()).toHaveAttribute('href', /google\.com\/maps/);
 });

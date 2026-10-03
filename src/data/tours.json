@@ -1,0 +1,43 @@
+{
+ "invocation": {
+  "works": ["ganesha-mithila", "lotus-offering"],
+  "stops": [
+   { "w": 0, "box": [0.27, 0.06, 0.46, 0.46], "text": "His family begins every good thing with Ganesha. This one was painted in Mithila, in Bihar." },
+   { "w": 1, "box": [0.12, 0.4, 0.38, 0.32], "text": "Her family follows the Buddha’s path. At Ajanta, near her home, devotees bring lotuses." },
+   { "text": "Two blessings, side by side: may every good thing be yours." }
+  ]
+ },
+ "homes": {
+  "works": ["chhath", "two-mothers"],
+  "stops": [
+   { "w": 0, "box": [0.29, 0.2, 0.25, 0.48], "text": "His Bihar: at Chhath, women stand in the river and raise baskets of fruit to the sun." },
+   { "w": 1, "box": [0.69, 0.14, 0.3, 0.52], "text": "Her Maharashtra: in Paithan, home of the Paithani, painters showed two mothers embracing." },
+   { "text": "Old threads already join them: the very name Bihar comes from vihara, a Buddhist monastery." }
+  ]
+ },
+ "haldi": {
+  "works": ["spice-market", "royal-bath"],
+  "stops": [
+   { "w": 0, "box": [0.1, 0.58, 0.42, 0.4], "text": "Turmeric at a Patna market. In Bihar, married women bless the couple with it, and with rice." },
+   { "w": 1, "box": [0.3, 0.3, 0.34, 0.4], "text": "At Ajanta, in her Maharashtra, women bathe a king of Mithila before his great day." },
+   { "text": "In Maharashtra the turmeric touches him first; what is left, the ushti halad, goes to her." }
+  ]
+ },
+ "sangeet": {
+  "works": ["holi", "fugdi"],
+  "stops": [
+   { "w": 0, "box": [0.14, 0.28, 0.32, 0.6], "text": "Patna, around 1795: a dhol, a daf and colour in the air. Bihar celebrates out loud." },
+   { "w": 1, "box": [0.13, 0.2, 0.74, 0.44], "text": "In Pune they play fugdi: two women cross hands, lean back and spin." },
+   { "w": 1, "box": [0.13, 0.31, 0.24, 0.22], "text": "A nine-yard sari, a pearl nath, green bangles: dressed for a Marathi celebration." },
+   { "text": "Women on both sides sang as they worked, jatsar in Bihar and ovi in Maharashtra. Tonight, everyone sings." }
+  ]
+ },
+ "shaadi": {
+  "works": ["baraat", "blessing"],
+  "stops": [
+   { "w": 0, "box": [0.47, 0.46, 0.24, 0.4], "text": "His side arrives at night: torches, a band, and the groom in his palanquin." },
+   { "w": 1, "box": [0.16, 0.24, 0.44, 0.68], "text": "Paithan, around 1850: a bride bows, and the women of her family bless her." },
+   { "text": "Rice from his side, petals from hers: the blessings fall on both of them together." }
+  ]
+ }
+}
