@@ -31,28 +31,29 @@
    }
   }
  },
- "ganesha-mithila": {
-  "src": "https://openaccess-cdn.clevelandart.org/2005.84/2005.84_print.jpg",
-  "page": "https://clevelandart.org/art/2005.84",
-  "title": "Ganesha, a Mithila (Madhubani) painting",
-  "short": "Ganesha, Mithila painting",
+ "ganesha": {
+  "src": "https://iiif.wellcomecollection.org/image/V0044933/full/full/0/default.jpg",
+  "page": "https://wellcomecollection.org/works/nekd64ff",
+  "title": "Ganesha, seated on a lotus on the coils of a serpent",
+  "short": "Ganesha, a print",
   "side": "his",
-  "date": "20th century",
-  "place": "Mithila, Bihar",
-  "medium": "Ink and colour on paper",
-  "museum": "The Cleveland Museum of Art",
-  "credit": "The Cleveland Museum of Art, Gift of Pamela Elizabeth Ward in loving memory of her parents, William E. and Evelyn Svec Ward, 2005.84 (catalogued as “Large, multi-armed figure facing out”)",
-  "licence": "CC0",
-  "alt": "A magenta Ganesha with many arms sits on a lotus under a canopy, in bright pink, yellow and green, framed by a border of leaves.",
+  "date": "c. 1900",
+  "place": "India",
+  "medium": "Chromolithograph",
+  "museum": "Wellcome Collection",
+  "credit": "Wellcome Collection, 25930i",
+  "licence": "public domain",
+  "alt": "Four-armed Ganesha in a tall crown sits on a pink lotus on the coils of a five-headed serpent, holding a trident and a bowl with his mouse, under hanging lamps on a deep red ground.",
   "crops": {
    "main": {
-    "box": [0, 0, 1, 1],
+    "box": [0.012, 0.008, 0.976, 0.984],
     "widths": [600, 900, 1200, 1600],
     "webp": [600],
+    "median": 3,
     "q": {
-     "avif": 50,
-     "webp": 70,
-     "big": 40
+     "avif": 46,
+     "webp": 66,
+     "big": 36
     }
    }
   }

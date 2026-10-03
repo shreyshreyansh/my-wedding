@@ -1,10 +1,10 @@
 {
  "invocation": {
-  "works": ["ganesha-mithila", "buddha-ajanta"],
+  "works": ["ganesha", "buddha-ajanta"],
   "stops": [
-   { "w": 0, "box": [0.27, 0.06, 0.46, 0.46], "text": "His family begins every good thing with Ganesha. This one was painted in Mithila, in Bihar." },
+   { "w": 0, "box": [0.24, 0.06, 0.48, 0.46], "text": "His family begins every good thing with Ganesha, seated on a lotus, the remover of obstacles." },
    { "w": 1, "box": [0.34, 0.02, 0.4, 0.44], "text": "Her family follows the Buddha. At Ajanta, near her home, he was painted seated on a lotus, at peace." },
-   { "text": "Two blessings, side by side: may every good thing be yours." }
+   { "text": "Both sit on a lotus. Two blessings, side by side: may every good thing be yours." }
   ]
  },
  "homes": {

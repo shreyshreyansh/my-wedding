@@ -21,7 +21,7 @@ Each chapter is a pair: a work from his side (Bihar) and one from hers (Maharash
 | Where | His side · Bihar | Her side · Maharashtra |
 |---|---|---|
 | Cover | *Gauri Ragini*, Marwar, c. 1625–30 (National Museum of Asian Art, Smithsonian, S2018.1.49, CC0). Not yet replaced. | |
-| Blessing | Ganesha, a Mithila (Madhubani) painting, 20th century (The Cleveland Museum of Art, 2005.84, CC0) | The Buddha seated on a lotus, a wall painting at Ajanta (photograph by Vasukrishnan57, 2011, Wikimedia Commons, CC BY-SA 4.0: credited in the footer, and the crop is shared under the same licence) |
+| Blessing | Ganesha seated on a lotus on a serpent's coils, a chromolithograph, India, c. 1900 (Wellcome Collection 25930i, Public Domain Mark). The family chose it over the Mithila Ganesha (Cleveland 2005.84), which was too rough beside the Buddha. | The Buddha seated on a lotus, a wall painting at Ajanta (photograph by Vasukrishnan57, 2011, Wikimedia Commons, CC BY-SA 4.0: credited in the footer, and the crop is shared under the same licence) |
 | Two homes | A Chhath scene on mica, probably Patna, 19th century (Wellcome Collection, Public Domain Mark) | Two mothers embrace, Paithan, c. 1850 (LACMA, M.82.234.2, public domain) |
 | Haldi | Shiva Dayal Lal, *Four women selling food-grains, vegetables and fruit*, Patna, c. 1850 (V&A IS.66-1949, via Wikimedia Commons, PD-Art) | The bath of King Mahajanaka of Mithila, Ajanta Cave 1: Herringham's *Ajanta Frescoes* (1915), plate XIV (Smithsonian Libraries via Internet Archive, public domain) |
 | Sangeet | *Holi being played in a courtyard*, Patna, c. 1795 (British Library Add.Or.939, via Wikimedia Commons, PD-Art) | *Fugdi*, Chitrashala Press print no. 102, Pune, c. 1880–1900 (Wellcome Collection, Public Domain Mark) |
@@ -31,7 +31,7 @@ Each chapter is a pair: a work from his side (Bihar) and one from hers (Maharash
 
 **Licence notes.**
 - The Ajanta Buddha is the one work here that is not public domain: CC BY-SA 4.0 asks for the photographer's name (in the footer credits) and that our crop carries the same licence.
-- No better openly licensed Mithila Ganesha exists than Cleveland's (searched October 2026). Finer ones are by living artists (for example on Memeraki); one bought with the artist's written permission can replace it: add it to `art.json` like any other work.
+- No finer openly licensed Mithila Ganesha exists than Cleveland's (searched October 2026); finer ones are by living artists. The family chose a public-domain print of Ganesha instead.
 - The two Commons works are faithful photographs of paintings long out of copyright (PD-Art). The V&A's own terms for its photograph are non-commercial; this is a private, non-commercial invitation either way.
 - Upload.wikimedia.org refuses this pipeline's requests (HTTP 429), so those two `src` links are Commons' own thumbnails (1920 and 3840 px wide).
 - The Ajanta plates come from archive.org's IIIF server, which fails on `max`; the links ask for an explicit width.
