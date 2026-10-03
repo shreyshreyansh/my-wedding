@@ -89,3 +89,11 @@ test('focus rings show for keyboard users, not after a tap', async ({ page }) =>
   await expect(page.locator('#heroTitle')).toBeFocused();
   expect(await outline('#heroTitle')).toBe('none');
 });
+
+test('the night sections keep their dark ground under their gold words', async ({ page }) => {
+  /* axe cannot judge contrast over the paper texture, so check the grounds themselves */
+  await page.goto('/');
+  await openCover(page);
+  const grounds = await page.evaluate(() => ['footer', '#mangal'].map((s) => getComputedStyle(document.querySelector(s)!).backgroundColor));
+  expect(grounds).toEqual(['rgb(26, 18, 32)', 'rgb(26, 18, 32)']);
+});
