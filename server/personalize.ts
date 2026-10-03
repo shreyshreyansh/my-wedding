@@ -48,7 +48,6 @@ export function personalize(res: Response, v: View): Response {
   if (!g) return rw.transform(res);
 
   const invited = new Set<string>(g.ev);
-  const lastInvited = g.ev[g.ev.length - 1];
   const dates = datesFor(g.ev);
   const dev = g.lang !== 'en' && g.label_dev;
   const name = dev ? g.label_dev! : g.label;
@@ -61,7 +60,6 @@ export function personalize(res: Response, v: View): Response {
     .on('[data-dates-long]', { element: (el) => { el.setInnerContent(dates.long); } })
     /* only their events */
     .on('.chapter[data-event]', { element: (el) => { if (!invited.has(el.getAttribute('data-event')!)) el.remove(); } })
-    .on('.chapter[data-event="' + lastInvited + '"] .threads', { element: (el) => { el.remove(); } })
     .on('.chapters', { element: (el) => { el.setAttribute('style', '--n:' + g.ev.length); } })
     .on('[data-count-title]', { element: (el) => { el.setInnerContent(countWords[g.ev.length]); } })
     .on('.row[data-event]', { element: (el) => { if (!invited.has(el.getAttribute('data-event')!)) el.remove(); } })

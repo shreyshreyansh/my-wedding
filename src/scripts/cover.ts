@@ -1,14 +1,10 @@
-// The cover (antarpat): made to fit the screen, locked until the guest taps the seal. Works without the motion chunk.
-import { coverToran, twinkles } from '../art/cover';
-import { app, root, $, isPhone, isStill } from './app';
+// The cover (antarpat): locked until the guest taps the seal. Works without the motion chunk.
+import { app, root, $, isStill } from './app';
 
 /** `onTap` runs synchronously inside the tap, so audio.play() is allowed by the browser. */
 export function initCover(onTap: () => void) {
   const cover = $('#cover');
   if (!cover) return null;
-  const phone = isPhone();
-  $('#cvToran')!.innerHTML = coverToran(innerWidth, phone);
-  $('#cvTw')!.innerHTML = twinkles(innerWidth, innerHeight, phone);
   root.classList.add('locked');
   const seal = $('#openBtn') as HTMLButtonElement;
   /* the seal's focus ring is for keyboard users: show it only once a key is pressed */

@@ -8,7 +8,7 @@ import { extname, join, resolve } from 'node:path';
 
 const root = resolve('dist');
 if (!existsSync(join(root, 'og-card/index.html'))) { console.error('dist/og-card is missing: run npm run og (it builds first).'); process.exit(1); }
-const TYPES = { '.html': 'text/html', '.woff2': 'font/woff2', '.css': 'text/css', '.js': 'text/javascript' };
+const TYPES = { '.html': 'text/html', '.woff2': 'font/woff2', '.css': 'text/css', '.js': 'text/javascript', '.avif': 'image/avif', '.webp': 'image/webp' };
 const server = createServer((req, res) => {
   const p = new URL(req.url, 'http://x').pathname;
   let f = join(root, decodeURIComponent(p));
@@ -21,6 +21,8 @@ const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1200, height: 1200 }, deviceScaleFactor: 1 });
 await page.goto(`http://127.0.0.1:${server.address().port}/og-card/`);
 await page.evaluate(() => document.fonts.ready);
+await page.evaluate(() => Promise.all([...document.images].map((i) => i.decode())));
+await page.waitForTimeout(300);
 mkdirSync('public/og', { recursive: true });
 let q = 90, jpg;
 do { jpg = await page.locator('#card').screenshot({ type: 'jpeg', quality: q }); q -= 5; } while (jpg.length > 280 * 1024 && q > 50);

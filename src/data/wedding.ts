@@ -57,8 +57,7 @@ export const events: WeddingEvent[] = [
     when: 'Tuesday, 8 December 2026 · 8 in the evening',
     short: 'Tue 8 Dec · 8 pm',
     dress: 'Evening formals; Indo-western welcome',
-    swatch: { bg: '#2F3E73', edge: '#C9A04A' },
-    playable: 'Play the dholak'
+    swatch: { bg: '#2F3E73', edge: '#C9A04A' }
   },
   {
     id: 'shaadi',
@@ -168,11 +167,6 @@ export const mangal = {
   savdhan: '॥ शुभमंगल सावधान ॥'
 };
 
-export const ribbons = {
-  zari: ['शुभ विवाह', 'Shubh Vivah', 'पैठणी', 'Two souls, one celebration', 'शुभमंगल सावधान'],
-  paper: ['मधुबनी', 'Madhubani meets Paithani', 'शुभ विवाह', 'From Pune to Ranchi', 'मंगल भवन']
-};
-
 export const chaupai = ['मंगल भवन अमंगल हारी।', 'द्रवउ सो दसरथ अजिर बिहारी॥'];
 
 /* ---------- RSVP ---------- */
@@ -203,18 +197,17 @@ export const copy = {
     guestDefault: 'our family and friends',
     invocation: '॥ श्री गणेशाय नमः ॥',
     seal: 'शुभमंगल सावधान',
-    tap: 'Tap to open your invitation',
-    why: 'At these words, the antarpat is lowered'
+    tap: 'Tap to open',
+    why: 'At these words, the antarpat is lowered and the couple see each other'
   },
-  hero: { her: 'Paithani · from her Pune', his: 'Madhubani · from his Bihar' },
-  meeting: [
-    'They see each other. Keep scrolling.',
-    'Silk from her side, paper from his',
-    'Tails open, feather by feather',
-    'They meet, and the garland is exchanged'
-  ],
+  hero: { eyebrow: 'The wedding of', his: 'Bihar · Madhubani', her: 'Pune · Paithani' },
+  through: {
+    invocation: '॥ श्री गणेशाय नमः ॥',
+    line: 'Every invitation begins with Ganesha, who clears the way.',
+    label: 'Ganesha, Mithila painting'
+  },
   invite: { eyebrowDev: 'निमंत्रण', eyebrow: 'the invitation', title: 'You are invited', choose: 'Read the invitation in', manuhar: 'बाल मनुहार' },
-  schedule: { eyebrowDev: 'कार्यक्रम', eyebrow: 'the celebrations', title: 'From Pune to Ranchi,', titleEm: 'three celebrations' },
+  schedule: { eyebrowDev: 'कार्यक्रम', eyebrow: 'the celebrations', title: 'From Pune to Ranchi,', titleEm: 'three celebrations', when: 'When', where: 'Where', wear: 'Wear' },
   rites: {
     wayDev: 'रस्ता दाखवा', way: 'Find your way to us',
     knotDev: 'गाँठ बाँध लीजिए', knot: 'Save the date', knotBusy: 'Opening your calendar…'
@@ -241,7 +234,11 @@ export const copy = {
     noCode: 'To reply, answer the WhatsApp message that brought you here. We’ll count you in.',
     badCode: 'We couldn’t find your personal link, so here is the invitation for everyone.'
   },
-  footer: { love: 'With love, the families of Shreyansh & Mrunalini' },
+  footer: {
+    love: 'With love, the families of Shreyansh & Mrunalini',
+    credits: 'The art on this page',
+    creditsNote: 'Every painting and textile here is in the public domain, shared openly by the museums that keep it.'
+  },
   controls: {
     muteOn: 'Play the music', muteOff: 'Mute the music', hint: 'Tap the bell to mute',
     gentle: 'Gentle motion', gentleDev: 'कम हलचल', fullMotion: 'Full motion'
@@ -252,9 +249,9 @@ export const copy = {
 export const site = {
   title: 'Shreyansh & Mrunalini · 8 & 9 December 2026',
   description: 'With love, you are invited to the wedding of Shreyansh and Mrunalini in Ranchi.',
-  ogAlt: 'Two peacocks, one in Paithani silk and one in Madhubani line, facing each other in a medallion.',
-  ogVersion: 1,
+  ogAlt: 'Shreyansh & Mrunalini, in large letters over a magenta silk woven with gold.',
+  ogVersion: 2,
   /** bump when an event's time or place changes, so calendars update the saved event */
   calendarSequence: 0,
-  themeColor: '#A3195B'
+  themeColor: '#1A1220'
 };

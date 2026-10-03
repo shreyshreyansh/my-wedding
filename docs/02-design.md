@@ -1,5 +1,7 @@
 # Phase 2 — Design
 
+> **October 2026: redesigned.** The story below stays (peacocks, Paithani meets Madhubani, the antarpat), but the drawn-in-code art was replaced by real museum paintings and textiles in a quiet, editorial page. See [05-art-sources.md](05-art-sources.md).
+
 - **Design canvas:** https://claude.ai/artifact/SGiypJevJt1eNSEZsSa3fx
 - **Scroll-motion prototype:** https://claude.ai/artifact/PHnbz3mYgvhdaqpMkC4VWZ. Its source is in `design/prototype/`.
 

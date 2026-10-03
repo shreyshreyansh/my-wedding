@@ -1,50 +1,50 @@
 /* rsvp: slides over the countdown like a curtain */
-#rsvp{position:relative;z-index:3;box-shadow:0 -24px 40px rgba(43,33,27,.35)}
-.rsvp{padding:48px var(--gut) 56px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
-.rsvp .med{width:min(48vw,200px)}
-.rsvp h2{margin:0;font-size:clamp(36px,7vw,52px);line-height:1.15;font-weight:700}
+#rsvp{position:relative;z-index:3;background:var(--paper-bg);box-shadow:0 -30px 60px -20px rgba(31,25,21,.35)}
+.rsvp{padding:clamp(56px,10svh,104px) var(--gut) clamp(64px,11svh,112px);display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.rsvp h2{margin:0;font-family:var(--display);font-size:clamp(48px,12vw,92px);line-height:.98}
 
 /* one panel at a time: the edge (and the page, as you reply) sets data-rsvp */
-.r-panel{display:none;width:min(100%,460px)}
+.r-panel{display:none;width:min(100%,480px)}
 #rsvp[data-rsvp="nocode"] .r-nocode,#rsvp[data-rsvp="replied"] .r-thanks,#rsvp[data-rsvp="closed"] .r-closed{display:block}
 #rsvp[data-rsvp="form"] .r-form,#rsvp[data-rsvp="sending"] .r-form,#rsvp[data-rsvp="failed"] .r-form{display:flex}
 #rsvp[data-closed] .r-change{display:none}
-.r-nocode,.r-closed{padding:20px;background:var(--chuna);border:3px double var(--kajal);font-style:italic}
+.r-nocode,.r-closed{margin-top:8px;padding:22px 20px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);font-family:var(--display);font-style:italic;font-size:1.35rem;line-height:1.3}
 .r-nocode p,.r-closed p{margin:0}
-.r-nocode .r-bad{margin-bottom:10px;color:var(--deep)}
-.r-closed .btn{margin-top:14px}
+.r-nocode .r-bad{margin-bottom:10px;font-family:"Tiro Devanagari Hindi",serif;font-size:1rem;color:var(--rani)}
+.r-closed .btn{margin-top:16px;font-family:"Tiro Devanagari Hindi",serif;font-style:normal}
 
-.rsvp form{flex-direction:column;gap:14px;margin-top:10px;text-align:left}
-.r-ask{margin:0;font-style:italic;text-align:center}
-.row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;background:var(--chuna);border:3px double var(--kajal)}
+.rsvp form{flex-direction:column;gap:0;margin-top:14px;text-align:left}
+.r-ask{margin:0 0 12px;font-style:italic;text-align:center;color:var(--ink-2)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 0;border-top:1px solid var(--hair)}
+.row:last-of-type{border-bottom:1px solid var(--hair)}
 .row .ev{display:flex;flex-direction:column}
-.row .ev b{font-family:Amita,"Tiro Devanagari Hindi",Georgia,serif;font-size:1.5rem;line-height:1.2}
-.row .ev i{font-size:1rem;color:var(--sal)}
-.step{display:flex;align-items:center;gap:4px}
-.step button{width:48px;height:48px;border-radius:50%;border:0;background:transparent;color:var(--kajal);cursor:pointer;display:grid;place-items:center;box-shadow:inset 0 0 0 2px var(--zari),inset 0 0 0 4px var(--chuna),inset 0 0 0 5.5px var(--kajal);transition:background .18s ease}
-.step button:hover{background:var(--kagaz)}
-.step button:disabled{opacity:.35;cursor:default}
-.r-count{width:2.2em;min-height:48px;padding:0;border:0;background:transparent;text-align:center;font-family:Amita,"Tiro Devanagari Hindi",Georgia,serif;font-size:1.7rem;font-weight:700;color:var(--kajal);-moz-appearance:textfield;appearance:textfield}
+.row .ev b{font-family:var(--display);font-weight:400;font-size:2rem;line-height:1}
+.row .ev i{font-size:.9rem;color:var(--ink-2)}
+.step{display:flex;align-items:center;gap:2px}
+.step button{width:48px;height:48px;border-radius:50%;border:1px solid var(--hair);background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center;transition:background .18s ease,border-color .18s ease}
+.step button:hover{border-color:var(--ink)}
+.step button:disabled{opacity:.3;cursor:default}
+.r-count{width:2em;min-height:48px;padding:0;border:0;background:transparent;text-align:center;font-family:var(--display);font-size:2.2rem;color:var(--ink);-moz-appearance:textfield;appearance:textfield}
 .r-count::-webkit-inner-spin-button,.r-count::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 html:not(.js) .step button{display:none}
-html:not(.js) .r-count{width:3.2em;border-bottom:3px double var(--kajal)}
-.field{display:flex;flex-direction:column;gap:2px}
-.field label{font-style:italic;color:var(--sal);font-size:1rem}
-.field input,.field textarea{min-height:48px;padding:8px 2px;border:0;border-bottom:3px double var(--kajal);background:transparent;font:inherit;font-size:1.1rem;color:var(--kajal);resize:vertical}
+html:not(.js) .r-count{width:3.2em;border-bottom:1px solid var(--ink)}
+.field{display:flex;flex-direction:column;gap:0;margin-top:18px}
+.field label{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+.field input,.field textarea{min-height:48px;padding:8px 0;border:0;border-bottom:1px solid var(--ink);border-radius:0;background:transparent;font:inherit;font-size:1.1rem;color:var(--ink);resize:vertical}
+.field input:focus,.field textarea:focus{outline:none;border-bottom-width:2px}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.r-send{min-height:60px;font-size:1.25rem}
-.r-send .cal{font-weight:700}
-#rsvp[data-rsvp="sending"] .r-send{opacity:.75;pointer-events:none}
-.r-failed{display:flex;flex-direction:column;gap:10px;padding:16px;background:var(--chuna);border:3px double var(--sindoor);text-align:center}
+.r-send{margin-top:24px;min-height:60px;font-size:1.15rem;letter-spacing:.04em}
+#rsvp[data-rsvp="sending"] .r-send{opacity:.7;pointer-events:none}
+.r-failed{display:flex;flex-direction:column;gap:10px;margin-top:16px;padding:18px;border:1px solid var(--sindoor);text-align:center}
 .r-failed[hidden]{display:none}
 .r-failed p{margin:0;font-style:italic}
-.btn-wa{border:0;background:#1F7A4D;color:#fff;box-shadow:inset 0 0 0 3px #1F7A4D,inset 0 0 0 5px var(--zari)}
+.btn-wa{border:0;background:#1F7A4D;color:#fff}
 .btn-wa:hover{background:#18633E}
 
-.thanks{padding:24px 20px;background:var(--chuna);border:3px double var(--kajal)}
+.thanks{margin-top:8px;padding:8px 0 0}
 .thanks:focus{outline:none}
-.thanks .dhanyavad{font-size:2rem;font-weight:700;color:var(--rani);margin:0}
-.r-thanks-title{font-size:1.8rem;font-weight:700;margin:0}
-.r-summary{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:2px;font-size:1.1rem}
-.r-seeyou{margin:8px 0 14px;font-style:italic}
-
+.thanks .dhanyavad{font-size:2.2rem;color:var(--rani);margin:0}
+.r-thanks-title{font-family:var(--display);font-size:3rem;line-height:1;margin:0}
+.r-summary{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;border-top:1px solid var(--hair);font-size:1.1rem}
+.r-summary li{padding:10px 0;border-bottom:1px solid var(--hair)}
+.r-seeyou{margin:14px 0 18px;font-family:var(--display);font-style:italic;font-size:1.6rem}

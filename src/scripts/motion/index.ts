@@ -6,9 +6,8 @@ import { coverMotion } from './cover';
 import { hero } from './hero';
 import { interactions } from './interactions';
 import { mangal, curtain } from './mangal';
-import { meeting } from './meeting';
-import { ribbons } from './ribbons';
 import { schedule } from './schedule';
+import { through } from './through';
 import { shared, type Run } from './shared';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -52,11 +51,8 @@ export function start({ intro }: { intro: boolean }) {
       on: (el, type, fn) => { el.addEventListener(type, fn); cleanups.push(() => el.removeEventListener(type, fn)); },
       cleanup: (fn) => cleanups.push(fn)
     };
-    /* progress thread in the zari selvedge */
-    gsap.to('#progress', { scaleY: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: 0.3 } });
     hero(run);
-    ribbons(run);
-    meeting(run);
+    through(run);
     schedule(run);
     mangal();
     curtain();

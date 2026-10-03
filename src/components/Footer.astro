@@ -1,13 +1,21 @@
 ---
-import Band from './Band.astro';
+// The last word, the credits for every artwork on the page, and the gentle-motion switch.
+import art from '../data/art.json';
 import { chaupai, copy, music } from '../data/wedding';
+const works = Object.values(art);
 ---
-<footer class="plate">
-  <Band />
+<footer>
   <div class="foot">
     <p lang="hi" class="chaupai">{chaupai[0]}<br>{chaupai[1]}</p>
-    <p class="cal love">{copy.footer.love}</p>
+    <p class="love">{copy.footer.love}</p>
     {music.src && (music.title || music.credit) && <p class="credit">♪ {[music.title, music.credit].filter(Boolean).join(' · ')}</p>}
+    <details class="credits">
+      <summary>{copy.footer.credits}</summary>
+      <p>{copy.footer.creditsNote}</p>
+      <ul>
+        {works.map((w) => <li><a href={w.page} target="_blank" rel="noopener"><b>{w.title}</b><span>{w.place}, {w.date}. {w.credit}. {w.licence === 'CC0' ? 'Public domain (CC0)' : 'Public domain'}.</span></a></li>)}
+      </ul>
+    </details>
     <button type="button" class="gentle" id="motionBtn" aria-pressed="false"><span class="dot" aria-hidden="true"></span><span>{copy.controls.gentle}</span> · <span lang="hi">{copy.controls.gentleDev}</span></button>
   </div>
 </footer>

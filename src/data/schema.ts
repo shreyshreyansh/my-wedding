@@ -18,8 +18,6 @@ export interface WeddingEvent {
   short: string;
   dress: string;
   swatch: { bg: string; edge: string };
-  /** the medallion is a button that plays the scene (Sangeet's dholak) */
-  playable?: string;
 }
 
 /** One line of the invitation card. `k` picks the typography. */

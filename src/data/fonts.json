@@ -1,7 +1,7 @@
 {
   "preload": [
-    "/fonts/amita-normal-700-devanagari.a272c1c8.woff2",
-    "/fonts/amita-normal-700-latin.609169c5.woff2",
-    "/fonts/tiro-hindi-normal-400-latin.0cbde597.woff2"
+    "/fonts/instrument-serif-italic-400-latin.5a51946d.woff2",
+    "/fonts/instrument-serif-normal-400-latin.5eb09b5a.woff2",
+    "/fonts/tiro-hindi-normal-400-devanagari.f6c0f32a.woff2"
   ]
 }

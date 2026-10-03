@@ -1,7 +1,6 @@
 ---
 // The invitation card in the family's words, in English, Marathi or Hindi. The switch is a CSS radio group:
 // no JavaScript, no history entries. The edge pre-selects the family's language.
-import Band from './Band.astro';
 import { copy, invitation } from '../data/wedding';
 import type { Block, Lang } from '../data/schema';
 const langs = Object.keys(invitation) as Lang[];
@@ -17,10 +16,10 @@ function groups(blocks: Block[]) {
   return out;
 }
 ---
-<section id="invite" class="paper" aria-labelledby="invTitle">
+<section id="invite" aria-labelledby="invTitle">
   <div class="inv">
-    <p class="eyebrow reveal"><span lang="mr" class="mr">{copy.invite.eyebrowDev}</span> · {copy.invite.eyebrow}</p>
-    <h2 id="invTitle" class="cal reveal">{copy.invite.title}</h2>
+    <p class="eyebrow reveal"><span lang="mr">{copy.invite.eyebrowDev}</span> · {copy.invite.eyebrow}</p>
+    <h2 id="invTitle" class="reveal">{copy.invite.title}</h2>
     <fieldset class="inv-set">
       <legend class="sr-only">{copy.invite.choose}</legend>
       {langs.map((l) => <input class="inv-radio sr-only" type="radio" name="invlang" id={'inv-' + l} value={l} checked={l === 'en'} />)}
@@ -40,5 +39,4 @@ function groups(blocks: Block[]) {
       </div>
     </fieldset>
   </div>
-  <Band />
 </section>

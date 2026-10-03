@@ -19,14 +19,15 @@ async function useWholeFonts(page: Page) {
 async function frames(page: Page) {
   await page.goto('/?g=abc234');
   await page.evaluate(() => document.fonts.ready);
-  const out: Record<string, Buffer> = { cover: await page.locator('#cover .cloth-body').screenshot() };
+  const out: Record<string, Buffer> = {};
+  for (const s of ['#cover .cv-top', '#cover .seal', '#cover .cv-bottom']) out[s] = await page.locator(s).screenshot();
   await page.locator('#openBtn').click();
   for (const l of ['en', 'mr', 'hi']) {
     await page.locator(`label[for="inv-${l}"]`).click();
     await page.evaluate(() => document.fonts.ready);
     out['invite-' + l] = await page.locator(`.inv-card.c-${l}`).screenshot();
   }
-  for (const s of ['.hero-plate', '.chapters', '#mangal .mg-inner', '#rsvp .rsvp', 'footer .foot', '#schedule .sched-head']) {
+  for (const s of ['#hero .h-in', '#through .th-cap', '.ch-haldi .ch-text', '.ch-sangeet .ch-text', '.ch-shaadi .ch-text', '#mangal .mg-inner', '#rsvp .rsvp', 'footer .foot', '#schedule .sched-head']) {
     await page.locator(s).scrollIntoViewIfNeeded();
     await page.evaluate(() => document.fonts.ready);
     out[s] = await page.locator(s).screenshot({ mask: [page.locator('#controls')] });

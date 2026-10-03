@@ -1,7 +1,9 @@
 /* the countdown sits sticky; the RSVP slides over it like a curtain */
 .curtain{position:relative}
-.count{position:sticky;top:0;z-index:1;padding:clamp(36px,11svh,96px) var(--gut) 40px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
-.units{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;width:min(100%,520px)}
-.unit{display:flex;flex-direction:column;align-items:center;gap:6px}
-.dial{width:clamp(66px,19vw,108px);aspect-ratio:1;border-radius:50%;background:var(--kagaz);color:var(--kajal);display:grid;place-items:center;overflow:hidden;box-shadow:-3px 0 0 0 var(--zari),3px 0 0 0 var(--chuna),0 0 0 6px var(--kajal)}
-.dial b{display:block;font-family:Amita,"Tiro Devanagari Hindi",Georgia,serif;font-size:clamp(26px,7vw,42px);font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.count{position:sticky;top:0;z-index:1;padding:clamp(48px,12svh,110px) var(--gut) clamp(40px,8svh,80px);display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;background:var(--paper-2)}
+.units{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:min(100%,560px);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.unit{display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px 0 12px;overflow:hidden}
+.unit + .unit{border-left:1px solid var(--hair)}
+.unit b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(44px,13vw,84px);line-height:1;font-variant-numeric:tabular-nums}
+.unit i{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-style:normal;color:var(--ink-2)}
+.count-when{font-family:var(--display);font-style:italic;font-size:clamp(22px,5.6vw,30px);line-height:1.2}

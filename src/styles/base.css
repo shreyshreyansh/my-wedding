@@ -1,23 +1,39 @@
-/* tokens and base type */
+/* tokens and base type: a quiet folio. Ivory paper and ink; colour comes from the art; gold only on dark or as ink. */
 :root{
-  --rani:#A3195B; --rani-deep:#8A1450; --mor:#0E5C63; --zari:#C9A04A; --zari-hi:#F2D98C; --chuna:#F5EFE3;
-  --kagaz:#EFE3C8; --kajal:#2B211B; --sindoor:#B3261E; --haldi:#D99A1E; --neel:#2F3E73;
-  --sal:#5E6B3A; --deep:#7A3522; --zari-ink:#86661C;
-  --selv:clamp(8px,1.1vw,16px);
-  --gut:calc(var(--selv) + 20px);
+  --paper:#F4EEE3; --paper-2:#EBE2D0; --ink:#1F1915; --ink-2:#5A4E45; --hair:rgba(31,25,21,.16);
+  --night:#1A1220; --night-2:#251A2C; --night-zari:#D8B46A; --zari:#C9A04A; --zari-hi:#F2DFA2;
+  --gold-ink:#7A4E12; --rani:#8E1A50; --sindoor:#A8281E; --mor:#0E4F55; --haldi:#D99A1E;
+  /* older names, still used by the RSVP and burst colours */
+  --chuna:#F4EEE3; --kagaz:#EBE2D0; --kajal:#1F1915;
+  --display:"Instrument Serif","Tiro Devanagari Hindi",Georgia,serif;
+  /* hand-made paper from a 1922 Canson sample book (src/data/art.json, "paper"), toned to the ivory */
+  --paper-bg:var(--paper) url(/art/paper-1922.webp) 0 0/760px auto;
+  --gut:clamp(20px,5vw,56px);
   color-scheme:light;
 }
 *{box-sizing:border-box}
-html{touch-action:manipulation}
+html{touch-action:manipulation;background:var(--paper)}
 html.locked,html.locked body{overflow:hidden}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
 .lenis.lenis-stopped{overflow:hidden}
-body{margin:0;background:var(--kagaz);color:var(--kajal);font-family:"Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif;font-size:clamp(18px,.4vw + 16.5px,20px);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
-.cal{font-family:Amita,"Tiro Devanagari Hindi",Georgia,serif}
-.mr{font-family:"Tiro Devanagari Marathi","Noto Serif Devanagari",Georgia,serif}
-h1,h2,h3{text-wrap:balance}
+body{margin:0;background:var(--paper-bg);color:var(--ink);font-family:"Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif;font-size:clamp(18px,.4vw + 16.5px,20px);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+:lang(mr){font-family:"Tiro Devanagari Marathi","Noto Serif Devanagari",Georgia,serif}
+h1,h2,h3{text-wrap:balance;font-weight:400}
 a{color:inherit}
-:focus-visible{outline:3px solid var(--zari);outline-offset:3px}
-.word{display:inline-block;white-space:nowrap}
-.ch{display:inline-block;will-change:transform}
+:focus-visible{outline:2px solid var(--gold-ink);outline-offset:3px}
+
+/* the shared editorial pieces */
+.eyebrow{margin:0;font-size:.78rem;line-height:1.5;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-ink)}
+.eyebrow span{font-size:1.15em;letter-spacing:0;text-transform:none}
+.sec-title{margin:0;font-family:var(--display);font-size:clamp(44px,11vw,88px);line-height:.98;letter-spacing:-.01em}
+.sec-title em,h2 em{font-style:italic}
+/* a museum label under each artwork */
+.label{margin:0;font-size:.8rem;line-height:1.45;letter-spacing:.02em;color:var(--ink-2)}
+.label span{font-style:italic}
+.night{background:var(--night);color:var(--paper)}
+.night .eyebrow{color:var(--night-zari)}
+.night .label{color:rgba(244,238,227,.66)}
+picture{display:block}
+picture img{display:block;width:100%;height:auto;background:var(--ph)}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}

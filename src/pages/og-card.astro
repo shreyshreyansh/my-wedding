@@ -1,11 +1,11 @@
 ---
 // Tooling only (removed from dist after the build): the 1200×630 link-preview card and the app icon,
-// photographed by scripts/og.mjs. The medallion and names sit in the centre square, which WhatsApp may crop to.
+// photographed by scripts/og.mjs. The names sit in the centre square, which WhatsApp may crop to.
 import '../styles/fonts.css';
 import '../styles/base.css';
-import '../styles/textiles.css';
-import { medallion } from '../art/peacock';
+import files from '../data/art-files.json';
 import { couple, dates, venue } from '../data/wedding';
+const wide = files.silk.wide.avif[0][0], tall = files.silk.tall.avif[1][0];
 ---
 <!doctype html>
 <html lang="en">
@@ -14,33 +14,30 @@ import { couple, dates, venue } from '../data/wedding';
 <meta name="robots" content="noindex">
 <title>card</title>
 <style>
-  body{margin:0;background:#2B211B}
-  #card{position:relative;width:1200px;height:630px;overflow:hidden;display:flex;flex-direction:column;align-items:center}
-  #card .half{position:absolute;top:0;bottom:0;width:50%}
-  #card .l{left:0}#card .r{right:0}
-  #card .edge{position:absolute;top:0;bottom:0;width:22px}
-  #card .edge.l{left:0}#card .edge.r{right:0;border-left:2px solid var(--kajal)}
-  #card .inv{position:relative;margin:24px 0 0;padding:2px 14px;background:var(--kajal);color:var(--chuna);font-size:20px}
-  #card .med{position:relative;width:330px;height:330px;margin-top:8px}
-  #card .med svg{display:block;width:100%;height:100%}
-  #card .names{position:relative;margin-top:12px;padding:10px 28px 12px;background:var(--kajal);color:var(--chuna);text-align:center;box-shadow:0 0 0 3px var(--zari)}
-  #card .nm{font-family:Amita,serif;font-weight:700;font-size:52px;line-height:1.1;margin:0}
-  #card .nm span{color:var(--zari)}
-  #card .dn{font-family:Amita,serif;font-size:28px;color:var(--zari);line-height:1.3}
-  #card .date{position:relative;margin-top:14px;font-size:22px;font-style:italic;color:var(--kajal);background:var(--kagaz);padding:2px 14px}
-  #icon{width:512px;height:512px;display:grid;place-items:center;background:var(--kagaz)}
-  #icon svg{width:480px;height:480px}
+  body{margin:0;background:#1A1220}
+  #card{position:relative;width:1200px;height:630px;overflow:hidden;color:#F4EEE3;text-align:center}
+  #card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  #card .shade{position:absolute;inset:0;background:radial-gradient(ellipse 360px 300px at 50% 50%,rgba(26,18,32,.9) 0,rgba(26,18,32,.78) 55%,rgba(26,18,32,.25) 100%)}
+  #card .in{position:absolute;left:285px;top:0;width:630px;height:630px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  #card .inv{margin:0 0 14px;font-size:20px;color:#F2DFA2}
+  #card .nm{margin:0;font-family:var(--display);font-size:104px;line-height:.86;letter-spacing:-.01em}
+  #card .amp{display:block;font-style:italic;font-size:52px;line-height:1.1;color:#F2DFA2}
+  #card .dn{margin-top:14px;font-size:30px;color:#D8B46A}
+  #card .date{margin-top:14px;font-size:17px;letter-spacing:.18em;text-transform:uppercase}
+  #icon{width:512px;height:512px;background-color:#8E1A50;background-repeat:no-repeat;background-size:1047px auto;background-position:-257px -986px}
 </style>
 </head>
 <body>
 <div id="card">
-  <div class="half l silk"></div><div class="half r paper"></div>
-  <div class="edge l zari"></div><div class="edge r hatch"></div>
-  <p class="inv" lang="hi">॥ श्री गणेशाय नमः ॥</p>
-  <div class="med" set:html={medallion('garland', 'closed')}></div>
-  <div class="names"><p class="nm">{couple.groom.en} <span>&amp;</span> {couple.bride.en}</p><div class="dn" lang="hi">{couple.bothDev}</div></div>
-  <p class="date">{dates.short} · {venue.city}</p>
+  <img src={wide} alt="">
+  <div class="shade"></div>
+  <div class="in">
+    <p class="inv" lang="hi">॥ श्री गणेशाय नमः ॥</p>
+    <p class="nm">{couple.groom.en}<span class="amp">&amp;</span>{couple.bride.en}</p>
+    <div class="dn" lang="hi">{couple.bothDev}</div>
+    <div class="date">{dates.short} · {venue.city}</div>
+  </div>
 </div>
-<div id="icon" set:html={medallion('apart', 'none')}></div>
+<div id="icon" style={'background-image:url(' + tall + ')'}></div>
 </body>
 </html>

@@ -18,7 +18,7 @@ test('every scroll animation moves and ends in its final state, with no errors',
   page.on('pageerror', (e) => errors.push(e.message));
   page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
   await page.goto('/?g=abc234');
-  await expect(page.locator('#cover .cv-cta')).toBeVisible();
+  await expect(page.locator('#openBtn')).toBeVisible();
   await page.waitForTimeout(2600);
   await page.locator('#openBtn').click();
   await expect(page.locator('#cover')).toHaveCount(0, { timeout: 5000 });
@@ -29,7 +29,7 @@ test('every scroll animation moves and ends in its final state, with no errors',
     w.__seen = w.__trig.map((t) => new Set([t.progress.toFixed(3)]));
     return w.__trig.length;
   });
-  expect(count).toBeGreaterThan(30);
+  expect(count).toBeGreaterThan(20);
   await scrollThrough(page, () => page.evaluate(() => {
     const w = window as unknown as { __trig: { progress: number }[]; __seen: Set<string>[] };
     w.__trig.forEach((t, i) => w.__seen[i].add(t.progress.toFixed(3)));
@@ -40,13 +40,13 @@ test('every scroll animation moves and ends in its final state, with no errors',
   });
   expect(still, 'triggers whose progress never changed').toEqual([]);
   const done = await page.evaluate(() => ({
-    chapterTitles: [...document.querySelectorAll('.chapter h3 .ch')].every((c) => getComputedStyle(c).opacity === '1'),
+    chapterTitles: [...document.querySelectorAll('.chapter h3')].every((c) => getComputedStyle(c).opacity === '1'),
+    platesOpen: [...document.querySelectorAll('.plate-art')].every((p) => /^inset\(0(px|%)?( 0(px|%)?)*\)$|^none$/.test(getComputedStyle(p).clipPath)),
     verseLit: [...document.querySelectorAll('#verse .vw')].every((c) => +getComputedStyle(c).opacity > 0.99),
-    threadsDrawn: [...document.querySelectorAll<SVGPathElement>('.threads path')].every((p) => parseFloat(p.style.strokeDashoffset || '0') < 0.01),
-    rsvpTitle: [...document.querySelectorAll('#rsvp h2 .ch')].every((c) => getComputedStyle(c).opacity === '1'),
-    meetingDone: getComputedStyle(document.querySelector('#meeting .cap:last-child')!).opacity === '1'
+    rsvpTitle: getComputedStyle(document.querySelector('#rsvp h2')!).opacity === '1',
+    throughDone: getComputedStyle(document.querySelector('#through .th-silk')!).visibility === 'hidden' && getComputedStyle(document.querySelector('#through .th-line')!).opacity === '1'
   }));
-  expect(done).toEqual({ chapterTitles: true, verseLit: true, threadsDrawn: true, rsvpTitle: true, meetingDone: true });
+  expect(done).toEqual({ chapterTitles: true, platesOpen: true, verseLit: true, rsvpTitle: true, throughDone: true });
   expect(errors).toEqual([]);
 });
 
@@ -56,7 +56,7 @@ test('Gentle motion stops everything in its final state, and full motion comes b
   await page.locator('#openBtn').click();
   await expect(page.locator('#cover')).toHaveCount(0, { timeout: 5000 });
   const triggers = () => page.evaluate(() => (window as unknown as { __motion: { ScrollTrigger: { getAll(): unknown[] } } }).__motion.ScrollTrigger.getAll().length);
-  expect(await triggers()).toBeGreaterThan(30);
+  expect(await triggers()).toBeGreaterThan(20);
   const btn = page.locator('#motionBtn');
   await btn.scrollIntoViewIfNeeded();
   await btn.click();
@@ -64,12 +64,12 @@ test('Gentle motion stops everything in its final state, and full motion comes b
   await expect(page.locator('html')).not.toHaveClass(/\bmotion\b/);
   await expect(btn).toHaveAttribute('aria-pressed', 'true');
   expect(await triggers()).toBe(0);
-  await expect(page.locator('#meeting .cap').first()).toBeHidden();
-  await expect(page.locator('#meeting .cap').last()).toBeVisible();
+  await expect(page.locator('#through .th-silk')).toBeHidden();
+  await expect(page.locator('#through .th-line')).toBeVisible();
   expect(await page.evaluate(() => localStorage.getItem('sm-motion'))).toBe('gentle');
   await btn.click();
   await expect(page.locator('html')).toHaveClass(/\bmotion\b/);
-  await expect.poll(triggers).toBeGreaterThan(30);
+  await expect.poll(triggers).toBeGreaterThan(20);
   expect(await page.evaluate(() => localStorage.getItem('sm-motion'))).toBe('full');
 });
 

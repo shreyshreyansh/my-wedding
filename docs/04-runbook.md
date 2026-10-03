@@ -10,7 +10,7 @@ For whoever sets the site up (a developer, once) and for the family members who 
 | The guest list, phone numbers, replies | The family's Google Sheet | Family |
 | Who is invited to what (no phone numbers) | Cloudflare KV key `guests`, published from the Sheet | Sheet menu |
 | Each family's latest reply | Cloudflare KV `r:<code>`, copied to the Sheet | The site |
-| The site | Cloudflare Pages, built from this repo | Developer |
+| The site | Cloudflare Workers, built from this repo | Developer |
 
 The guest list never goes into this repository. Keep exports in `private/`, which git ignores.
 
@@ -122,6 +122,7 @@ npm run test:unit
 npx playwright test visual --update-snapshots   # after an intended visual change; look at tests/__golden__ before committing
 npm run fonts          # after changing text: re-cut the fonts to the page (needs Python: pip install fonttools brotli)
 npm run og             # re-shoot the link preview and icons
+npm run art            # re-cut the paintings and textiles in src/data/art.json (see 05-art-sources.md)
 ```
 
 The tests need nothing online except `npm run fonts` (it downloads the fonts once).

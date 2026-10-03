@@ -46,7 +46,7 @@ export function initRsvp(labels: { send: string; sending: string; none: string }
   let guest: GuestInfo;
   try { guest = JSON.parse(data.textContent || ''); } catch { return; }
   const pendingKey = 'sm-pending:' + guest.code;
-  const thanks = $('.r-thanks', sec)!, failed = $('.r-failed', form)!, sendLabel = $('.r-send .cal', form)!;
+  const thanks = $('.r-thanks', sec)!, failed = $('.r-failed', form)!, sendLabel = $('.r-send span', form)!;
   const inputs = $$<HTMLInputElement>('input.r-count', form);
   const setState = (s: string) => { sec.dataset.rsvp = s; };
   const max = (i: HTMLInputElement) => Number(i.max) || guest.max || 20;

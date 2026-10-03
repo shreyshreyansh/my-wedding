@@ -1,0 +1,108 @@
+{
+ "silk": {
+  "src": "https://openaccess-cdn.clevelandart.org/1916.1213/1916.1213_print.jpg",
+  "page": "https://clevelandart.org/art/1916.1213",
+  "title": "Fragment of Gold Cloth",
+  "date": "1800s",
+  "place": "India",
+  "medium": "Silk brocade with gold and silver threads",
+  "museum": "The Cleveland Museum of Art",
+  "credit": "The Cleveland Museum of Art, Gift of Mr. and Mrs. J. H. Wade 1916.1213",
+  "licence": "CC0",
+  "alt": "Magenta silk woven with gold flowers, a gold medallion at its centre and wide gold end bands.",
+  "crops": {
+   "tall": {"box": [0.29, 0.03, 0.44, 0.935], "widths": [540, 720], "webp": [540], "median": 3, "q": {"avif": 46, "webp": 60}},
+   "wide": {"rotate": 90, "box": [0.037, 0.055, 0.928, 0.89], "widths": [1280, 1920], "webp": [1280], "median": 3, "q": {"avif": 46, "webp": 60}}
+  }
+ },
+ "ganesha": {
+  "src": "https://openaccess-cdn.clevelandart.org/2005.84/2005.84_print.jpg",
+  "page": "https://clevelandart.org/art/2005.84",
+  "title": "Large, multi-armed figure facing out",
+  "date": "1900s",
+  "place": "Mithila, Bihar",
+  "medium": "Ink and colour on paper",
+  "museum": "The Cleveland Museum of Art",
+  "credit": "The Cleveland Museum of Art, Gift of Pamela Elizabeth Ward in loving memory of her parents, William E. and Evelyn Svec Ward 2005.84",
+  "licence": "CC0",
+  "alt": "A Mithila (Madhubani) painting of Ganesha, many-armed, in magenta, yellow and green, framed by leaves and flowers.",
+  "crops": {
+   "tall": {"box": [0.04, 0.025, 0.92, 0.95], "widths": [600, 900, 1200], "webp": [600], "q": {"avif": 50, "webp": 70}}
+  }
+ },
+ "haldi": {
+  "src": "https://ids.si.edu/ids/iiif/FS-S2018.1.51_001crop/full/!4000,4000/0/default.jpg",
+  "page": "https://asia.si.edu/object/S2018.1.51/",
+  "title": "Kakubha Ragini, folio from a Ragamala",
+  "date": "c. 1630",
+  "place": "probably Marwar, Rajasthan",
+  "medium": "Opaque watercolour on paper",
+  "museum": "National Museum of Asian Art, Smithsonian",
+  "credit": "National Museum of Asian Art, Smithsonian Institution, Purchase and partial gift from the Catherine and Ralph Benkaim Collection, Friends of the National Museum of Asian Art, S2018.1.51",
+  "licence": "CC0",
+  "alt": "A woman holding two garlands stands between two peacocks on a turmeric-yellow ground, under dark trees.",
+  "crops": {
+   "tall": {"box": [0.05, 0.17, 0.9, 0.76], "widths": [600, 900, 1200], "webp": [600], "q": {"avif": 50, "webp": 70}}
+  }
+ },
+ "sangeet": {
+  "src": "https://openaccess-cdn.clevelandart.org/1971.82/1971.82_print.jpg",
+  "page": "https://clevelandart.org/art/1971.82",
+  "title": "Royal Women Celebrating Diwali",
+  "date": "c. 1760",
+  "place": "Lucknow, Uttar Pradesh",
+  "medium": "Gum tempera and gold on paper",
+  "museum": "The Cleveland Museum of Art",
+  "credit": "The Cleveland Museum of Art, Andrew R. and Martha Holden Jennings Fund 1971.82",
+  "licence": "CC0",
+  "alt": "Women light sparklers on a palace terrace at night; gold fireworks fill the dark sky.",
+  "crops": {
+   "tall": {"box": [0.38, 0.05, 0.5, 0.82], "widths": [600, 900, 1200], "webp": [600], "q": {"avif": 50, "webp": 70}},
+   "wide": {"box": [0.045, 0.045, 0.91, 0.885], "widths": [1200, 1800], "webp": [1200], "q": {"avif": 50, "webp": 70}}
+  }
+ },
+ "shaadi": {
+  "src": "https://ids.si.edu/ids/iiif/FS-S2018.1.29_001crop/full/!4000,4000/0/default.jpg",
+  "page": "https://asia.si.edu/object/S2018.1.29/",
+  "title": "Wedding Ceremony with Brahma in Attendance",
+  "date": "c. 1680",
+  "place": "Ajmer, Rajasthan",
+  "medium": "Opaque watercolour on paper",
+  "museum": "National Museum of Asian Art, Smithsonian",
+  "credit": "National Museum of Asian Art, Smithsonian Institution, Purchase and partial gift from the Catherine and Ralph Benkaim Collection, Friends of the National Museum of Asian Art, S2018.1.29",
+  "licence": "CC0",
+  "alt": "A bride and groom sit by the sacred fire under a toran of mango leaves, between towers of painted pots, as Brahma chants.",
+  "crops": {
+   "tall": {"box": [0.02, 0.13, 0.96, 0.85], "widths": [600, 900, 1200], "webp": [600], "q": {"avif": 50, "webp": 70}}
+  }
+ },
+ "lotus": {
+  "src": "https://openaccess-cdn.clevelandart.org/2018.155/2018.155_print.jpg",
+  "page": "https://clevelandart.org/art/2018.155",
+  "title": "Vishnu on Ananta, the Endless Serpent",
+  "date": "c. 1700",
+  "place": "Chamba, Himachal Pradesh",
+  "medium": "Gum tempera and gold on paper",
+  "museum": "The Cleveland Museum of Art",
+  "credit": "The Cleveland Museum of Art, Purchase and partial gift from the Catherine and Ralph Benkaim Collection; Severance and Greta Millikin Purchase Fund 2018.155",
+  "licence": "CC0",
+  "alt": "",
+  "crops": {
+   "frieze": {"box": [0.03, 0.015, 0.93, 0.13], "widths": [900, 1600], "webp": [900], "q": {"avif": 50, "webp": 70}}
+  }
+ },
+ "paper": {
+  "src": "https://archive.org/download/samplebookoffren00cans/samplebookoffren00cans_orig_jp2.tar/samplebookoffren00cans_orig_jp2%2Fsamplebookoffren00cans_orig_0016.jp2",
+  "page": "https://archive.org/details/samplebookoffren00cans/page/n16/mode/1up",
+  "title": "Ingres hand-made paper, from a sample book of French papers",
+  "date": "1922",
+  "place": "Canson & Montgolfier, France",
+  "medium": "Paper",
+  "museum": "Internet Archive (Getty Research Institute)",
+  "credit": "Paper sample from a Canson & Montgolfier sample book, 1922, Getty Research Institute via Internet Archive",
+  "licence": "public domain",
+  "alt": "",
+  "tile": "/art/paper-1922.webp",
+  "crops": {}
+ }
+}

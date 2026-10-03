@@ -1,25 +1,29 @@
 ---
+// One celebration: its painting as a full-bleed plate with a museum label, then when, where and what to wear.
+import Art from './Art.astro';
 import RiteTokens from './RiteTokens.astro';
-import { eventArt } from '../art/events';
-import { letters } from '../art/decor';
+import art from '../data/art.json';
 import type { WeddingEvent } from '../data/schema';
-import { venue } from '../data/wedding';
-interface Props { ev: WeddingEvent; last: boolean }
-const { ev, last } = Astro.props;
-const art = eventArt(ev.id);
+import { copy, venue } from '../data/wedding';
+interface Props { ev: WeddingEvent; n: number }
+const { ev, n } = Astro.props;
+const a = art[ev.id];
+const DEV = '०१२३४५६७८९';
 ---
-<article class="chapter" data-event={ev.id}>
-  {ev.playable
-    ? <button type="button" class="med medbtn" aria-label={ev.playable} set:html={art}></button>
-    : <div class="med" set:html={art}></div>}
-  <h3 class="cal letters wave" set:html={letters(ev.name.en)}></h3>
-  <div class="cal dn reveal">{ev.dn.map((d, i) => <Fragment>{i > 0 && ' · '}<span lang={d.lang}>{d.text}</span></Fragment>)}</div>
-  <p class="story reveal" style="margin:0">{ev.story}</p>
-  <dl class="reveal">
-    <dt>When</dt><dd>{ev.when}</dd>
-    <dt>Where</dt><dd>{venue.full}</dd>
-    <dt>Wear</dt><dd><span class="swatch" style={'background:' + ev.swatch.bg + ';--edge:' + ev.swatch.edge}></span>{ev.dress}</dd>
-  </dl>
-  <RiteTokens ev={ev} />
-  {!last && <svg class="threads" viewBox="0 0 60 130" width="60" height="130" aria-hidden="true"><path pathLength="1" d="M30 0C54 22 6 44 30 65S6 108 30 130" fill="none" stroke="#C9A04A" stroke-width="3"/><path pathLength="1" d="M30 0C6 22 54 44 30 65S54 108 30 130" fill="none" stroke="#2B211B" stroke-width="1.6"/></svg>}
+<article class={'chapter ch-' + ev.id} data-event={ev.id}>
+  <figure class="plate-fig">
+    <div class="plate-art"><Art id={ev.id} wide={'wide' in a.crops ? 'wide' : undefined} sizes="(min-width: 1024px) 50vw, 100vw" /></div>
+    <figcaption class="label"><span>{a.title}</span> · {a.place}, {a.date} · {a.museum}</figcaption>
+  </figure>
+  <div class="ch-text">
+    <p class="ch-no reveal"><span class="num" lang="hi">{DEV[0] + DEV[n]}</span>{ev.dn.map((d, i) => <Fragment>{i > 0 && ' · '}<span lang={d.lang}>{d.text}</span></Fragment>)}</p>
+    <h3 class="reveal">{ev.name.en}</h3>
+    <p class="story reveal">{ev.story}</p>
+    <dl class="reveal">
+      <div><dt>{copy.schedule.when}</dt><dd>{ev.when}</dd></div>
+      <div><dt>{copy.schedule.where}</dt><dd>{venue.full}</dd></div>
+      <div><dt>{copy.schedule.wear}</dt><dd><span class="swatch" style={'--sw:' + ev.swatch.bg}></span>{ev.dress}</dd></div>
+    </dl>
+    <RiteTokens ev={ev} />
+  </div>
 </article>

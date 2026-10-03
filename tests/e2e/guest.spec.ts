@@ -37,15 +37,13 @@ test('a Hindi family: their name in Devanagari, the Hindi card, all three events
   for (const id of ['haldi', 'sangeet', 'shaadi']) await expect(page.locator('#n-' + id)).toHaveValue('4');
 });
 
-test('a Marathi family invited to two events sees only those, and no loose thread after the last', async ({ page }) => {
+test('a Marathi family invited to two events sees only those', async ({ page }) => {
   await page.goto('/?g=mrw567');
   await openCover(page);
   await expect(page.locator('#inv-mr')).toBeChecked();
   await expect(page.locator('.inv-card.c-mr')).toBeVisible();
   await expect(page.locator('.chapter')).toHaveCount(2);
   await expect(page.locator('.chapter[data-event="haldi"]')).toHaveCount(0);
-  await expect(page.locator('.chapter[data-event="sangeet"] .threads')).toHaveCount(1);
-  await expect(page.locator('.chapter[data-event="shaadi"] .threads')).toHaveCount(0);
   await expect(page.locator('[data-count-title]')).toHaveText('two celebrations');
   await expect(page.locator('.row[data-event]')).toHaveCount(2);
 });

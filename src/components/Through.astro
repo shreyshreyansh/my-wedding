@@ -1,0 +1,19 @@
+---
+// Through the medallion: the cover's silk comes back over the page with its gold medallion open, and scrolling
+// flies through it into a Mithila painting of Ganesha, with whom every invitation begins.
+import Art from './Art.astro';
+import art from '../data/art.json';
+import { copy } from '../data/wedding';
+const g = art.ganesha;
+---
+<section id="through" aria-labelledby="thTitle">
+  <div class="th-pin">
+    <Art id="ganesha" class="th-art" sizes="(min-aspect-ratio: 1/1) 60vh, 100vw" />
+    <div class="th-silk" aria-hidden="true"><Art id="silk" crop="tall" wide="wide" alt="" /></div>
+    <div class="th-cap">
+      <p id="thTitle" lang="hi" class="th-inv">{copy.through.invocation}</p>
+      <p class="th-line">{copy.through.line}</p>
+      <p class="label"><span>{copy.through.label}</span> · {g.place}, {g.date} · {g.museum}</p>
+    </div>
+  </div>
+</section>

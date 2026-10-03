@@ -1,18 +1,9 @@
 /* Still pages: the OS asks for reduced motion (html.still, set in the head), the guest chose gentle motion,
    or the motion chunk hasn't loaded (html:not(.motion)). Every section shows its final state. */
 html:not(.js) #cover{display:none}
-.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
-@media (max-width:599px){.fl.wide,.strand.wide{display:none}}
-
-/* the meeting's last frame: fans open, tails folded away, the last caption */
-html:not(.motion) #meetSvg .tail{visibility:hidden}
-html:not(.motion) #meeting .cap:not(:last-child){visibility:hidden}
-
-html.still .strand svg,html.still .savdhan,html.still .hang svg,html.still #cover .cloth::after{animation:none}
-html.still .tw,html.still #cover .cloth::after,html.still .btn-primary::after,html.still .seal::after{display:none}
+html.still .savdhan{animation:none}
 html.still .count{position:relative}
-html.still .seal-wrap .halo + .ring{opacity:.9;inset:-7px}
 @media (prefers-reduced-motion:reduce){
-  html:not(.js) .strand svg,html:not(.js) .savdhan{animation:none}
+  html:not(.js) .savdhan{animation:none}
   html:not(.js) .count{position:relative}
 }

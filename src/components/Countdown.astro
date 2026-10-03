@@ -2,10 +2,10 @@
 import { copy, dates } from '../data/wedding';
 const ids = ['d', 'h', 'm', 's'];
 ---
-<div class="count plate" id="count" data-target={dates.countdown}>
-  <p class="eyebrow"><span lang="mr" class="mr">{copy.count.eyebrowDev}</span> · {copy.count.eyebrow}</p>
+<div class="count" id="count" data-target={dates.countdown}>
+  <p class="eyebrow"><span lang="mr">{copy.count.eyebrowDev}</span> · {copy.count.eyebrow}</p>
   <div class="units">
-    {ids.map((k, i) => <div class="unit"><div class="dial"><b id={'cd-' + k}>–</b></div><i>{copy.count.units[i]}</i></div>)}
+    {ids.map((k, i) => <div class="unit"><b id={'cd-' + k}>–</b><i>{copy.count.units[i]}</i></div>)}
   </div>
-  <span>{dates.countdownLabel}</span>
+  <span class="count-when">{dates.countdownLabel}</span>
 </div>

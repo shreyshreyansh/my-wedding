@@ -18,12 +18,17 @@ const lenis = js.find((p) => /\/lenis\.[\w-]+\.js$/.test(p));
 if (!entry || !motion) fails.push('could not find the entry or motion script');
 
 /* what a phone downloads before the cover is fully drawn */
-const coverFonts = all.filter((p) => /fonts\/(amita-normal-700-(latin|devanagari)|tiro-hindi-(normal|italic)-400-(latin|devanagari))\.\w+\.woff2$/.test(p));
+const coverFonts = all.filter((p) => /fonts\/(instrument-serif-(normal|italic)-400-latin|tiro-hindi-normal-400-(latin|devanagari))\.\w+\.woff2$/.test(p));
 const phoneJs = (entry ? gz(join(DIST, entry)) : 0) + (motion ? gz(motion) : 0);
 check('first view (HTML + JS + cover fonts, gzip)', gz(join(DIST, 'index.html')) + phoneJs + coverFonts.reduce((a, p) => a + statSync(p).size, 0), 300 * KB);
 check('JavaScript on a phone (gzip)', phoneJs, 75 * KB);
+/* the cover silk a phone fetches: the largest AVIF in the cover's portrait srcset */
+const coverImg = /<div id="cover"[\s\S]*?<source type="image\/avif" srcset="([^"]+)"/.exec(html)?.[1];
+if (!coverImg) fails.push('could not find the cover silk');
+else check('cover silk on a phone', Math.max(...coverImg.split(',').map((c) => statSync(join(DIST, c.trim().split(' ')[0])).size)), 120 * KB);
 if (lenis) check('smooth scroll, mouse only (gzip)', gz(lenis), 10 * KB);
-check('everything in dist', all.reduce((a, p) => a + statSync(p).size, 0), 3 * KB * KB);
+/* the museum art comes in several sizes and formats; a guest fetches one of each */
+check('everything in dist', all.reduce((a, p) => a + statSync(p).size, 0), 8 * KB * KB);
 for (const p of all.filter((p) => /\/audio\//.test(p))) check('audio ' + relative(DIST, p), statSync(p).size, 1000 * 1000);
 
 /* the WhatsApp preview: tags early in the page, the image the right size */

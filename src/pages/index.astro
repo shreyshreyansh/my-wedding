@@ -1,12 +1,10 @@
 ---
 import '../styles/fonts.css';
 import '../styles/base.css';
-import '../styles/textiles.css';
 import '../styles/buttons.css';
 import '../styles/cover.css';
 import '../styles/hero.css';
-import '../styles/ribbons.css';
-import '../styles/meeting.css';
+import '../styles/through.css';
 import '../styles/schedule.css';
 import '../styles/mangal.css';
 import '../styles/curtain.css';
@@ -17,8 +15,7 @@ import '../styles/footer.css';
 import '../styles/gentle.css';
 import Cover from '../components/Cover.astro';
 import Hero from '../components/Hero.astro';
-import Ribbons from '../components/Ribbons.astro';
-import Meeting from '../components/Meeting.astro';
+import Through from '../components/Through.astro';
 import Schedule from '../components/Schedule.astro';
 import Mangal from '../components/Mangal.astro';
 import Countdown from '../components/Countdown.astro';
@@ -43,9 +40,6 @@ assertComplete();
 <script is:inline>(function(d){var h=d.documentElement;if(!('noModule' in d.createElement('script')))return;h.className+=' js locked';var p=null;try{p=localStorage.getItem('sm-motion')}catch(e){}if(p==='gentle'||(p!=='full'&&window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))h.className+=' still'})(document);</script>
 </head>
 <body>
-<div class="selv l zari" aria-hidden="true"></div>
-<div class="selv r hatch" aria-hidden="true"></div>
-<div id="progress" aria-hidden="true"></div>
 <div id="akshata" aria-hidden="true"></div>
 
 <Cover />
@@ -53,8 +47,7 @@ assertComplete();
 
 <main>
   <Hero />
-  <Ribbons />
-  <Meeting />
+  <Through />
   <Invitation />
   <Schedule />
   <Mangal />

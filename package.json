@@ -12,6 +12,7 @@
     "codes": "node scripts/codes.mjs",
     "audio": "node scripts/audio.mjs",
     "fonts": "node scripts/fonts.mjs",
+    "art": "node scripts/art.mjs",
     "og": "astro build && node scripts/og.mjs",
     "budget": "node scripts/budget.mjs",
     "test": "playwright test",
