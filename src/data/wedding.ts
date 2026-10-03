@@ -5,12 +5,12 @@ import { todo, type Block, type Lang, type Tri, type WeddingEvent } from './sche
 /* ---------- the couple (groom first: his family hosts, in Ranchi) ---------- */
 const parents = {
   groom: {
-    father: { en: todo('Groom’s father, English'), mr: todo('Groom’s father, Marathi'), hi: todo('Groom’s father, Hindi') } as Tri,
-    mother: { en: todo('Groom’s mother, English'), mr: todo('Groom’s mother, Marathi'), hi: todo('Groom’s mother, Hindi') } as Tri
+    father: { en: 'Umesh Kumar Sinha', mr: 'उमेश कुमार सिन्हा', hi: 'उमेश कुमार सिन्हा' } as Tri,
+    mother: { en: 'Rupa Sinha', mr: 'रूपा सिन्हा', hi: 'रूपा सिन्हा' } as Tri
   },
   bride: {
-    father: { en: todo('Bride’s father, English'), mr: todo('Bride’s father, Marathi'), hi: todo('Bride’s father, Hindi') } as Tri,
-    mother: { en: todo('Bride’s mother, English'), mr: todo('Bride’s mother, Marathi'), hi: todo('Bride’s mother, Hindi') } as Tri
+    father: { en: 'Shriharsh Waghmare', mr: 'श्रीहर्ष वाघमारे', hi: 'श्रीहर्ष वाघमारे' } as Tri,
+    mother: { en: 'Sumati Waghmare', mr: 'सुमती वाघमारे', hi: 'सुमती वाघमारे' } as Tri
   }
 };
 
@@ -101,7 +101,7 @@ export const invitation: Record<Lang, { label: string; blocks: Block[] }> = {
     label: 'English',
     blocks: [
       { k: 'invocation', t: '॥ Shri Ganeshaya Namah ॥ · ॥ Namo Buddhaya ॥' },
-      { k: 'lead', t: 'With the blessings of our elders and the grace of God, we request the pleasure of your company at the wedding of' },
+      { k: 'lead', t: 'With the blessings of our elders, we request the pleasure of your company at the wedding of' },
       { k: 'name', t: 'Shreyansh' },
       { k: 'parents', t: 'son of Mr ' + P.groom.father.en + ' & Mrs ' + P.groom.mother.en },
       { k: 'join', t: 'with' },
@@ -110,26 +110,25 @@ export const invitation: Record<Lang, { label: string; blocks: Block[] }> = {
       { k: 'when', t: 'Wednesday, 9 December 2026' },
       { k: 'where', t: '8:00 in the evening · Haveli Banquet, Ranchi' },
       { k: 'note', t: 'Please accept this invitation as our personal visit.' },
-      { k: 'sign', t: 'With love, ' + todo('Inviting family names, English') }
+      { k: 'sign', t: 'With love, Umesh Kumar & Rupa Sinha and Shriharsh & Sumati Waghmare' }
     ]
   },
   mr: {
     label: 'मराठी',
     blocks: [
       { k: 'invocation', t: '॥ श्री गणेशाय नमः ॥ · ॥ नमो बुद्धाय ॥' },
-      { k: 'deity', t: '॥ श्री ' + todo('Kulaswamini, Marathi') + ' प्रसन्न ॥' },
       { k: 'lead', t: 'सप्रेम नमस्कार वि. वि.' },
-      { k: 'lead', t: 'श्रीकृपेकरून' },
+      { k: 'lead', t: 'वडीलधाऱ्यांच्या आशीर्वादाने' },
       { k: 'name', t: 'चि. श्रेयांश' },
       { k: 'parents', t: '(श्री. ' + P.groom.father.mr + ' व सौ. ' + P.groom.mother.mr + ' यांचा सुपुत्र)' },
       { k: 'join', t: 'आणि' },
       { k: 'name', t: 'चि. सौ. कां. मृणालिनी' },
       { k: 'parents', t: '(श्री. ' + P.bride.father.mr + ' व सौ. ' + P.bride.mother.mr + ' यांची सुकन्या)' },
       { k: 'shubh', t: '॥ यांचा शुभविवाह ॥' },
-      { k: 'when', t: 'बुधवार, दि. ९ डिसेंबर २०२६ रोजी रात्री ८ वा. ' + todo('Tithi and shake date, Marathi') + ' या शुभमुहूर्तावर करण्याचे योजिले आहे.' },
+      { k: 'when', t: 'बुधवार, दि. ९ डिसेंबर २०२६ रोजी रात्री ८ वा. करण्याचे योजिले आहे.' },
       { k: 'request', t: 'तरी आपण या मंगलसमयी सहकुटुंब, सहपरिवार अगत्य उपस्थित राहून वधूवरांस शुभाशीर्वाद द्यावेत ही नम्र विनंती.' },
       { k: 'where', t: 'विवाह स्थळ: हवेली बँक्वेट, रांची' },
-      { k: 'sign', t: 'आपले नम्र: ' + todo('Inviters, Marathi') }
+      { k: 'sign', t: 'आपले नम्र: श्री. उमेश कुमार व सौ. रूपा सिन्हा · श्री. श्रीहर्ष व सौ. सुमती वाघमारे' }
     ]
   },
   hi: {
@@ -146,7 +145,7 @@ export const invitation: Record<Lang, { label: string; blocks: Block[] }> = {
       { k: 'request', t: 'के शुभ विवाह के मांगलिक अवसर पर आप सपरिवार सादर आमंत्रित हैं।' },
       { k: 'when', t: 'बुधवार, ९ दिसम्बर २०२६' },
       { k: 'where', t: 'रात्रि ८ बजे · हवेली बैंक्वेट, रांची' },
-      { k: 'sign', t: 'दर्शनाभिलाषी: ' + todo('Family members, Hindi') },
+      { k: 'sign', t: 'दर्शनाभिलाषी: श्री उमेश कुमार एवं श्रीमती रूपा सिन्हा · श्री श्रीहर्ष एवं श्रीमती सुमती वाघमारे' },
       { k: 'note', t: 'समयाभाव के कारण निमंत्रण पत्रिका को ही मनुहार की मान्यता प्रदान कर अनुगृहीत करें।' },
       { k: 'manuhar', t: '“मेले ' + todo('Bal manuhar: relation, e.g. चाचा') + ' की छादी में जलूल आना!”' },
       { k: 'manuhar-by', t: '— ' + todo('Bal manuhar: child’s name') }
