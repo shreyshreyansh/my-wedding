@@ -1,17 +1,12 @@
 ---
-// ॥ श्री गणेशाय नमः ॥ — every invitation begins with Ganesha. A Pahari painting of Indra bowing to him, as a plate.
-import Art from './Art.astro';
-import art from '../data/art.json';
+// ॥ श्री गणेशाय नमः ॥ — every invitation begins with Ganesha: a Pahari painting of Indra bowing to him, to look into.
+import Tour from './Tour.astro';
 import { copy } from '../data/wedding';
-const g = art.ganesha;
 ---
 <section id="invocation" aria-labelledby="ivTitle">
-  <figure class="iv-fig">
-    <div class="iv-art"><Art id="ganesha" wide="wide" sizes="(min-aspect-ratio: 1/1) 72vw, 100vw" /></div>
-    <figcaption class="label"><span>{g.title}</span> · {g.place}, {g.date} · {g.museum}</figcaption>
-  </figure>
   <div class="iv-text">
     <p id="ivTitle" lang="hi" class="iv-inv reveal">{copy.invocation.invocation}</p>
     <p class="iv-line reveal">{copy.invocation.line}</p>
   </div>
+  <Tour id="ganesha" />
 </section>

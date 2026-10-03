@@ -2,6 +2,7 @@
 import { gsap } from 'gsap';
 import { app } from '../app';
 import { burst } from './burst';
+import { celebrate } from './celebrate';
 
 export function interactions() {
   app.hooks.knot = (r) => { gsap.fromTo(r.querySelector('.rite-ic'), { rotation: -90, scale: 0.6 }, { rotation: 0, scale: 1, duration: 0.6, ease: 'back.out(2.4)' }); };
@@ -9,5 +10,6 @@ export function interactions() {
   app.hooks.tick = (el) => { gsap.fromTo(el, { yPercent: -45, opacity: 0.4 }, { yPercent: 0, opacity: 1, duration: 0.38, ease: 'power2.out' }); };
   app.hooks.burst = burst;
   app.hooks.toss = () => burst(30, true);
+  app.hooks.celebrate = celebrate;
   app.hooks.reveal = (el) => { gsap.from(el, { autoAlpha: 0, y: 16, duration: 0.6, ease: 'power3.out', clearProps: 'all' }); };
 }

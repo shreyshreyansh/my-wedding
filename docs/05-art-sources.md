@@ -51,7 +51,16 @@ Commit both. `src/components/Art.astro` renders them as a responsive `<picture>`
 
 The cloth looked artificial, the brocade read as a worn fragment, and the Madhubani piece didn't sit with the finer paintings.
 
-**The paper** (`public/art/paper-1922.webp`) is the 1922 scan, made grey and re-toned so its average is exactly the page ivory (#F4EEE3). It tiles without seams and weighs 14 KB.
+**The paper** (`public/art/paper-1922.<hash>.webp`) is the 1922 scan, made grey, with its dark flecks evened out (they read as stray punctuation next to text), and re-toned so its average is exactly the page ivory (#F4EEE3). It tiles without seams and weighs 13 KB.
+
+## Looking into a painting
+
+Each event painting, and the Ganesha, is a *tour*:
+- **On scroll** it stays on screen while the view glides to two or three details, with a line of text for each, then back out to the whole painting.
+- **In `src/data/art.json`** the details live under the work's `"tour"`. Each one has a `box` (fractions of the crop: `[x, y, width, height]`) and its words.
+- **Living details** come from `"live"`: gold sparks twinkle in the Sangeet fireworks (`twinkle` areas), and the sacred fire flickers in the Shaadi painting (`fire`, a point). They move only while the painting is on screen.
+- **For sharp details**, the tour paintings have a 1800 px version at a lower quality, used only on screens dense enough to need it.
+- **With Gentle motion, or without JavaScript**, the painting simply appears with its details listed under it.
 
 ## Swapping in the family's own art (recommended)
 

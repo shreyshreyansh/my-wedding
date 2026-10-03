@@ -1,0 +1,40 @@
+---
+// A painting to look into. It stays on screen while you scroll, and the view glides to its details, one line of
+// text each, then back out to the whole painting. The details and their words are the work's "tour" in
+// src/data/art.json; "live" adds twinkling fireworks or a flickering fire. Without the motion (or with Gentle
+// motion) it is simply the painting, with its details listed under it.
+import Art from './Art.astro';
+import art from '../data/art.json';
+import files from '../data/art-files.json';
+
+interface Props { id: 'haldi' | 'sangeet' | 'shaadi' | 'ganesha' }
+const { id } = Astro.props;
+type Work = { title: string; place: string; date: string; museum: string; tour: { box: number[]; text: string }[]; live?: { twinkle?: number[][]; fire?: number[] } };
+const a = (art as unknown as Record<string, Work>)[id];
+const f = files[id].tall;
+
+/* the sparkles sit in the same places on every visit (a seeded random walk) */
+let seed = [...id].reduce((s, c) => s * 31 + c.charCodeAt(0), 7);
+const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+const stars = (a.live?.twinkle ?? []).flatMap(([x, y, w, h]) => Array.from({ length: Math.max(3, Math.round(w * h * 60)) }, () => ({
+  l: (x + rand() * w) * 100, t: (y + rand() * h) * 100, s: 6 + rand() * 12, d: 1.6 + rand() * 2.4, dl: -rand() * 4
+})));
+const fire = a.live?.fire;
+---
+<div class="tour" data-tour={JSON.stringify(a.tour.map((t) => t.box))} style={'--stops:' + a.tour.length}>
+  <div class="tour-pin">
+    <div class="tour-stage">
+      <div class="tour-art" style={'--ar:' + (f.w / f.h).toFixed(4)}>
+        <Art id={id} sizes="(min-width: 1024px) 60vw, 150vw" />
+        {stars.length > 0 && <span class="twinkles" aria-hidden="true">{stars.map((s) => <i style={`left:${s.l.toFixed(1)}%;top:${s.t.toFixed(1)}%;--s:${s.s.toFixed(0)}px;--d:${s.d.toFixed(2)}s;--dl:${s.dl.toFixed(2)}s`}></i>)}</span>}
+        {fire && <span class="fire" aria-hidden="true" style={`left:${fire[0] * 100}%;top:${fire[1] * 100}%`}></span>}
+      </div>
+    </div>
+    <div class="tour-caps">
+      <p class="label tour-cap is-label"><span>{a.title}</span> · {a.place}, {a.date} · {a.museum}</p>
+      <ol class="tour-list">
+        {a.tour.map((t, i) => <li class="tour-cap"><b>{i + 1} / {a.tour.length}</b> {t.text}</li>)}
+      </ol>
+    </div>
+  </div>
+</div>

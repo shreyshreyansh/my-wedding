@@ -7,6 +7,7 @@ import { hero } from './hero';
 import { interactions } from './interactions';
 import { mangal, curtain } from './mangal';
 import { schedule } from './schedule';
+import { tours } from './tour';
 import { shared, type Run } from './shared';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -51,7 +52,8 @@ export function start({ intro }: { intro: boolean }) {
       cleanup: (fn) => cleanups.push(fn)
     };
     hero(run);
-    schedule(run);
+    schedule();
+    tours(run);
     mangal();
     curtain();
     return () => cleanups.forEach((fn) => fn());

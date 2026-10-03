@@ -7,12 +7,14 @@ import { initRsvp } from './rsvp';
 import { initCalendar } from './calendar';
 import { initMusic } from './music';
 import { initMotionPref } from './motion-pref';
+import { chime } from './chime';
 
 (window as unknown as { __smBooted: boolean }).__smBooted = true;
 
 const labels = JSON.parse(document.getElementById('labels')?.textContent || '{}');
 const startMusic = initMusic();
-const cover = initCover(startMusic);
+/* the bell and the music start inside the tap: browsers allow sound only then */
+const cover = initCover(() => { chime(); startMusic(); });
 initCountdown();
 initRsvp(labels.rsvp);
 initCalendar(labels.knotBusy);

@@ -26,8 +26,12 @@
   "credit": "The Metropolitan Museum of Art, Gift of Steven Kossak, The Kronos Collections, 2021",
   "licence": "CC0",
   "alt": "Ganesha, orange-skinned and crowned, sits on a gold throne under a canopy while Indra kneels and touches his feet.",
+  "tour": [
+   {"box": [0.44, 0.25, 0.38, 0.4], "text": "Ganesha on his throne, the remover of obstacles."},
+   {"box": [0.03, 0.6, 0.42, 0.32], "text": "Indra, king of the gods, bows at his feet."}
+  ],
   "crops": {
-   "tall": {"box": [0.13, 0.05, 0.58, 0.9], "widths": [600, 900, 1200], "webp": [600], "q": {"avif": 50, "webp": 70}},
+   "tall": {"box": [0.13, 0.05, 0.58, 0.9], "widths": [600, 900, 1200, 1800], "webp": [600], "q": {"avif": 50, "webp": 70, "big": 40}},
    "wide": {"box": [0.008, 0.01, 0.985, 0.975], "widths": [1200, 1800], "webp": [1200], "q": {"avif": 50, "webp": 70}}
   }
  },
@@ -42,8 +46,13 @@
   "credit": "National Museum of Asian Art, Smithsonian Institution, Purchase and partial gift from the Catherine and Ralph Benkaim Collection, Friends of the National Museum of Asian Art, S2018.1.51",
   "licence": "CC0",
   "alt": "A woman holding two garlands stands between two peacocks on a turmeric-yellow ground, under dark trees.",
+  "tour": [
+   {"box": [0.36, 0.16, 0.3, 0.22], "text": "A ragini, a musical mode, painted as a woman waiting in a grove."},
+   {"box": [0.27, 0.39, 0.48, 0.32], "text": "In her hands, two garlands of flowers."},
+   {"box": [0.01, 0.43, 0.32, 0.36], "text": "Peacocks gather round. In Indian poetry they call for the rain, and for love."}
+  ],
   "crops": {
-   "tall": {"box": [0.05, 0.17, 0.9, 0.76], "widths": [600, 900, 1200], "webp": [600], "q": {"avif": 50, "webp": 70}}
+   "tall": {"box": [0.05, 0.17, 0.9, 0.76], "widths": [600, 900, 1200, 1800], "webp": [600], "q": {"avif": 50, "webp": 70, "big": 40}}
   }
  },
  "sangeet": {
@@ -57,8 +66,14 @@
   "credit": "The Cleveland Museum of Art, Andrew R. and Martha Holden Jennings Fund 1971.82",
   "licence": "CC0",
   "alt": "Women light sparklers on a palace terrace at night; gold fireworks fill the dark sky.",
+  "tour": [
+   {"box": [0.06, 0.0, 0.52, 0.44], "text": "Gold fireworks rise into the night."},
+   {"box": [0, 0.57, 0.46, 0.42], "text": "A lady lights a sparkler on the palace terrace…"},
+   {"box": [0.58, 0.4, 0.42, 0.32], "text": "…and another answers from the balcony."}
+  ],
+  "live": {"twinkle": [[0, 0.02, 1, 0.38], [0.6, 0.42, 0.12, 0.2], [0, 0.6, 0.12, 0.1], [0, 0.82, 1, 0.16]]},
   "crops": {
-   "tall": {"box": [0.38, 0.05, 0.5, 0.82], "widths": [600, 900, 1200], "webp": [600], "q": {"avif": 50, "webp": 70}},
+   "tall": {"box": [0.38, 0.05, 0.5, 0.82], "widths": [600, 900, 1200, 1800], "webp": [600], "q": {"avif": 50, "webp": 70, "big": 40}},
    "wide": {"box": [0.045, 0.045, 0.91, 0.885], "widths": [1200, 1800], "webp": [1200], "q": {"avif": 50, "webp": 70}}
   }
  },
@@ -73,8 +88,14 @@
   "credit": "National Museum of Asian Art, Smithsonian Institution, Purchase and partial gift from the Catherine and Ralph Benkaim Collection, Friends of the National Museum of Asian Art, S2018.1.29",
   "licence": "CC0",
   "alt": "A bride and groom sit by the sacred fire under a toran of mango leaves, between towers of painted pots, as Brahma chants.",
+  "tour": [
+   {"box": [0.3, 0.22, 0.48, 0.5], "text": "The bride and groom sit together at the sacred fire."},
+   {"box": [0.04, 0.02, 0.62, 0.22], "text": "Above them, a toran of mango leaves."},
+   {"box": [0.06, 0.63, 0.36, 0.37], "text": "Brahma, the creator, chants the wedding mantras."}
+  ],
+  "live": {"fire": [0.375, 0.545]},
   "crops": {
-   "tall": {"box": [0.02, 0.13, 0.96, 0.85], "widths": [600, 900, 1200], "webp": [600], "q": {"avif": 50, "webp": 70}}
+   "tall": {"box": [0.02, 0.13, 0.96, 0.85], "widths": [600, 900, 1200, 1800], "webp": [600], "q": {"avif": 50, "webp": 70, "big": 40}}
   }
  },
  "lotus": {
@@ -103,7 +124,7 @@
   "credit": "Paper sample from a Canson & Montgolfier sample book, 1922, Getty Research Institute via Internet Archive",
   "licence": "public domain",
   "alt": "",
-  "tile": "/art/paper-1922.webp",
+  "tile": "/art/paper-1922.2c88ba4d.webp",
   "crops": {}
  }
 }

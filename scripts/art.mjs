@@ -46,7 +46,9 @@ for (const [id, a] of Object.entries(art)) {
       /* a woven photo is mostly thread noise: a small median keeps the pattern's edges and halves the file */
       let sized = base.clone().resize(width, height, { kernel: 'lanczos3' });
       if (c.median) sized = sized.median(c.median);
-      for (const [fmt, opts] of [['avif', { quality: c.q?.avif ?? 52, effort: 4 }], ['webp', { quality: c.q?.webp ?? 76, effort: 6 }]]) {
+      /* the largest widths are only for zooming into a painting's details: they can take a lower quality */
+      const big = width > 1200 && c.q?.big;
+      for (const [fmt, opts] of [['avif', { quality: big || (c.q?.avif ?? 52), effort: 4 }], ['webp', { quality: c.q?.webp ?? 76, effort: 6 }]]) {
         /* WebP is only for browsers without AVIF: the smaller widths are enough */
         if (fmt === 'webp' && c.webp && !c.webp.includes(width)) continue;
         const data = await sized.clone()[fmt](opts).toBuffer();

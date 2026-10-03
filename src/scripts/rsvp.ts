@@ -1,6 +1,7 @@
 // The RSVP: steppers, sending to /api/rsvp with a timeout and one retry, the WhatsApp fallback,
 // "Change my reply", and a quiet resend on the next visit if a reply never got through.
 import { app, $, $$ } from './app';
+import { chime } from './chime';
 import { rsvpMessage, summaryLine, waLink, type Row } from '../lib/wa';
 
 interface Reply { n: Record<string, number>; name: string; note: string; at: string; rev: number; rid: string }
@@ -83,7 +84,7 @@ export function initRsvp(labels: { send: string; sending: string; none: string }
     const none = Object.values(reply.n).every((n) => !n);
     list.replaceChildren(...(none ? [labels.none] : rows(reply.n).map(summaryLine)).map((t) => Object.assign(document.createElement('li'), { textContent: t })));
     setState('replied');
-    if (focus) thanks.focus({ preventScroll: true });
+    if (focus) { thanks.focus({ preventScroll: true }); chime(2); app.hooks.celebrate?.(); }
     app.hooks.reveal?.(thanks);
   }
   function showFailed(p: Payload) {

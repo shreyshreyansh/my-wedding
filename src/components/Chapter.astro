@@ -1,23 +1,20 @@
 ---
-// One celebration: its painting as a full-bleed plate with a museum label, then when, where and what to wear.
-import Art from './Art.astro';
+// One celebration: its number and name, its painting to look into, then when, where and what to wear.
 import RiteTokens from './RiteTokens.astro';
-import art from '../data/art.json';
+import Tour from './Tour.astro';
 import type { WeddingEvent } from '../data/schema';
 import { copy, venue } from '../data/wedding';
 interface Props { ev: WeddingEvent; n: number }
 const { ev, n } = Astro.props;
-const a = art[ev.id];
 const DEV = '०१२३४५६७८९';
 ---
 <article class={'chapter ch-' + ev.id} data-event={ev.id}>
-  <figure class="plate-fig">
-    <div class="plate-art"><Art id={ev.id} wide={'wide' in a.crops ? 'wide' : undefined} sizes="(min-width: 1024px) 50vw, 100vw" /></div>
-    <figcaption class="label"><span>{a.title}</span> · {a.place}, {a.date} · {a.museum}</figcaption>
-  </figure>
-  <div class="ch-text">
+  <header class="ch-head">
     <p class="ch-no reveal"><span class="num" lang="hi">{DEV[0] + DEV[n]}</span>{ev.dn.map((d, i) => <Fragment>{i > 0 && ' · '}<span lang={d.lang}>{d.text}</span></Fragment>)}</p>
     <h3 class="reveal">{ev.name.en}</h3>
+  </header>
+  <Tour id={ev.id} />
+  <div class="ch-text">
     <p class="story reveal">{ev.story}</p>
     <dl class="reveal">
       <div><dt>{copy.schedule.when}</dt><dd>{ev.when}</dd></div>

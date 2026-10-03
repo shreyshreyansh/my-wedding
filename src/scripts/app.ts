@@ -23,6 +23,8 @@ export interface Hooks {
   reveal?: (el: HTMLElement) => void;
   knot?: (rite: HTMLElement) => void;
   burst?: (n: number, petals?: boolean) => void;
+  /** petals and rice for a reply that has just been sent */
+  celebrate?: () => void;
 }
 
 export const app = {

@@ -7,7 +7,7 @@
   --chuna:#F4EEE3; --kagaz:#EBE2D0; --kajal:#1F1915;
   --display:"Instrument Serif","Tiro Devanagari Hindi",Georgia,serif;
   /* hand-made paper from a 1922 Canson sample book (src/data/art.json, "paper"), toned to the ivory */
-  --paper-bg:var(--paper) url(/art/paper-1922.webp) 0 0/760px auto;
+  --paper-bg:var(--paper) url(/art/paper-1922.2c88ba4d.webp) 0 0/760px auto;
   --gut:clamp(20px,5vw,56px);
   color-scheme:light;
 }

@@ -1,13 +1,13 @@
 {
  "haldi": {
-  "tall": {"w":2525,"h":3040,"colour":"#585838","avif":[["/art/haldi-tall-600.b1c4a9b9.avif",600,63019],["/art/haldi-tall-900.53d0b84c.avif",900,138147],["/art/haldi-tall-1200.a7ffc2c7.avif",1200,256467]],"webp":[["/art/haldi-tall-600.b7281874.webp",600,100094]]}
+  "tall": {"w":2525,"h":3040,"colour":"#585838","avif":[["/art/haldi-tall-600.b1c4a9b9.avif",600,63019],["/art/haldi-tall-900.53d0b84c.avif",900,138147],["/art/haldi-tall-1200.a7ffc2c7.avif",1200,256467],["/art/haldi-tall-1800.898771a5.avif",1800,381997]],"webp":[["/art/haldi-tall-600.b7281874.webp",600,100094]]}
  },
  "sangeet": {
-  "tall": {"w":1700,"h":2360,"colour":"#584838","avif":[["/art/sangeet-tall-600.bf4683a3.avif",600,64578],["/art/sangeet-tall-900.1123e221.avif",900,132771],["/art/sangeet-tall-1200.3722869e.avif",1200,213229]],"webp":[["/art/sangeet-tall-600.abd4317c.webp",600,103814]]},
+  "tall": {"w":1700,"h":2360,"colour":"#584838","avif":[["/art/sangeet-tall-600.bf4683a3.avif",600,64578],["/art/sangeet-tall-900.1123e221.avif",900,132771],["/art/sangeet-tall-1200.3722869e.avif",1200,213229],["/art/sangeet-tall-1700.b157bcd6.avif",1700,238812]],"webp":[["/art/sangeet-tall-600.abd4317c.webp",600,103814]]},
   "wide": {"w":3094,"h":2547,"colour":"#584838","avif":[["/art/sangeet-wide-1200.ae8cd61b.avif",1200,137033],["/art/sangeet-wide-1800.19a2749b.avif",1800,278380]],"webp":[["/art/sangeet-wide-1200.a1e7c922.webp",1200,217202]]}
  },
  "shaadi": {
-  "tall": {"w":3212,"h":3400,"colour":"#782828","avif":[["/art/shaadi-tall-600.507ad3fd.avif",600,46473],["/art/shaadi-tall-900.5d314154.avif",900,98939],["/art/shaadi-tall-1200.72221f08.avif",1200,175688]],"webp":[["/art/shaadi-tall-600.5df0063d.webp",600,62574]]}
+  "tall": {"w":3212,"h":3400,"colour":"#782828","avif":[["/art/shaadi-tall-600.507ad3fd.avif",600,46473],["/art/shaadi-tall-900.5d314154.avif",900,98939],["/art/shaadi-tall-1200.72221f08.avif",1200,175688],["/art/shaadi-tall-1800.03480fce.avif",1800,233516]],"webp":[["/art/shaadi-tall-600.5df0063d.webp",600,62574]]}
  },
  "lotus": {
   "frieze": {"w":3062,"h":442,"colour":"#684848","avif":[["/art/lotus-frieze-900.4ee27937.avif",900,11841],["/art/lotus-frieze-1600.a331297a.avif",1600,34843]],"webp":[["/art/lotus-frieze-900.d2b9d734.webp",900,13936]]}

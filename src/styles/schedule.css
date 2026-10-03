@@ -4,12 +4,8 @@
 .sched-head h2{margin:0;font-family:var(--display);font-size:clamp(44px,11vw,96px);line-height:.98;max-width:12em}
 .sched-head h2 em{display:block}
 .chapter{position:relative;display:flex;flex-direction:column}
-.plate-fig{margin:0}
-.plate-art{position:relative;overflow:hidden;aspect-ratio:4/5;background:var(--paper-2)}
-.plate-art picture,.plate-art img{position:absolute;inset:0;width:100%;height:100%}
-.plate-art img{object-fit:cover}
-.plate-fig .label{padding:10px var(--gut) 0}
-.ch-text{padding:clamp(26px,5svh,48px) var(--gut) clamp(64px,11svh,120px);display:flex;flex-direction:column;gap:12px}
+.ch-head{padding:clamp(40px,8svh,88px) var(--gut) clamp(4px,1svh,12px);display:flex;flex-direction:column;gap:8px}
+.ch-text{padding:clamp(20px,4svh,40px) var(--gut) clamp(64px,11svh,120px);display:flex;flex-direction:column;gap:12px}
 .ch-no{margin:0;display:flex;align-items:baseline;gap:14px;font-size:1.25rem;color:var(--rani)}
 .ch-no .num{font-family:"Tiro Devanagari Hindi",serif;font-size:.9rem;letter-spacing:.1em;color:var(--gold-ink)}
 .chapter h3{margin:0;font-family:var(--display);font-size:min(27vw,180px);line-height:.82;letter-spacing:-.02em}
@@ -38,15 +34,12 @@
 .ch-sangeet .rite{border-color:rgba(244,238,227,.8);color:var(--paper)}
 .ch-sangeet .rite:hover{background:var(--paper);color:var(--night)}
 .ch-sangeet .rite:hover i{color:var(--ink-2)}
-.ch-sangeet .plate-art{background:var(--night-2)}
 .ch-sangeet .swatch{box-shadow:0 0 0 1px rgba(244,238,227,.5)}
 
 @media (min-width:1024px){
-  .chapter{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}
-  .plate-fig{position:sticky;top:0;height:100vh;display:flex;flex-direction:column}
-  .plate-art{flex:1;aspect-ratio:auto}
-  .plate-fig .label{padding:10px 24px 14px}
-  .ch-text{min-height:100vh;justify-content:center;padding:12vh 6vw}
-  .chapter:nth-child(even) .plate-fig{order:2}
+  .ch-head{padding-inline:6vw;flex-direction:row;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
+  .ch-head h3{order:-1}
+  .ch-text{padding-inline:6vw;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);column-gap:6vw;align-items:start}
+  .ch-text .story{grid-row:span 2}
   .chapter h3{font-size:min(12vw,200px)}
 }
