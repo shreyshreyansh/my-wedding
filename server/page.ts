@@ -1,8 +1,10 @@
-// GET / — the invitation. With ?g=<code> it becomes that family's own; if anything fails, everyone gets the generic page.
+// GET / — the invitation. With ?g=<code> it becomes that family's own, and with ?name=<name> it greets that person by
+// name (either, both or neither); if anything fails, everyone gets the generic page.
 import type { Env } from './env';
 import { now } from './env';
 import { deadlines, findGuest, findReply, normaliseCode, waNumber } from './guests';
 import { withPrivate } from './headers';
+import { cleanName } from './name';
 import { personalize, type View } from './personalize';
 
 export async function invitation(request: Request, env: Env, page: Response): Promise<Response> {
@@ -17,7 +19,8 @@ export async function invitation(request: Request, env: Env, page: Response): Pr
     const view: View = {
       code: guest ? code : null, guest, bad: !!raw && !guest, reply,
       closed: t > deadlines().close, change: url.searchParams.has('change'),
-      wa: guest ? waNumber(env, guest) : '', now: t
+      wa: guest ? waNumber(env, guest) : '', now: t,
+      person: cleanName(url.searchParams.get('name'))
     };
     return withPrivate(personalize(page, view));
   } catch {

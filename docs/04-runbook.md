@@ -101,6 +101,14 @@ The backup to the menu, from a CSV export of the Guests tab: `npm run codes -- p
 - After the deadline the form closes and shows a WhatsApp button instead. A reply already on its way (a slow connection, a retry) is still accepted for three more days.
 - Reminders (around 20 Nov): send non-responders their link with `#rsvp` on the end, e.g. `https://…/?g=abc234#rsvp`; it opens straight at the RSVP.
 
+## Greeting a person by name
+
+Add `name=` to any link and the page speaks to that person: their name on the cover, "Rahul, you are invited", "Will you join us, Rahul?", the RSVP's name box filled in, and "Thank you, Rahul!".
+- On its own: `https://ranchiwedspune.in/?name=Rahul`. They see every event, and the RSVP points them to WhatsApp (there is no code to reply with).
+- With a family's code: `https://ranchiwedspune.in/?g=abc234&name=Anjali`. Anjali is greeted by name; the events and the RSVP are her family's.
+- Spaces work as `%20` or `+` (`?name=Rahul+Kumar`); Devanagari works too (`?name=राहुल`). Only letters, spaces and . ' - & are kept, up to 40 characters, and a lower-case first letter becomes a capital.
+- Without `name=`, or with nothing usable in it, the page reads as before. The link preview on WhatsApp is the same for everyone and never shows the name.
+
 ## When something goes wrong
 
 | Problem | What to do |

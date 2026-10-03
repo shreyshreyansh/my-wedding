@@ -1,10 +1,26 @@
 import { expect, test } from '@playwright/test';
 import { cleanGuest, normaliseCode, type Guest } from '../../server/guests';
+import { cleanName, isDevanagari } from '../../server/name';
 import { clampCounts, handleRsvp } from '../../server/rsvp';
 import { buildIcs, fold, icsText, utc } from '../../src/lib/ics';
 import { rsvpMessage, summaryLine, waLink } from '../../src/lib/wa';
 import { datesFor, events, rsvp as rules } from '../../src/data/wedding';
 import { guestList, parseCsv } from '../../scripts/lib.mjs';
+
+test('a ?name= keeps only what a name is made of, at most 40 characters', () => {
+  expect(cleanName('rahul')).toBe('Rahul');
+  expect(cleanName('  rahul   kumar  ')).toBe('Rahul Kumar');
+  expect(cleanName('Anjali & Vikram')).toBe('Anjali & Vikram');
+  expect(cleanName("d'souza-mehta")).toBe("D'souza-Mehta");
+  expect(cleanName('McDonald')).toBe('McDonald');
+  expect(cleanName('राहुल')).toBe('राहुल');
+  expect(isDevanagari('राहुल')).toBe(true);
+  expect(cleanName('<script>alert(1)</script>')).toBe('Script Alert Script');
+  expect(cleanName('a'.repeat(80))!.length).toBe(40);
+  expect(cleanName('')).toBeNull();
+  expect(cleanName(null)).toBeNull();
+  expect(cleanName('123 !!')).toBeNull();
+});
 
 test('guest codes are normalised from what people paste', () => {
   expect(normaliseCode('abc234')).toBe('abc234');

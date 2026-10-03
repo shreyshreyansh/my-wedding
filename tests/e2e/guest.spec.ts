@@ -1,4 +1,4 @@
-// Personal links: the edge greets the family, keeps only their events, picks their language.
+// Personal links: the edge greets the family, keeps only their events, picks their language; ?name= greets a person.
 import { expect, test } from '@playwright/test';
 import { noSideways, openCover } from './helpers';
 
@@ -77,4 +77,36 @@ test('a #rsvp link lands on the RSVP once the cover opens', async ({ page }) => 
   await page.goto('/?g=abc234#rsvp');
   await openCover(page);
   await expect(page.locator('#rsvp h2')).toBeInViewport();
+});
+
+test('?name= greets the guest by name on the cover, the invitation, the RSVP and its thank-you', async ({ page }) => {
+  await page.goto('/?name=rahul');
+  await expect(page.locator('[data-guest-name]')).toHaveText('Rahul');
+  await openCover(page);
+  await expect(page.locator('#invTitle')).toHaveText('Rahul, you are invited');
+  await expect(page.locator('#rsvpTitle')).toHaveText('Will you join us, Rahul?');
+  await expect(page.locator('.r-thanks-title')).toHaveText('Thank you, Rahul!');
+  await expect(page.locator('#rsvp')).toHaveAttribute('data-rsvp', 'nocode');
+});
+
+test('?name= with a family code: the person by name, the family’s events and RSVP', async ({ page }) => {
+  await page.goto('/?g=abc234&name=Anjali');
+  await expect(page.locator('[data-guest-name]')).toHaveText('Anjali');
+  await openCover(page);
+  await expect(page.locator('#rsvp')).toHaveAttribute('data-rsvp', 'form');
+  await expect(page.locator('[data-guest-ask]')).toHaveText(/^Anjali, how many of you/);
+  await expect(page.locator('#rsvpName')).toHaveValue('Anjali');
+});
+
+test('a name in Devanagari is marked as Hindi; anything that is not a name is left out', async ({ page }) => {
+  await page.goto('/?name=' + encodeURIComponent('राहुल'));
+  await expect(page.locator('[data-guest-name] span')).toHaveAttribute('lang', 'hi');
+  await page.goto('/?name=' + encodeURIComponent('<img src=x onerror=alert(1)>'));
+  await expect(page.locator('[data-guest-name] img')).toHaveCount(0);
+  await expect(page.locator('[data-guest-name]')).toHaveText('Img Src X Onerror Alert');
+  await page.goto('/?name=' + encodeURIComponent('!!!'));
+  await expect(page.locator('[data-guest-name]')).toHaveText('our family and friends');
+  await openCover(page);
+  await expect(page.locator('#invTitle')).toHaveText('You are invited');
+  await expect(page.locator('#rsvpTitle')).toHaveText('Will you join us?');
 });

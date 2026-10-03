@@ -221,7 +221,7 @@ export const copy = {
     line: 'May every blessing be yours.'
   },
   homes: { eyebrowDev: 'दो घर · दोन घरं', eyebrow: 'two homes', title: 'Bihar and Maharashtra,', titleEm: 'and the old threads between them' },
-  invite: { eyebrowDev: 'निमंत्रण', eyebrow: 'the invitation', title: 'You are invited', choose: 'Read the invitation in', manuhar: 'बाल मनुहार' },
+  invite: { eyebrowDev: 'निमंत्रण', eyebrow: 'the invitation', title: 'You are invited', titleFor: '{name}, you are invited', choose: 'Read the invitation in', manuhar: 'बाल मनुहार' },
   schedule: { eyebrowDev: 'कार्यक्रम', eyebrow: 'the celebrations', title: 'From Pune to Ranchi,', titleEm: 'three celebrations', when: 'When', where: 'Where', wear: 'Wear' },
   rites: {
     wayDev: 'रस्ता दाखवा', way: 'Find your way to us',
@@ -232,6 +232,8 @@ export const copy = {
   rsvp: {
     eyebrowDev: 'उत्तराकांक्षी', eyebrow: 'awaiting your reply',
     title: 'Will you join us?',
+    /* with ?name= in the link */
+    titleFor: 'Will you join us, {name}?',
     ask: 'how many of you will come to each celebration?',
     name: 'Your name',
     note: 'A note for the couple (optional)',
@@ -242,6 +244,7 @@ export const copy = {
     pali: ['दानञ्च धम्मचरिया च, ञातकानञ्च सङ्गहो।', 'अनवज्जानि कम्मानि, एतं मङ्गलमुत्तमं॥'],
     paliEn: 'Giving, living rightly, kindness to one’s relatives, doing no harm: this is the highest blessing. From the Mangala Sutta.',
     thanks: 'Thank you!',
+    thanksFor: 'Thank you, {name}!',
     seeYou: 'See you in Ranchi.',
     none: 'We’ll miss you. Thank you for letting us know.',
     change: 'Change my reply',

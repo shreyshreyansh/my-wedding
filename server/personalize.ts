@@ -1,8 +1,9 @@
 // Turns the one static page into a family's own invitation, at the edge, as it streams:
-// their name, only their events, their language, and their RSVP as they left it.
+// their name, only their events, their language, and their RSVP as they left it. A ?name= greets one person by name.
 import type { Guest, Reply } from './guests';
 import { copy, countWords, datesFor, events } from '../src/data/wedding';
 import { closedMessage, summaryLine, waLink } from '../src/lib/wa';
+import { isDevanagari } from './name';
 
 export interface View {
   code: string | null;
@@ -16,6 +17,8 @@ export interface View {
   change: boolean;
   wa: string;
   now: number;
+  /** ?name=, already cleaned (server/name.ts): shown wherever the page speaks to the guest */
+  person?: string | null;
 }
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -45,6 +48,20 @@ export function personalize(res: Response, v: View): Response {
 
   if (v.bad) rw.on('[data-badcode]', { element: (el) => { el.removeAttribute('hidden'); } });
   rw.on('#rsvp', { element: (el) => { el.setAttribute('data-rsvp', rsvpState(v)); if (v.closed) el.setAttribute('data-closed', ''); } });
+
+  /* a person's own name, from ?name=: on the cover, in the headings that speak to them, and in the RSVP */
+  const p = v.person;
+  if (p) {
+    const who = isDevanagari(p) ? '<span lang="hi">' + esc(p) + '</span>' : esc(p);
+    const fill = (tpl: string) => esc(tpl).replace('{name}', who);
+    rw
+      .on('[data-guest-name]', { element: (el) => { el.setInnerContent(who, { html: true }); } })
+      .on('[data-for-title]', { element: (el) => { el.setInnerContent(fill(copy.invite.titleFor), { html: true }); } })
+      .on('[data-for-rsvp]', { element: (el) => { el.setInnerContent(fill(copy.rsvp.titleFor), { html: true }); } })
+      .on('[data-for-thanks]', { element: (el) => { el.setInnerContent(fill(copy.rsvp.thanksFor), { html: true }); } })
+      .on('[data-guest-ask]', { element: (el) => { el.setInnerContent(who + ', ' + esc(copy.rsvp.ask), { html: true }); } })
+      .on('#rsvpName', { element: (el) => { if (!v.reply?.name) el.setAttribute('value', p); } });
+  }
   if (!g) return rw.transform(res);
 
   const invited = new Set<string>(g.ev);
@@ -54,8 +71,8 @@ export function personalize(res: Response, v: View): Response {
 
   rw
     /* the greeting */
-    .on('[data-guest-name]', { element: (el) => { el.setInnerContent(name); if (dev) el.setAttribute('lang', g.lang); } })
-    .on('[data-guest-ask]', { element: (el) => { el.setInnerContent(cap(g.label) + ', ' + copy.rsvp.ask); } })
+    .on('[data-guest-name]', { element: (el) => { if (p) return; el.setInnerContent(name); if (dev) el.setAttribute('lang', g.lang); } })
+    .on('[data-guest-ask]', { element: (el) => { if (!p) el.setInnerContent(cap(g.label) + ', ' + copy.rsvp.ask); } })
     .on('[data-dates-short]', { element: (el) => { el.setInnerContent(dates.short); } })
     .on('[data-dates-long]', { element: (el) => { el.setInnerContent(dates.long); } })
     /* only their events */

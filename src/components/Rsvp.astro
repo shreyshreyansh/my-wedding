@@ -9,7 +9,7 @@ const wa = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><
 <section id="rsvp" aria-labelledby="rsvpTitle" data-rsvp="nocode">
   <div class="rsvp">
     <p class="eyebrow reveal"><span lang="hi">{copy.rsvp.eyebrowDev}</span> · {copy.rsvp.eyebrow}</p>
-    <h2 id="rsvpTitle" class="reveal">{copy.rsvp.title}</h2>
+    <h2 id="rsvpTitle" class="reveal" data-for-rsvp>{copy.rsvp.title}</h2>
 
     <div class="r-nocode r-panel reveal">
       <p class="r-bad" data-badcode hidden>{copy.rsvp.badCode}</p>
@@ -44,7 +44,7 @@ const wa = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><
 
     <div class="thanks r-thanks r-panel" tabindex="-1">
       <p lang="hi" class="dhanyavad">{copy.rsvp.thanksDev}</p>
-      <p class="r-thanks-title">{copy.rsvp.thanks}</p>
+      <p class="r-thanks-title" data-for-thanks>{copy.rsvp.thanks}</p>
       <ul class="r-summary" data-reply-summary></ul>
       <p class="r-seeyou">{copy.rsvp.seeYou}</p>
       <p lang="pi" class="r-pali"><i class="leaf" aria-hidden="true"></i>{copy.rsvp.pali[0]}<br>{copy.rsvp.pali[1]}</p>

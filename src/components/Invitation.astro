@@ -19,7 +19,7 @@ function groups(blocks: Block[]) {
 <section id="invite" aria-labelledby="invTitle">
   <div class="inv">
     <p class="eyebrow reveal"><span lang="mr">{copy.invite.eyebrowDev}</span> · {copy.invite.eyebrow}</p>
-    <h2 id="invTitle" class="reveal">{copy.invite.title}</h2>
+    <h2 id="invTitle" class="reveal" data-for-title>{copy.invite.title}</h2>
     <fieldset class="inv-set">
       <legend class="sr-only">{copy.invite.choose}</legend>
       {langs.map((l) => <input class="inv-radio sr-only" type="radio" name="invlang" id={'inv-' + l} value={l} checked={l === 'en'} />)}
