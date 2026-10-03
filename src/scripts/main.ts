@@ -8,9 +8,11 @@ import { initCalendar } from './calendar';
 import { initMusic } from './music';
 import { initMotionPref } from './motion-pref';
 import { chime } from './chime';
+import { initImages } from './images';
 
 (window as unknown as { __smBooted: boolean }).__smBooted = true;
 
+initImages();
 const labels = JSON.parse(document.getElementById('labels')?.textContent || '{}');
 const startMusic = initMusic();
 /* the bell and the music start inside the tap: browsers allow sound only then */

@@ -26,12 +26,15 @@
 @keyframes flicker{0%{opacity:.35;transform:scale(1)}12%{opacity:.6;transform:scale(1.06,1.12)}23%{opacity:.3;transform:scale(.96)}37%{opacity:.65;transform:scale(1.08,1.16)}48%{opacity:.4;transform:scale(1)}63%{opacity:.7;transform:scale(1.05,1.18)}79%{opacity:.32;transform:scale(.98)}100%{opacity:.35;transform:scale(1)}}
 .tour.live .twinkles i,.tour.live .fire{animation-play-state:running}
 
-@media (min-width:1024px){
+/* wider than tall (desktops, landscape tablets and phones): the painting beside its words */
+@media (min-aspect-ratio:6/5){
   .tour-pin{flex-direction:row;align-items:stretch}
   .tour-stage{flex:1.5;padding:5vh 0}
   .tour-caps{flex:1;min-height:0;display:flex;align-items:center;padding:0 6vw 0 3vw}
-  .tour-cap{left:0;right:6vw;top:50%;transform:translateY(-50%);text-align:left}
-  .tour-caps .tour-cap.is-label{left:0}
+  /* centred with the translate property, so the fade-in (a transform) does not undo it */
+  .tour-cap{left:3vw;right:6vw;top:50%;translate:0 -50%;text-align:left}
+  .tour-list .tour-cap{font-size:clamp(20px,2.6vw,34px)}
+  .tour-caps .tour-cap.is-label{left:3vw}
 }
 
 /* without the motion: the painting, and its details as a list */
@@ -40,7 +43,7 @@ html:not(.motion) .tour-pin{position:relative;height:auto;display:block}
 html:not(.motion) .tour-stage{container-type:normal;display:block;padding:0}
 html:not(.motion) .tour-art{width:min(100%,640px);margin:0 auto}
 html:not(.motion) .tour-caps{display:block;min-height:0;padding:10px var(--gut) 0}
-html:not(.motion) .tour-cap{position:static;opacity:1;transform:none;text-align:left}
+html:not(.motion) .tour-cap{position:static;opacity:1;transform:none;translate:none;text-align:left}
 html:not(.motion) .tour-list{margin-top:14px;display:flex;flex-direction:column;gap:10px}
 html:not(.motion) .tour-list .tour-cap{font-size:1.25rem}
 html:not(.motion) .tour-cap b{display:inline;margin:0 8px 0 0}

@@ -14,7 +14,7 @@ export default defineConfig({
   projects: [
     { name: 'unit', testMatch: /unit\/.*\.spec\.ts$/ },
     { name: 'phone', testMatch: /e2e\/(?!perf).*\.spec\.ts$/, use: { ...devices['Pixel 7'], viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, contextOptions: { reducedMotion: 'reduce' } } },
-    { name: 'desktop', testMatch: /e2e\/(visual|motion|a11y|seo)\.spec\.ts$/, use: { viewport: { width: 1440, height: 900 }, contextOptions: { reducedMotion: 'reduce' } } },
+    { name: 'desktop', testMatch: /e2e\/(visual|motion|a11y|seo|responsive)\.spec\.ts$/, use: { viewport: { width: 1440, height: 900 }, contextOptions: { reducedMotion: 'reduce' } } },
     /* timing is measured alone, after everything else, so parallel tests can't slow the throttled CPU */
     { name: 'perf', testMatch: /e2e\/perf\.spec\.ts$/, dependencies: ['phone', 'desktop'], use: { ...devices['Pixel 7'], viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 } }
   ],

@@ -11,6 +11,7 @@ export const shared = {
 
 export interface Run {
   phone: boolean;
+  tab: boolean;
   desk: boolean;
   fine: boolean;
   /** add a listener that is removed when this run is reverted */

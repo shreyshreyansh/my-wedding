@@ -50,6 +50,20 @@
   .cv-cta{margin-top:max(26px,5vh);align-items:flex-start}
 }
 
+/* short landscape screens (a phone held sideways): everything tighter so the seal stays on screen */
+@media (min-aspect-ratio:1/1) and (max-height:520px){
+  .cv-for{display:none}
+  .cv-panel{padding-top:max(14px,env(safe-area-inset-top));padding-bottom:max(12px,env(safe-area-inset-bottom))}
+  .cv-names .nm{font-size:min(8vw,12svh)}
+  .cv-names .amp{font-size:min(4vw,6svh)}
+  .cv-dn{margin-top:4px;font-size:18px}
+  .cv-date{margin-top:4px}
+  .cv-cta{margin-top:10px}
+  .seal{width:min(27svh,110px)}
+  .seal .big{font-size:15px}
+  .seal .small{font-size:.62rem}
+}
+
 .js #cover:not(.ready) .cv-in{visibility:hidden;animation:cvsafe 0s 3s forwards}
 @keyframes cvsafe{to{visibility:visible}}
 

@@ -16,7 +16,7 @@ export function tours(run: Run) {
     /* where the painting must move, and how far it must grow, to fill the stage with one detail */
     const view = (b: Box) => {
       const sw = stage.clientWidth, sh = stage.clientHeight, aw = art.offsetWidth, ah = art.offsetHeight;
-      const s = Math.min((sw * 0.94) / (b[2] * aw), (sh * 0.94) / (b[3] * ah), run.desk ? 2.6 : 3.2);
+      const s = Math.min((sw * 0.94) / (b[2] * aw), (sh * 0.94) / (b[3] * ah), 3.2);
       return { x: sw / 2 - art.offsetLeft - s * (b[0] + b[2] / 2) * aw, y: sh / 2 - art.offsetTop - s * (b[1] + b[3] / 2) * ah, scale: s };
     };
     gsap.set(art, { transformOrigin: '0 0' });

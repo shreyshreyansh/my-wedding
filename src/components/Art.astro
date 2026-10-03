@@ -4,7 +4,7 @@
 import files from '../data/art-files.json';
 import art from '../data/art.json';
 
-type Set = { w: number; h: number; colour: string; avif: [string, number, number][]; webp: [string, number, number][] };
+type Set = { w: number; h: number; colour: string; lqip?: string; avif: [string, number, number][]; webp: [string, number, number][] };
 interface Props {
   id: keyof typeof files;
   crop?: string;
@@ -23,7 +23,7 @@ const f = all[crop], w = wide ? all[wide] : null;
 const srcset = (list: Set['avif']) => list.map(([u, wd]) => u + ' ' + wd + 'w').join(', ');
 const LAND = '(min-aspect-ratio: 1/1)';
 ---
-<picture class={cls} style={'--ph:' + f.colour}>
+<picture class={cls} style={'--ph:' + f.colour + (f.lqip ? ';--lq:url(' + f.lqip + ')' : '')}>
   {w && <source media={LAND} type="image/avif" srcset={srcset(w.avif)} sizes={sizes} width={w.w} height={w.h} />}
   {w && <source media={LAND} type="image/webp" srcset={srcset(w.webp)} sizes={sizes} width={w.w} height={w.h} />}
   <source type="image/avif" srcset={srcset(f.avif)} sizes={sizes} />

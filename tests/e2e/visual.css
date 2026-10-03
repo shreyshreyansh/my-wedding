@@ -2,3 +2,4 @@
 #controls{visibility:hidden!important}
 /* the paintings load lazily and decode at their own pace: these frames check the layout and type around them */
 picture img{visibility:hidden!important}
+picture::before{display:none}

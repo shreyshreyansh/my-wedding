@@ -2,7 +2,7 @@
 //   npm run art            (all of them)
 //   npm run art -- silk    (one)
 // The masters come from each museum's open-access server and are kept in node_modules/.cache/art.
-// Writes public/art/*.{avif,webp} and src/data/art-files.json (sizes, srcsets and a colour to show while loading).
+// Writes public/art/*.{avif,webp} and src/data/art-files.json (sizes, srcsets, and a colour and tiny sketch to show while loading).
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
@@ -40,7 +40,9 @@ for (const [id, a] of Object.entries(art)) {
     const box = { left: Math.round(x * mw), top: Math.round(y * mh), width: Math.round(w * mw), height: Math.round(h * mh) };
     const base = sharp(src).rotate(c.rotate || 0).extract(box);
     const { dominant } = await sharp(await base.clone().resize(64).toBuffer()).stats();
-    const set = { w: box.width, h: box.height, colour: '#' + hex(dominant.r) + hex(dominant.g) + hex(dominant.b), avif: [], webp: [] };
+    /* a 24 px sketch of the painting, inlined in the page and blurred while the real one loads */
+    const lqip = 'data:image/webp;base64,' + (await base.clone().resize(24).webp({ quality: 50 }).toBuffer()).toString('base64');
+    const set = { w: box.width, h: box.height, colour: '#' + hex(dominant.r) + hex(dominant.g) + hex(dominant.b), lqip, avif: [], webp: [] };
     for (const width of c.widths.filter((wd) => wd <= box.width).concat(c.widths.some((wd) => wd > box.width) ? [box.width] : [])) {
       const height = Math.round((box.height * width) / box.width);
       /* a woven photo is mostly thread noise: a small median keeps the pattern's edges and halves the file */

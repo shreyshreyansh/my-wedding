@@ -43,11 +43,12 @@ export function start({ intro }: { intro: boolean }) {
   };
 
   mm = gsap.matchMedia();
-  mm.add({ phone: '(max-width: 599px)', desk: '(min-width: 1024px)' }, (c) => {
-    const { phone, desk } = c.conditions as { phone: boolean; desk: boolean };
+  /* every width is covered: tablets (600 to 1023 px) get the same motion as the rest */
+  mm.add({ phone: '(max-width: 599px)', tab: '(min-width: 600px) and (max-width: 1023px)', desk: '(min-width: 1024px)' }, (c) => {
+    const { phone, tab, desk } = c.conditions as { phone: boolean; tab: boolean; desk: boolean };
     const cleanups: (() => void)[] = [];
     const run: Run = {
-      phone, desk, fine,
+      phone, tab, desk, fine,
       on: (el, type, fn) => { el.addEventListener(type, fn); cleanups.push(() => el.removeEventListener(type, fn)); },
       cleanup: (fn) => cleanups.push(fn)
     };
