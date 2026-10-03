@@ -57,22 +57,22 @@
    }
   }
  },
- "lotus-offering": {
-  "src": "https://iiif.archive.org/image/iiif/2/ajantafrescoes00royaa%2fajantafrescoes00royaa_jp2.zip%2fajantafrescoes00royaa_jp2%2fajantafrescoes00royaa_0012.jp2/pct:18.9,18.7,61.8,53.5/3700,/0/default.jpg",
-  "page": "https://archive.org/details/ajantafrescoes00royaa",
-  "title": "Offering lotus flowers to the Bodhisattva, Ajanta Cave 1",
-  "short": "Lotus offering, Ajanta",
+ "buddha-ajanta": {
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Mural_paintings_of_Buddha_at_Ajanta_Caves.jpg/1920px-Mural_paintings_of_Buddha_at_Ajanta_Caves.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Mural_paintings_of_Buddha_at_Ajanta_Caves.jpg",
+  "title": "The Buddha seated on a lotus, a wall painting at Ajanta",
+  "short": "The Buddha, Ajanta",
   "side": "hers",
-  "date": "mural c. 460–480; copy 1911",
+  "date": "wall painting c. 5th century; photograph 2011",
   "place": "Ajanta, Maharashtra",
-  "medium": "Copy of a wall painting, from Ajanta Frescoes (1915), plate X",
-  "museum": "Smithsonian Libraries, via Internet Archive",
-  "credit": "Copy by Syed Ahmad, 1911, for Lady Herringham’s Ajanta Frescoes (India Society, London, 1915), plate X; Smithsonian Libraries scan via Internet Archive",
-  "licence": "public domain",
-  "alt": "A crowned bodhisattva with a pearl necklace; at left, devotees climb towards him carrying a tray heaped with white lotuses.",
+  "medium": "Wall painting (photograph)",
+  "museum": "Wikimedia Commons",
+  "credit": "Photograph by Vasukrishnan57, via Wikimedia Commons; the crop on this page is shared under the same licence",
+  "licence": "CC BY-SA 4.0",
+  "alt": "A golden painted Buddha sits calmly on a lotus, a halo behind his head, among dark flowering trees.",
   "crops": {
    "main": {
-    "box": [0, 0, 1, 1],
+    "box": [0.08, 0, 0.84, 1],
     "widths": [600, 900, 1200, 1600],
     "webp": [600],
     "q": {

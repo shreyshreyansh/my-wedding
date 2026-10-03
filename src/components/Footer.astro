@@ -16,7 +16,7 @@ const works = Object.values(art);
       <summary>{copy.footer.credits}</summary>
       <p>{copy.footer.creditsNote}</p>
       <ul>
-        {works.map((w) => <li><a href={w.page} target="_blank" rel="noopener"><b>{w.title}</b><span>{w.place}, {w.date}. {w.credit}. {w.licence === 'CC0' ? 'Public domain (CC0)' : 'Public domain'}.</span></a></li>)}
+        {works.map((w) => <li><a href={w.page} target="_blank" rel="noopener"><b>{w.title}</b><span>{w.place}, {w.date}. {w.credit}. {w.licence === 'CC0' ? 'Public domain (CC0)' : w.licence.startsWith('CC BY') ? w.licence : 'Public domain'}.</span></a></li>)}
       </ul>
     </details>
     <button type="button" class="gentle" id="motionBtn" aria-pressed="false"><span class="dot" aria-hidden="true"></span><span>{copy.controls.gentle}</span> · <span lang="hi">{copy.controls.gentleDev}</span></button>
