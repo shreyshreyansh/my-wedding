@@ -1,0 +1,7 @@
+---
+// The same invitation in one language: /en/, /mr/ (मराठी), /hi/ (हिंदी). Guests reach them as /?lang=mr and so on.
+import Page from '../../components/Page.astro';
+import { LANGS } from '../../data/i18n';
+export const getStaticPaths = () => LANGS.map((lang) => ({ params: { lang } }));
+---
+<Page />

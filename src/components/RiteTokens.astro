@@ -1,10 +1,14 @@
 ---
 // A chapter's two actions: the way to the venue (Google Maps) and the date for the calendar.
 import type { WeddingEvent } from '../data/schema';
-import { copy, venue } from '../data/wedding';
+import { venue } from '../data/wedding';
+import { T, viewOf, type Part } from '../data/i18n';
 interface Props { ev: WeddingEvent }
 const { ev } = Astro.props;
 const gcal = calendarLink(ev);
+const t = T(viewOf(Astro.url));
+/* the Devanagari large and the English small beneath it; a single language on its own */
+const words = (parts: Part[]) => parts.map((p) => (p.lang || parts.length === 1 ? { tag: 'b', ...p } : { tag: 'i', ...p }));
 function calendarLink(e: WeddingEvent) {
   const utc = (iso: string) => new Date(iso).toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
   return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(e.name.en + ' · Shreyansh & Mrunalini') +
@@ -14,10 +18,10 @@ const arrow = '<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true
 const plus = '<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path class="ic" d="M10 4v12M4 10h12"/></svg>';
 ---
 <div class="rites reveal">
-  <a class="rite" data-rite="way" href={venue.maps} target="_blank" rel="noopener" aria-label={'Find your way to ' + venue.full + ' (opens Google Maps)'}>
-    <span class="rite-t"><b lang="mr">{copy.rites.wayDev}</b><i>{copy.rites.way}</i></span><span class="rite-ic" set:html={arrow}></span>
+  <a class="rite" data-rite="way" href={venue.maps} target="_blank" rel="noopener" aria-label={t.rites.wayAria}>
+    <span class="rite-t">{words(t.rites.way).map((w) => w.tag === 'b' ? <b lang={w.lang}>{w.t}</b> : <i>{w.t}</i>)}</span><span class="rite-ic" set:html={arrow}></span>
   </a>
-  <a class="rite" data-rite="knot" data-cal={ev.id} data-ics={'/cal/' + ev.id + '.ics'} href={gcal} target="_blank" rel="noopener" aria-label={'Save the ' + ev.name.en + ' date to your calendar'}>
-    <span class="rite-t"><b lang="hi">{copy.rites.knotDev}</b><i>{copy.rites.knot}</i></span><span class="rite-ic" set:html={plus}></span>
+  <a class="rite" data-rite="knot" data-cal={ev.id} data-ics={'/cal/' + ev.id + '.ics'} href={gcal} target="_blank" rel="noopener" aria-label={t.rites.knotAria(t.ev[ev.id].name)}>
+    <span class="rite-t">{words(t.rites.knot).map((w) => w.tag === 'b' ? <b lang={w.lang}>{w.t}</b> : <i>{w.t}</i>)}</span><span class="rite-ic" set:html={plus}></span>
   </a>
 </div>

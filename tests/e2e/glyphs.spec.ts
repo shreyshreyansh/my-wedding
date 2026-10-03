@@ -1,4 +1,5 @@
-// The cut-down fonts must draw exactly what Google's whole fonts draw: every letter and conjunct, in every language.
+// The cut-down fonts must draw exactly what Google's whole fonts draw: every letter and conjunct, in every language,
+// on the mixed page and on the Marathi and Hindi ones (?lang=).
 // Hinting is off, as on phones (iOS and Android place glyphs without it); `npm run fonts` keeps Google's files to compare with.
 import { chromium, expect, test, type Page } from '@playwright/test';
 import { existsSync, readFileSync } from 'node:fs';
@@ -16,8 +17,8 @@ async function useWholeFonts(page: Page) {
   });
 }
 
-async function frames(page: Page) {
-  await page.goto('/?g=abc234');
+async function frames(page: Page, lang: string) {
+  await page.goto('/?g=abc234' + lang);
   await page.evaluate(() => document.fonts.ready);
   const out: Record<string, Buffer> = {};
   for (const s of ['#cover .cv-top', '#cover .seal', '#cover .cv-mid']) out[s] = await page.locator(s).screenshot();
@@ -25,9 +26,12 @@ async function frames(page: Page) {
   for (const l of ['en', 'mr', 'hi']) {
     await page.locator(`label[for="inv-${l}"]`).click();
     await page.evaluate(() => document.fonts.ready);
-    out['invite-' + l] = await page.locator(`.inv-card.c-${l}`).screenshot();
+    out['invite-' + l] = await page.locator(`.inv-card.c-${l}`).screenshot({ mask: [page.locator('#controls')] });
   }
-  for (const s of ['#hero .h-in', '#invocation .iv-text', '#homes .hm-head', '.ch-haldi .ch-text', '.ch-sangeet .ch-text', '.ch-shaadi .ch-text', '#mangal .mg-inner', '#rsvp .rsvp', 'footer .foot', '#schedule .sched-head']) {
+  for (const s of ['#hero .h-in', '#invocation .iv-text', '#homes .hm-head', '.ch-haldi .ch-text', '.ch-sangeet .ch-text', '.ch-shaadi .ch-text', '#mangal .mg-inner', '#rsvp .rsvp', 'footer .foot', '#schedule .sched-head',
+    '.ch-haldi .ch-head', '.ch-sangeet .ch-head', '.ch-shaadi .ch-head', '#tour-invocation .tour-caps', '#tour-homes .tour-caps', '#tour-haldi .tour-caps', '#tour-sangeet .tour-caps', '#tour-shaadi .tour-caps',
+    /* the countdown's words, not its ticking numbers */
+    '#count .eyebrow', '#count .count-when', ...[1, 2, 3, 4].map((n) => `#count .unit:nth-child(${n}) i`)]) {
     await page.locator(s).scrollIntoViewIfNeeded();
     await page.evaluate(() => document.fonts.ready);
     out[s] = await page.locator(s).screenshot({ mask: [page.locator('#controls')] });
@@ -48,15 +52,15 @@ async function diff(page: Page, a: Buffer, b: Buffer) {
   }, [a.toString('base64'), b.toString('base64')]);
 }
 
-test('subset fonts draw the page exactly as the whole fonts do', async ({}, info) => {
+for (const lang of ['', '&lang=mr', '&lang=hi']) test('subset fonts draw the page exactly as the whole fonts do' + (lang && ': ' + lang.slice(1)), async ({}, info) => {
   test.skip(info.project.name !== 'phone');
   test.skip(!existsSync(join(CACHE, 'ref.css')), 'run `npm run fonts` first');
   const browser = await chromium.launch({ args: ['--font-render-hinting=none'] });
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce', baseURL: 'http://127.0.0.1:8788' });
-  const ours = await frames(await ctx.newPage());
+  const ours = await frames(await ctx.newPage(), lang);
   const wholePage = await ctx.newPage();
   await useWholeFonts(wholePage);
-  const whole = await frames(wholePage);
+  const whole = await frames(wholePage, lang);
   const scratch = await ctx.newPage();
   const diffs: Record<string, number> = {};
   for (const k of Object.keys(ours)) diffs[k] = await diff(scratch, ours[k], whole[k]);

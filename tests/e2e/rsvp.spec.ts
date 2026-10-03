@@ -22,6 +22,27 @@ test('send a reply: it lands in the Sheet, and the page remembers it', async ({ 
   await expect(page.locator('.r-summary li').first()).toHaveText('Haldi · 2 guests');
 });
 
+test('a reply sent from the Marathi page: the summary in Marathi, the Sheet and WhatsApp in English', async ({ page, request }) => {
+  await page.route('**/api/rsvp', (r) => r.abort());
+  await page.goto('/?g=mra234&lang=mr');
+  await openCover(page);
+  await page.locator('.row[data-event="sangeet"] button[data-d="-1"]').click();
+  await page.locator('.row[data-event="sangeet"] button[data-d="-1"]').click();
+  await page.locator('.r-send').click();
+  await expect(page.locator('.r-failed')).toBeVisible({ timeout: 20_000 });
+  const text = decodeURIComponent((await page.locator('.r-failed .r-wa').getAttribute('href'))!.split('text=')[1]);
+  expect(text).toBe('RSVP · the MRA234 family (mra234)\nSangeet: 0\nShaadi: 2');
+  await page.unroute('**/api/rsvp');
+  await page.locator('.r-retry').click();
+  await expect(page.locator('#rsvp')).toHaveAttribute('data-rsvp', 'replied');
+  await expect(page.locator('.r-summary li')).toHaveText(['संगीत · येणार नाही', 'लग्न · २ पाहुणे']);
+  await expect.poll(async () => (await sheetRows(request, 'mra234')).length).toBe(1);
+  expect((await sheetRows(request, 'mra234'))[0]).toMatchObject({ n: { sangeet: 0, shaadi: 2 } });
+  await page.reload();
+  await openCover(page);
+  await expect(page.locator('.r-summary li').last()).toHaveText('लग्न · २ पाहुणे');
+});
+
 test('change a reply: the form comes back filled in, and the new answer replaces the old', async ({ page, request }) => {
   await page.goto('/?g=rsv333');
   await openCover(page);

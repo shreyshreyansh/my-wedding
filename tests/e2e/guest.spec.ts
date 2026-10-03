@@ -110,3 +110,94 @@ test('a name in Devanagari is marked as Hindi; anything that is not a name is le
   await expect(page.locator('#invTitle')).toHaveText('You are invited');
   await expect(page.locator('#rsvpTitle')).toHaveText('Will you join us?');
 });
+
+/* ?lang=: the whole page in one language; without it (or with anything else) the page stays as it is */
+test('?lang=mr: the page in Marathi, the Marathi card open, the holy lines as they are', async ({ page }) => {
+  await page.goto('/?lang=mr');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'mr');
+  await expect(page.locator('[data-guest-name]')).toHaveText('आमचे सर्व आप्तेष्ट आणि मित्रपरिवार');
+  await expect(page.locator('#cover .cv-date')).toContainText('८ व ९ डिसेंबर २०२६');
+  await openCover(page);
+  await expect(page.locator('#homesTitle')).toHaveText('बिहार आणि महाराष्ट्र, आणि त्यांना जोडणारे जुने धागे');
+  await expect(page.locator('#invTitle')).toHaveText('आपणास सस्नेह निमंत्रण');
+  await expect(page.locator('#inv-mr')).toBeChecked();
+  await expect(page.locator('.ch-haldi h3')).toHaveText('हळद');
+  await expect(page.locator('#tour-haldi .tour-list li').first()).toContainText('पाटण्याच्या बाजारातील हळद');
+  await expect(page.locator('#rsvpTitle')).toHaveText('आपण याल ना?');
+  await expect(page.locator('#ivTitle')).toContainText('॥ श्री गणेशाय नमः ॥');
+  await expect(page.locator('#savdhan')).toHaveText('॥ शुभमंगल सावधान ॥');
+  /* nothing left in English but the names, the art credits, the English invitation card (and placeholders still to fill) */
+  const english = await page.evaluate(() => {
+    const out: string[] = [];
+    const w = document.createTreeWalker(document.querySelector('main')!, NodeFilter.SHOW_TEXT);
+    for (let n = w.nextNode(); n; n = w.nextNode()) {
+      const el = n.parentElement!;
+      if (el.closest('style, script, .c-en, .inv-tabs, .h-names, .hp, [lang="en"]') || !/[A-Za-z]{3}/.test((n.textContent || '').replace(/⟦[^⟧]*⟧/g, ''))) continue;
+      out.push((n.textContent || '').trim().slice(0, 40));
+    }
+    return out;
+  });
+  expect(english).toEqual([]);
+});
+
+test('?lang=hi with a family code: the family, their events and dates, all in Hindi', async ({ page }) => {
+  await page.goto('/?g=mrw567&lang=hi');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'hi');
+  await expect(page.locator('[data-guest-name]')).toHaveText('वाघमारे काका आणि कुटुंब');
+  await expect(page.locator('[data-dates-short]')).toHaveText('८ और ९ दिसंबर २०२६');
+  await openCover(page);
+  await expect(page.locator('[data-count-title]')).toHaveText('दो समारोह');
+  await expect(page.locator('#inv-hi')).toBeChecked(); /* the link's language, not the family's */
+  await expect(page.locator('.row[data-event] .ev b')).toHaveText(['संगीत संध्या', 'शुभ विवाह']);
+  await expect(page.locator('[data-guest-ask]')).toHaveText('वाघमारे काका आणि कुटुंब, हर समारोह में आप कितने लोग आएँगे?');
+});
+
+test('?lang=en: English only, no Devanagari beside it but the holy lines and the names', async ({ page }) => {
+  await page.goto('/?lang=en&g=abc234');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  await expect(page.locator('[data-guest-name]')).toHaveText('the Sharma family');
+  await openCover(page);
+  await expect(page.locator('#inv-en')).toBeChecked();
+  await expect(page.locator('#homes .eyebrow')).toHaveText('two homes');
+  await expect(page.locator('.ch-haldi .ch-no')).toHaveText('01');
+  await expect(page.locator('.dhanyavad')).toHaveCount(0);
+  await expect(page.locator('[data-guest-ask]')).toHaveText(/^The Sharma family, how many of you/);
+});
+
+test('?lang= with anything else, or none, leaves the page as it is', async ({ page }) => {
+  for (const q of ['/?lang=fr', '/?lang=MR', '/']) {
+    await page.goto(q);
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    await expect(page.locator('#homes .eyebrow')).toHaveText('दो घर · दोन घरं · two homes');
+  }
+});
+
+test('/mr/ and the like lead to ?lang=, keeping the rest of the link', async ({ page, request }) => {
+  const res = await request.get('/hi/?g=abc234', { maxRedirects: 0 });
+  expect(res.status()).toBe(302);
+  expect(new URL(res.headers().location).search).toBe('?g=abc234&lang=hi');
+  await page.goto('/mr');
+  await expect(page).toHaveURL(/\/\?lang=mr$/);
+  await expect(page.locator('html')).toHaveAttribute('lang', 'mr');
+});
+
+test('?lang= with ?name=: the person greeted in that language, their name kept as written', async ({ page }) => {
+  await page.goto('/?lang=mr&name=rahul');
+  await expect(page.locator('[data-guest-name] .who')).toHaveAttribute('lang', 'en');
+  await openCover(page);
+  await expect(page.locator('#invTitle')).toHaveText('Rahul, आपणास सस्नेह निमंत्रण');
+  await expect(page.locator('.r-thanks-title')).toHaveText('Rahul, मनःपूर्वक आभार!');
+  await page.goto('/?lang=hi&name=' + encodeURIComponent('राहुल') + '&g=abc234');
+  await expect(page.locator('#rsvpTitle')).toHaveText('राहुल, क्या आप पधारेंगे?');
+  await expect(page.locator('#rsvpTitle .who')).not.toHaveAttribute('lang', /./);
+  await expect(page.locator('.r-change')).toHaveAttribute('href', /lang=hi/);
+});
+
+test('the Marathi and Hindi pages fit small phones', async ({ page }) => {
+  for (const lang of ['mr', 'hi']) {
+    await page.setViewportSize({ width: 360, height: 800 });
+    await page.goto('/?g=abc234&lang=' + lang);
+    await openCover(page);
+    expect(await noSideways(page), lang).toBe(true);
+  }
+});

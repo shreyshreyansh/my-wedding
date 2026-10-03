@@ -6,6 +6,7 @@ import { buildIcs, fold, icsText, utc } from '../../src/lib/ics';
 import { rsvpMessage, summaryLine, waLink } from '../../src/lib/wa';
 import { datesFor, events, rsvp as rules } from '../../src/data/wedding';
 import { guestList, parseCsv } from '../../scripts/lib.mjs';
+import { T, isLang, line, num, viewOf } from '../../src/data/i18n';
 
 test('a ?name= keeps only what a name is made of, at most 40 characters', () => {
   expect(cleanName('rahul')).toBe('Rahul');
@@ -137,4 +138,26 @@ test('bots and strangers get nowhere', async () => {
   expect((await handleRsvp(post({ g: 'zzzzzz', t, n: {} }), env, () => {})).status).toBe(404);
   const big = new Request('http://x/api/rsvp', { method: 'POST', body: 'x'.repeat(5000) });
   expect((await handleRsvp(big, env, () => {})).status).toBe(413);
+});
+
+test('?lang=: which page, the numbers and the reply summary in each language', () => {
+  expect(viewOf(new URL('https://x/mr/'))).toBe('mr');
+  expect(viewOf(new URL('https://x/'))).toBe('mixed');
+  expect(viewOf(new URL('https://x/cal/haldi.ics'))).toBe('mixed');
+  expect([isLang('hi'), isLang('HI'), isLang('fr'), isLang(null)]).toEqual([true, false, false, false]);
+  expect(num('mr', 2026)).toBe('२०२६');
+  expect(num('en', 12)).toBe('12');
+  expect(line('mixed', 'Haldi', 2)).toBe(summaryLine({ name: 'Haldi', n: 2 }));
+  expect(line('mr', 'हळद', 1)).toBe('हळद · १ पाहुणा');
+  expect(line('mr', 'हळद', 3)).toBe('हळद · ३ पाहुणे');
+  expect(line('hi', 'हल्दी', 0)).toBe('हल्दी · नहीं आएँगे');
+  /* the mixed page says exactly what it always has */
+  expect(T('mixed').dates(['haldi', 'shaadi'])).toEqual(datesFor(['haldi', 'shaadi']));
+  expect(T('mr').dates(['shaadi'])).toEqual({ short: '९ डिसेंबर २०२६', long: 'बुधवार ९ डिसेंबर २०२६' });
+  expect(T('hi').dates(['haldi', 'sangeet', 'shaadi']).long).toBe('मंगलवार ८ और बुधवार ९ दिसंबर २०२६');
+  /* every language has every event, and the same keys throughout */
+  for (const v of ['en', 'mr', 'hi'] as const) {
+    expect(Object.keys(T(v).ev).sort()).toEqual(events.map((e) => e.id).sort());
+    expect(Object.keys(T(v)).sort()).toEqual(Object.keys(T('mixed')).sort());
+  }
 });

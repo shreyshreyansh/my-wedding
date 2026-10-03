@@ -1,0 +1,79 @@
+---
+// The whole invitation, in one of its four readings (src/data/i18n.ts): the page at / is "mixed", English with
+// Devanagari beside it, and /en/, /mr/ and /hi/ are the same page in one language (served for ?lang=, see worker/index.ts).
+import '../styles/fonts.css';
+import '../styles/base.css';
+import '../styles/buttons.css';
+import '../styles/cover.css';
+import '../styles/hero.css';
+import '../styles/invocation.css';
+import '../styles/tour.css';
+import '../styles/schedule.css';
+import '../styles/mangal.css';
+import '../styles/curtain.css';
+import '../styles/rsvp.css';
+import '../styles/invite.css';
+import '../styles/controls.css';
+import '../styles/footer.css';
+import '../styles/gentle.css';
+import Cover from './Cover.astro';
+import Hero from './Hero.astro';
+import Invocation from './Invocation.astro';
+import TwoHomes from './TwoHomes.astro';
+import Schedule from './Schedule.astro';
+import Mangal from './Mangal.astro';
+import Countdown from './Countdown.astro';
+import Rsvp from './Rsvp.astro';
+import Footer from './Footer.astro';
+import Invitation from './Invitation.astro';
+import Controls from './Controls.astro';
+import SeoHead from './SeoHead.astro';
+import { assertComplete } from '../data/schema';
+import { T, viewOf } from '../data/i18n';
+import fonts from '../data/fonts.json';
+import artFiles from '../data/art-files.json';
+/* the cover painting is the first thing a guest sees: ask for it before anything else */
+const cv = artFiles.cover, set = (l: (string | number)[][]) => l.map(([u, w]) => u + ' ' + w + 'w').join(', ');
+
+assertComplete();
+const view = viewOf(Astro.url), t = T(view);
+---
+<!doctype html>
+<html lang={t.html}>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<SeoHead />
+<link rel="preload" as="image" type="image/avif" fetchpriority="high" media="(max-aspect-ratio: 1/1)" imagesrcset={set(cv.tall.avif)} imagesizes="100vw" />
+<link rel="preload" as="image" type="image/avif" fetchpriority="high" media="(min-aspect-ratio: 1/1)" imagesrcset={set(cv.wide.avif)} imagesizes="56vw" />
+{fonts.preload.map((href) => <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />)}
+<script is:inline>(function(d){var h=d.documentElement;if(!('noModule' in d.createElement('script')))return;h.className+=' js locked';if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)h.className+=' still'})(document);</script>
+</head>
+<body>
+<div id="akshata" aria-hidden="true"></div>
+
+<Cover />
+<Controls />
+
+<main>
+  <Hero />
+  <Invocation />
+  <TwoHomes />
+  <Invitation />
+  <Schedule />
+  <Mangal />
+  <div class="curtain">
+    <Countdown />
+    <Rsvp />
+  </div>
+</main>
+
+<Footer />
+
+<script type="application/json" id="labels" set:html={JSON.stringify({ knotBusy: t.rites.busy, rsvp: { send: t.rsvp.send, sending: t.rsvp.sending, none: t.rsvp.none, line: t.rsvp.line } })}></script>
+<script is:inline>(function(){var d=document,h=d.documentElement,c=d.getElementById('cover');function un(){h.className=h.className.replace(/\s?locked/g,'')}if(!c){un();return}c.addEventListener('click',function(){if(window.__smBooted)return;un();if(c.parentNode)c.parentNode.removeChild(c)})})();</script>
+<script>
+  import '../scripts/main';
+</script>
+</body>
+</html>

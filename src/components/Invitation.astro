@@ -1,9 +1,12 @@
 ---
 // The invitation card in the family's words, in English, Marathi or Hindi. The switch is a CSS radio group:
 // no JavaScript, no history entries. The edge pre-selects the family's language.
+import Parts from './Parts.astro';
 import { copy, invitation } from '../data/wedding';
+import { T, viewOf } from '../data/i18n';
 import type { Block, Lang } from '../data/schema';
 const langs = Object.keys(invitation) as Lang[];
+const t = T(viewOf(Astro.url));
 /* the children's plea (बाल मनुहार) sits in its own little box */
 function groups(blocks: Block[]) {
   const out: (Block | Block[])[] = [];
@@ -18,11 +21,11 @@ function groups(blocks: Block[]) {
 ---
 <section id="invite" aria-labelledby="invTitle">
   <div class="inv">
-    <p class="eyebrow reveal"><span lang="mr">{copy.invite.eyebrowDev}</span> · {copy.invite.eyebrow}</p>
-    <h2 id="invTitle" class="reveal" data-for-title>{copy.invite.title}</h2>
+    <p class="eyebrow reveal"><Parts parts={t.invite.eyebrow} /></p>
+    <h2 id="invTitle" class="reveal" data-for-title>{t.invite.title}</h2>
     <fieldset class="inv-set">
-      <legend class="sr-only">{copy.invite.choose}</legend>
-      {langs.map((l) => <input class="inv-radio sr-only" type="radio" name="invlang" id={'inv-' + l} value={l} checked={l === 'en'} />)}
+      <legend class="sr-only">{t.invite.choose}</legend>
+      {langs.map((l) => <input class="inv-radio sr-only" type="radio" name="invlang" id={'inv-' + l} value={l} checked={l === t.invite.card} />)}
       <div class="inv-tabs reveal">
         {langs.map((l) => <label for={'inv-' + l} lang={l} class={'t-' + l}>{invitation[l].label}</label>)}
       </div>

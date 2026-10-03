@@ -173,5 +173,26 @@
       "shaadi"
     ],
     "party": 4
+  },
+  "mra234": {
+    "label": "the MRA234 family",
+    "label_dev": "एमआरए कुटुंब",
+    "lang": "mr",
+    "side": "bride",
+    "ev": [
+      "sangeet",
+      "shaadi"
+    ],
+    "party": 2
+  },
+  "hnd567": {
+    "label": "the HND567 family",
+    "lang": "en",
+    "side": "groom",
+    "ev": [
+      "haldi",
+      "shaadi"
+    ],
+    "party": 3
   }
 }

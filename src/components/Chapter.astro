@@ -3,23 +3,25 @@
 import RiteTokens from './RiteTokens.astro';
 import Tour from './Tour.astro';
 import type { WeddingEvent } from '../data/schema';
-import { copy, venue } from '../data/wedding';
+import { T, num, viewOf } from '../data/i18n';
 interface Props { ev: WeddingEvent; n: number }
 const { ev, n } = Astro.props;
-const DEV = '०१२३४५६७८९';
+const view = viewOf(Astro.url), t = T(view), e = t.ev[ev.id];
+/* the chapter's number: Devanagari, except on the English page */
+const no = view === 'en' ? '0' + n : '०' + num('hi', n);
 ---
 <article class={'chapter ch-' + ev.id} data-event={ev.id}>
   <header class="ch-head">
-    <p class="ch-no reveal"><span class="num" lang="hi">{DEV[0] + DEV[n]}</span>{ev.dn.map((d, i) => <Fragment>{i > 0 && ' · '}<span lang={d.lang}>{d.text}</span></Fragment>)}</p>
-    <h3 class="reveal">{ev.name.en}</h3>
+    <p class="ch-no reveal"><span class="num" lang={view === 'en' ? undefined : 'hi'}>{no}</span>{e.dn.map((d, i) => <Fragment>{i > 0 && ' · '}<span lang={d.lang}>{d.t}</span></Fragment>)}</p>
+    <h3 class="reveal">{e.name}</h3>
   </header>
   <Tour id={ev.id} />
   <div class="ch-text">
-    <p class="story reveal">{ev.story}</p>
+    <p class="story reveal">{e.story}</p>
     <dl class="reveal">
-      <div><dt>{copy.schedule.when}</dt><dd>{ev.when}</dd></div>
-      <div><dt>{copy.schedule.where}</dt><dd>{venue.full}</dd></div>
-      <div><dt>{copy.schedule.wear}</dt><dd><span class="swatch" style={'--sw:' + ev.swatch.bg}></span>{ev.dress}</dd></div>
+      <div><dt>{t.schedule.when}</dt><dd>{e.when}</dd></div>
+      <div><dt>{t.schedule.where}</dt><dd>{t.venue}</dd></div>
+      <div><dt>{t.schedule.wear}</dt><dd><span class="swatch" style={'--sw:' + ev.swatch.bg}></span>{e.dress}</dd></div>
     </dl>
     <RiteTokens ev={ev} />
   </div>

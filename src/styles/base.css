@@ -20,7 +20,17 @@ html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
 .lenis.lenis-stopped{overflow:hidden}
 body{margin:0;background:var(--paper-bg);color:var(--ink);font-family:"Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif;font-size:clamp(18px,.4vw + 16.5px,20px);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
-:lang(mr){font-family:"Tiro Devanagari Marathi","Noto Serif Devanagari",Georgia,serif}
+:where(html:not(:lang(mr))) :lang(mr){font-family:"Tiro Devanagari Marathi","Noto Serif Devanagari",Georgia,serif}
+/* the Marathi page (?lang=mr): Marathi letterforms throughout, the Latin names still in the display face */
+html:lang(mr){--display:"Instrument Serif","Tiro Devanagari Marathi",Georgia,serif}
+html:lang(mr) body{font-family:"Tiro Devanagari Marathi","Noto Serif Devanagari",Georgia,serif}
+:where(html:lang(mr)) :lang(hi){font-family:"Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif}
+/* a guest's name on the Marathi and Hindi pages (server/personalize.ts): the face that keeps every Devanagari letter */
+/* on those pages Devanagari is never letter-spaced (it would break the line joining the letters), and the small
+   labels set in spaced capitals for English come up a size */
+html:not(:lang(en)) :is(.eyebrow,.label,.cv-for,.cv-date,.seal .small,.unit i,.credits summary,.h-eyebrow,.mg-label,.field label,.chapter dt,.r-send,.ch-no .num,.tour-cap b,.b-manuhar-head){letter-spacing:0}
+html:not(:lang(en)) :is(.chapter dt,.field label,.unit i,.credits summary,.mg-label){font-size:.88rem}
+html:not(:lang(en)) .who{font-family:"Instrument Serif","Tiro Devanagari Hindi",Georgia,serif;font-style:normal}
 h1,h2,h3{text-wrap:balance;font-weight:400}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--gold-ink);outline-offset:3px}

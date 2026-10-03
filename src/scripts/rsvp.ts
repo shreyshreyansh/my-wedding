@@ -2,7 +2,7 @@
 // "Change my reply", and a quiet resend on the next visit if a reply never got through.
 import { app, $, $$ } from './app';
 import { chime } from './chime';
-import { rsvpMessage, summaryLine, waLink, type Row } from '../lib/wa';
+import { rsvpMessage, summaryLine, waLink, type Row, type Words } from '../lib/wa';
 
 interface Reply { n: Record<string, number>; name: string; note: string; at: string; rev: number; rid: string }
 interface GuestInfo { code: string; label: string; ev: string[]; party: number; max: number; lang: string; wa: string; t: number; closed: boolean; reply: Reply | null }
@@ -41,7 +41,7 @@ async function send(p: Payload): Promise<Reply> {
   throw new Error('network');
 }
 
-export function initRsvp(labels: { send: string; sending: string; none: string }) {
+export function initRsvp(labels: { send: string; sending: string; none: string; line?: Words }) {
   const sec = $('#rsvp'), form = $<HTMLFormElement>('#rsvpForm'), data = $('#guest');
   if (!sec || !form || !data) return;
   let guest: GuestInfo;
@@ -52,6 +52,8 @@ export function initRsvp(labels: { send: string; sending: string; none: string }
   const setState = (s: string) => { sec.dataset.rsvp = s; };
   const max = (i: HTMLInputElement) => Number(i.max) || guest.max || 20;
   const nameOf = (i: HTMLInputElement) => i.closest('.row')!.querySelector('b')!.textContent!;
+  /* the WhatsApp fallback stays in English, whatever the page's language: the family copies it into the Sheet */
+  const enOf = (i: HTMLInputElement) => (i.closest('.row') as HTMLElement).dataset.en || nameOf(i);
 
   /* steppers: the number itself is a real input, so it also works typed, and without JavaScript */
   const clamp = (i: HTMLInputElement, v: number) => {
@@ -70,7 +72,7 @@ export function initRsvp(labels: { send: string; sending: string; none: string }
     }));
   });
 
-  const rows = (n: Record<string, number>): Row[] => inputs.map((i) => ({ name: nameOf(i), n: n[i.name.slice(2)] ?? 0 }));
+  const rows = (n: Record<string, number>, en = false): Row[] => inputs.map((i) => ({ name: en ? enOf(i) : nameOf(i), n: n[i.name.slice(2)] ?? 0 }));
   const payload = (rid: string): Payload => {
     const f = new FormData(form);
     const n: Record<string, number> = {};
@@ -82,13 +84,13 @@ export function initRsvp(labels: { send: string; sending: string; none: string }
     guest.reply = reply;
     const list = $('.r-summary', thanks)!;
     const none = Object.values(reply.n).every((n) => !n);
-    list.replaceChildren(...(none ? [labels.none] : rows(reply.n).map(summaryLine)).map((t) => Object.assign(document.createElement('li'), { textContent: t })));
+    list.replaceChildren(...(none ? [labels.none] : rows(reply.n).map((r) => summaryLine(r, labels.line))).map((t) => Object.assign(document.createElement('li'), { textContent: t })));
     setState('replied');
     if (focus) { thanks.focus({ preventScroll: true }); chime(2); app.hooks.celebrate?.(); }
     app.hooks.reveal?.(thanks);
   }
   function showFailed(p: Payload) {
-    const msg = rsvpMessage({ label: guest.label, code: guest.code, rows: rows(p.n), name: p.name, note: p.note });
+    const msg = rsvpMessage({ label: guest.label, code: guest.code, rows: rows(p.n, true), name: p.name, note: p.note });
     $<HTMLAnchorElement>('.r-wa', failed)!.href = waLink(guest.wa || '', msg);
     failed.hidden = false;
     setState('failed');

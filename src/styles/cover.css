@@ -18,6 +18,8 @@
 .cv-for span{letter-spacing:0;text-transform:none;font-size:.95rem}
 .cv-guestname{display:block;margin-top:2px;font-family:var(--display);font-style:italic;font-size:clamp(24px,6.8vw,32px);line-height:1.15}
 .cv-guestname:lang(hi),.cv-guestname:lang(mr){font-style:normal;font-size:clamp(22px,6.2vw,28px)}
+/* on the Marathi page too, the family's name in the face that keeps every Devanagari letter */
+html:lang(mr) .cv-guestname{font-family:"Instrument Serif","Tiro Devanagari Hindi",Georgia,serif}
 
 .cv-mid{display:flex;flex-direction:column;align-items:center;margin-top:clamp(14px,3.4svh,34px)}
 .cv-names{margin:0;font-family:var(--display);font-weight:400;line-height:.86;letter-spacing:-.01em;display:flex;flex-direction:column;align-items:center}

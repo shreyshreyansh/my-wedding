@@ -36,3 +36,14 @@ test('the RSVP form posts and the page comes back replied', async ({ page }) => 
   await expect(page.locator('.r-summary li')).toHaveText(['Haldi · 1 guest', 'Shaadi · 3 guests']);
   await expect(page.locator('.r-change')).toHaveAttribute('href', '/?g=rsv888&change=1#rsvp');
 });
+
+test('the RSVP form posted from the Hindi page comes back in Hindi', async ({ page }) => {
+  await page.goto('/?g=hnd567&lang=hi');
+  await page.fill('#n-haldi', '1');
+  await page.waitForTimeout(2600);
+  await page.locator('.r-send').click();
+  await expect(page).toHaveURL(/\?g=hnd567&lang=hi#rsvp$/);
+  await expect(page.locator('html')).toHaveAttribute('lang', 'hi');
+  await expect(page.locator('.r-summary li')).toHaveText(['हल्दी · १ अतिथि', 'शुभ विवाह · ३ अतिथि']);
+  await expect(page.locator('.r-change')).toHaveAttribute('href', '/?g=hnd567&change=1&lang=hi#rsvp');
+});

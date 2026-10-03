@@ -14,7 +14,12 @@ export function rsvpMessage(o: { label: string; code: string; rows: Row[]; name?
   return lines.join('\n');
 }
 
-/** "Haldi · 2 guests", "Sangeet · not coming" */
-export const summaryLine = (r: Row) => r.name + ' · ' + (r.n ? r.n + (r.n === 1 ? ' guest' : ' guests') : 'not coming');
+/** the words around the number in a reply's summary; deva: write the number in Devanagari digits */
+export interface Words { one: string; many: string; no: string; deva?: boolean }
+const EN: Words = { one: 'guest', many: 'guests', no: 'not coming' };
+const digits = (n: number, deva?: boolean) => (deva ? String(n).replace(/\d/g, (d) => '०१२३४५६७८९'[+d]) : String(n));
+
+/** "Haldi · 2 guests", "Sangeet · not coming"; "हळद · २ पाहुणे" with the Marathi words */
+export const summaryLine = (r: Row, w: Words = EN) => r.name + ' · ' + (r.n ? digits(r.n, w.deva) + ' ' + (r.n === 1 ? w.one : w.many) : w.no);
 
 export const closedMessage = (label: string, code: string) => 'Namaste! This is ' + label + ' (' + code + '), about the wedding RSVP.';

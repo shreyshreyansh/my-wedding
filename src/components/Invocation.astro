@@ -3,12 +3,14 @@
 // then Ganesha on his lotus and a Buddha painted at Ajanta to look into.
 import Tour from './Tour.astro';
 import { copy } from '../data/wedding';
+import { T, viewOf } from '../data/i18n';
+const t = T(viewOf(Astro.url));
 ---
 <section id="invocation" aria-labelledby="ivTitle">
   <div class="iv-text">
     <p id="ivTitle" class="iv-pair reveal"><span lang="hi">{copy.invocation.his}</span><i class="leaf" aria-hidden="true"></i><span lang="pi">{copy.invocation.hers}</span></p>
     <p lang="pi" class="iv-inv reveal">{copy.invocation.blessing}</p>
-    <p class="iv-line reveal">{copy.invocation.line}</p>
+    <p class="iv-line reveal">{t.invocation.line}</p>
   </div>
   <Tour id="invocation" />
 </section>

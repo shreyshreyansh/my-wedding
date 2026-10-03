@@ -1,12 +1,14 @@
 ---
 // Where each of them comes from: his Bihar and her Maharashtra, a painting from each, and the threads between them.
 import Tour from './Tour.astro';
-import { copy } from '../data/wedding';
+import Parts from './Parts.astro';
+import { T, viewOf } from '../data/i18n';
+const t = T(viewOf(Astro.url));
 ---
 <section id="homes" aria-labelledby="homesTitle">
   <header class="hm-head">
-    <p class="eyebrow reveal"><span lang="hi">{copy.homes.eyebrowDev}</span> · {copy.homes.eyebrow}</p>
-    <h2 id="homesTitle" class="reveal">{copy.homes.title} <em>{copy.homes.titleEm}</em></h2>
+    <p class="eyebrow reveal"><Parts parts={t.homes.eyebrow} /></p>
+    <h2 id="homesTitle" class="reveal">{t.homes.title} <em>{t.homes.titleEm}</em></h2>
   </header>
   <Tour id="homes" />
 </section>

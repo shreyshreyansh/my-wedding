@@ -6,6 +6,7 @@ import { forwardOrRemember, toRow } from './forward';
 import { json, PRIVATE } from './headers';
 import { rsvp as rules } from '../src/data/wedding';
 import type { EventId } from '../src/data/schema';
+import { isLang } from '../src/data/i18n';
 
 const MAX_BODY = 4096;
 
@@ -48,7 +49,9 @@ export async function handleRsvp(req: Request, env: Env, waitUntil: (p: Promise<
   if (!parsed) return json({ ok: false, error: 'too-large' }, 413);
   const { body, form } = parsed;
   const code = normaliseCode(String(body.g ?? ''));
-  const back = (hash: string) => new Response(null, { status: 303, headers: { ...PRIVATE, Location: '/?g=' + (code ?? '') + hash } });
+  /* without JavaScript the form comes back to the page it was sent from, in the same language */
+  const lg = String(body.lang ?? ''), lang = isLang(lg) ? '&lang=' + lg : '';
+  const back = (hash: string) => new Response(null, { status: 303, headers: { ...PRIVATE, Location: '/?g=' + (code ?? '') + lang + hash } });
 
   /* a filled honeypot is a bot: pretend it worked, keep nothing */
   if (clean(body.hp, 100)) return form ? back('#rsvp') : json({ ok: true });

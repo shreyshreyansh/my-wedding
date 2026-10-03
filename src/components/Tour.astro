@@ -2,7 +2,7 @@
 // Two paintings to look into, one from his side (Bihar) and one from hers (Maharashtra). They stay on screen while
 // you scroll, and the view glides to a detail of each, one line of text each, then back out to show them together.
 // The tours are in src/data/tours.json and the paintings in src/data/art.json; "live" adds twinkling stars or
-// flickering torches. Without the motion (or with Gentle motion) it is simply the two paintings, the lines listed under them.
+// flickering torches. Without the motion (Reduce Motion) it is simply the two paintings, the lines listed under them.
 //
 // The pair stands side by side or one above the other, whichever fills the stage more: side by side wins once the
 // stage is wider than the square root of the two layouts' aspect ratios multiplied (a container query, below).
@@ -10,12 +10,17 @@ import Art from './Art.astro';
 import art from '../data/art.json';
 import files from '../data/art-files.json';
 import tours from '../data/tours.json';
+import { T, num, viewOf } from '../data/i18n';
 
 type Box = [number, number, number, number];
-type Work = { title: string; short: string; place: string; date: string; live?: { twinkle?: number[][]; fire?: number[][] } };
+type Work = { title: string; short: string; short_mr: string; short_hi: string; side: 'his' | 'hers'; place: string; date: string; live?: { twinkle?: number[][]; fire?: number[][] } };
 interface Props { id: keyof typeof tours }
 const { id } = Astro.props;
-const tour = tours[id] as { works: string[]; stops: { w?: number; box?: number[]; text: string }[] };
+const tour = tours[id] as { works: string[]; stops: { w?: number; box?: number[]; text: string; mr: string; hi: string }[] };
+/* the words in the page's language (the English is also the mixed page's) */
+const view = viewOf(Astro.url), t = T(view);
+const say = (s: (typeof tour.stops)[number]) => (view === 'mr' || view === 'hi' ? s[view] : s.text);
+const short = (w: Work) => (view === 'mr' || view === 'hi' ? w[`short_${view}`] : w.short);
 const works = tour.works.map((w) => ({ id: w, a: (art as unknown as Record<string, Work>)[w], f: (files as Record<string, Record<string, { w: number; h: number }>>)[w].main }));
 const ars = works.map((w) => w.f.w / w.f.h);
 const G = 0.035;
@@ -46,7 +51,7 @@ const pieces = works.map((w, i) => {
   const vars = ['c', 'r'].flatMap((k) => { const p = (k === 'c' ? col : row)[i]; return [`--${k}l:${pct(p.l)}`, `--${k}t:${pct(p.t)}`, `--${k}w:${pct(p.w)}`, `--${k}h:${pct(p.h)}`]; }).join(';');
   return { ...w, stars, fires: w.a.live?.fire ?? [], vars };
 });
-const label = works.map((w) => ((w.a as unknown as { side: string }).side === 'his' ? 'Bihar: ' : 'Maharashtra: ') + w.a.short).join('  ·  ');
+const label = works.map((w) => (w.a.side === 'his' ? t.tour.his : t.tour.hers) + short(w.a)).join('  ·  ');
 ---
 <div class="tour" id={'tour-' + id} data-tour={JSON.stringify(boxes.col)} data-tour-row={JSON.stringify(boxes.row)} style={'--stops:' + tour.stops.length}>
   <style is:inline set:html={`#tour-${id} .tour-art{--ar:${AR.col.toFixed(4)}}@container (min-aspect-ratio:${Math.round(flip * 1000)}/1000){#tour-${id} .tour-art{--ar:${AR.row.toFixed(4)};--layout:row}#tour-${id} .tour-piece{left:var(--rl);top:var(--rt);width:var(--rw);height:var(--rh)}}`} />
@@ -54,7 +59,7 @@ const label = works.map((w) => ((w.a as unknown as { side: string }).side === 'h
     <div class="tour-stage">
       <div class="tour-art pair">
         {pieces.map((p) => (
-          <div class={'tour-piece is-' + (p.a as unknown as { side: string }).side} style={p.vars}>
+          <div class={'tour-piece is-' + p.a.side} style={p.vars}>
             <Art id={p.id as keyof typeof files} crop="main" sizes="(min-aspect-ratio: 6/5) 40vw, 130vw" />
             {p.stars.length > 0 && <span class="twinkles" aria-hidden="true">{p.stars.map((s) => <i style={`left:${s.l.toFixed(1)}%;top:${s.t.toFixed(1)}%;--s:${s.s.toFixed(0)}px;--d:${s.d.toFixed(2)}s;--dl:${s.dl.toFixed(2)}s`}></i>)}</span>}
             {p.fires.map(([x, y, s]) => <span class="fire" aria-hidden="true" style={`left:${x * 100}%;top:${y * 100}%` + (s ? `;--fs:${s * 100}%` : '')}></span>)}
@@ -65,7 +70,7 @@ const label = works.map((w) => ((w.a as unknown as { side: string }).side === 'h
     <div class="tour-caps">
       <p class="label tour-cap is-label">{label}</p>
       <ol class="tour-list">
-        {tour.stops.map((s, i) => <li class="tour-cap"><b>{i + 1} / {tour.stops.length}</b> {s.text}</li>)}
+        {tour.stops.map((s, i) => <li class="tour-cap"><b>{num(view, i + 1)} / {num(view, tour.stops.length)}</b> {say(s)}</li>)}
       </ol>
     </div>
   </div>

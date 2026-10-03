@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 import { noSideways, openCover } from './helpers';
 
-for (const url of ['/', '/?g=abc234', '/?g=vsf234']) {
+for (const url of ['/', '/?g=abc234', '/?g=vsf234', '/?g=abc234&lang=mr', '/?lang=hi']) {
   test(`no serious accessibility problems: ${url}`, async ({ page }) => {
     await page.goto(url);
     const cover = await new AxeBuilder({ page }).analyze();

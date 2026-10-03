@@ -6,7 +6,7 @@ For whoever sets the site up (a developer, once) and for the family members who 
 
 | Piece | Where | Who touches it |
 |---|---|---|
-| Every word on the page | `src/data/wedding.ts` | Developer, with the family's wording |
+| Every word on the page | `src/data/wedding.ts`; the Marathi and Hindi pages in `src/data/i18n.ts` (and `mr`, `hi` in `tours.json`) | Developer, with the family's wording |
 | The guest list, phone numbers, replies | The family's Google Sheet | Family |
 | Who is invited to what (no phone numbers) | Cloudflare KV key `guests`, published from the Sheet | Sheet menu |
 | Each family's latest reply | Cloudflare KV `r:<code>`, copied to the Sheet | The site |
@@ -57,7 +57,7 @@ Placeholders show on the page as `⟦…⟧`. Search `todo(` in `src/data/weddin
 - The inviters (Marathi), the family members (Hindi दर्शनाभिलाषी) and the English sign-off.
 - बाल मनुहार: the relation (e.g. चाचा) and the child's name.
 
-An elder should read all three cards before invitations go out. Before launch, build with `STRICT=1 npm run build`: it fails while any placeholder is left.
+An elder should read all three cards, and the Marathi and Hindi pages (`?lang=mr`, `?lang=hi`), before invitations go out. Before launch, build with `STRICT=1 npm run build`: it fails while any placeholder is left.
 
 Also confirm in `wedding.ts`: the exact Google Maps pin (`venue.maps`), the RSVP deadline (`rsvp.deadline`, default Wed 25 Nov), event times.
 
@@ -109,6 +109,15 @@ Add `name=` to any link and the page speaks to that person: their name on the co
 - Spaces work as `%20` or `+` (`?name=Rahul+Kumar`); Devanagari works too (`?name=राहुल`). Only letters, spaces and . ' - & are kept, up to 40 characters, and a lower-case first letter becomes a capital.
 - Without `name=`, or with nothing usable in it, the page reads as before. The link preview on WhatsApp is the same for everyone and never shows the name.
 
+## The page in one language
+
+Add `lang=` to any link and the whole page is in that language: `lang=mr` (मराठी), `lang=hi` (हिंदी) or `lang=en` (English only).
+- `https://ranchiwedspune.in/?g=abc234&lang=mr`: the family's own invitation, in Marathi. It works with `name=` too.
+- Without `lang=`, or with anything else in it, the page is as it has always been: English with Devanagari beside it.
+- Translated: every heading, the stories under the paintings, the dates, the RSVP and its thank-you, the footer. Not translated: the holy lines (the invocations, the mangalashtak, the Pali verses, the chaupai), the couple's names and the art credits. The invitation card opens in the link's language; the three cards are still there to switch between.
+- A reply sent from any language reaches the Sheet the same way, and the WhatsApp fallback message is always in English, so it reads the same to whoever enters it.
+- The Marathi and Hindi wording is in `src/data/i18n.ts` and the `mr` / `hi` lines in `src/data/tours.json`. An elder should read them before the links go out. After changing them: `npm run build && npm run fonts && npm run build`.
+
 ## When something goes wrong
 
 | Problem | What to do |
@@ -137,7 +146,7 @@ The tests need nothing online except `npm run fonts` (it downloads the fonts onc
 
 ## Go / no-go (26 Oct)
 - [ ] `STRICT=1 npm run build` passes: no placeholders left.
-- [ ] Elder has read the English, Marathi and Hindi cards.
+- [ ] Elder has read the English, Marathi and Hindi cards, and the `?lang=mr` and `?lang=hi` pages.
 - [ ] Test family: link preview on WhatsApp, cover tap and music, RSVP reaches the Sheet in a minute, WhatsApp fallback (reply in airplane mode), calendar on an iPhone and an Android, Maps pin.
 - [ ] Mid-range Android on Jio and Airtel; an iPhone on Safari; Samsung Internet (with its dark mode).
 - [ ] Test replies cleared; the final guest list published.

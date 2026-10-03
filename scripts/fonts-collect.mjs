@@ -1,4 +1,5 @@
-// Which characters does each font face draw? Opens the built page and reads every text node's computed font.
+// Which characters does each font face draw? Opens each built page (the mixed one and /en/, /mr/, /hi/) and reads every
+// text node's computed font, plus data-glyphs: the words the edge or the page can put into that element later.
 // Used by scripts/fonts.mjs; run after `npm run build`.
 import { chromium } from '@playwright/test';
 import { createServer } from 'node:http';
@@ -9,12 +10,13 @@ const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/cs
 export const OURS = ['Instrument Serif', 'Amita', 'Tiro Devanagari Hindi', 'Tiro Devanagari Marathi'];
 /* faces with no Devanagari: the browser draws those letters with the next face in the stack */
 const LATIN_ONLY = ['Instrument Serif'];
+const PAGES = ['/', '/en/', '/mr/', '/hi/'];
 
 export async function collect(dir = 'dist') {
   const root = resolve(dir);
   const server = createServer((req, res) => {
     const p = new URL(req.url, 'http://x').pathname;
-    const f = join(root, p === '/' ? 'index.html' : decodeURIComponent(p));
+    const f = join(root, decodeURIComponent(p) + (p.endsWith('/') ? 'index.html' : ''));
     if (!existsSync(f) || !statSync(f).isFile()) { res.writeHead(404); return res.end(); }
     res.writeHead(200, { 'content-type': TYPES[extname(f)] || 'application/octet-stream' });
     res.end(readFileSync(f));
@@ -22,21 +24,23 @@ export async function collect(dir = 'dist') {
   const browser = await chromium.launch();
   const out = {};
   try {
-    for (const width of [390, 1440]) {
+    for (const page of PAGES) for (const width of [390, 1440]) {
       const pg = await browser.newPage({ viewport: { width, height: 900 } });
       await pg.route(/^https?:\/\/(?!127\.0\.0\.1)/, (r) => r.abort());
-      await pg.goto(`http://127.0.0.1:${server.address().port}/`);
+      await pg.goto(`http://127.0.0.1:${server.address().port}${page}`);
       const faces = await pg.evaluate(([ours, latinOnly]) => {
         const res = {};
+        const runs = [];
         const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-        for (let n = walker.nextNode(); n; n = walker.nextNode()) {
-          const el = n.parentElement;
-          if (!el || /^(SCRIPT|STYLE|NOSCRIPT)$/.test(el.tagName) || !n.textContent.trim()) continue;
+        for (let n = walker.nextNode(); n; n = walker.nextNode()) runs.push([n.parentElement, n.textContent]);
+        for (const el of document.querySelectorAll('[data-glyphs]')) runs.push([el, el.dataset.glyphs]);
+        for (const [el, raw] of runs) {
+          if (!el || /^(SCRIPT|STYLE|NOSCRIPT)$/.test(el.tagName) || !raw.trim()) continue;
           const cs = getComputedStyle(el);
           const stack = cs.fontFamily.split(',').map((s) => s.trim().replace(/^["']|["']$/g, '')).filter((s) => ours.includes(s));
           if (!stack.length) continue;
           const style = cs.fontStyle === 'normal' ? 'normal' : 'italic';
-          const text = n.textContent + (cs.textTransform === 'uppercase' ? n.textContent.toUpperCase() : '');
+          const text = raw + (cs.textTransform === 'uppercase' ? raw.toUpperCase() : '');
           for (const ch of text) {
             const deva = /[\u0900-\u097F\u200C\u200D]/.test(ch);
             const fam = deva ? stack.find((f) => !latinOnly.includes(f)) : stack[0];

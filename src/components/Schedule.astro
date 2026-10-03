@@ -1,12 +1,15 @@
 ---
 // The celebrations, as plates in a folio: one painting each, with its museum label, and the day's details.
 import Chapter from './Chapter.astro';
-import { copy, events } from '../data/wedding';
+import Parts from './Parts.astro';
+import { events } from '../data/wedding';
+import { T, viewOf } from '../data/i18n';
+const t = T(viewOf(Astro.url));
 ---
 <section id="schedule" aria-labelledby="schedTitle">
   <header class="sched-head">
-    <p class="eyebrow reveal"><span lang="mr">{copy.schedule.eyebrowDev}</span> · {copy.schedule.eyebrow}</p>
-    <h2 id="schedTitle" class="reveal">{copy.schedule.title} <em data-count-title>{copy.schedule.titleEm}</em></h2>
+    <p class="eyebrow reveal"><Parts parts={t.schedule.eyebrow} /></p>
+    <h2 id="schedTitle" class="reveal">{t.schedule.title} <em data-count-title data-glyphs={t.schedule.countWords.join(' ')}>{t.schedule.countWords[events.length]}</em></h2>
   </header>
   <div class="chapters">
     {events.map((ev, i) => <Chapter ev={ev} n={i + 1} />)}

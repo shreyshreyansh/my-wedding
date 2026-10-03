@@ -1,12 +1,14 @@
 ---
 // The names, set like the title page of a folio: his flush left, hers flush right, an italic & on a hairline.
-// The falling antarpat reveals this page.
-import { couple, copy, dates, venue } from '../data/wedding';
+// The falling antarpat reveals this page. (On the English-only page an empty first span keeps "The wedding of" on the right.)
+import { couple, events } from '../data/wedding';
+import { T, viewOf } from '../data/i18n';
+const t = T(viewOf(Astro.url));
 ---
 <section id="hero" aria-labelledby="heroTitle">
   <div class="h-in">
-    <p class="h-eyebrow"><span lang="hi">॥ शुभ विवाह ॥</span><span>{copy.hero.eyebrow}</span></p>
-    <h1 id="heroTitle" tabindex="-1" class="h-names" aria-label={couple.groom.en + ' and ' + couple.bride.en}>
+    <p class="h-eyebrow">{t.view === 'en' && <span></span>}{t.hero.eyebrow.map((p) => <span lang={p.lang}>{p.t}</span>)}</p>
+    <h1 id="heroTitle" tabindex="-1" class="h-names" aria-label={t.hero.aria}>
       <span class="h-who his" aria-hidden="true">
         <span class="nm">{couple.groom.en}</span>
         <span class="h-sub"><span lang="hi" class="dn">{couple.groom.dev}</span></span>
@@ -18,8 +20,8 @@ import { couple, copy, dates, venue } from '../data/wedding';
       </span>
     </h1>
     <div class="h-when">
-      <span class="h-date" data-dates-long>{dates.long}</span>
-      <span>{venue.full}</span>
+      <span class="h-date" data-dates-long>{t.dates(events.map((e) => e.id)).long}</span>
+      <span>{t.venue}</span>
     </div>
   </div>
 </section>

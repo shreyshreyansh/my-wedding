@@ -57,7 +57,8 @@ for (const p of all) {
     if (/^\s*disallow:/im.test(t) && /robots\.txt$/.test(rel)) fails.push('robots.txt Disallow (it would stop link previews)');
   }
 }
-if (process.env.STRICT === '1' && /⟦/.test(html)) fails.push('placeholders ⟦…⟧ left in the page');
+/* the mixed page and the one-language pages (/en/, /mr/, /hi/) */
+if (process.env.STRICT === '1') for (const p of all.filter((p) => /(^|\/)index\.html$/.test(relative(DIST, p)) && !/og-card/.test(p))) if (/⟦/.test(readFileSync(p, 'utf8'))) fails.push('placeholders ⟦…⟧ left in ' + relative(DIST, p));
 
 console.table(rows);
 if (fails.length) { console.error('\nBudget check failed:\n  - ' + fails.join('\n  - ')); process.exit(1); }

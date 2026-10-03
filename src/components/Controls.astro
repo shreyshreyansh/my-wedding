@@ -1,11 +1,13 @@
 ---
 // The music bell: a kajal ghanti on a zari ring, top right. Only there when the couple's recording exists.
-import { copy, music } from '../data/wedding';
+import { music } from '../data/wedding';
+import { T, viewOf } from '../data/i18n';
+const t = T(viewOf(Astro.url));
 ---
 {music.src && (
   <div class="controls" id="controls" hidden>
     <audio id="music" preload="none" src={music.src} data-loop={music.loop ? '1' : ''}></audio>
-    <button type="button" class="bell-btn" id="bellBtn" aria-label={copy.controls.muteOff} data-on={copy.controls.muteOff} data-off={copy.controls.muteOn}>
+    <button type="button" class="bell-btn" id="bellBtn" aria-label={t.controls.muteOff} data-on={t.controls.muteOff} data-off={t.controls.muteOn}>
       <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true">
         <path d="M16 3v3" stroke="#C9A04A" stroke-width="2" stroke-linecap="round"/>
         <path d="M16 6c-5 0-8 4-8 9v5l-2 3h20l-2-3v-5c0-5-3-9-8-9Z" fill="#C9A04A"/>
@@ -16,6 +18,6 @@ import { copy, music } from '../data/wedding';
         <path class="bell-slash" d="M5 27 27 5" stroke="#B3261E" stroke-width="3" stroke-linecap="round"/>
       </svg>
     </button>
-    <span class="bell-hint plate" aria-hidden="true">{copy.controls.hint}</span>
+    <span class="bell-hint plate" aria-hidden="true">{t.controls.hint}</span>
   </div>
 )}
