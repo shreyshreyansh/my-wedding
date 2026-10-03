@@ -110,7 +110,7 @@ The backup to the menu, from a CSV export of the Guests tab: `npm run codes -- p
 | A family should see another event | Tick it in Guests, **Publish guest list**. No need to resend. |
 | An event's time or place changes | Edit `wedding.ts`, bump `site.calendarSequence`, push. Saved calendar entries update when reopened. Tell guests on WhatsApp too. |
 | The WhatsApp preview looks old | Change the card, `npm run og`, bump `site.ogVersion`, push. WhatsApp caches previews for a while. |
-| Motion makes someone uncomfortable | The footer has **Gentle motion · कम हलचल**; phones set to Reduce Motion get the still page automatically. |
+| Motion makes someone uncomfortable | Turning on Reduce Motion on their phone (Settings › Accessibility) gives them the still page automatically. |
 
 ## For the developer
 

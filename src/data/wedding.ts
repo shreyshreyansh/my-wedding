@@ -212,7 +212,7 @@ export const copy = {
     seal: 'शुभमंगल सावधान',
     tap: 'Open'
   },
-  hero: { eyebrow: 'The wedding of', his: 'Bihar · Madhubani', her: 'Pune · Paithani' },
+  hero: { eyebrow: 'The wedding of' },
   /* his family's invocation and hers, side by side and equal, and one blessing both can say (docs/research/06-story-customs-bridges.md §c) */
   invocation: {
     his: '॥ श्री गणेशाय नमः ॥',
@@ -255,11 +255,10 @@ export const copy = {
   footer: {
     love: 'With love, the families of Shreyansh & Mrunalini',
     credits: 'The art on this page',
-    creditsNote: 'Every painting and textile here is in the public domain, shared openly by the museums that keep it.'
+    creditsNote: 'Every picture here is shared openly: by the museums and libraries that keep it, or, for the photographs, by the people who took them.'
   },
   controls: {
-    muteOn: 'Play the music', muteOff: 'Mute the music', hint: 'Tap the bell to mute',
-    gentle: 'Gentle motion', gentleDev: 'कम हलचल', fullMotion: 'Full motion'
+    muteOn: 'Play the music', muteOff: 'Mute the music', hint: 'Tap the bell to mute'
   }
 };
 

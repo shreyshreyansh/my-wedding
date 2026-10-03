@@ -7,7 +7,7 @@ export const $$ = <T extends Element = HTMLElement>(sel: string, from: ParentNod
 
 export const isPhone = () => matchMedia('(max-width: 599px)').matches;
 export const fine = matchMedia('(pointer: fine)').matches;
-/** still = the OS asks for reduced motion (unless the guest chose full motion) or the guest chose gentle motion. Set by the head script. */
+/** still = the phone or computer asks for reduced motion. Set by the head script. */
 export const isStill = () => root.classList.contains('still');
 
 export interface Hooks {

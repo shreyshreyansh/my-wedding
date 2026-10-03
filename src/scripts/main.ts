@@ -1,12 +1,11 @@
 // Essential behaviour: the cover, music, countdown, RSVP and calendar. No animation library here, so the invitation
-// works even if the motion chunk never arrives. Motion loads after, unless the guest wants the page still.
+// works even if the motion chunk never arrives. Motion loads after, unless the phone asks for reduced motion.
 import { app, isStill } from './app';
 import { initCover } from './cover';
 import { initCountdown } from './countdown';
 import { initRsvp } from './rsvp';
 import { initCalendar } from './calendar';
 import { initMusic } from './music';
-import { initMotionPref } from './motion-pref';
 import { chime } from './chime';
 import { initImages } from './images';
 
@@ -24,11 +23,6 @@ initCalendar(labels.knotBusy);
 type Motion = typeof import('./motion');
 let motion: Promise<Motion> | null = null;
 const loadMotion = () => (motion ??= import('./motion'));
-
-initMotionPref(
-  () => { loadMotion().then((m) => m.start({ intro: false })).catch(() => {}); },
-  () => { motion?.then((m) => m.stop()).catch(() => {}); }
-);
 
 if (!cover || isStill()) {
   cover?.show();

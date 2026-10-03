@@ -10,7 +10,6 @@
 .h-sub{display:flex;align-items:baseline;gap:14px;margin-top:6px;font-family:"Tiro Devanagari Hindi",Georgia,serif}
 .h-sub .dn{font-size:clamp(22px,6vw,34px);line-height:1.2;color:var(--rani)}
 .her .h-sub .dn{color:var(--rani)}
-.h-sub .from{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
 .h-amp{display:flex;align-items:center;gap:16px;margin:clamp(2px,1svh,10px) 0}
 .h-amp i{flex:1;height:1px;background:var(--hair);transform-origin:50% 50%}
 .h-amp span{font-style:italic;font-size:min(16vw,9svh,120px);line-height:.8;color:var(--gold-ink)}

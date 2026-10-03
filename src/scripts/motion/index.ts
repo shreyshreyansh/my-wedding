@@ -15,8 +15,6 @@ ScrollTrigger.config({ ignoreMobileResize: true });
 /* read by the tests (trigger counts) */
 (window as unknown as { __motion: object }).__motion = { gsap, ScrollTrigger };
 
-let mm: gsap.MatchMedia | null = null;
-
 export function start({ intro }: { intro: boolean }) {
   root.classList.add('motion');
   coverMotion(intro);
@@ -42,7 +40,7 @@ export function start({ intro }: { intro: boolean }) {
     shared.heroIntro?.play();
   };
 
-  mm = gsap.matchMedia();
+  const mm = gsap.matchMedia();
   /* every width is covered: tablets (600 to 1023 px) get the same motion as the rest */
   mm.add({ phone: '(max-width: 599px)', tab: '(min-width: 600px) and (max-width: 1023px)', desk: '(min-width: 1024px)' }, (c) => {
     const { phone, tab, desk } = c.conditions as { phone: boolean; tab: boolean; desk: boolean };
@@ -64,15 +62,3 @@ export function start({ intro }: { intro: boolean }) {
   document.fonts?.ready.then(() => ScrollTrigger.refresh());
 }
 
-/** Gentle motion: put every section back in its still, final state. */
-export function stop() {
-  mm?.revert();
-  mm = null;
-  if (shared.lenisTick) gsap.ticker.remove(shared.lenisTick);
-  shared.lenis?.destroy();
-  shared.lenis = null;
-  shared.lenisTick = null;
-  shared.heroIntro = null;
-  root.classList.remove('motion');
-  app.hooks = {};
-}

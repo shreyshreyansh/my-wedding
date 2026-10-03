@@ -71,7 +71,7 @@ Each chapter's art is a *tour* of two works, his side's and hers:
 - **In `src/data/tours.json`** each tour lists its two `works` (ids in `art.json`) and its `stops`. A stop has `w` (0 for his work, 1 for hers), a `box` (fractions of that work's crop: `[x, y, width, height]`) and its words. A stop with no `w` shows the whole pair.
 - **Side by side or one above the other:** `Tour.astro` works out both layouts and the boxes for each. A container query stands the pair side by side once the stage is wider than the square root of the two layouts' aspect ratios multiplied, which is where side by side fills more of it. `tour.ts` reads which layout is showing each time the page is measured.
 - **Living details** come from a work's `"live"`: `twinkle` areas get stars, and `fire` points (`[x, y, size]`) flicker. The baraat's sky twinkles and its torches flicker, only while on screen.
-- **With Gentle motion, or without JavaScript**, the two paintings simply appear one above the other, with the lines listed under them.
+- **With Reduce Motion on, or without JavaScript**, the two paintings simply appear one above the other, with the lines listed under them.
 
 ## Swapping in the family's own art (recommended)
 
