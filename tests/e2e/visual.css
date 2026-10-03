@@ -1,1 +1,4 @@
+/* the music bell floats over every section and its hint fades on a timer: leave it out of the frames */
 #controls{visibility:hidden!important}
+/* the paintings load lazily and decode at their own pace: these frames check the layout and type around them */
+picture img{visibility:hidden!important}

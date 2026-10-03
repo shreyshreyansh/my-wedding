@@ -4,7 +4,7 @@ import { expect, test, type Page } from '@playwright/test';
 import { LATE, TODAY, openCover } from './helpers';
 
 const SIZES: Record<string, [number, number][]> = { phone: [[390, 844], [375, 667], [360, 800]], desktop: [[1440, 900]] };
-/* the music bell floats over every section and its hint fades on a timer: leave it out of the frames */
+/* tests/e2e/visual.css hides the music bell and the paintings (see there) */
 const shot = { animations: 'disabled' as const, stylePath: 'tests/e2e/visual.css' };
 
 test.beforeEach(async ({ page }) => { await page.clock.setFixedTime(TODAY); });
