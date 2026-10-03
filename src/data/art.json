@@ -295,28 +295,19 @@
    }
   }
  },
- "lotus": {
-  "src": "https://openaccess-cdn.clevelandart.org/2018.155/2018.155_print.jpg",
-  "page": "https://clevelandart.org/art/2018.155",
-  "title": "Vishnu on Ananta, the Endless Serpent",
-  "date": "c. 1700",
-  "place": "Chamba, Himachal Pradesh",
-  "medium": "Gum tempera and gold on paper",
-  "museum": "The Cleveland Museum of Art",
-  "credit": "The Cleveland Museum of Art, Purchase and partial gift from the Catherine and Ralph Benkaim Collection; Severance and Greta Millikin Purchase Fund 2018.155",
-  "licence": "CC0",
+ "bodhi": {
+  "src": "https://iiif.wellcomecollection.org/image/V0043954/full/full/0/default.jpg",
+  "page": "https://wellcomecollection.org/works/v2qwpk8g",
+  "title": "Peepul tree (Ficus religiosa): fruiting stem",
+  "date": "c. 1843",
+  "place": "London",
+  "medium": "Coloured lithograph, from Burnett's Plantae utiliores",
+  "museum": "Wellcome Collection",
+  "credit": "Wellcome Collection, V0043954. One leaf, cut out, is the Bodhi-leaf ornament",
+  "licence": "public domain",
   "alt": "",
-  "crops": {
-   "frieze": {
-    "box": [0.03, 0.015, 0.93, 0.13],
-    "widths": [900, 1600],
-    "webp": [900],
-    "q": {
-     "avif": 50,
-     "webp": 70
-    }
-   }
-  }
+  "crops": {},
+  "tile": "/art/bodhi-leaf.27039368.webp"
  },
  "paper": {
   "src": "https://archive.org/download/samplebookoffren00cans/samplebookoffren00cans_orig_jp2.tar/samplebookoffren00cans_orig_jp2%2Fsamplebookoffren00cans_orig_0016.jp2",

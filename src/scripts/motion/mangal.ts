@@ -9,8 +9,9 @@ export function mangal() {
     gsap.from(el, { y: 24, autoAlpha: 0, duration: 0.85, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
   });
   if (document.getElementById('verse')) {
-    gsap.fromTo('#verse .vw', { opacity: 0.18, y: 6 }, { opacity: 1, y: 0, ease: 'none', stagger: 0.1, scrollTrigger: { trigger: '#verse', start: 'top 78%', end: 'bottom 42%', scrub: true } });
-    gsap.fromTo('#mangal .mg-frieze picture', { xPercent: -4 }, { xPercent: 4, ease: 'none', scrollTrigger: { trigger: '#mangal', start: 'top bottom', end: 'bottom top', scrub: true } });
+    for (const id of ['#verse', '#verse2']) if (document.querySelector(id)) gsap.fromTo(id + ' .vw', { opacity: 0.18, y: 6 }, { opacity: 1, y: 0, ease: 'none', stagger: 0.1, scrollTrigger: { trigger: id, start: 'top 78%', end: 'bottom 42%', scrub: true } });
+    /* the leaves of the torans sway only while the section is on screen */
+    ScrollTrigger.create({ trigger: '#mangal', start: 'top bottom', end: 'bottom top', toggleClass: { targets: '#mangal', className: 'live' } });
     ScrollTrigger.create({ trigger: '#savdhan', start: 'top 82%', once: true, onEnter: () => burst(24) });
   }
 }

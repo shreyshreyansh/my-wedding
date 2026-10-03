@@ -26,7 +26,7 @@ Each chapter is a pair: a work from his side (Bihar) and one from hers (Maharash
 | Haldi | Shiva Dayal Lal, *Four women selling food-grains, vegetables and fruit*, Patna, c. 1850 (V&A IS.66-1949, via Wikimedia Commons, PD-Art) | The bath of King Mahajanaka of Mithila, Ajanta Cave 1: Herringham's *Ajanta Frescoes* (1915), plate XIV (Smithsonian Libraries via Internet Archive, public domain) |
 | Sangeet | *Holi being played in a courtyard*, Patna, c. 1795 (British Library Add.Or.939, via Wikimedia Commons, PD-Art) | *Fugdi*, Chitrashala Press print no. 102, Pune, c. 1880–1900 (Wellcome Collection, Public Domain Mark) |
 | Shaadi | A baraat by night, probably Patna, 19th century (Wellcome Collection, Public Domain Mark) | A bride is blessed by elders, Paithan, c. 1850 (LACMA, M.85.297.6, public domain) |
-| Mangalashtak friezes | Lotuses from *Vishnu on Ananta*, Chamba, c. 1700 (The Cleveland Museum of Art, 2018.155, CC0) | |
+| Bodhi leaf (ornament, the toran over the verses, leaves among the RSVP petals) | | One leaf from *Peepul tree (Ficus religiosa): fruiting stem*, c. 1843, the Buddha's tree of Bodh Gaya, in his Bihar (Wellcome Collection V0043954, Public Domain Mark). Cut out by `scripts/leaf.mjs`. |
 | Paper texture | Ingres hand-made paper, Canson & Montgolfier sample book, 1922 (Getty Research Institute via Internet Archive, public domain) | |
 
 **Licence notes.**
@@ -57,6 +57,8 @@ Commit both. `src/components/Art.astro` renders them as a responsive `<picture>`
 *Earlier versions, dropped after the family's review:*
 - a silk brocade (Cleveland 1916.1213) as the cover, falling away in a WebGL cloth effect: the cloth looked artificial and the brocade read as a worn fragment;
 - court paintings from Rajasthan, the Punjab Hills and Lucknow for the chapters: beautiful, but from neither family's home, so they told no story of theirs. The October 2026 pairs replace them.
+
+**The Bodhi leaf** (`public/art/bodhi-leaf.<hash>.webp`, 8 KB): `node scripts/leaf.mjs` cuts the small top-right leaf out of the 1843 plate by its colour (the paper is a pale, greyish cream; the leaf is saturated green), keeps the largest shape and fills its pale veins. Then update `--leaf` in `src/styles/base.css` and the `tile` in `art.json`. It is used three ways: as a gold ornament through a CSS mask (`.leaf`, between the two invocations and in the footer and RSVP), as the toran of leaves over the verses, and drawn among the petals when a reply is sent. The Vishnu lotus frieze it replaced is no longer used.
 
 **The paper** (`public/art/paper-1922.<hash>.webp`) is the 1922 scan, made grey, with its dark flecks evened out (they read as stray punctuation next to text), and re-toned so its average is exactly the page ivory (#F4EEE3). It tiles without seams and weighs 13 KB.
 

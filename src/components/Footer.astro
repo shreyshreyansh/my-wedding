@@ -1,12 +1,15 @@
 ---
-// The last word, the credits for every artwork on the page, and the gentle-motion switch.
+// The last word: his family's chaupai and her family's Pali blessing, the credits for every artwork on the page, and
+// the gentle-motion switch.
 import art from '../data/art.json';
-import { chaupai, copy, music } from '../data/wedding';
+import { chaupai, copy, metta, music } from '../data/wedding';
 const works = Object.values(art);
 ---
 <footer>
   <div class="foot">
     <p lang="hi" class="chaupai">{chaupai[0]}<br>{chaupai[1]}</p>
+    <i class="leaf foot-leaf" aria-hidden="true"></i>
+    <p class="chaupai metta"><span lang="pi">{metta.pi}</span><span class="metta-en">{metta.en}</span></p>
     <p class="love">{copy.footer.love}</p>
     {music.src && (music.title || music.credit) && <p class="credit">♪ {[music.title, music.credit].filter(Boolean).join(' · ')}</p>}
     <details class="credits">

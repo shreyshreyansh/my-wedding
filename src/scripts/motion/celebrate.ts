@@ -1,8 +1,13 @@
-// When a reply is sent: marigold and rose petals and grains of rice shower down the screen for a few seconds.
-// Drawn on one canvas that is removed afterwards.
-type Bit = { x: number; y: number; vx: number; vy: number; r: number; vr: number; w: number; h: number; c: string; sway: number; ph: number; petal: boolean };
+// When a reply is sent: marigold and rose petals, grains of rice and a few Bodhi leaves shower down the screen for a
+// few seconds. Drawn on one canvas that is removed afterwards.
+type Bit = { x: number; y: number; vx: number; vy: number; r: number; vr: number; w: number; h: number; c: string; sway: number; ph: number; petal: boolean; leaf?: boolean };
 type Mem = Navigator & { deviceMemory?: number };
 const COLOURS = ['#E27A1B', '#F2B33D', '#E9952B', '#D9466F', '#C2365E', '#F6E7C8'];
+
+/* the leaf is the page's own ornament (--leaf in base.css); fetched now, so it is ready by the time a reply is sent */
+const leaf = new Image();
+const leafUrl = getComputedStyle(document.documentElement).getPropertyValue('--leaf').match(/url\(["']?([^"')]+)/)?.[1];
+if (leafUrl) leaf.src = leafUrl;
 
 export function celebrate() {
   const few = ((navigator as Mem).deviceMemory ?? 8) <= 2;
@@ -16,6 +21,7 @@ export function celebrate() {
   if (!g) { c.remove(); return; }
   g.scale(dpr, dpr);
   const n = few ? 70 : 150;
+  const leaves = leaf.complete && leaf.naturalWidth ? (few ? 7 : 14) : 0;
   const bits: Bit[] = Array.from({ length: n }, (_, i) => {
     const petal = i % 4 !== 3;
     return {
@@ -24,6 +30,11 @@ export function celebrate() {
       c: petal ? COLOURS[i % 5] : COLOURS[5], sway: 20 + Math.random() * 40, ph: Math.random() * 6, petal
     };
   });
+  /* the leaves fall slower than the petals, and drift and turn more, as leaves do */
+  for (let i = 0; i < leaves; i++) {
+    const w = 15 + Math.random() * 10;
+    bits.push({ x: Math.random() * W, y: -40 - Math.random() * H * 0.5, vx: (Math.random() - 0.5) * 30, vy: 40 + Math.random() * 40, r: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 2.4, w, h: w * 2.03, c: '', sway: 50 + Math.random() * 50, ph: Math.random() * 6, petal: false, leaf: true });
+  }
   let last = performance.now(), age = 0;
   const frame = (now: number) => {
     const dt = Math.min(0.05, (now - last) / 1000);
@@ -31,7 +42,7 @@ export function celebrate() {
     g.clearRect(0, 0, W, H);
     let alive = 0;
     for (const b of bits) {
-      b.vy = Math.min(b.vy + 120 * dt, b.petal ? 170 : 260);
+      b.vy = Math.min(b.vy + 120 * dt, b.leaf ? 120 : b.petal ? 170 : 260);
       b.y += b.vy * dt;
       b.x += (b.vx + Math.sin(age * 2 + b.ph) * b.sway) * dt;
       b.r += b.vr * dt;
@@ -41,6 +52,7 @@ export function celebrate() {
       g.translate(b.x, b.y);
       g.rotate(b.r);
       g.globalAlpha = Math.min(1, Math.max(0, 3.6 - age));
+      if (b.leaf) { g.drawImage(leaf, -b.w / 2, -b.h / 2, b.w, b.h); g.restore(); continue; }
       g.fillStyle = b.c;
       g.beginPath();
       g.ellipse(0, 0, b.w / 2, b.h / 2, 0, 0, Math.PI * 2);

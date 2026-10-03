@@ -1,7 +1,8 @@
 /* the two invocations side by side, the shared blessing, then the paintings to look into */
 #invocation{background:var(--paper-bg);border-top:1px solid var(--hair)}
 .iv-text{padding:clamp(56px,10svh,104px) var(--gut) clamp(8px,2svh,24px);display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
-.iv-pair{margin:0;display:flex;flex-wrap:wrap;justify-content:center;gap:4px clamp(18px,5vw,48px);font-family:"Tiro Devanagari Hindi",Georgia,serif;font-size:clamp(22px,6vw,34px);color:var(--rani)}
+.iv-pair{margin:0;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px clamp(14px,4vw,36px);font-family:"Tiro Devanagari Hindi",Georgia,serif;font-size:clamp(22px,6vw,34px);color:var(--rani)}
+.iv-pair .leaf{color:var(--gold-ink);font-size:.8em}
 .iv-inv{margin:6px 0 0;font-family:"Tiro Devanagari Hindi",Georgia,serif;font-size:clamp(20px,5vw,28px);color:var(--gold-ink)}
 .iv-line{margin:0;font-family:var(--display);font-style:italic;font-size:clamp(26px,7vw,44px);line-height:1.08;max-width:15em}
 

@@ -163,11 +163,26 @@ export const mangal = {
     'पूर्णाः पुण्यजलैः समुद्रसहिताः कुर्वन्तु वो मङ्गलम्॥'
   ],
   rivers: ['गोदावरी', 'गण्डकी'],
+  label: 'From the mangalashtak, the eight verses sung over a Marathi wedding',
   gloss: 'Ganga, Sindhu, Saraswati, Yamuna, Godavari, Narmada… and the famed Gandaki: may these holy rivers bring you auspiciousness. The Godavari flows through her Maharashtra; the Gandaki through his Bihar.',
+  /* the first of the eight Pali victory verses chanted at Buddhist weddings (aimwell.org/jayamangala.html) */
+  jaya: {
+    verse: [
+      'बाहुं सहस्समभिनिम्मित सायुधन्तं',
+      'गिरिमेखलं उदित घोर ससेन मारं।',
+      'दानादि धम्म विधिना जितवा मुनिन्दो',
+      'तं तेजसा भवतु ते जयमङ्गलानि॥'
+    ],
+    marks: ['जयमङ्गलानि'],
+    label: 'From the jayamangala gāthā, the eight Pali verses chanted at a Buddhist wedding',
+    gloss: 'Mara came with a thousand armed hands and his army; the Lord of Sages won by giving and the other virtues. By that power, may victory and every blessing be yours. This first verse tells of the night under the Bodhi tree at Bodh Gaya, in his Bihar.'
+  },
   savdhan: '॥ शुभमंगल सावधान ॥'
 };
 
 export const chaupai = ['मंगल भवन अमंगल हारी।', 'द्रवउ सो दसरथ अजिर बिहारी॥'];
+/* her family's blessing beside his: "may all beings be happy" (Karaniya Metta Sutta, Sn 1.8) */
+export const metta = { pi: 'सब्बे सत्ता भवन्तु सुखितत्ता॥', en: 'May all beings be happy.' };
 
 /* ---------- RSVP ---------- */
 export const rsvp = {
@@ -195,7 +210,6 @@ export const copy = {
     eyebrow: 'with love, for',
     eyebrowDev: 'सस्नेह निमंत्रण',
     guestDefault: 'our family and friends',
-    invocation: '॥ श्री गणेशाय नमः ॥ · ॥ नमो बुद्धाय ॥',
     seal: 'शुभमंगल सावधान',
     tap: 'Open'
   },
@@ -214,7 +228,7 @@ export const copy = {
     wayDev: 'रस्ता दाखवा', way: 'Find your way to us',
     knotDev: 'गाँठ बाँध लीजिए', knot: 'Save the date', knotBusy: 'Opening your calendar…'
   },
-  mangal: { eyebrowDev: 'मंगलाष्टक', eyebrow: 'Mangalashtak', title: 'Two rivers,', titleEm: 'one blessing' },
+  mangal: { eyebrowDev: 'मंगलाष्टक', eyebrowPi: 'जयमङ्गल', eyebrow: 'Mangalashtak · Jayamangala', title: 'Eight verses each,', titleEm: 'one blessing' },
   count: { eyebrowDev: 'मुहूर्त', eyebrow: 'the muhurat is in', units: ['days', 'hours', 'minutes', 'seconds'] },
   rsvp: {
     eyebrowDev: 'उत्तराकांक्षी', eyebrow: 'awaiting your reply',
@@ -225,6 +239,9 @@ export const copy = {
     send: 'Send RSVP',
     sending: 'Sending…',
     thanksDev: 'धन्यवाद',
+    /* the Mangala Sutta (Sn 2.4): for two families becoming one */
+    pali: ['दानञ्च धम्मचरिया च, ञातकानञ्च सङ्गहो।', 'अनवज्जानि कम्मानि, एतं मङ्गलमुत्तमं॥'],
+    paliEn: 'Giving, living rightly, kindness to one’s relatives, doing no harm: this is the highest blessing. From the Mangala Sutta.',
     thanks: 'Thank you!',
     seeYou: 'See you in Ranchi.',
     none: 'We’ll miss you. Thank you for letting us know.',

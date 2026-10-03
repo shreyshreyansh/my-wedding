@@ -8,6 +8,8 @@
   --display:"Instrument Serif","Tiro Devanagari Hindi",Georgia,serif;
   /* hand-made paper from a 1922 Canson sample book (src/data/art.json, "paper"), toned to the ivory */
   --paper-bg:var(--paper) url(/art/paper-1922.2c88ba4d.webp) 0 0/760px auto;
+  /* one Bodhi leaf (scripts/leaf.mjs): a gold ornament through a mask, a toran, and among the petals */
+  --leaf:url(/art/bodhi-leaf.27039368.webp);
   --gut:clamp(20px,5vw,56px);
   color-scheme:light;
 }
@@ -31,6 +33,8 @@ a{color:inherit}
 /* a museum label under each artwork */
 .label{margin:0;font-size:.8rem;line-height:1.45;letter-spacing:.02em;color:var(--ink-2)}
 .label span{font-style:italic}
+/* the Bodhi leaf of Bodh Gaya, in the colour of the words around it */
+.leaf{display:inline-block;width:.6em;height:1.22em;vertical-align:-.28em;background:currentColor;-webkit-mask:var(--leaf) center/contain no-repeat;mask:var(--leaf) center/contain no-repeat}
 .night{background:var(--night);color:var(--paper)}
 .night .eyebrow{color:var(--night-zari)}
 .night .label{color:rgba(244,238,227,.66)}
