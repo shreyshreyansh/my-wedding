@@ -197,14 +197,12 @@ export const copy = {
     guestDefault: 'our family and friends',
     invocation: '॥ श्री गणेशाय नमः ॥',
     seal: 'शुभमंगल सावधान',
-    tap: 'Tap to open',
-    why: 'At these words, the antarpat is lowered and the couple see each other'
+    tap: 'Open'
   },
   hero: { eyebrow: 'The wedding of', his: 'Bihar · Madhubani', her: 'Pune · Paithani' },
-  through: {
+  invocation: {
     invocation: '॥ श्री गणेशाय नमः ॥',
-    line: 'Every invitation begins with Ganesha, who clears the way.',
-    label: 'Ganesha, Mithila painting'
+    line: 'Every invitation begins with Ganesha, who clears the way.'
   },
   invite: { eyebrowDev: 'निमंत्रण', eyebrow: 'the invitation', title: 'You are invited', choose: 'Read the invitation in', manuhar: 'बाल मनुहार' },
   schedule: { eyebrowDev: 'कार्यक्रम', eyebrow: 'the celebrations', title: 'From Pune to Ranchi,', titleEm: 'three celebrations', when: 'When', where: 'Where', wear: 'Wear' },
@@ -249,8 +247,8 @@ export const copy = {
 export const site = {
   title: 'Shreyansh & Mrunalini · 8 & 9 December 2026',
   description: 'With love, you are invited to the wedding of Shreyansh and Mrunalini in Ranchi.',
-  ogAlt: 'Shreyansh & Mrunalini, in large letters over a magenta silk woven with gold.',
-  ogVersion: 2,
+  ogAlt: 'Shreyansh & Mrunalini, in large letters over a 17th-century painting of a peacock grove.',
+  ogVersion: 3,
   /** bump when an event's time or place changes, so calendars update the saved event */
   calendarSequence: 0,
   themeColor: '#1A1220'

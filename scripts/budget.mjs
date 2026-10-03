@@ -22,10 +22,10 @@ const coverFonts = all.filter((p) => /fonts\/(instrument-serif-(normal|italic)-4
 const phoneJs = (entry ? gz(join(DIST, entry)) : 0) + (motion ? gz(motion) : 0);
 check('first view (HTML + JS + cover fonts, gzip)', gz(join(DIST, 'index.html')) + phoneJs + coverFonts.reduce((a, p) => a + statSync(p).size, 0), 300 * KB);
 check('JavaScript on a phone (gzip)', phoneJs, 75 * KB);
-/* the cover silk a phone fetches: the largest AVIF in the cover's portrait srcset */
+/* the cover painting a phone fetches: the largest AVIF in the cover's portrait srcset */
 const coverImg = /<div id="cover"[\s\S]*?<source type="image\/avif" srcset="([^"]+)"/.exec(html)?.[1];
-if (!coverImg) fails.push('could not find the cover silk');
-else check('cover silk on a phone', Math.max(...coverImg.split(',').map((c) => statSync(join(DIST, c.trim().split(' ')[0])).size)), 120 * KB);
+if (!coverImg) fails.push('could not find the cover painting');
+else check('cover painting on a phone', Math.max(...coverImg.split(',').map((c) => statSync(join(DIST, c.trim().split(' ')[0])).size)), 120 * KB);
 if (lenis) check('smooth scroll, mouse only (gzip)', gz(lenis), 10 * KB);
 /* the museum art comes in several sizes and formats; a guest fetches one of each */
 check('everything in dist', all.reduce((a, p) => a + statSync(p).size, 0), 8 * KB * KB);

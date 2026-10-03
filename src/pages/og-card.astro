@@ -5,7 +5,7 @@ import '../styles/fonts.css';
 import '../styles/base.css';
 import files from '../data/art-files.json';
 import { couple, dates, venue } from '../data/wedding';
-const wide = files.silk.wide.avif[0][0], tall = files.silk.tall.avif[1][0];
+const art = files.cover.tall.avif[files.cover.tall.avif.length - 1][0];
 ---
 <!doctype html>
 <html lang="en">
@@ -16,20 +16,21 @@ const wide = files.silk.wide.avif[0][0], tall = files.silk.tall.avif[1][0];
 <style>
   body{margin:0;background:#1A1220}
   #card{position:relative;width:1200px;height:630px;overflow:hidden;color:#F4EEE3;text-align:center}
-  #card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  #card .shade{position:absolute;inset:0;background:radial-gradient(ellipse 360px 300px at 50% 50%,rgba(26,18,32,.9) 0,rgba(26,18,32,.78) 55%,rgba(26,18,32,.25) 100%)}
+  #card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 70%}
+  #card .shade{position:absolute;inset:0;background:radial-gradient(ellipse 380px 320px at 50% 50%,rgba(26,18,32,.9) 0,rgba(26,18,32,.74) 55%,rgba(26,18,32,.2) 100%)}
   #card .in{position:absolute;left:285px;top:0;width:630px;height:630px;display:flex;flex-direction:column;align-items:center;justify-content:center}
   #card .inv{margin:0 0 14px;font-size:20px;color:#F2DFA2}
   #card .nm{margin:0;font-family:var(--display);font-size:104px;line-height:.86;letter-spacing:-.01em}
   #card .amp{display:block;font-style:italic;font-size:52px;line-height:1.1;color:#F2DFA2}
   #card .dn{margin-top:14px;font-size:30px;color:#D8B46A}
   #card .date{margin-top:14px;font-size:17px;letter-spacing:.18em;text-transform:uppercase}
-  #icon{width:512px;height:512px;background-color:#8E1A50;background-repeat:no-repeat;background-size:1047px auto;background-position:-257px -986px}
+  #icon{width:512px;height:512px;display:grid;place-items:center;background:#1A1220;box-shadow:inset 0 0 0 26px #1A1220,inset 0 0 0 28px rgba(242,223,162,.7)}
+  #icon span{font-family:var(--display);font-style:italic;font-size:400px;line-height:1;color:#E9CF8A;transform:translateY(-4%)}
 </style>
 </head>
 <body>
 <div id="card">
-  <img src={wide} alt="">
+  <img src={art} alt="">
   <div class="shade"></div>
   <div class="in">
     <p class="inv" lang="hi">॥ श्री गणेशाय नमः ॥</p>
@@ -38,6 +39,6 @@ const wide = files.silk.wide.avif[0][0], tall = files.silk.tall.avif[1][0];
     <div class="date">{dates.short} · {venue.city}</div>
   </div>
 </div>
-<div id="icon" style={'background-image:url(' + tall + ')'}></div>
+<div id="icon"><span>&amp;</span></div>
 </body>
 </html>

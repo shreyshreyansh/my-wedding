@@ -18,8 +18,8 @@ Every work used is listed in `src/data/art.json` (title, date, place, museum, cr
 
 | Where | Work | Museum | Licence |
 |---|---|---|---|
-| Cover (the antarpat) and the medallion fly-through | *Fragment of Gold Cloth*, silk brocade with gold and silver threads, India, 1800s | The Cleveland Museum of Art, 1916.1213 | CC0 |
-| Invocation (॥ श्री गणेशाय नमः ॥) | Ganesha, Mithila (Madhubani) painting, Bihar, 1900s | The Cleveland Museum of Art, 2005.84 | CC0 |
+| Cover | *Gauri Ragini*, a woman in a dark grove full of peacocks, Marwar, c. 1625–30 | National Museum of Asian Art, Smithsonian, S2018.1.49 | CC0 |
+| Invocation (॥ श्री गणेशाय नमः ॥) | *The God Indra Worships Ganesha*, Tehri Garhwal Gita Govinda, Kangra or Guler, c. 1775–80 | The Metropolitan Museum of Art, 659913 | CC0 |
 | Haldi | *Kakubha Ragini*, a woman with two garlands between two peacocks, probably Marwar, c. 1630 | National Museum of Asian Art, Smithsonian, S2018.1.51 | CC0 |
 | Sangeet | *Royal Women Celebrating Diwali*, Lucknow, c. 1760 | The Cleveland Museum of Art, 1971.82 | CC0 |
 | Shaadi | *Wedding Ceremony with Brahma in Attendance*, Ajmer, c. 1680 | National Museum of Asian Art, Smithsonian, S2018.1.29 | CC0 |
@@ -41,14 +41,15 @@ Commit both. `src/components/Art.astro` renders them as a responsive `<picture>`
 
 **Crops** are fractions of the image: `[x, y, width, height]`. A crop can be turned first (`"rotate": 90`), which the silk uses on wide screens so its gold end bands sit at the sides.
 
-**The silk** is photographed thread by thread, so it compresses badly. A small median filter (`"median": 3`) keeps the pattern's edges and halves the file. The phone cover is 105 KB.
+**Textiles** photographed thread by thread compress badly. A small median filter (`"median": 3`) keeps a pattern's edges and halves the file. Paintings don't need it. The phone cover is 109 KB at most.
 
-**The cover seal** sits on the woven medallion. Its position comes from CSS variables:
-- `--mx`, `--my`: the medallion's centre, as fractions of the crop;
-- `--mw`, `--mh`: its size;
-- `--ar`: the crop's height over its width.
+**Opening the cover:** a circle of light grows from the seal, and the page shows through it. It is a CSS mask whose radius GSAP animates (`src/scripts/motion/cover.ts`).
 
-They live in `src/styles/cover.css` and `through.css`. If you recrop the silk, update them.
+*Earlier version, dropped after the family's review:*
+- a silk brocade (Cleveland 1916.1213) as the cover, falling away in a WebGL cloth effect;
+- a Madhubani Ganesha (Cleveland 2005.84).
+
+The cloth looked artificial, the brocade read as a worn fragment, and the Madhubani piece didn't sit with the finer paintings.
 
 **The paper** (`public/art/paper-1922.webp`) is the 1922 scan, made grey and re-toned so its average is exactly the page ivory (#F4EEE3). It tiles without seams and weighs 14 KB.
 

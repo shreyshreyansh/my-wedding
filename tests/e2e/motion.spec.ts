@@ -29,7 +29,7 @@ test('every scroll animation moves and ends in its final state, with no errors',
     w.__seen = w.__trig.map((t) => new Set([t.progress.toFixed(3)]));
     return w.__trig.length;
   });
-  expect(count).toBeGreaterThan(20);
+  expect(count).toBeGreaterThan(15);
   await scrollThrough(page, () => page.evaluate(() => {
     const w = window as unknown as { __trig: { progress: number }[]; __seen: Set<string>[] };
     w.__trig.forEach((t, i) => w.__seen[i].add(t.progress.toFixed(3)));
@@ -41,12 +41,12 @@ test('every scroll animation moves and ends in its final state, with no errors',
   expect(still, 'triggers whose progress never changed').toEqual([]);
   const done = await page.evaluate(() => ({
     chapterTitles: [...document.querySelectorAll('.chapter h3')].every((c) => getComputedStyle(c).opacity === '1'),
-    platesOpen: [...document.querySelectorAll('.plate-art')].every((p) => /^inset\(0(px|%)?( 0(px|%)?)*\)$|^none$/.test(getComputedStyle(p).clipPath)),
+    platesOpen: [...document.querySelectorAll('.plate-art, .iv-art')].every((p) => /^inset\(0(px|%)?( 0(px|%)?)*\)$|^none$/.test(getComputedStyle(p).clipPath)),
     verseLit: [...document.querySelectorAll('#verse .vw')].every((c) => +getComputedStyle(c).opacity > 0.99),
     rsvpTitle: getComputedStyle(document.querySelector('#rsvp h2')!).opacity === '1',
-    throughDone: getComputedStyle(document.querySelector('#through .th-silk')!).visibility === 'hidden' && getComputedStyle(document.querySelector('#through .th-line')!).opacity === '1'
+    invocationShown: getComputedStyle(document.querySelector('#invocation .iv-line')!).opacity === '1'
   }));
-  expect(done).toEqual({ chapterTitles: true, platesOpen: true, verseLit: true, rsvpTitle: true, throughDone: true });
+  expect(done).toEqual({ chapterTitles: true, platesOpen: true, verseLit: true, rsvpTitle: true, invocationShown: true });
   expect(errors).toEqual([]);
 });
 
@@ -56,7 +56,7 @@ test('Gentle motion stops everything in its final state, and full motion comes b
   await page.locator('#openBtn').click();
   await expect(page.locator('#cover')).toHaveCount(0, { timeout: 5000 });
   const triggers = () => page.evaluate(() => (window as unknown as { __motion: { ScrollTrigger: { getAll(): unknown[] } } }).__motion.ScrollTrigger.getAll().length);
-  expect(await triggers()).toBeGreaterThan(20);
+  expect(await triggers()).toBeGreaterThan(15);
   const btn = page.locator('#motionBtn');
   await btn.scrollIntoViewIfNeeded();
   await btn.click();
@@ -64,12 +64,12 @@ test('Gentle motion stops everything in its final state, and full motion comes b
   await expect(page.locator('html')).not.toHaveClass(/\bmotion\b/);
   await expect(btn).toHaveAttribute('aria-pressed', 'true');
   expect(await triggers()).toBe(0);
-  await expect(page.locator('#through .th-silk')).toBeHidden();
-  await expect(page.locator('#through .th-line')).toBeVisible();
+  await expect(page.locator('#invocation .iv-line')).toBeVisible();
+  await expect(page.locator('.chapter h3').first()).toBeVisible();
   expect(await page.evaluate(() => localStorage.getItem('sm-motion'))).toBe('gentle');
   await btn.click();
   await expect(page.locator('html')).toHaveClass(/\bmotion\b/);
-  await expect.poll(triggers).toBeGreaterThan(20);
+  await expect.poll(triggers).toBeGreaterThan(15);
   expect(await page.evaluate(() => localStorage.getItem('sm-motion'))).toBe('full');
 });
 

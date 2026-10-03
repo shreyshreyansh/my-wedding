@@ -1,11 +1,4 @@
 {
- "silk": {
-  "tall": {"w":1192,"h":3179,"colour":"#883848","avif":[["/art/silk-tall-540.415d0e96.avif",540,65831],["/art/silk-tall-720.a06bb942.avif",720,107238]],"webp":[["/art/silk-tall-540.e02c21b1.webp",540,125448]]},
-  "wide": {"w":3155,"h":2410,"colour":"#883848","avif":[["/art/silk-wide-1280.d69d0b7a.avif",1280,107417],["/art/silk-wide-1920.c2b48fae.avif",1920,219830]],"webp":[["/art/silk-wide-1280.cb334cb3.webp",1280,201194]]}
- },
- "ganesha": {
-  "tall": {"w":2381,"h":3230,"colour":"#983868","avif":[["/art/ganesha-tall-600.c79a7872.avif",600,80985],["/art/ganesha-tall-900.42cb83c6.avif",900,140262],["/art/ganesha-tall-1200.23dcec6c.avif",1200,205428]],"webp":[["/art/ganesha-tall-600.99e571f9.webp",600,121016]]}
- },
  "haldi": {
   "tall": {"w":2525,"h":3040,"colour":"#585838","avif":[["/art/haldi-tall-600.b1c4a9b9.avif",600,63019],["/art/haldi-tall-900.53d0b84c.avif",900,138147],["/art/haldi-tall-1200.a7ffc2c7.avif",1200,256467]],"webp":[["/art/haldi-tall-600.b7281874.webp",600,100094]]}
  },
@@ -18,5 +11,13 @@
  },
  "lotus": {
   "frieze": {"w":3062,"h":442,"colour":"#684848","avif":[["/art/lotus-frieze-900.4ee27937.avif",900,11841],["/art/lotus-frieze-1600.a331297a.avif",1600,34843]],"webp":[["/art/lotus-frieze-900.d2b9d734.webp",900,13936]]}
+ },
+ "cover": {
+  "tall": {"w":2944,"h":3500,"colour":"#383828","avif":[["/art/cover-tall-540.cc1a6beb.avif",540,43792],["/art/cover-tall-720.459a82a1.avif",720,73494],["/art/cover-tall-900.91de187b.avif",900,111437]],"webp":[["/art/cover-tall-540.73dff523.webp",540,68558]]},
+  "wide": {"w":2944,"h":3500,"colour":"#383828","avif":[["/art/cover-wide-1200.ff4b253e.avif",1200,196566],["/art/cover-wide-1600.dbc6238f.avif",1600,361189]],"webp":[["/art/cover-wide-1200.4f82d4b4.webp",1200,335570]]}
+ },
+ "ganesha": {
+  "tall": {"w":2273,"h":2237,"colour":"#887838","avif":[["/art/ganesha-tall-600.a57762c5.avif",600,36968],["/art/ganesha-tall-900.bafdff7d.avif",900,75903],["/art/ganesha-tall-1200.aeedf8c9.avif",1200,127226]],"webp":[["/art/ganesha-tall-600.2b2af2fb.webp",600,46844]]},
+  "wide": {"w":3860,"h":2423,"colour":"#d8b8a8","avif":[["/art/ganesha-wide-1200.55a1635b.avif",1200,86517],["/art/ganesha-wide-1800.fc32045e.avif",1800,181539]],"webp":[["/art/ganesha-wide-1200.3b23bee9.webp",1200,107972]]}
  }
 }

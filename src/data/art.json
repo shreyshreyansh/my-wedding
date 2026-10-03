@@ -1,33 +1,34 @@
 {
- "silk": {
-  "src": "https://openaccess-cdn.clevelandart.org/1916.1213/1916.1213_print.jpg",
-  "page": "https://clevelandart.org/art/1916.1213",
-  "title": "Fragment of Gold Cloth",
-  "date": "1800s",
-  "place": "India",
-  "medium": "Silk brocade with gold and silver threads",
-  "museum": "The Cleveland Museum of Art",
-  "credit": "The Cleveland Museum of Art, Gift of Mr. and Mrs. J. H. Wade 1916.1213",
+ "cover": {
+  "src": "https://ids.si.edu/ids/iiif/FS-S2018.1.49_001crop/full/!4000,4000/0/default.jpg",
+  "page": "https://asia.si.edu/object/S2018.1.49/",
+  "title": "Gauri Ragini, folio from a Ragamala",
+  "date": "c. 1625–30",
+  "place": "Marwar, Rajasthan",
+  "medium": "Opaque watercolour on paper",
+  "museum": "National Museum of Asian Art, Smithsonian",
+  "credit": "National Museum of Asian Art, Smithsonian Institution, Purchase and partial gift from the Catherine and Ralph Benkaim Collection, Friends of the National Museum of Asian Art, S2018.1.49",
   "licence": "CC0",
-  "alt": "Magenta silk woven with gold flowers, a gold medallion at its centre and wide gold end bands.",
+  "alt": "A woman in saffron stands in a dark grove among peacocks and peahens, with red flowers and lotuses at her feet.",
   "crops": {
-   "tall": {"box": [0.29, 0.03, 0.44, 0.935], "widths": [540, 720], "webp": [540], "median": 3, "q": {"avif": 46, "webp": 60}},
-   "wide": {"rotate": 90, "box": [0.037, 0.055, 0.928, 0.89], "widths": [1280, 1920], "webp": [1280], "median": 3, "q": {"avif": 46, "webp": 60}}
+   "tall": {"box": [0.055, 0.095, 0.89, 0.875], "widths": [540, 720, 900], "webp": [540], "q": {"avif": 48, "webp": 66}},
+   "wide": {"box": [0.055, 0.095, 0.89, 0.875], "widths": [1200, 1600], "webp": [1200], "q": {"avif": 48, "webp": 66}}
   }
  },
  "ganesha": {
-  "src": "https://openaccess-cdn.clevelandart.org/2005.84/2005.84_print.jpg",
-  "page": "https://clevelandart.org/art/2005.84",
-  "title": "Large, multi-armed figure facing out",
-  "date": "1900s",
-  "place": "Mithila, Bihar",
-  "medium": "Ink and colour on paper",
-  "museum": "The Cleveland Museum of Art",
-  "credit": "The Cleveland Museum of Art, Gift of Pamela Elizabeth Ward in loving memory of her parents, William E. and Evelyn Svec Ward 2005.84",
+  "src": "https://images.metmuseum.org/CRDImages/as/original/DP372795.jpg",
+  "page": "https://www.metmuseum.org/art/collection/search/659913",
+  "title": "The God Indra Worships Ganesha, from the Tehri Garhwal Gita Govinda",
+  "date": "c. 1775–80",
+  "place": "Kangra or Guler, Punjab Hills",
+  "medium": "Ink and opaque watercolour on paper",
+  "museum": "The Metropolitan Museum of Art",
+  "credit": "The Metropolitan Museum of Art, Gift of Steven Kossak, The Kronos Collections, 2021",
   "licence": "CC0",
-  "alt": "A Mithila (Madhubani) painting of Ganesha, many-armed, in magenta, yellow and green, framed by leaves and flowers.",
+  "alt": "Ganesha, orange-skinned and crowned, sits on a gold throne under a canopy while Indra kneels and touches his feet.",
   "crops": {
-   "tall": {"box": [0.04, 0.025, 0.92, 0.95], "widths": [600, 900, 1200], "webp": [600], "q": {"avif": 50, "webp": 70}}
+   "tall": {"box": [0.13, 0.05, 0.58, 0.9], "widths": [600, 900, 1200], "webp": [600], "q": {"avif": 50, "webp": 70}},
+   "wide": {"box": [0.008, 0.01, 0.985, 0.975], "widths": [1200, 1800], "webp": [1200], "q": {"avif": 50, "webp": 70}}
   }
  },
  "haldi": {
