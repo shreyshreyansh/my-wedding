@@ -51,6 +51,8 @@ a{color:inherit}
 /* while a painting loads: its colour and a blurred 24 px sketch, never its alt text; then it fades in */
 picture{display:block;position:relative;overflow:hidden}
 picture::before{content:"";position:absolute;inset:0;background:var(--ph) var(--lq,none) center/cover no-repeat;filter:blur(14px);transform:scale(1.1)}
+/* the sketch goes once the painting has faded in over it (images.ts): left there, a phone would keep blurring it */
+picture.done::before{content:none}
 picture img{position:relative;display:block;width:100%;height:auto;color:transparent;transition:opacity .7s ease}
 html.js picture img:not(.in):not([fetchpriority=high]){opacity:0}
 .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}

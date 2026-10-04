@@ -70,3 +70,26 @@ test('there is no motion switch to find: the phone setting decides', async ({ pa
   await page.goto('/');
   await expect(page.locator('#motionBtn')).toHaveCount(0);
 });
+
+/* Phones run out of graphics memory long before laptops do. Two things once made scrolling lag on a phone: paused
+   animations (every leaf and spark kept a layer all the way down the page), and the pinned paintings, which made the
+   phone lift the rest of the page into layers thousands of pixels tall. */
+test('a phone holds few layers, none much taller than the screen', async ({ page, context }, info) => {
+  test.skip(info.project.name !== 'phone');
+  await page.goto('/?g=abc234');
+  await page.waitForTimeout(2600);
+  await page.locator('#openBtn').click();
+  await expect(page.locator('#cover')).toHaveCount(0, { timeout: 5000 });
+  const cdp = await context.newCDPSession(page);
+  let layers: { width: number; height: number; drawsContent: boolean; layerId: string; parentLayerId?: string }[] = [];
+  cdp.on('LayerTree.layerTreeDidChange', (e) => { if (e.layers) layers = e.layers as typeof layers; });
+  await cdp.send('LayerTree.enable');
+  const [H, doc] = await page.evaluate(() => [innerHeight, document.documentElement.scrollHeight]);
+  for (const s of ['#tour-homes', '#tour-sangeet', '#rsvp']) {
+    await page.evaluate((s) => scrollTo(0, document.querySelector(s)!.getBoundingClientRect().top + scrollY + 600), s);
+    await page.waitForTimeout(1200);
+    const drawing = layers.filter((l) => l.drawsContent && l.height < doc - 1); /* the page itself is as tall as the document */
+    expect(drawing.length, s).toBeLessThan(40);
+    expect(drawing.filter((l) => l.height > 2 * H).map((l) => `${Math.round(l.width)}×${Math.round(l.height)}`), s).toEqual([]);
+  }
+});

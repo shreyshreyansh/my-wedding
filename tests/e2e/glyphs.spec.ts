@@ -19,6 +19,9 @@ async function useWholeFonts(page: Page) {
 
 async function frames(page: Page, lang: string) {
   await page.goto('/?g=abc234' + lang);
+  /* the paintings' blurred sketches go on a timer once each has loaded (images.ts); the two pages would be caught at
+     different moments, and the layers around them change how text is smoothed. Letters are what is compared here */
+  await page.addStyleTag({ content: 'picture::before{content:none!important}' });
   await page.evaluate(() => document.fonts.ready);
   const out: Record<string, Buffer> = {};
   for (const s of ['#cover .cv-top', '#cover .seal', '#cover .cv-mid']) out[s] = await page.locator(s).screenshot();

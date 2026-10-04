@@ -3,10 +3,11 @@
 /* a gold thread with leaves hung from it, as a toran hangs over a door; the lower one stands them up */
 .mg-toran{position:relative;height:clamp(64px,11vw,96px);overflow:hidden;display:flex;justify-content:center;gap:clamp(6px,1.4vw,14px);padding-top:10px}
 .mg-toran::before{content:"";position:absolute;left:0;right:0;top:10px;height:1px;background:linear-gradient(90deg,transparent,var(--night-zari) 12%,var(--night-zari) 88%,transparent)}
-.mg-toran i{flex:none;width:clamp(20px,3.6vw,32px);aspect-ratio:118/240;background:var(--leaf) center top/contain no-repeat;transform-origin:50% 0;rotate:var(--r);scale:var(--k);animation:leafsway 5s ease-in-out var(--dl) infinite alternate;animation-play-state:paused}
+.mg-toran i{flex:none;width:clamp(20px,3.6vw,32px);aspect-ratio:118/240;background:var(--leaf) center top/contain no-repeat;transform-origin:50% 0;rotate:var(--r);scale:var(--k)}
 .mg-toran.up{transform:scaleY(-1)}
 @keyframes leafsway{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
-html.motion #mangal.live .mg-toran i{animation-play-state:running}
+/* the sway is only set while the section is on screen: even a paused animation keeps each leaf on its own layer */
+html.motion #mangal.live .mg-toran i{animation:leafsway 5s ease-in-out var(--dl) infinite alternate}
 .mg-label{margin:22px 0 0;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--night-zari);max-width:28em}
 .mg-leaf{margin-top:18px;color:var(--night-zari);font-size:1.3rem}
 .mg-inner{padding:clamp(48px,9svh,96px) var(--gut);display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}

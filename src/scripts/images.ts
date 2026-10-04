@@ -7,7 +7,10 @@ type Conn = Navigator & { connection?: { saveData?: boolean; effectiveType?: str
 
 export function initImages() {
   const imgs = $$<HTMLImageElement>('picture img');
-  const shown = (img: HTMLImageElement) => img.classList.add('in');
+  const shown = (img: HTMLImageElement) => {
+    img.classList.add('in');
+    setTimeout(() => img.parentElement?.classList.add('done'), 900);
+  };
   for (const img of imgs) {
     if (img.complete && img.naturalWidth) shown(img);
     else { img.addEventListener('load', () => shown(img), { once: true }); img.addEventListener('error', () => shown(img), { once: true }); }

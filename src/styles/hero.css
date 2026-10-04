@@ -5,6 +5,9 @@
 .h-eyebrow span:first-child{letter-spacing:0;text-transform:none;font-size:1rem}
 .h-names{margin:0;display:flex;flex-direction:column;gap:clamp(6px,1.4svh,16px);font-family:var(--display);font-weight:400}
 .h-who{display:flex;flex-direction:column}
+/* the names drift apart and the page fades as it scrolls: on their own layers they are moved, not redrawn, each frame */
+html.motion .h-who{will-change:transform}
+html.motion .h-in{will-change:opacity}
 .h-who .nm{display:block;font-size:min(25vw,15svh,230px);line-height:.84;letter-spacing:-.02em;padding-bottom:.04em}
 .h-who.her{align-items:flex-end;text-align:right}
 .h-sub{display:flex;align-items:baseline;gap:14px;margin-top:6px;font-family:"Tiro Devanagari Hindi",Georgia,serif}
