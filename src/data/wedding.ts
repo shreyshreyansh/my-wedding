@@ -196,7 +196,7 @@ export const rsvp = {
 /* ---------- music: the couple's own recording, made with `npm run audio -- input.wav` ---------- */
 export const music = {
   /** public/audio/invite.m4a, made by `npm run audio`; bump v when the file changes (MUSIC_SRC overrides it, for tests) */
-  src: ((globalThis as { process?: { env: Record<string, string | undefined> } }).process?.env.MUSIC_SRC || '/audio/invite.m4a?v=1') as string | null,
+  src: ((globalThis as { process?: { env: Record<string, string | undefined> } }).process?.env.MUSIC_SRC || '/audio/invite.m4a?v=2') as string | null,
   /** the background music plays round and round until the guest mutes it */
   loop: true,
   /** shown small in the footer when set, e.g. 'Mangalashtak' and 'sung by Aaji' */

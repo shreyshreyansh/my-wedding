@@ -65,3 +65,15 @@ test('the music file is served in byte ranges', async ({ request }) => {
   const whole = await request.get('/audio/invite.m4a?v=1');
   expect([whole.status(), whole.headers()['accept-ranges'], (await whole.body()).length]).toEqual([200, 'bytes', size]);
 });
+
+/* An iPhone (every browser there is Safari underneath) mutes "ambient" page sound when the phone is set to silent. The
+   chime used to set that for the whole page, music included, so a phone on silent played the music without a sound. */
+test('on an iPhone the music plays as playback, not ambient sound, even though the chime runs too', async ({ page }) => {
+  await page.addInitScript(() => { (navigator as unknown as { audioSession: { type: string } }).audioSession = { type: 'auto' }; });
+  await page.goto('/?g=mus234');
+  await page.evaluate(() => localStorage.removeItem('sm-muted'));
+  await page.reload();
+  await openCover(page);
+  await expect(page.locator('#music')).toHaveJSProperty('paused', false);
+  expect(await page.evaluate(() => (navigator as unknown as { audioSession: { type: string } }).audioSession.type)).toBe('playback');
+});

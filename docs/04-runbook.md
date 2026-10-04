@@ -63,7 +63,7 @@ Also confirm in `wedding.ts`: the exact Google Maps pin (`venue.maps`), the RSVP
 
 ## Music
 
-The background music is `public/audio/invite.m4a`. It starts when the guest taps the seal (phones allow sound only after a tap) and plays on a loop. The bell at the top right stays on screen all the way down: tap it to mute or play. A mute is remembered on that phone, and the music pauses while the guest is in another app.
+The background music is `public/audio/invite.m4a`. It starts when the guest taps the seal (phones allow sound only after a tap) and plays on a loop. The bell at the top right stays on screen all the way down: tap it to mute or play. A mute is remembered on that phone, and the music pauses while the guest is in another app. On an iPhone it plays the way a video does, so it is heard even with the phone set to silent (tapping the bell is the way to quiet it).
 
 To change it:
 1. Make sure the recording is yours to use: a film or label song needs a licence even if you sang it; traditional verses sung by the family are fine.
