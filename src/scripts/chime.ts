@@ -1,5 +1,6 @@
 // A singing bowl, made in the browser (there is no sound file): struck softly when the seal is tapped, twice when a
-// reply is sent, and left to ring out. Quiet; silent when the guest has muted the music, and on an iPhone set to silent.
+// reply is sent, and left to ring out. Quiet; silent when the guest has muted the music. With the music playing it
+// follows the music's setting (heard on an iPhone set to silent); on its own it keeps to the silent switch.
 type Nav = Navigator & { audioSession?: { type: string } };
 type Win = Window & { webkitAudioContext?: typeof AudioContext };
 let ctx: AudioContext | null = null;
@@ -10,7 +11,8 @@ export function chime(times = 1) {
   if (muted()) return;
   try {
     const nav = navigator as Nav;
-    if (nav.audioSession) nav.audioSession.type = 'ambient';
+    /* only when nothing has chosen yet: 'ambient' for the music too would mute it on a phone set to silent */
+    if (nav.audioSession && nav.audioSession.type === 'auto') nav.audioSession.type = 'ambient';
     const AC = window.AudioContext || (window as Win).webkitAudioContext;
     if (!AC) return;
     ctx ??= new AC();

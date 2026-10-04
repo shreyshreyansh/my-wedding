@@ -14,8 +14,9 @@ import { initImages } from './images';
 initImages();
 const labels = JSON.parse(document.getElementById('labels')?.textContent || '{}');
 const startMusic = initMusic();
-/* the bell and the music start inside the tap: browsers allow sound only then */
-const cover = initCover(() => { chime(); startMusic(); });
+/* the bell and the music start inside the tap: browsers allow sound only then. The music first: on an iPhone it sets
+   how the page's sound meets the silent switch, and the chime follows it */
+const cover = initCover(() => { startMusic(); chime(); });
 initCountdown();
 initRsvp(labels.rsvp);
 initCalendar(labels.knotBusy);
