@@ -8,10 +8,10 @@
   ]
  },
  "homes": {
-  "works": ["chhath", "two-mothers"],
+  "works": ["chhath", "mahabodhi"],
   "stops": [
    { "w": 0, "box": [0.29, 0.2, 0.25, 0.48], "text": "His Bihar: at Chhath, women stand in the river and raise baskets of fruit to the sun.", "mr": "श्रेयांशचा बिहार: छठ पूजेला स्त्रिया नदीत उभ्या राहून फळांच्या टोपल्या सूर्याला अर्पण करतात.", "hi": "श्रेयांश का बिहार: छठ पर महिलाएँ नदी में खड़ी होकर फलों से भरे सूप सूर्य को अर्पित करती हैं।" },
-   { "w": 1, "box": [0.69, 0.14, 0.3, 0.52], "text": "Her Maharashtra: in Paithan, home of the Paithani, painters showed two mothers embracing.", "mr": "मृणालिनीचा महाराष्ट्र: पैठणीच्या पैठणमध्ये चित्रकारांनी दोन मातांची गळाभेट रंगवली.", "hi": "मृणालिनी का महाराष्ट्र: पैठणी के घर पैठण में चित्रकारों ने दो माताओं को गले मिलते दिखाया।" },
+   { "w": 1, "box": [0.42, 0.54, 0.18, 0.36], "text": "Her faith began in his Bihar: at Bodh Gaya, under the Bodhi tree, the Buddha awoke. Pilgrims carried home little temples like this one.", "mr": "मृणालिनीच्या धम्माचा उगम श्रेयांशच्या बिहारमध्ये: बोधगयेत, बोधिवृक्षाखाली बुद्धांना ज्ञानप्राप्ती झाली. यात्रेकरू अशी छोटी मंदिरे घरी नेत.", "hi": "मृणालिनी के धर्म का उद्गम श्रेयांश के बिहार में है: बोधगया में, बोधिवृक्ष के नीचे, बुद्ध को ज्ञान मिला। तीर्थयात्री ऐसे छोटे मंदिर घर ले जाते थे।" },
    { "text": "Old threads already join them: the very name Bihar comes from vihara, a Buddhist monastery.", "mr": "जुने धागे त्यांना आधीच जोडतात: ‘बिहार’ हे नावच ‘विहार’, म्हणजे बौद्ध मठ, या शब्दावरून आले आहे.", "hi": "पुराने धागे उन्हें पहले से जोड़ते हैं: ‘बिहार’ नाम ही ‘विहार’, यानी बौद्ध मठ, से आया है।" }
   ]
  },

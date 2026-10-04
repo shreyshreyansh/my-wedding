@@ -118,7 +118,7 @@ test('?lang=mr: the page in Marathi, the Marathi card open, the holy lines as th
   await expect(page.locator('[data-guest-name]')).toHaveText('आमचे सर्व आप्तेष्ट आणि मित्रपरिवार');
   await expect(page.locator('#cover .cv-date')).toContainText('८ व ९ डिसेंबर २०२६');
   await openCover(page);
-  await expect(page.locator('#homesTitle')).toHaveText('बिहार आणि महाराष्ट्र, आणि त्यांना जोडणारे जुने धागे');
+  await expect(page.locator('#homesTitle')).toHaveText('बिहार आणि बौद्ध धम्म, आणि त्यांना जोडणारे जुने धागे');
   await expect(page.locator('#invTitle')).toHaveText('आपणास सस्नेह निमंत्रण');
   await expect(page.locator('#inv-mr')).toBeChecked();
   await expect(page.locator('.ch-haldi h3')).toHaveText('हळद');

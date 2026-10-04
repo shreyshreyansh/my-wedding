@@ -221,7 +221,7 @@ export const copy = {
     blessing: '॥ भवतु सब्ब मङ्गलं ॥',
     line: 'May every blessing be yours.'
   },
-  homes: { eyebrowDev: 'दो घर · दोन घरं', eyebrow: 'two homes', title: 'Bihar and Maharashtra,', titleEm: 'and the old threads between them' },
+  homes: { eyebrowDev: 'दो घर · दोन घरं', eyebrow: 'two homes', title: 'Bihar and Buddhism,', titleEm: 'and the old threads between them' },
   invite: { eyebrowDev: 'निमंत्रण', eyebrow: 'the invitation', title: 'You are invited', titleFor: '{name}, you are invited', choose: 'Read the invitation in', manuhar: 'बाल मनुहार' },
   schedule: { eyebrowDev: 'कार्यक्रम', eyebrow: 'the celebrations', title: 'From Pune to Ranchi,', titleEm: 'three celebrations', when: 'When', where: 'Where', wear: 'Wear' },
   rites: {

@@ -116,31 +116,30 @@
    }
   }
  },
- "two-mothers": {
-  "src": "https://collections-images.lacma.org/images/39004/39004-1-desktop.jpg",
-  "page": "https://collections.lacma.org/node/39004",
-  "title": "Ghatotkacha embraces his cousin Abhimanyu while the two mothers also embrace, from the Paithan “Marriage of Abhimanyu and Vatsala” set",
-  "short": "Two mothers embrace, Paithan",
-  "short_mr": "दोन मातांची गळाभेट, पैठण",
-  "short_hi": "दो माताओं का मिलन, पैठण",
+ "mahabodhi": {
+  "src": "https://openaccess-cdn.clevelandart.org/1971.167/1971.167_print.jpg",
+  "page": "https://clevelandart.org/art/1971.167",
+  "title": "Portable Buddhist Temple: a pilgrim’s model of the Mahabodhi temple at Bodh Gaya",
+  "short": "The Bodh Gaya temple, carved in the 900s",
+  "short_mr": "बोधगयेचे महाबोधी मंदिर, दहाव्या शतकातील कोरीव प्रतिकृती",
+  "short_hi": "बोधगया का महाबोधि मंदिर, दसवीं सदी की नक्काशी",
   "side": "hers",
-  "date": "c. 1850",
-  "place": "Paithan, Maharashtra",
-  "medium": "Opaque watercolour on paper",
-  "museum": "Los Angeles County Museum of Art",
-  "credit": "Los Angeles County Museum of Art, M.82.234.2",
-  "licence": "public domain",
-  "alt": "In a Paithan storyteller’s painting, two cousins hug under palm fronds, and at right two veiled mothers in red and yellow saris embrace.",
+  "from": "his",
+  "date": "900s",
+  "place": "Bihar",
+  "medium": "Kaolin with traces of pigment, 28 cm high",
+  "museum": "The Cleveland Museum of Art",
+  "credit": "The Cleveland Museum of Art, John L. Severance Fund, 1971.167",
+  "licence": "CC0",
+  "alt": "A small golden stone model of the Mahabodhi temple: a tall tower stepped with tiny shrines, and in an arched niche at its foot the Buddha stands among attendants.",
+  "cutout": {},
   "crops": {
    "main": {
-    "box": [0.03, 0.035, 0.94, 0.88],
+    "box": [0, 0.085, 1, 0.905],
+    "pad": 0.25,
     "widths": [600, 900, 1200, 1600],
     "webp": [600],
-    "q": {
-     "avif": 50,
-     "webp": 70,
-     "big": 40
-    }
+    "q": { "avif": 50, "webp": 70, "big": 40 }
    }
   }
  },

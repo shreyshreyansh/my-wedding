@@ -16,13 +16,13 @@ Every work used is listed in `src/data/art.json` (title, date, place, museum, cr
 
 ## What the page uses
 
-Each chapter is a pair: a work from his side (Bihar) and one from hers (Maharashtra). The pairs and their captions are in `src/data/tours.json`; the research behind them is in `docs/research/`.
+Each chapter is a pair: a work from his side (Bihar) and one from hers (Maharashtra, or her Buddhist faith). The pairs and their captions are in `src/data/tours.json`; the research behind them is in `docs/research/`.
 
 | Where | His side · Bihar | Her side · Maharashtra |
 |---|---|---|
 | Cover | *Gauri Ragini*, Marwar, c. 1625–30 (National Museum of Asian Art, Smithsonian, S2018.1.49, CC0). Not yet replaced. | |
 | Blessing | Ganesha seated on a lotus on a serpent's coils, a chromolithograph, India, c. 1900 (Wellcome Collection 25930i, Public Domain Mark). The family chose it over the Mithila Ganesha (Cleveland 2005.84), which was too rough beside the Buddha. | The Buddha seated on a lotus, a wall painting at Ajanta (photograph by Vasukrishnan57, 2011, Wikimedia Commons, CC BY-SA 4.0: credited in the footer, and the crop is shared under the same licence) |
-| Two homes | A Chhath scene on mica, probably Patna, 19th century (Wellcome Collection, Public Domain Mark) | Two mothers embrace, Paithan, c. 1850 (LACMA, M.82.234.2, public domain) |
+| Two homes (Bihar and Buddhism) | A Chhath scene on mica, probably Patna, 19th century (Wellcome Collection, Public Domain Mark) | Her faith, made in his Bihar: *Portable Buddhist Temple*, a pilgrim's model of the Mahabodhi temple at Bodh Gaya, Bihar, 900s, kaolin (Cleveland Museum of Art 1971.167, CC0). Lifted off its grey studio backdrop by `scripts/art.mjs` (`cutout`), with clear space each side (`pad`) so the pair keeps its size on a phone. Replaced the Paithan *two mothers embrace* (LACMA M.82.234.2) in October 2026 to make the Bihar–Buddhism thread plain. |
 | Haldi | Shiva Dayal Lal, *Four women selling food-grains, vegetables and fruit*, Patna, c. 1850 (V&A IS.66-1949, via Wikimedia Commons, PD-Art) | The bath of King Mahajanaka of Mithila, Ajanta Cave 1: Herringham's *Ajanta Frescoes* (1915), plate XIV (Smithsonian Libraries via Internet Archive, public domain) |
 | Sangeet | *Holi being played in a courtyard*, Patna, c. 1795 (British Library Add.Or.939, via Wikimedia Commons, PD-Art) | *Fugdi*, Chitrashala Press print no. 102, Pune, c. 1880–1900 (Wellcome Collection, Public Domain Mark) |
 | Shaadi | A baraat by night, probably Patna, 19th century (Wellcome Collection, Public Domain Mark) | A bride is blessed by elders, Paithan, c. 1850 (LACMA, M.85.297.6, public domain) |
@@ -30,6 +30,7 @@ Each chapter is a pair: a work from his side (Bihar) and one from hers (Maharash
 | Paper texture | Ingres hand-made paper, Canson & Montgolfier sample book, 1922 (Getty Research Institute via Internet Archive, public domain) | |
 
 **Licence notes.**
+- No large, openly licensed painting of the Mahabodhi temple was found (October 2026). The British Library has early ones (Bhavani Baksh, 1813–14, WD734; an artist at Gaya, c. 1810) but not online at a usable size; the 1810 view of the great tree at Bodh Gaya on Commons is 924 px wide. Hence the carved model.
 - The Ajanta Buddha is the one work here that is not public domain: CC BY-SA 4.0 asks for the photographer's name (in the footer credits) and that our crop carries the same licence.
 - No finer openly licensed Mithila Ganesha exists than Cleveland's (searched October 2026); finer ones are by living artists. The family chose a public-domain print of Ganesha instead.
 - The two Commons works are faithful photographs of paintings long out of copyright (PD-Art). The V&A's own terms for its photograph are non-commercial; this is a private, non-commercial invitation either way.

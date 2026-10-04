@@ -16,7 +16,9 @@ import tours from '../data/tours.json';
 import { T, num, viewOf } from '../data/i18n';
 
 type Box = [number, number, number, number];
-type Work = { title: string; short: string; short_mr: string; short_hi: string; side: 'his' | 'hers'; place: string; date: string; live?: { twinkle?: number[][]; fire?: number[][] } };
+/* side: whose family the work speaks for; from: where it was made, when that is the other home (the Bodh Gaya temple is
+   her faith's, made in his Bihar), for its label */
+type Work = { title: string; short: string; short_mr: string; short_hi: string; side: 'his' | 'hers'; from?: 'his' | 'hers'; place: string; date: string; live?: { twinkle?: number[][]; fire?: number[][] } };
 interface Props { id: keyof typeof tours }
 const { id } = Astro.props;
 const tour = tours[id] as { works: string[]; stops: { w?: number; box?: number[]; text: string; mr: string; hi: string }[] };
@@ -54,7 +56,7 @@ const pieces = works.map((w, i) => {
   const vars = ['c', 'r'].flatMap((k) => { const p = (k === 'c' ? col : row)[i]; return [`--${k}l:${pct(p.l)}`, `--${k}t:${pct(p.t)}`, `--${k}w:${pct(p.w)}`, `--${k}h:${pct(p.h)}`]; }).join(';');
   return { ...w, stars, fires: w.a.live?.fire ?? [], vars };
 });
-const label = works.map((w) => (w.a.side === 'his' ? t.tour.his : t.tour.hers) + short(w.a)).join('  ·  ');
+const label = works.map((w) => ((w.a.from ?? w.a.side) === 'his' ? t.tour.his : t.tour.hers) + short(w.a)).join('  ·  ');
 ---
 <div class="tour" id={'tour-' + id} data-tour={JSON.stringify(boxes.col)} data-tour-row={JSON.stringify(boxes.row)} style={'--stops:' + tour.stops.length}>
   <style is:inline set:html={`#tour-${id} .tour-art{--ar:${AR.col.toFixed(4)}}@container (min-aspect-ratio:${Math.round(flip * 1000)}/1000){#tour-${id} .tour-art{--ar:${AR.row.toFixed(4)};--layout:row}#tour-${id} .tour-piece{left:var(--rl);top:var(--rt);width:var(--rw);height:var(--rh)}}`} />
