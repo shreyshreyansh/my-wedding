@@ -7,6 +7,7 @@ import { rsvpMessage, summaryLine, waLink } from '../../src/lib/wa';
 import { datesFor, events, rsvp as rules } from '../../src/data/wedding';
 import { guestList, parseCsv } from '../../scripts/lib.mjs';
 import { T, isLang, line, num, viewOf } from '../../src/data/i18n';
+import { ranged } from '../../server/range';
 
 test('a ?name= keeps only what a name is made of, at most 40 characters', () => {
   expect(cleanName('rahul')).toBe('Rahul');
@@ -160,4 +161,29 @@ test('?lang=: which page, the numbers and the reply summary in each language', (
     expect(Object.keys(T(v).ev).sort()).toEqual(events.map((e) => e.id).sort());
     expect(Object.keys(T(v)).sort()).toEqual(Object.keys(T('mixed')).sort());
   }
+});
+
+test('the music is answered in byte ranges, as an iPhone asks for it', async () => {
+  const file = () => new Response(new Uint8Array(Array.from({ length: 10 }, (_, i) => i)), { status: 200, headers: { 'Content-Type': 'audio/mp4', 'Cache-Control': 'public, max-age=31536000, immutable' } });
+  const ask = (range?: string, method = 'GET') => new Request('https://x/audio/invite.m4a', { method, headers: range ? { Range: range } : {} });
+  const bytes = async (r: Response) => [...new Uint8Array(await r.arrayBuffer())];
+
+  const first = await ranged(ask('bytes=0-1'), file());
+  expect([first.status, first.headers.get('content-range'), first.headers.get('content-length'), first.headers.get('accept-ranges')]).toEqual([206, 'bytes 0-1/10', '2', 'bytes']);
+  expect(await bytes(first)).toEqual([0, 1]);
+  expect(first.headers.get('cache-control')).toContain('immutable');
+  expect(await bytes(await ranged(ask('bytes=7-'), file()))).toEqual([7, 8, 9]);
+  expect(await bytes(await ranged(ask('bytes=-3'), file()))).toEqual([7, 8, 9]);
+  expect((await ranged(ask('bytes=8-99'), file())).headers.get('content-range')).toBe('bytes 8-9/10');
+
+  const whole = await ranged(ask(), file());
+  expect([whole.status, whole.headers.get('accept-ranges')]).toEqual([200, 'bytes']);
+  expect((await bytes(whole)).length).toBe(10);
+  expect((await ranged(ask('bytes=0-1,4-5'), file())).status).toBe(200); /* several ranges: the whole file */
+  expect((await ranged(ask('bytes=0-1', 'HEAD'), file())).status).toBe(200);
+
+  const past = await ranged(ask('bytes=10-'), file());
+  expect([past.status, past.headers.get('content-range')]).toEqual([416, 'bytes */10']);
+  expect((await ranged(ask('bytes=-0'), file())).status).toBe(416);
+  expect((await ranged(ask('bytes=0-1'), new Response(null, { status: 404 }))).status).toBe(404);
 });

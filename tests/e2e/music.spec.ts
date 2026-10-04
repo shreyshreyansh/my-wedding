@@ -52,3 +52,16 @@ test('the music plays round and round, and the bell stays on screen all the way 
   await page.locator('#bellBtn').click();
   await expect(page.locator('#music')).toHaveJSProperty('paused', false);
 });
+
+/* Safari (every browser on an iPhone) asks for bytes=0-1 first and will not play from a server that answers 200 */
+test('the music file is served in byte ranges', async ({ request }) => {
+  const head = await request.get('/audio/invite.m4a?v=1', { headers: { Range: 'bytes=0-1' } });
+  expect(head.status()).toBe(206);
+  expect(head.headers()['content-range']).toMatch(/^bytes 0-1\/\d{5,}$/);
+  expect((await head.body()).length).toBe(2);
+  const size = Number(head.headers()['content-range'].split('/')[1]);
+  const tail = await request.get('/audio/invite.m4a?v=1', { headers: { Range: `bytes=${size - 100}-` } });
+  expect([tail.status(), (await tail.body()).length]).toEqual([206, 100]);
+  const whole = await request.get('/audio/invite.m4a?v=1');
+  expect([whole.status(), whole.headers()['accept-ranges'], (await whole.body()).length]).toEqual([200, 'bytes', size]);
+});

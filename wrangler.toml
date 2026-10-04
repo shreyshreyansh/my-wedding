@@ -1,5 +1,5 @@
 # Cloudflare Workers: the static site in dist/, with the Worker in worker/index.ts in front of /, /api/* and the
-# language pages (/en/, /mr/, /hi/, which it sends to /?lang=…).
+# language pages (/en/, /mr/, /hi/, which it sends to /?lang=…) and the music (answered in byte ranges, for iPhones).
 # Setup is in docs/04-runbook.md. Secrets (APPS_SCRIPT_URL, APPS_SCRIPT_SECRET, WA_BRIDE, WA_GROOM) are set
 # in the dashboard or with `npx wrangler secret put NAME`, never here. Locally they come from .dev.vars.
 name = "my-wedding"
@@ -11,7 +11,7 @@ workers_dev = true
 directory = "./dist"
 binding = "ASSETS"
 not_found_handling = "404-page"
-run_worker_first = ["/", "/api/*", "/en", "/en/*", "/mr", "/mr/*", "/hi", "/hi/*"]
+run_worker_first = ["/", "/api/*", "/en", "/en/*", "/mr", "/mr/*", "/hi", "/hi/*", "/audio/*"]
 
 [[kv_namespaces]]
 binding = "GUESTS"

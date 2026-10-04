@@ -1,9 +1,10 @@
-// The Worker in front of the static site (dist/). It runs first only for /, /api/* and the language pages (see
-// wrangler.toml); everything else is served straight from the static files.
+// The Worker in front of the static site (dist/). It runs first only for /, /api/*, the language pages and the music
+// (see wrangler.toml); everything else is served straight from the static files.
 import type { Env } from '../server/env';
 import { guestApi } from '../server/guest-api';
 import { json } from '../server/headers';
 import { invitation } from '../server/page';
+import { ranged } from '../server/range';
 import { handleRsvp } from '../server/rsvp';
 import { isLang } from '../src/data/i18n';
 
@@ -16,6 +17,8 @@ export default {
     }
     if (pathname === '/api/guest') return request.method === 'GET' ? guestApi(request, env) : json({ ok: false, error: 'method' }, 405);
     if (pathname.startsWith('/api/')) return json({ ok: false, error: 'not-found' }, 404);
+    /* the music, answered in byte ranges, or an iPhone will not play it (server/range.ts) */
+    if (pathname.startsWith('/audio/')) return ranged(request, await env.ASSETS.fetch(request));
     /* /mr/ and the like are how the build stores each language; the address guests use is /?lang=mr */
     const own = /^\/(en|mr|hi)(\/|\/index\.html)?$/.exec(pathname);
     if (own) {
