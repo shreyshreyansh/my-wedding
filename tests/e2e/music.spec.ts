@@ -37,3 +37,18 @@ test('music pauses when the guest switches apps', async ({ page }) => {
   await page.evaluate(() => { Object.defineProperty(document, 'hidden', { value: false, configurable: true }); document.dispatchEvent(new Event('visibilitychange')); });
   await expect(page.locator('#music')).toHaveJSProperty('paused', false);
 });
+
+test('the music plays round and round, and the bell stays on screen all the way down', async ({ page }) => {
+  await page.goto('/?g=mus234');
+  await page.evaluate(() => localStorage.removeItem('sm-muted'));
+  await openCover(page);
+  await expect(page.locator('#music')).toHaveJSProperty('loop', true);
+  for (const y of [0.3, 0.7, 1]) {
+    await page.evaluate((f) => scrollTo(0, f * (document.documentElement.scrollHeight - innerHeight)), y);
+    await expect(page.locator('#bellBtn')).toBeInViewport();
+  }
+  await page.locator('#bellBtn').click();
+  await expect(page.locator('#music')).toHaveJSProperty('paused', true);
+  await page.locator('#bellBtn').click();
+  await expect(page.locator('#music')).toHaveJSProperty('paused', false);
+});

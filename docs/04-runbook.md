@@ -63,9 +63,12 @@ Also confirm in `wedding.ts`: the exact Google Maps pin (`venue.maps`), the RSVP
 
 ## Music
 
+The background music is `public/audio/invite.m4a`. It starts when the guest taps the seal (phones allow sound only after a tap) and plays on a loop. The bell at the top right stays on screen all the way down: tap it to mute or play. A mute is remembered on that phone, and the music pauses while the guest is in another app.
+
+To change it:
 1. Make sure the recording is yours to use: a film or label song needs a licence even if you sang it; traditional verses sung by the family are fine.
-2. `npm i -D ffmpeg-static` once (or install ffmpeg), then `npm run audio -- recording.wav` (add a length in seconds to trim, e.g. `90`). It writes `public/audio/invite.m4a`, at most 1 MB.
-3. In `wedding.ts`, set `music.src = '/audio/invite.m4a?v=1'` (and optionally `title` and `credit`). The bell appears once `src` is set. If you replace the file, bump `v`.
+2. `npm i --no-save ffmpeg-static` once (or install ffmpeg), then `npm run audio -- song.mp3` (add a length in seconds to cut it shorter, e.g. `90`). It trims silence from both ends, so the loop has no gap, evens the loudness, and writes `public/audio/invite.m4a`, at most 1 MB.
+3. In `wedding.ts`, bump the `v` in `music.src` (`/audio/invite.m4a?v=2`), so phones fetch the new file. Optionally set `title` and `credit` (shown small in the footer). `loop: false` plays it once. `src: null` removes the music and the bell.
 
 ## The guest list (family)
 
