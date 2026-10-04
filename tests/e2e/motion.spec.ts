@@ -42,7 +42,7 @@ test('every scroll animation moves and ends in its final state, with no errors',
   const done = await page.evaluate(() => ({
     chapterTitles: [...document.querySelectorAll('.chapter h3')].every((c) => getComputedStyle(c).opacity === '1'),
     platesOpen: [...document.querySelectorAll('.tour-stage')].every((p) => /^inset\(0(px|%)?( 0(px|%)?)*\)$|^none$/.test(getComputedStyle(p).clipPath)),
-    verseLit: [...document.querySelectorAll('#verse .vw')].every((c) => +getComputedStyle(c).opacity > 0.99),
+    verseLit: [...document.querySelectorAll('#verse .vw, #verse2 .vw, #gloss .gw, #gloss2 .gw')].every((c) => +getComputedStyle(c).opacity > 0.99),
     rsvpTitle: getComputedStyle(document.querySelector('#rsvp h2')!).opacity === '1',
     invocationShown: getComputedStyle(document.querySelector('#invocation .iv-line')!).opacity === '1'
   }));

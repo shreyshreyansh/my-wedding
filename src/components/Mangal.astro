@@ -1,12 +1,15 @@
 ---
 // The blessing, at night, under a toran of Bodhi leaves: eight verses from each side, one shown from each, lit word
 // by word. His mangalashtak names the rivers of both homes; her jayamangala verse tells of the Buddha's victory
-// under the Bodhi tree at Bodh Gaya, in his Bihar. Then the refrain that seals a Marathi wedding.
+// under the Bodhi tree at Bodh Gaya, in his Bihar. Then the refrain that seals a Marathi wedding. What each verse means
+// lights the same way beneath it, word by word (mangal.ts).
 import { verse } from '../art/decor';
 import Parts from './Parts.astro';
 import { mangal } from '../data/wedding';
 import { T, viewOf } from '../data/i18n';
 const t = T(viewOf(Astro.url));
+/* a line of plain words, each in its own span so the scroll can light it */
+const words = (s: string) => s.split(' ');
 /* a string of leaves, each hung at its own small angle (fixed, so every visit looks the same) */
 const LEAVES = 31;
 const leaves = Array.from({ length: LEAVES }, (_, i) => ({ r: ((i * 37) % 13) - 6, s: 0.86 + ((i * 53) % 7) / 25, d: -((i * 29) % 17) / 4 }));
@@ -18,11 +21,11 @@ const leaves = Array.from({ length: LEAVES }, (_, i) => ({ r: ((i * 37) % 13) - 
     <h2 id="mgTitle" class="reveal">{t.mangal.title} <em>{t.mangal.titleEm}</em></h2>
     <p class="mg-label reveal">{t.mangal.label}</p>
     <div class="verse" lang="sa" id="verse" set:html={verse(mangal.verse, mangal.rivers)}></div>
-    <p class="gloss reveal">{t.mangal.gloss}</p>
+    <p class="gloss" id="gloss">{words(t.mangal.gloss).map((w, i) => <Fragment>{i > 0 && ' '}<span class="gw">{w}</span></Fragment>)}</p>
     <i class="leaf mg-leaf reveal" aria-hidden="true"></i>
     <p class="mg-label reveal">{t.mangal.jayaLabel}</p>
     <div class="verse" lang="pi" id="verse2" set:html={verse(mangal.jaya.verse, mangal.jaya.marks)}></div>
-    <p class="gloss reveal">{t.mangal.jayaGloss}</p>
+    <p class="gloss" id="gloss2">{words(t.mangal.jayaGloss).map((w, i) => <Fragment>{i > 0 && ' '}<span class="gw">{w}</span></Fragment>)}</p>
     <p lang="mr" class="savdhan" id="savdhan">{mangal.savdhan}</p>
   </div>
   <div class="mg-toran up" aria-hidden="true">{leaves.map((l) => <i style={`--r:${-l.r}deg;--k:${l.s.toFixed(2)};--dl:${l.d.toFixed(2)}s`}></i>)}</div>
