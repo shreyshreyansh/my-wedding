@@ -1,0 +1,38 @@
+---
+// A few of their favourite days: photos hanging on cords from two marigold strings (side by side on a wide screen), each swinging a little as the page
+// scrolls past (motion/reveal.ts). Until the couple send photos (src/data/wedding.ts, `photos`), the frames show
+// small drawings: a lotus, a diya, marigolds, a bell, the sun, a Bodhi leaf.
+import Parts from './Parts.astro';
+import { garland, motif } from '../art/sunrise';
+import { photos } from '../data/wedding';
+import { T, viewOf } from '../data/i18n';
+const t = T(viewOf(Astro.url));
+const N = 6;
+const frames = Array.from({ length: N }, (_, i) => photos[i] ?? null);
+/* each frame's own tilt and cord length, fixed so every visit looks the same */
+const tilt = [-5, 3, -2, 4, -4, 2], cord = [26, 44, 30, 40, 24, 36];
+---
+<section id="photos" class="sec ph" aria-labelledby="phTitle">
+  <header class="ph-head">
+    <p class="eyebrow reveal"><Parts parts={t.photos.eyebrow} /></p>
+    <h2 id="phTitle" class="reveal">{t.photos.title}</h2>
+  </header>
+  <div class="ph-lines">
+    {[0, 3].map((start) => (
+      <div class="ph-line">
+        <Fragment set:html={garland()} />
+        <ul class="ph-frames">
+          {frames.slice(start, start + 3).map((p, j) => { const i = start + j; return (
+            <li class="ph-frame" style={`--t:${tilt[i]}deg;--c:${cord[i]}px`}>
+              <span class="ph-cord" aria-hidden="true"></span>
+              <span class="ph-card">
+                {p ? <img src={p.src} alt={p.alt} loading="lazy" decoding="async" /> : <span class="ph-motif" set:html={motif(i)}></span>}
+              </span>
+            </li>
+          ); })}
+        </ul>
+      </div>
+    ))}
+  </div>
+  {!photos.length && <p class="ph-soon">{t.photos.soon}</p>}
+</section>

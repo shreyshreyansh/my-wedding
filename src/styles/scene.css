@@ -1,0 +1,80 @@
+/* the opening scene: a sticky stage the height of the screen inside a tall section; scrolling through the section
+   slides the layers apart (motion/scene.ts). Without JavaScript, or with reduced motion, it is one screen tall. */
+#hero.scene{position:relative;height:100vh;height:100svh}
+html.js:not(.still) #hero.scene{height:260vh;height:260svh}
+.sc-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;contain:paint;container-type:size;
+  /* behind everything: the sky's colour at the top, and the ghat's stone steps that the river slides up to show */
+  background:linear-gradient(#E8BC9A,#FBE4C8 56%,#EACCA4 70%);
+  /* one unit of the 1600 × 1000 drawing, in pixels: the layers cover the stage from its bottom centre */
+  --s:max(100cqw / 1600,100cqh / 1000)}
+.sc-l{position:absolute;inset:0}
+/* back to front: sky, sun, clouds and birds, the names, the far hills, the temple hills, the river, the toran */
+.sc-sky{z-index:1}.sc-sun{z-index:2}.sc-puffs,.sc-birds{position:absolute;inset:0;z-index:3}.sc-far{z-index:5}.sc-mid{z-index:6}.sc-near{z-index:7}
+/* the ghat's steps hang under the river and come up into view as you scroll down */
+.sc-near .sc-ghat{position:absolute;left:0;top:100%;width:100%;height:72%;object-fit:cover;object-position:50% 0;margin-top:-1px}
+.sc-layer,.sc-sky img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 100%}
+html.js:not(.still) :is(.sc-l,.sc-sun,.h-who,.h-amp,.sc-toran){will-change:transform}
+
+/* small things placed in the drawing's own units, by their centre */
+.sc-sun,.sc-puff,.sc-flames i{position:absolute;left:calc(50% + (var(--x) - 800) * var(--s));top:calc(100% - (1000 - var(--y)) * var(--s));translate:-50% -50%}
+.sc-sun{--x:800;--y:604;width:calc(320 * var(--s));aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,#FFFEF8 0,#FFF8E6 21%,#FFF1D4 23%,rgba(255,236,200,.5) 32%,rgba(255,226,180,0) 68%)}
+.sc-puff{width:calc(var(--w) * 1.1 * var(--s))}
+.sc-puff svg{display:block;width:100%;height:auto}
+.sc-flock{position:absolute;left:0;top:calc(100% - (1000 - var(--y)) * var(--s));width:calc(150 * var(--s));min-width:72px;translate:-110% 0}
+.sc-flock svg{display:block;width:100%;height:auto}
+.sc-flames i{width:calc(70 * var(--k) * var(--s));aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,222,140,.85) 0,rgba(255,206,120,.35) 40%,rgba(255,200,110,0) 70%)}
+@media (max-aspect-ratio:3/4){.sc-puff.wide{display:none}}
+
+/* the names, in the sky */
+.h-in{position:absolute;left:0;right:0;top:calc(max(14px,env(safe-area-inset-top)) + 12.5svh);z-index:4;display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 var(--gut);text-align:center}
+.h-eyebrow{margin:0;display:flex;flex-wrap:wrap;justify-content:center;column-gap:.7em;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2)}
+.h-eyebrow span:first-child{letter-spacing:0;text-transform:none;font-size:.98rem;color:var(--rust)}
+.h-names{margin:0;display:flex;flex-direction:column;align-items:center;font-family:var(--display);font-weight:400;color:var(--ink);text-shadow:0 0 18px rgba(255,246,230,.8)}
+.h-who{display:flex;flex-direction:column;align-items:center}
+.h-who .nm{display:block;font-size:min(15vw,7.6svh,128px);line-height:1;letter-spacing:-.01em}
+.h-sub{margin-top:2px}
+.h-sub .dn{font-size:clamp(18px,4.8vw,26px);line-height:1.3;color:var(--rust)}
+.h-amp{display:block;font-style:italic;font-size:min(8vw,4.2svh,64px);line-height:1;color:var(--gold-deep);margin:2px 0}
+#heroTitle:focus{outline:none}
+@media (min-width:1024px) and (min-aspect-ratio:5/4){
+  .h-in{top:calc(12svh + 4.6vw)}
+  .h-names{flex-direction:row;align-items:flex-start;gap:clamp(18px,2.4vw,40px)}
+  .h-who .nm{font-size:min(8.2vw,13svh,150px)}
+  .h-amp{font-size:min(5vw,8svh,96px);margin-top:.15em}
+}
+
+/* the dates, on a cream band over the river */
+.h-when{position:absolute;left:50%;bottom:max(46px,7svh);translate:-50% 0;z-index:9;display:flex;flex-direction:column;align-items:center;gap:0;width:max-content;max-width:calc(100% - 32px);
+  padding:9px 22px 10px;border-radius:999px;background:rgba(255,249,240,.86);box-shadow:0 0 0 1px rgba(221,164,93,.7),0 8px 24px rgba(95,37,15,.16);text-align:center}
+.h-date{font-family:var(--display);font-size:clamp(18px,4.8vw,24px);line-height:1.25;color:var(--ink)}
+.h-venue{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2)}
+html:not(:lang(en)) .h-venue{letter-spacing:0;font-size:.9rem}
+.sc-hint{position:absolute;left:50%;bottom:max(12px,2svh);translate:-50% 0;z-index:9;width:1px;height:28px;background:rgba(95,37,15,.25)}
+.sc-hint i{position:absolute;left:-2px;top:0;width:5px;height:5px;border-radius:50%;background:var(--rust)}
+html.still .sc-hint,html:not(.js) .sc-hint{display:none}
+html.locked #hero :is(.h-in,.h-when){visibility:hidden}
+
+/* the marigold toran with its brass bells, across the top; --u is one swag's width */
+.sc-toran{position:absolute;left:0;right:0;top:0;z-index:8;--n:3;--u:calc(100cqw / var(--n));height:calc(var(--u) * 1.3);pointer-events:none}
+@media (min-width:600px){.sc-toran{--n:5}}
+@media (min-width:1024px){.sc-toran{--n:7}}
+.tr-swags{position:absolute;left:0;top:calc(var(--u) * -.03);display:flex;width:max-content}
+.tr-swag{flex:0 0 var(--u);width:var(--u)}
+.tr-swag svg,.tr-strand svg{display:block;width:100%;height:auto}
+.tr-strand{position:absolute;top:calc(var(--u) * -.04);left:calc(var(--i) * var(--u) - var(--u) * .11);width:calc(var(--u) * .22);transform-origin:50% 0}
+
+/* the things that live on their own, only while the scene is on screen */
+html.motion:not(.still) .scene.live .tr-strand{animation:sway 4.8s ease-in-out var(--dl) infinite alternate}
+html.motion:not(.still) .scene.live .sc-puff{animation:drift 38s ease-in-out var(--dl) infinite alternate}
+html.motion:not(.still) .scene.live .sc-flock{animation:fly var(--dur) linear var(--dl) infinite}
+html.motion:not(.still) .scene.live .sc-flock .bd{transform-box:fill-box;transform-origin:50% 60%;animation:flap .42s ease-in-out var(--d) infinite alternate}
+html.motion:not(.still) .scene.live .sc-flames i{animation:flick 1.7s ease-in-out var(--dl) infinite alternate}
+html.motion:not(.still) .scene.live .sc-hint i{animation:hint 2.2s ease-in-out infinite}
+@keyframes sway{from{transform:rotate(-2.4deg)}to{transform:rotate(2.4deg)}}
+@keyframes drift{from{transform:translateX(-14px)}to{transform:translateX(18px)}}
+@keyframes fly{0%{transform:translate(0,0)}50%{transform:translate(65cqw,-2cqh)}100%{transform:translate(130cqw,1cqh)}}
+@keyframes flap{to{transform:scaleY(-.45)}}
+@keyframes flick{0%{opacity:.6;transform:scale(.92)}45%{opacity:1;transform:scale(1.06)}100%{opacity:.78;transform:scale(.98)}}
+@keyframes hint{0%{transform:translateY(0);opacity:0}20%{opacity:1}80%{opacity:1}100%{transform:translateY(23px);opacity:0}}
+.tr-in{position:absolute;inset:0}

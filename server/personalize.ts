@@ -106,10 +106,10 @@ export function personalize(res: Response, v: View): Response {
     .on('[data-dates-short]', { element: (el) => { el.setInnerContent(dates.short); } })
     .on('[data-dates-long]', { element: (el) => { el.setInnerContent(dates.long); } })
     /* only their events */
-    .on('.chapter[data-event]', { element: (el) => { if (!invited.has(el.getAttribute('data-event')!)) el.remove(); } })
+    /* only their celebrations: every element marked with one (its card, its RSVP row, what to wear for it) */
+    .on('[data-event]', { element: (el) => { if (!invited.has(el.getAttribute('data-event')!)) el.remove(); } })
     .on('.chapters', { element: (el) => { el.setAttribute('style', '--n:' + g.ev.length); } })
     .on('[data-count-title]', { element: (el) => { el.setInnerContent(t.schedule.countWords[g.ev.length]); } })
-    .on('.row[data-event]', { element: (el) => { if (!invited.has(el.getAttribute('data-event')!)) el.remove(); } })
     /* their language for the invitation card, unless the link chose one (?lang=) */
     .on('input[name="invlang"]', { element: (el) => { if (reading !== 'mixed') return; if (el.getAttribute('value') === g.lang) el.setAttribute('checked', ''); else el.removeAttribute('checked'); } })
     /* the RSVP form, prefilled with their last reply or their party size */

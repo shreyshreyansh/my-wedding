@@ -3,9 +3,10 @@
 // photographed by scripts/og.mjs. The names sit in the centre square, which WhatsApp may crop to.
 import '../styles/fonts.css';
 import '../styles/base.css';
-import files from '../data/art-files.json';
+import files from '../data/scene-files.json';
 import { couple, dates, venue } from '../data/wedding';
-const art = files.cover.tall.avif[files.cover.tall.avif.length - 1][0];
+/* the opening scene at sunrise: the sky, the hills and the river, the names in the sky */
+const sky = files.sky.wide.webp[files.sky.wide.webp.length - 1][0];
 ---
 <!doctype html>
 <html lang="en">
@@ -14,24 +15,27 @@ const art = files.cover.tall.avif[files.cover.tall.avif.length - 1][0];
 <meta name="robots" content="noindex">
 <title>card</title>
 <style>
-  body{margin:0;background:#1A1220}
-  #card{position:relative;width:1200px;height:630px;overflow:hidden;color:#F4EEE3;text-align:center}
-  #card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 70%}
-  #card .shade{position:absolute;inset:0;background:radial-gradient(ellipse 380px 320px at 50% 50%,rgba(26,18,32,.9) 0,rgba(26,18,32,.74) 55%,rgba(26,18,32,.2) 100%)}
-  #card .in{position:absolute;left:285px;top:0;width:630px;height:630px;display:flex;flex-direction:column;align-items:center;justify-content:center}
-  #card .inv{margin:0 0 14px;font-size:20px;color:#F2DFA2}
-  #card .nm{margin:0;font-family:var(--display);font-size:104px;line-height:.86;letter-spacing:-.01em}
-  #card .amp{display:block;font-style:italic;font-size:52px;line-height:1.1;color:#F2DFA2}
-  #card .dn{margin-top:14px;font-size:30px;color:#D8B46A}
-  #card .date{margin-top:14px;font-size:17px;letter-spacing:.18em;text-transform:uppercase}
-  #icon{width:512px;height:512px;display:grid;place-items:center;background:#1A1220;box-shadow:inset 0 0 0 26px #1A1220,inset 0 0 0 28px rgba(242,223,162,.7)}
+  html,body{margin:0;background:#FBF3E6;overflow:hidden;scrollbar-gutter:auto}
+  #card{position:relative;width:1200px;height:630px;overflow:hidden;color:#5F250F;text-align:center;background:#E8BC9A}
+  #card img{position:absolute;left:0;top:0;width:100%;height:700px;object-fit:cover;object-position:50% 100%}
+  #card .glow{position:absolute;inset:0;background:radial-gradient(ellipse 360px 210px at 50% 34%,rgba(255,246,230,.85) 0,rgba(255,246,230,0) 100%)}
+  #card .in{position:absolute;left:285px;top:0;width:630px;height:350px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  #card .inv{margin:0 0 10px;font-size:20px;color:#AB5626}
+  #card .nm{margin:0;font-family:var(--display);font-size:84px;line-height:.92;letter-spacing:-.01em}
+  #card .amp{display:block;font-style:italic;font-size:46px;line-height:1.1;color:#B9823E}
+  #card .dn{margin-top:8px;font-size:25px;color:#AB5626}
+  #card .date{margin-top:10px;font-size:17px;letter-spacing:.18em;text-transform:uppercase;color:#8A5A3E}
+  #icon{width:512px;height:512px;display:grid;place-items:center;background:#5F250F;box-shadow:inset 0 0 0 26px #5F250F,inset 0 0 0 28px rgba(221,164,93,.8)}
   #icon span{font-family:var(--display);font-style:italic;font-size:400px;line-height:1;color:#E9CF8A;transform:translateY(-4%)}
 </style>
 </head>
 <body>
 <div id="card">
-  <img src={art} alt="">
-  <div class="shade"></div>
+  <img src={sky} alt="">
+  <img src={files.far} alt="">
+  <img src={files.mid} alt="">
+  <img src={files.near} alt="">
+  <div class="glow"></div>
   <div class="in">
     <p class="inv" lang="hi">॥ श्री गणेशाय नमः ॥</p>
     <p class="nm">{couple.groom.en}<span class="amp">&amp;</span>{couple.bride.en}</p>

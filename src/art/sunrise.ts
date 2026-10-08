@@ -111,15 +111,17 @@ function chhatri(x: number, y: number, s: number) {
     `<rect x="${f(x - w - 4 * s)}" y="${f(y)}" width="${f(2 * w + 8 * s)}" height="${f(5 * s)}" fill="${C.whiteShade}"/></g>`;
 }
 
-/** a tree as an illustrator draws one: a cluster of round shapes, dark, then mid, then lit on the side facing the sun */
-function tree(x: number, y: number, s: number, rand: () => number, toSun: number) {
+/** a tree as an illustrator draws one: a cluster of round shapes, dark, then mid, then lit on the side facing the sun.
+    Its shapes join three shared paths (one per ink), so a whole bank of trees is three elements */
+type Inks = { dark: string[]; mid: string[]; lit: string[] };
+const circ = (cx: number, cy: number, r: number) => `M${f(cx - r)} ${f(cy)}a${f(r)} ${f(r)} 0 1 0 ${f(2 * r)} 0a${f(r)} ${f(r)} 0 1 0 ${f(-2 * r)} 0`;
+function tree(x: number, y: number, s: number, rand: () => number, toSun: number, ink: Inks) {
   const n = 4 + Math.floor(rand() * 3), r = 13 * s, blobs: P[] = [];
   for (let i = 0; i < n; i++) blobs.push([x + (rand() - 0.5) * r * 2.2, y - r * (0.9 + rand() * 1.5)]);
   const sx = toSun * r * 0.22;
-  const dark = blobs.map(([bx, by]) => `<circle cx="${f(bx)}" cy="${f(by)}" r="${f(r * (0.85 + rand() * 0.3))}"/>`).join('');
-  const mid = blobs.map(([bx, by]) => `<circle cx="${f(bx + sx)}" cy="${f(by - r * 0.22)}" r="${f(r * 0.72)}"/>`).join('');
-  const lit = blobs.filter(([, by]) => by < y - r * 1.4).map(([bx, by]) => `<circle cx="${f(bx + sx * 1.8)}" cy="${f(by - r * 0.42)}" r="${f(r * 0.38)}"/>`).join('');
-  return `<g fill="${C.treeDark}">${dark}</g><g fill="${C.tree}">${mid}</g><g fill="${C.treeLit}">${lit}</g>`;
+  for (const [bx, by] of blobs) ink.dark.push(circ(bx, by, r * (0.85 + rand() * 0.3)));
+  for (const [bx, by] of blobs) ink.mid.push(circ(bx + sx, by - r * 0.22, r * 0.72));
+  for (const [bx, by] of blobs) if (by < y - r * 1.4) ink.lit.push(circ(bx + sx * 1.8, by - r * 0.42, r * 0.38));
 }
 
 /** a toddy palm, the tree of every Bihar riverbank */
@@ -180,148 +182,243 @@ function cloud(cx: number, cy: number, w: number, rand: () => number, id: string
 
 /* ---------- the layers ---------- */
 
+/** a whole SVG file, for a layer the page loads as an image: its ids stay inside it */
+const doc = (body: string, defs = '', vb = `0 0 ${W} ${H}`, ratio = 'xMidYMax slice') =>
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb}" preserveAspectRatio="${ratio}">${defs ? `<defs>${defs}</defs>` : ''}${body}</svg>`;
+
+/** the diyas on the morning river (x, y, size); the page lights a flickering glow over each flame */
+export const DIYAS: [number, number, number][] = [[742, 872, 0.62], [800, 846, 0.5], [866, 900, 0.7], [776, 962, 0.95], [930, 838, 0.46], [688, 920, 0.78], [902, 978, 1]];
+/** and on the night river, many more */
+export const NIGHT_DIYAS: [number, number, number][] = [[600, 952, 0.9], [652, 884, 0.62], [706, 836, 0.48], [748, 912, 0.75], [790, 800, 0.38], [812, 862, 0.56],
+  [860, 944, 0.92], [884, 826, 0.44], [930, 880, 0.64], [978, 958, 0.86], [1012, 842, 0.5], [548, 860, 0.58], [1060, 900, 0.7], [470, 930, 0.8], [1140, 960, 0.9], [1218, 872, 0.6], [392, 980, 1]];
+
+/** the hills, the same at dawn and at night */
+function shapes() {
+  const rand = rng(1209);
+  return {
+    back: ridge([[-60, 650], [220, 628], [520, 640], [800, 652], [1080, 626], [1380, 640], [1660, 630]], 5, rand),
+    ranchi: ridge([[-60, 636], [80, 598], [210, 586], [330, 610], [440, 588], [545, 556], [640, 574], [730, 604], [820, 640], [900, 660]], 7, rand),
+    pune0: mesa(1300, 1640, 506, 600, rand), pune1: mesa(830, 1250, 528, 668, rand), pune2: mesa(1150, 1700, 552, 672, rand),
+    left: ridge([[-60, 702], [140, 690], [300, 672], [440, 642], [560, 604], [640, 582], [690, 584], [750, 612], [820, 672], [880, 728]], 6, rand, 28),
+    right: ridge([[720, 732], [800, 694], [870, 646], [930, 606], [975, 592], [1030, 593], [1085, 612], [1170, 650], [1310, 680], [1480, 694], [1660, 700]], 6, rand, 28),
+    lEdge: [[772, 716], [720, 744], [640, 784], [540, 834], [420, 892], [260, 960], [150, 1004]] as P[],
+    rEdge: [[828, 716], [884, 742], [968, 780], [1080, 826], [1220, 884], [1380, 950], [1500, 1004]] as P[],
+    lTop: ridge([[-60, 706], [300, 712], [600, 714], [772, 716]], 3, rand, 40),
+    rTop: ridge([[828, 716], [1100, 714], [1400, 710], [1660, 706]], 3, rand, 40)
+  };
+}
+type Shapes = ReturnType<typeof shapes>;
+const banks = (S: Shapes) => ({
+  left: curve(S.lTop) + S.lEdge.slice(1).map(([x, y]) => `L${f(x)} ${f(y)}`).join('') + 'L-60 1004Z',
+  right: 'M' + f(S.rEdge[0][0]) + ' ' + f(S.rEdge[0][1]) + curve(S.rTop).replace(/^M[^C]+/, '') + `L1660 1004L${f(S.rEdge[S.rEdge.length - 1][0])} 1004` +
+    [...S.rEdge].reverse().slice(1).map(([x, y]) => `L${f(x)} ${f(y)}`).join('') + 'Z',
+  river: `M${f(S.lEdge[0][0])} ${f(S.lEdge[0][1])}` + S.lEdge.slice(1).map(([x, y]) => `L${f(x)} ${f(y)}`).join('') + [...S.rEdge].reverse().map(([x, y]) => `L${f(x)} ${f(y)}`).join('') + 'Z'
+});
+/** trees along both banks, smaller towards the middle where the bank is far away */
+function treeline(rand: () => number) {
+  const ink: Inks = { dark: [], mid: [], lit: [] };
+  const row = (x0: number, x1: number) => {
+    for (let x = x0; x < x1; x += 15 + rand() * 12) {
+      const d = Math.abs(x - 800) / 800, s = 0.45 + d * 1.15;
+      tree(x, 715 + d * 2, s * (0.85 + rand() * 0.3), rand, x < 800 ? 1 : -1, ink);
+    }
+  };
+  row(-40, 760);
+  row(842, 1650);
+  return ink;
+}
+
+/**
+ * The morning scene, as four layers that slide apart as you scroll: the sky (saved as a picture), the far hills,
+ * the temple hills and the river (SVG files). The sun's disc, a few drifting clouds, the birds and the diyas' glow
+ * are small pieces the page places over them, at the points in DIYAS and MARKS.
+ */
 export function scene() {
-  const rand = rng(20261209);
+  const S = shapes(), rand = rng(20261209);
 
-  /* the sun: a wide glow and a soft disc; the disc rises on its own (motion/hero.ts) */
-  const sun = svg(
-    `<circle cx="800" cy="600" r="560" fill="url(#sr-halo)"/><circle cx="800" cy="600" r="210" fill="url(#sr-halo2)"/>` +
-    `<circle cx="800" cy="600" r="74" fill="url(#sr-disc)"/>`,
-    `<radialGradient id="sr-halo"><stop offset="0" stop-color="#FFE7BD" stop-opacity=".95"/><stop offset=".35" stop-color="#FFDDB0" stop-opacity=".55"/><stop offset="1" stop-color="#FFD6A8" stop-opacity="0"/></radialGradient>` +
-    `<radialGradient id="sr-halo2"><stop offset="0" stop-color="#FFF6E2" stop-opacity=".95"/><stop offset="1" stop-color="#FFEBC8" stop-opacity="0"/></radialGradient>` +
-    `<radialGradient id="sr-disc"><stop offset="0" stop-color="#FFFDF6"/><stop offset=".8" stop-color="#FFF6DF"/><stop offset="1" stop-color="#FFEFD0" stop-opacity="0"/></radialGradient>`
-  );
-
-  /* clouds: streaks across the glow, a puff or two near the middle for a phone, banks in the corners for a laptop */
+  /* sky: the gradient, the sun's wide glow, streaks of cloud, banks in the laptop's corners, the faintest range */
   let streaks = '';
   for (let i = 0; i < 9; i++) {
     const y = 380 + rand() * 190, x = 120 + rand() * 1360, rx = 120 + rand() * 260;
     streaks += `<ellipse cx="${f(x)}" cy="${f(y)}" rx="${f(rx)}" ry="${f(4 + rand() * 6)}" fill="#FFF7EC" opacity="${f(0.35 + rand() * 0.35)}"/>`;
   }
-  const birds = [[930, 452, 1], [962, 438, 0.8], [985, 462, 0.7], [1010, 446, 0.6]].map(([x, y, s]) =>
-    `<path d="M${f(x - 9 * s)} ${f(y - 3 * s)}Q${f(x - 4 * s)} ${f(y - 6 * s)} ${f(x)} ${f(y)}Q${f(x + 4 * s)} ${f(y - 6 * s)} ${f(x + 9 * s)} ${f(y - 3 * s)}" stroke="#8C5A3C" stroke-width="${f(1.8 * s)}" fill="none" stroke-linecap="round"/>`).join('');
-  const clouds = svg(
-    streaks +
-    cloud(190, 250, 420, rand, 'sr-cl', 11) + cloud(1420, 190, 460, rand, 'sr-cl', 11) + cloud(1180, 330, 200, rand, 'sr-cl', 7) +
-    cloud(640, 395, 170, rand, 'sr-cl', 7) + cloud(1000, 300, 150, rand, 'sr-cl', 6) + cloud(330, 420, 160, rand, 'sr-cl', 6) + birds,
-    vgrad('sr-cl', [[0, C.cloud], [0.7, '#FFF0DE'], [1, C.cloudLo]])
+  const sky = doc(
+    `<rect x="-20" y="-20" width="1640" height="1040" fill="url(#k)"/><circle cx="800" cy="600" r="640" fill="url(#h)"/><circle cx="800" cy="600" r="230" fill="url(#h2)"/>` +
+    streaks + cloud(190, 250, 420, rand, 'c', 11) + cloud(1420, 190, 460, rand, 'c', 11) + cloud(1180, 330, 200, rand, 'c', 7) +
+    `<path d="${down(S.back, curve(S.back))}" fill="${C.far0}"/>`,
+    vgrad('k', [[0, '#E8BC9A'], [0.34, '#F4D3B2'], [0.56, '#FBE4C8'], [0.66, '#FFF0DC'], [1, '#FFF4E4']]) +
+    `<radialGradient id="h"><stop offset="0" stop-color="#FFE9C2" stop-opacity=".95"/><stop offset=".35" stop-color="#FFDDB0" stop-opacity=".5"/><stop offset="1" stop-color="#FFD6A8" stop-opacity="0"/></radialGradient>` +
+    `<radialGradient id="h2"><stop offset="0" stop-color="#FFF7E6" stop-opacity=".9"/><stop offset="1" stop-color="#FFEBC8" stop-opacity="0"/></radialGradient>` +
+    vgrad('c', [[0, C.cloud], [0.7, '#FFF0DE'], [1, C.cloudLo]])
   );
 
-  /* far: Ranchi's rounded plateau hills on the left, the Sahyadri's mesas on the right, a faint range behind both */
-  const back = ridge([[-60, 650], [220, 628], [520, 640], [800, 652], [1080, 626], [1380, 640], [1660, 630]], 5, rand);
-  const ranchi = ridge([[-60, 636], [80, 598], [210, 586], [330, 610], [440, 588], [545, 556], [640, 574], [730, 604], [820, 640], [900, 660]], 7, rand);
-  const pune1 = mesa(830, 1250, 528, 668, rand), pune2 = mesa(1150, 1700, 552, 672, rand), pune0 = mesa(1300, 1640, 506, 600, rand);
-  const far = svg(
-    `<path d="${down(back, curve(back))}" fill="${C.far0}"/>` +
-    `<path d="${down(pune0, line(pune0))}" fill="${C.far0}"/>` +
-    `<path d="${down(pune1, line(pune1))}" fill="url(#sr-far)"/><path d="${line(pune1)}" fill="none" stroke="${C.rimFar}" stroke-width="2.2"/>` +
-    `<path d="${down(pune2, line(pune2))}" fill="url(#sr-far)"/><path d="${line(pune2)}" fill="none" stroke="${C.rimFar}" stroke-width="2.2"/>` +
-    `<path d="${down(ranchi, curve(ranchi))}" fill="url(#sr-far)"/><path d="${curve(ranchi)}" fill="none" stroke="${C.rimFar}" stroke-width="2.2"/>`,
-    vgrad('sr-far', [[0, C.far], [0.2, C.farLo]])
+  /* far: Ranchi's rounded plateau hills on the left, the Sahyadri's mesas on the right */
+  const rim = (d: string, c: string) => `<path d="${d}" fill="none" stroke="${c}" stroke-width="2.2"/>`;
+  const far = doc(
+    `<path d="${down(S.pune0, line(S.pune0))}" fill="${C.far0}"/>` +
+    `<path d="${down(S.pune1, line(S.pune1))}" fill="url(#g)"/>` + rim(line(S.pune1), C.rimFar) +
+    `<path d="${down(S.pune2, line(S.pune2))}" fill="url(#g)"/>` + rim(line(S.pune2), C.rimFar) +
+    `<path d="${down(S.ranchi, curve(S.ranchi))}" fill="url(#g)"/>` + rim(curve(S.ranchi), C.rimFar),
+    vgrad('g', [[0, C.far], [0.2, C.farLo]])
   );
 
-  /* mid: the two temple hills */
-  const left = ridge([[-60, 702], [140, 690], [300, 672], [440, 642], [560, 604], [640, 582], [690, 584], [750, 612], [820, 672], [880, 728]], 6, rand, 28);
-  const right = ridge([[720, 732], [800, 694], [870, 646], [930, 606], [975, 592], [1030, 593], [1085, 612], [1170, 650], [1310, 680], [1480, 694], [1660, 700]], 6, rand, 28);
-  /* Parvati's steps climbing the hill */
+  /* mid: the two temple hills, Parvati's steps climbing the right one */
   const steps = `<path d="M1150 652L1110 636L1128 626L1090 614L1104 604L1060 598" fill="none" stroke="${C.rimMid}" stroke-width="2.4" stroke-dasharray="3 3" opacity=".9"/>`;
-  const mid = svg(
-    `<path d="${down(right, curve(right))}" fill="url(#sr-mid)"/><path d="${curve(right)}" fill="none" stroke="${C.rimMid}" stroke-width="2.4"/>` + steps +
-    `<path d="${down(left, curve(left))}" fill="url(#sr-mid)"/><path d="${curve(left)}" fill="none" stroke="${C.rimMid}" stroke-width="2.4"/>` +
+  const mid = doc(
+    `<path d="${down(S.right, curve(S.right))}" fill="url(#g)"/>` + rim(curve(S.right), C.rimMid) + steps +
+    `<path d="${down(S.left, curve(S.left))}" fill="url(#g)"/>` + rim(curve(S.left), C.rimMid) +
     temple(664, 586, 0.86) + temple(1004, 596, 0.74, false) + chhatri(964, 598, 0.42) + chhatri(1044, 598, 0.42),
-    vgrad('sr-mid', [[0, C.mid], [0.14, C.midLo]])
+    vgrad('g', [[0, C.mid], [0.14, C.midLo]])
   );
 
-  /* near: mist, the banks and their trees, the river, its ghat, lotuses and diyas */
-  const mist = `<rect x="-20" y="600" width="1640" height="150" fill="url(#sr-mist)"/>`;
-  const lEdge: P[] = [[772, 716], [720, 744], [640, 784], [540, 834], [420, 892], [260, 960], [150, 1004]];
-  const rEdge: P[] = [[828, 716], [884, 742], [968, 780], [1080, 826], [1220, 884], [1380, 950], [1500, 1004]];
-  const lTop = ridge([[-60, 706], [300, 712], [600, 714], [772, 716]], 3, rand, 40);
-  const rTop = ridge([[828, 716], [1100, 714], [1400, 710], [1660, 706]], 3, rand, 40);
-  const leftBank = curve(lTop) + lEdge.slice(1).map(([x, y]) => `L${f(x)} ${f(y)}`).join('') + `L-60 1004Z`;
-  const rightBank = 'M' + f(rEdge[0][0]) + ' ' + f(rEdge[0][1]) + curve(rTop).replace(/^M[^C]+/, '') + `L1660 1004L${f(rEdge[rEdge.length - 1][0])} 1004` + [...rEdge].reverse().slice(1).map(([x, y]) => `L${f(x)} ${f(y)}`).join('') + 'Z';
-  const river = `M${f(lEdge[0][0])} ${f(lEdge[0][1])}` + lEdge.slice(1).map(([x, y]) => `L${f(x)} ${f(y)}`).join('') + [...rEdge].reverse().map(([x, y]) => `L${f(x)} ${f(y)}`).join('') + 'Z';
-
-  /* the sun's path on the water, wider as it comes closer */
-  let glitter = '';
+  /* near: mist, the river and the sun's path on it, the banks and their trees, the ghat, lotuses, diyas */
+  const B = banks(S);
+  const glit: string[][] = [[], [], []];
   for (let y = 722; y < 1000; y += 9 + (y - 716) * 0.03) {
     const t = (y - 716) / 284, n = 1 + Math.floor(t * 3);
     for (let k = 0; k < n; k++) {
-      const w = 10 + t * 70 * (0.5 + rand()), x = 800 + (rand() - 0.5) * (12 + t * 160);
-      glitter += `<rect x="${f(x - w / 2)}" y="${f(y)}" width="${f(w)}" height="${f(1.6 + t * 2.4)}" rx="1.5" fill="#FFFBF0" opacity="${f(0.9 - t * 0.5)}"/>`;
+      const w = 10 + t * 70 * (0.5 + rand()), x = 800 + (rand() - 0.5) * (12 + t * 160), h = 1.6 + t * 2.4;
+      glit[Math.min(2, Math.floor(t * 3))].push(`M${f(x - w / 2)} ${f(y)}h${f(w)}v${f(h)}h${f(-w)}Z`);
     }
   }
-  let ripples = '';
+  const ripples: string[] = [];
   for (let i = 0; i < 26; i++) {
     const y = 730 + rand() * 260, t = (y - 716) / 284, cx = 800 + (rand() - 0.5) * (120 + t * 900), w = 20 + t * 90 * rand();
-    ripples += `<path d="M${f(cx - w / 2)} ${f(y)}h${f(w)}" stroke="${C.water2}" stroke-width="${f(1 + t * 1.4)}" stroke-linecap="round" opacity=".55"/>`;
+    ripples.push(`M${f(cx - w / 2)} ${f(y)}h${f(w)}`);
   }
-  /* the trees' shadow on the water at the far end */
-  const shade = `<path d="M772 716L828 716L850 728Q800 733 750 728Z" fill="${C.treeDark}" opacity=".25"/>`;
-
-  /* trees, smaller towards the middle where the bank is far away */
-  let trees = '';
-  const row = (x0: number, x1: number, side: number) => {
-    for (let x = x0; side < 0 ? x < x1 : x < x1; x += 15 + rand() * 12) {
-      const d = Math.abs(x - 800) / 800, s = 0.45 + d * 1.15;
-      const y = side < 0 ? 712 + d * 2 : 714 + d * 2;
-      trees += tree(x, y + 3, s * (0.85 + rand() * 0.3), rand, x < 800 ? 1 : -1);
+  /* grass along the water's edge */
+  const tufts: string[] = [];
+  for (const edge of [S.lEdge, S.rEdge]) for (let i = 0; i < edge.length - 1; i++) {
+    const [x0, y0] = edge[i], [x1, y1] = edge[i + 1];
+    for (let t = 0.1; t < 1; t += 0.22) {
+      const x = x0 + (x1 - x0) * t, y = y0 + (y1 - y0) * t, h = 4 + ((y - 716) / 284) * 14, side = edge === S.lEdge ? -1 : 1;
+      for (let k = -1; k <= 1; k++) tufts.push(`M${f(x + side * 6 + k * h * 0.3)} ${f(y + 2)}q${f(k * h * 0.2)} ${f(-h * 0.5)} ${f(k * h * 0.45)} ${f(-h)}`);
     }
-  };
-  row(-40, 760, -1);
-  row(842, 1650, 1);
+  }
+  /* the banks are fields: furrows running towards the far end of the river, and a few bushes */
+  let furrows = '';
+  for (let k = -16; k <= 16; k++) if (Math.abs(k) > 2) furrows += `M800 716L${f(800 + k * 110)} 1004`;
+  const bushes: string[] = [];
+  for (let i = 0; i < 40; i++) {
+    const side = i % 2 ? 1 : -1, t = 0.15 + rand() * 0.85, y = 720 + t * 280, x = 800 + side * (90 + t * 700 + rand() * 260 * t), r = 3 + t * 9;
+    bushes.push(circ(x, y, r), circ(x + r, y + r * 0.2, r * 0.8));
+  }
+  const ink = treeline(rand);
   const palms = palm(118, 712, 150, 14) + palm(176, 714, 118, -8) + palm(1488, 712, 136, -12) + palm(612, 714, 70, 6);
-
-  /* the ghat: stone steps down to the water on her side's bank, a chhatri at the top */
   let ghat = '';
   for (let k = 0; k < 6; k++) {
-    const o = k * 9;
-    const a: P = [560 - o * 1.9, 830 + o * 0.6], b: P = [372 - o * 1.9, 914 + o * 0.6];
+    const o = k * 9, a: P = [560 - o * 1.9, 830 + o * 0.6], b: P = [372 - o * 1.9, 914 + o * 0.6];
     ghat += `<path d="M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}L${f(b[0] - 14)} ${f(b[1] - 2)}L${f(a[0] - 14)} ${f(a[1] - 2)}Z" fill="${C.stone}"/>` +
       `<path d="M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}l0 3.5L${f(a[0])} ${f(a[1] + 3.5)}Z" fill="${C.riser}"/>`;
   }
   ghat = `<g transform="translate(-8 -14)">${ghat}</g>` + chhatri(472, 830, 0.95);
-
   const lotuses = [[590, 948, 1.05], [626, 972, 0.8], [1010, 960, 1.1], [1052, 944, 0.75], [248, 984, 1.3], [1330, 934, 1.15], [1380, 968, 0.9], [690, 820, 0.55]];
   const pads = lotuses.map(([x, y, s], i) => pad(x - 20 * s, y + 6 * s, s, i % 2 ? 6 : -5) + pad(x + 22 * s, y + 9 * s, s * 0.85, i % 2 ? -4 : 8) + pad(x + 4 * s, y + 16 * s, s * 0.7, 2)).join('');
   const flowers = lotuses.map(([x, y, s]) => lotus(x, y + 4 * s, s)).join('');
-  const diyas = [[742, 872, 0.62], [800, 846, 0.5], [866, 900, 0.7], [776, 962, 0.95], [930, 838, 0.46], [688, 920, 0.78], [902, 978, 1]]
-    .map(([x, y, s]) => diya(x, y, s, 'sr')).join('');
-
-  const near = svg(
-    mist + `<path d="${river}" fill="url(#sr-water)"/>` + shade + ripples + glitter +
-    `<path d="${leftBank}" fill="url(#sr-bank)"/><path d="${rightBank}" fill="url(#sr-bank)"/>` +
-    `<path d="${line(lEdge)}" fill="none" stroke="#FFF3E0" stroke-width="2" opacity=".7"/><path d="${line(rEdge)}" fill="none" stroke="#FFF3E0" stroke-width="2" opacity=".7"/>` +
-    trees + palms + ghat + pads + flowers + diyas,
-    vgrad('sr-mist', [[0, '#FFF6EA', 0], [0.62, '#FFF6EA', 0.7], [1, '#FFF6EA', 0]]) +
-    vgrad('sr-water', [[0, C.water0], [0.45, C.water1], [1, C.water2]]) +
-    vgrad('sr-bank', [[0, C.bank], [1, C.bankLo]]) +
-    `<radialGradient id="sr-glow"><stop offset="0" stop-color="#FFE3A0" stop-opacity=".85"/><stop offset="1" stop-color="#FFD480" stop-opacity="0"/></radialGradient>` +
-    `<radialGradient id="sr-glowW"><stop offset="0" stop-color="#FFF0C8" stop-opacity=".8"/><stop offset="1" stop-color="#FFE7B0" stop-opacity="0"/></radialGradient>`
+  const near = doc(
+    `<rect x="-20" y="600" width="1640" height="150" fill="url(#m)"/><path d="${B.river}" fill="url(#w)"/>` +
+    `<path d="M772 716L828 716L850 728Q800 733 750 728Z" fill="${C.treeDark}" opacity=".25"/>` +
+    `<path d="${ripples.join('')}" stroke="${C.water2}" stroke-width="1.8" stroke-linecap="round" opacity=".55"/>` +
+    glit.map((g, i) => `<path d="${g.join('')}" fill="#FFFBF0" opacity="${[0.85, 0.6, 0.42][i]}"/>`).join('') +
+    `<path d="${B.left}" fill="url(#b)"/><path d="${B.right}" fill="url(#b)"/>` +
+    `<path d="${line(S.lEdge)}${line(S.rEdge)}" fill="none" stroke="#FFF3E0" stroke-width="2" opacity=".7"/>` +
+    `<path d="${tufts.join('')}" fill="none" stroke="${C.treeLit}" stroke-width="1.6" stroke-linecap="round"/>` +
+    `<g clip-path="url(#bk)"><path d="${furrows}" stroke="#8E9259" stroke-width="2" opacity=".55"/><path d="${bushes.join('')}" fill="${C.treeDark}" opacity=".55"/></g>` +
+    `<path d="${ink.dark.join('')}" fill="${C.treeDark}"/><path d="${ink.mid.join('')}" fill="${C.tree}"/><path d="${ink.lit.join('')}" fill="${C.treeLit}"/>` +
+    palms + ghat + pads + flowers + DIYAS.map(([x, y, s]) => diya(x, y, s, 'd')).join(''),
+    vgrad('m', [[0, '#FFF6EA', 0], [0.62, '#FFF6EA', 0.7], [1, '#FFF6EA', 0]]) +
+    vgrad('w', [[0, C.water0], [0.45, C.water1], [1, C.water2]]) +
+    vgrad('b', [[0, C.bank], [1, C.bankLo]]) +
+    `<clipPath id="bk"><path d="${B.left}"/><path d="${B.right}"/></clipPath>` +
+    `<radialGradient id="d-glow"><stop offset="0" stop-color="#FFE3A0" stop-opacity=".85"/><stop offset="1" stop-color="#FFD480" stop-opacity="0"/></radialGradient>` +
+    `<radialGradient id="d-glowW"><stop offset="0" stop-color="#FFF0C8" stop-opacity=".8"/><stop offset="1" stop-color="#FFE7B0" stop-opacity="0"/></radialGradient>`
   );
 
-  return { sun, clouds, far, mid, near };
+  return { sky, far, mid, near };
+}
+
+/** the same river at night, for the last section: moon, stars, every diya lit */
+export function nightScene() {
+  const S = shapes(), rand = rng(912), B = banks(S);
+  const stars: string[] = [], bright: string[] = [];
+  for (let i = 0; i < 90; i++) {
+    const x = rand() * 1600, y = rand() * 520, r = 0.8 + rand() * 1.4;
+    (rand() < 0.15 ? bright : stars).push(circ(x, y, r));
+  }
+  const ink = treeline(rng(20261209 + 1));
+  const moonGlit: string[] = [];
+  for (let y = 724; y < 1000; y += 10 + (y - 716) * 0.04) {
+    const t = (y - 716) / 284, w = 8 + t * 60 * (0.4 + rand()), x = 1150 + (rand() - 0.5) * (10 + t * 120);
+    moonGlit.push(`M${f(x - w / 2)} ${f(y)}h${f(w)}v${f(1.4 + t * 2)}h${f(-w)}Z`);
+  }
+  /* a temple at night: its silhouette, one lamp in the door */
+  const shrine = (x: number, y: number, s: number) => {
+    const sh = 64 * s, bw = 22 * s;
+    return `<path d="M${f(x - bw * 1.08)} ${f(y)}V${f(y - 14 * s)}H${f(x - bw)}C${f(x - bw)} ${f(y - sh * 0.62)} ${f(x - bw * 0.42)} ${f(y - sh * 0.92)} ${f(x)} ${f(y - sh)}C${f(x + bw * 0.42)} ${f(y - sh * 0.92)} ${f(x + bw)} ${f(y - sh * 0.62)} ${f(x + bw)} ${f(y - 14 * s)}H${f(x + bw * 1.08)}V${f(y)}Z" fill="#2A1B30"/>` +
+      `<path d="M${f(x)} ${f(y - sh - 6 * s)}V${f(y - sh - 28 * s)}" stroke="#2A1B30" stroke-width="${f(1.4 * s)}"/>` +
+      `<circle cx="${f(x)}" cy="${f(y - 6 * s)}" r="${f(16 * s)}" fill="url(#lg)"/><rect x="${f(x - 3 * s)}" y="${f(y - 10 * s)}" width="${f(6 * s)}" height="${f(10 * s)}" rx="${f(3 * s)}" fill="#FFC86A"/>`;
+  };
+  return doc(
+    `<rect x="-20" y="-20" width="1640" height="1040" fill="url(#k)"/>` +
+    `<path d="${stars.join('')}" fill="#F6E7CF" opacity=".7"/><path d="${bright.join('')}" fill="#FFF6E2"/>` +
+    `<circle cx="1150" cy="250" r="190" fill="url(#mh)"/><circle cx="1150" cy="250" r="40" fill="#FFF3D6"/><circle cx="1138" cy="242" r="40" fill="#F2DDB8" opacity=".35"/>` +
+    `<path d="${down(S.back, curve(S.back))}" fill="#3F2846"/>` +
+    `<path d="${down(S.pune0, line(S.pune0))}" fill="#3A2442"/><path d="${down(S.pune1, line(S.pune1))}" fill="#33203C"/><path d="${down(S.pune2, line(S.pune2))}" fill="#33203C"/>` +
+    `<path d="${down(S.ranchi, curve(S.ranchi))}" fill="#33203C"/>` +
+    `<path d="${down(S.right, curve(S.right))}" fill="#2A1B30"/><path d="${down(S.left, curve(S.left))}" fill="#2A1B30"/>` +
+    shrine(664, 586, 0.86) + shrine(1004, 596, 0.74) +
+    `<path d="${B.river}" fill="url(#w)"/><path d="${moonGlit.join('')}" fill="#FFF0D0" opacity=".55"/>` +
+    `<path d="${B.left}" fill="#1E1524"/><path d="${B.right}" fill="#1E1524"/>` +
+    `<path d="${ink.dark.join('')}${ink.mid.join('')}" fill="#211727"/>` +
+    NIGHT_DIYAS.map(([x, y, s]) => `<ellipse cx="${f(x)}" cy="${f(y + 10 * s)}" rx="${f(14 * s)}" ry="${f(40 * s)}" fill="url(#rf)"/>` + diya(x, y, s, 'n')).join(''),
+    vgrad('k', [[0, '#120C1A'], [0.4, '#22152F'], [0.6, '#3A2140'], [0.7, '#5B2E40'], [1, '#1A1220']]) +
+    vgrad('w', [[0, '#5A2E40'], [0.3, '#2E1E36'], [1, '#160F1C']]) +
+    `<radialGradient id="mh"><stop offset="0" stop-color="#FFF0D0" stop-opacity=".35"/><stop offset="1" stop-color="#FFF0D0" stop-opacity="0"/></radialGradient>` +
+    `<radialGradient id="lg"><stop offset="0" stop-color="#FFC86A" stop-opacity=".8"/><stop offset="1" stop-color="#FFC86A" stop-opacity="0"/></radialGradient>` +
+    `<radialGradient id="rf"><stop offset="0" stop-color="#FFC66A" stop-opacity=".45"/><stop offset="1" stop-color="#FFC66A" stop-opacity="0"/></radialGradient>` +
+    `<radialGradient id="n-glow"><stop offset="0" stop-color="#FFD27A" stop-opacity=".9"/><stop offset="1" stop-color="#FFB850" stop-opacity="0"/></radialGradient>` +
+    `<radialGradient id="n-glowW"><stop offset="0" stop-color="#FFD890" stop-opacity=".7"/><stop offset="1" stop-color="#FFC060" stop-opacity="0"/></radialGradient>`
+  );
+}
+
+/** a small cloud that drifts across the sky on its own (inline; its gradient is in sprite()) */
+export function puff(seed: number, w = 200) {
+  const rand = rng(seed);
+  return `<svg viewBox="${f(-w * 0.55)} ${f(-w * 0.34)} ${f(w * 1.1)} ${f(w * 0.48)}" aria-hidden="true" focusable="false">${cloud(0, 0, w, rand, 'sr-cl', 7)}</svg>`;
+}
+
+/** a flock: a few birds, each a "v" that the page flaps */
+export function flock(n: number, seed: number) {
+  const rand = rng(seed);
+  let s = '';
+  for (let i = 0; i < n; i++) {
+    const x = 12 + i * 22 + rand() * 8, y = 14 + (i % 2) * 8 + rand() * 8, k = 0.7 + rand() * 0.4;
+    s += `<g class="bd" style="--d:${f(-rand() * 0.6)}s"><path d="M${f(x - 9 * k)} ${f(y - 3 * k)}Q${f(x - 4 * k)} ${f(y - 6 * k)} ${f(x)} ${f(y)}Q${f(x + 4 * k)} ${f(y - 6 * k)} ${f(x + 9 * k)} ${f(y - 3 * k)}"/></g>`;
+  }
+  return `<svg viewBox="0 0 ${12 + n * 22 + 12} 40" aria-hidden="true" focusable="false"><g fill="none" stroke="#7E4C30" stroke-width="1.8" stroke-linecap="round">${s}</g></svg>`;
 }
 
 /* ---------- the cover's clouds: two banks that part when the invitation opens ---------- */
 
 export function coverClouds(side: 'l' | 'r') {
   const rand = rng(side === 'l' ? 7 : 11);
-  /* drawn as the left bank; the right one is its mirror. The edge at x = 800 billows, the rest is solid */
-  let shade = '', body = '', lit = '';
-  for (let i = 0; i < 26; i++) {
-    const y = -40 + i * 42 + (rand() - 0.5) * 20, r = 70 + rand() * 70, x = 690 + (rand() - 0.5) * 120 + Math.sin(i * 1.3) * 40;
-    shade += `<circle cx="${f(x + 8)}" cy="${f(y + 14)}" r="${f(r)}"/>`;
-    body += `<circle cx="${f(x)}" cy="${f(y)}" r="${f(r * 0.96)}"/>`;
-    if (i % 2) lit += `<circle cx="${f(x - r * 0.25)}" cy="${f(y - r * 0.3)}" r="${f(r * 0.45)}"/>`;
+  /* drawn as the left bank; the right one is its mirror. Rows of cumulus, each lit from above, piled over a solid
+     ground; near x = 800 the rows billow, and they open into a V at the top so the sunrise glows through */
+  const edge = (y: number) => 760 - Math.max(0, 360 - y) * 0.7;
+  let rows = '';
+  /* big billows down the seam and round the V, a beat apart */
+  for (let y = 1080; y > -120; y -= 96 + rand() * 40) {
+    const w = 320 + rand() * 220;
+    rows += cloud(edge(y) - w * 0.32 + (rand() - 0.5) * 40, y, w, rand, 'cc-' + side, 9);
   }
-  for (let i = 0; i < 18; i++) {
-    const x = rand() * 640, y = rand() * 1000, r = 60 + rand() * 90;
-    lit += `<circle cx="${f(x)}" cy="${f(y)}" r="${f(r)}" opacity=".55"/>`;
+  /* a few softer ones further in, so the bank has depth without repeating itself */
+  for (let i = 0; i < 6; i++) {
+    const y = 80 + i * 170 + rand() * 60, w = 260 + rand() * 260;
+    rows += `<g opacity=".55">${cloud(edge(y) - 330 - rand() * 260, y, w, rand, 'cc-' + side, 8)}</g>`;
   }
-  const g = `<rect x="-10" y="-10" width="700" height="1020" fill="url(#cc-${side})"/>` +
-    `<g fill="${C.cloudShade}">${shade}</g><g fill="url(#cc-${side})">${body}</g><g fill="#FFF9F0" opacity=".7">${lit}</g>`;
-  const defs = `<linearGradient id="cc-${side}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FDEBD6"/><stop offset=".6" stop-color="#F9E1C6"/><stop offset="1" stop-color="#F2CFAE"/></linearGradient>`;
+  const ground = `<path d="M-20 -20H${f(edge(-20) - 120)}L${f(edge(360) - 90)} 360V1020H-20Z" fill="url(#cg-${side})"/>`;
+  const defs = vgrad('cc-' + side, [[0, '#FFF9F0'], [0.6, '#FCEBD6'], [1, '#F4D3B2']]) + vgrad('cg-' + side, [[0, '#FBE6CE'], [1, '#F2D0AE']]);
+  const g = ground + rows;
   return svg(side === 'l' ? g : `<g transform="translate(800 0) scale(-1 1)">${g}</g>`, defs, side === 'l' ? 'xMaxYMid slice' : 'xMinYMid slice', '0 0 800 1000');
 }
 
@@ -341,6 +438,7 @@ export function sprite() {
     `<symbol id="${id}" viewBox="-10 -10 20 20"><path d="${bumps(7.6, 12, 2.2)}" fill="${c2}"/><path d="${bumps(5.4, 10, 1.6)}" fill="${c1}"/><circle r="2.6" fill="${c3}"/><circle cx="-1.8" cy="-2.2" r="1.1" fill="#FFFFFF" opacity=".35"/></symbol>`;
   return `<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>` +
     marigold('mg-o', '#F59A22', '#E57A12', '#C2570C') + marigold('mg-y', '#FFC531', '#F2A516', '#D9820B') +
+    vgrad('sr-cl', [[0, C.cloud], [0.7, '#FFF0DE'], [1, C.cloudLo]]) +
     `<symbol id="mango" viewBox="0 0 12 34"><path d="M6 0C11 8 11 22 6 34C1 22 1 8 6 0Z" fill="#5E8A3A"/><path d="M6 2V32" stroke="#86B055" stroke-width="1"/></symbol>` +
     `<symbol id="bell" viewBox="0 0 30 44"><path d="M15 0V8" stroke="#B37E2E" stroke-width="2"/><path d="M15 7C8 7 5 13 5 21V30L2 35H28L25 30V21C25 13 22 7 15 7Z" fill="#D9A441"/><path d="M15 7C20 7 23 13 23 21V30L26 35H15Z" fill="#B98326"/><path d="M5 30H25" stroke="#F3D58A" stroke-width="1.4"/><circle cx="15" cy="39" r="3.6" fill="#9C6A1E"/><path d="M8 18C8 13 10 10 13 9" stroke="#F8E3A8" stroke-width="1.6" fill="none" stroke-linecap="round"/></symbol>` +
     `</defs></svg>`;
@@ -414,3 +512,139 @@ export const icons: Record<string, string> = {
 };
 export const icon = (name: string, size = 36) =>
   `<svg class="ic-line" viewBox="0 0 48 48" width="${size}" height="${size}" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${icons[name]}</g></svg>`;
+
+/* ---------- the middle of the day: medallions, frames, the venue map, the photo frames' motifs ---------- */
+
+const ring = (r: number) => `<circle cx="60" cy="60" r="${r}" fill="none" stroke="var(--gold)" stroke-width="1.4"/><circle cx="60" cy="60" r="${r - 5}" fill="none" stroke="var(--gold)" stroke-width=".8" opacity=".7"/>`;
+
+/** his Bihar: the sun rising over the river, a soop of fruit raised to it, as at Chhath */
+export function medalChhath() {
+  return `<svg class="hm-svg" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle cx="60" cy="60" r="56" fill="#FCE7C8"/>` +
+    `<clipPath id="mc-clip"><circle cx="60" cy="60" r="51"/></clipPath><g clip-path="url(#mc-clip)">` +
+    `<rect x="0" y="0" width="120" height="70" fill="#F8D9AE"/><circle cx="60" cy="66" r="20" fill="#F6A94B"/><circle cx="60" cy="66" r="14" fill="#FBC46C"/>` +
+    `<rect x="0" y="66" width="120" height="60" fill="#E9B98C"/><path d="M30 76h60M38 84h44M46 92h28" stroke="#FFF1DA" stroke-width="2" stroke-linecap="round"/>` +
+    `<path d="M34 100Q60 80 86 100L80 108Q60 96 40 108Z" fill="#B87A3A"/><path d="M38 100Q60 84 82 100" stroke="#D9A160" stroke-width="1.4" fill="none"/>` +
+    `<circle cx="52" cy="92" r="4" fill="#E0742E"/><circle cx="60" cy="90" r="4.4" fill="#F2B43C"/><circle cx="68" cy="92" r="4" fill="#9DB04A"/></g>` + ring(56) + `</svg>`;
+}
+
+/** her faith: a Bodhi leaf, its long drip tip and its veins */
+export function medalBodhi() {
+  let veins = '';
+  for (let i = 1; i <= 6; i++) {
+    const y = 34 + i * 9, w = 6 + Math.sin((i / 7) * Math.PI) * 16;
+    veins += `M60 ${y + 6}Q${60 - w * 0.6} ${y + 2} ${60 - w} ${y - 4}M60 ${y + 6}Q${60 + w * 0.6} ${y + 2} ${60 + w} ${y - 4}`;
+  }
+  return `<svg class="hm-svg" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle cx="60" cy="60" r="56" fill="#EEF1DC"/>` +
+    `<path d="M60 26C40 26 26 42 30 60C34 76 48 86 58 98C59 102 59.5 106 60 112C60.5 106 61 102 62 98C72 86 86 76 90 60C94 42 80 26 60 26Z" fill="#7FA24E"/>` +
+    `<path d="M60 26C80 26 94 42 90 60C86 76 72 86 62 98C61 102 60.5 106 60 112Z" fill="#6A8F3E"/>` +
+    `<path d="M60 30V100" stroke="#C9DB97" stroke-width="1.4"/><path d="${veins}" stroke="#B9CF83" stroke-width="1" fill="none"/>` + ring(56) + `</svg>`;
+}
+
+/** the gold thread between the two medallions, drawn as you scroll */
+export function thread() {
+  return `<svg class="hm-thread" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false">` +
+    `<path d="M2 30C50 2 70 58 100 30S150 2 198 30" fill="none" stroke="var(--gold)" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>`;
+}
+
+/** a lotus-petal medallion, the frame round the couple's note: sixteen petals on a gold ring */
+export function petalFrame() {
+  let petals = '';
+  for (let i = 0; i < 16; i++) {
+    const a = (i / 16) * Math.PI * 2, x = 200 + Math.cos(a) * 176, y = 200 + Math.sin(a) * 176, deg = (a * 180) / Math.PI + 90;
+    petals += `<path d="M0 10C-12 0 -10 -16 0 -24C10 -16 12 0 0 10Z" transform="translate(${f(x)} ${f(y)}) rotate(${f(deg)})"/>`;
+  }
+  return `<svg class="nt-frame" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><g fill="none" stroke="var(--gold)" stroke-width="1.2">` +
+    `<circle cx="200" cy="200" r="168"/><circle cx="200" cy="200" r="160" opacity=".6"/>${petals}</g></svg>`;
+}
+
+/** the venue on a little drawn map: a river, two roads, a park, the pin */
+export function mapCard() {
+  return `<svg class="vn-drawn" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">` +
+    `<rect width="320" height="200" fill="#F6EAD3"/><path d="M0 150C60 130 90 170 160 150S270 110 320 130V200H0Z" fill="#CFE0D8"/>` +
+    `<path d="M-10 60L330 92M120 -10L150 210M230 -10L250 210" stroke="#FFFFFF" stroke-width="9"/><path d="M-10 60L330 92M120 -10L150 210M230 -10L250 210" stroke="#E7D3B0" stroke-width="1"/>` +
+    `<rect x="170" y="20" width="44" height="34" rx="6" fill="#DCE7C4"/><circle cx="192" cy="37" r="9" fill="#C8DAA9"/>` +
+    `<g transform="translate(176 104)"><ellipse cx="0" cy="24" rx="10" ry="3.5" fill="#5F250F" opacity=".2"/>` +
+    `<path d="M0 22C-12 8 -14 0 -14 -6A14 14 0 0 1 14 -6C14 0 12 8 0 22Z" fill="#AB5626"/><circle cx="0" cy="-6" r="5.5" fill="#FFF9F0"/></g></svg>`;
+}
+
+/** what a photo frame shows until the couple's photos arrive */
+export function motif(i: number) {
+  const bg = ['#F8E1C4', '#F3D9D6', '#E6EBD0', '#F6E6C0', '#EBDDEA', '#F9E4CF'][i % 6];
+  const draw = [
+    lotus(60, 92, 2.2),
+    diya(60, 86, 2.1, 'm' + i),
+    `<use href="#mg-o" x="22" y="34" width="44" height="44"/><use href="#mg-y" x="54" y="42" width="40" height="40"/><use href="#mg-o" x="36" y="64" width="34" height="34"/>`,
+    `<use href="#bell" x="38" y="22" width="44" height="66"/>`,
+    `<circle cx="60" cy="70" r="26" fill="#F6B05A"/><path d="M18 92h84M28 100h64" stroke="#E9B98C" stroke-width="4" stroke-linecap="round"/>`,
+    `<path d="M60 26C40 26 30 44 34 60C38 74 50 84 58 94C59 98 60 102 60 106C60 102 61 98 62 94C70 84 82 74 86 60C90 44 80 26 60 26Z" fill="#7FA24E"/>`
+  ][i % 6];
+  const defs = i % 6 === 1 ? `<defs><radialGradient id="m${i}-glow"><stop offset="0" stop-color="#FFE3A0" stop-opacity=".85"/><stop offset="1" stop-color="#FFD480" stop-opacity="0"/></radialGradient><radialGradient id="m${i}-glowW"><stop offset="0" stop-color="#FFF0C8" stop-opacity=".8"/><stop offset="1" stop-color="#FFE7B0" stop-opacity="0"/></radialGradient></defs>` : '';
+  return `<svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">${defs}<rect width="120" height="120" fill="${bg}"/>${draw}</svg>`;
+}
+
+/** the marigold string the photos hang from: flowers along a gentle curve */
+export function garland(w = 600) {
+  let s = '';
+  for (let i = 0; i <= 30; i++) {
+    const t = i / 30, x = 6 + t * (w - 12), y = 10 + Math.sin(Math.PI * t) * 26;
+    s += `<use href="#${i % 2 ? 'mg-y' : 'mg-o'}" x="${f(x - 8)}" y="${f(y - 8)}" width="16" height="16"/>`;
+  }
+  return `<svg class="ph-garland" viewBox="0 0 ${w} 50" preserveAspectRatio="none" aria-hidden="true" focusable="false">${s}</svg>`;
+}
+
+/** the celebrations' ground: a carved jaali, as a tile */
+export const jaali = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23C98F3E' stroke-opacity='.22' stroke-width='1.2'%3E%3Cpath d='M28 4L52 28L28 52L4 28Z'/%3E%3Ccircle cx='28' cy='28' r='7'/%3E%3C/g%3E%3Ccircle cx='0' cy='0' r='2' fill='%23C98F3E' fill-opacity='.25'/%3E%3Ccircle cx='56' cy='56' r='2' fill='%23C98F3E' fill-opacity='.25'/%3E%3Ccircle cx='56' cy='0' r='2' fill='%23C98F3E' fill-opacity='.25'/%3E%3Ccircle cx='0' cy='56' r='2' fill='%23C98F3E' fill-opacity='.25'/%3E%3C/svg%3E\")";
+
+/** the ghat's stone steps, coming towards you below the river: lamps lit along them, marigold petals, two brass
+    kalash with mango leaves. A band 1600 wide that the page hangs under the river layer, so scrolling down brings
+    the steps up into view (it is drawn from its top: xMidYMin) */
+export function ghatSteps() {
+  const rand = rng(88);
+  let steps = '', y = 0;
+  const edges: number[] = [];
+  for (let k = 0; k < 9; k++) {
+    const tread = 26 + k * 9, riser = 10 + k * 3.2;
+    steps += `<rect x="-20" y="${f(y)}" width="1640" height="${f(tread + 1)}" fill="${k % 2 ? '#EDD0A9' : '#F0D6B1'}"/>` +
+      `<rect x="-20" y="${f(y + tread)}" width="1640" height="${f(riser + 1)}" fill="url(#rs)"/><rect x="-20" y="${f(y)}" width="1640" height="2" fill="#FFF3DF" opacity=".8"/>`;
+    edges.push(y + tread);
+    y += tread + riser;
+  }
+  /* joints between the stones */
+  const joints: string[] = [];
+  y = 0;
+  for (let k = 0; k < 9; k++) {
+    const tread = 26 + k * 9, w = 90 + k * 26;
+    for (let x = -40 + (k % 2) * w * 0.5; x < 1640; x += w * (0.8 + rand() * 0.4)) joints.push(`M${f(x)} ${f(y + 3)}v${f(tread - 3)}`);
+    y += tread + 10 + k * 3.2;
+  }
+  /* a row of lamps along three of the steps, bigger as they come nearer */
+  let lamps = '';
+  for (const [k, n] of [[2, 9], [4, 7], [6, 5]] as [number, number][]) {
+    const s = 0.7 + k * 0.16, yy = edges[k] - 2;
+    for (let i = 0; i < n; i++) {
+      const x = 800 + (i - (n - 1) / 2) * (1600 / (n + 1)) * (0.62 + k * 0.03);
+      lamps += diya(x, yy, s, 'g');
+    }
+  }
+  /* petals scattered on the stone */
+  const petals: string[][] = [[], []];
+  for (let i = 0; i < 70; i++) {
+    const yy = rand() * y, x = 800 + (rand() - 0.5) * 1500, r = 3 + (yy / y) * 6;
+    petals[i % 2].push(`M${f(x - r)} ${f(yy)}a${f(r)} ${f(r * 0.6)} ${f(rand() * 180)} 1 0 ${f(2 * r)} 0a${f(r)} ${f(r * 0.6)} 0 1 0 ${f(-2 * r)} 0`);
+  }
+  /* a brass kalash with mango leaves and a coconut, each side */
+  const kalash = (x: number, base: number, s: number) => `<g transform="translate(${f(x)} ${f(base)}) scale(${f(s)})">` +
+    `<path d="M-30 0C-44 -18 -40 -52 -16 -62H16C40 -52 44 -18 30 0Z" fill="#D9A441"/><path d="M0 -62H16C40 -52 44 -18 30 0H0Z" fill="#B98326"/>` +
+    `<rect x="-18" y="-70" width="36" height="10" rx="3" fill="#E3B565"/><path d="M-26 -30H26" stroke="#F3D58A" stroke-width="3"/><circle cx="0" cy="-36" r="6" fill="#C2410C"/>` +
+    [-58, -34, -10, 14, 38].map((a, i) => `<path d="M0 -70C${f(-12 + a * 0.2)} ${f(-92 - (i % 2) * 6)} ${f(a * 0.9)} ${f(-104)} ${f(a * 1.3)} ${f(-96 + Math.abs(a) * 0.3)}C${f(a * 0.7)} ${f(-90)} ${f(a * 0.25)} ${f(-80)} 0 -70Z" fill="${i % 2 ? '#6F9A45' : '#5E8A3A'}"/>`).join('') +
+    `<ellipse cx="0" cy="-86" rx="17" ry="20" fill="#8B5A2B"/><path d="M-6 -104C-2 -110 2 -110 6 -104" stroke="#6E8B3D" stroke-width="3" fill="none"/></g>`;
+  return doc(
+    steps + `<path d="${joints.join('')}" stroke="#D8B48C" stroke-width="2" opacity=".7"/>` +
+    `<path d="${petals[0].join('')}" fill="#F29A22" opacity=".85"/><path d="${petals[1].join('')}" fill="#FFC531" opacity=".85"/>` +
+    lamps + kalash(250, edges[5] - 2, 1.05) + kalash(1350, edges[5] - 2, 1.05),
+    vgrad('rs', [[0, '#C39A72'], [1, '#D6B089']]) +
+    `<radialGradient id="g-glow"><stop offset="0" stop-color="#FFE3A0" stop-opacity=".85"/><stop offset="1" stop-color="#FFD480" stop-opacity="0"/></radialGradient>` +
+    `<radialGradient id="g-glowW"><stop offset="0" stop-color="#FFF0C8" stop-opacity=".8"/><stop offset="1" stop-color="#FFE7B0" stop-opacity="0"/></radialGradient>`,
+    `0 0 1600 ${f(y)}`, 'xMidYMin slice'
+  );
+}

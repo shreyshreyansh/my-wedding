@@ -1,16 +1,17 @@
 ---
-// Two invocations, his family's and hers, side by side and equal, with one blessing beneath that both can say;
-// then Ganesha on his lotus and a Buddha painted at Ajanta to look into.
-import Tour from './Tour.astro';
+// Morning: a lotus, the flower both families hold holy, draws itself; beneath it the two invocations, his family's
+// and hers, side by side and equal, and one blessing both can say.
 import { copy } from '../data/wedding';
+import { divider, lotusMark } from '../art/sunrise';
 import { T, viewOf } from '../data/i18n';
 const t = T(viewOf(Astro.url));
 ---
-<section id="invocation" aria-labelledby="ivTitle">
+<section id="invocation" class="sec iv" aria-labelledby="ivTitle">
+  <Fragment set:html={lotusMark()} />
   <div class="iv-text">
     <p id="ivTitle" class="iv-pair reveal"><span lang="hi">{copy.invocation.his}</span><i class="leaf" aria-hidden="true"></i><span lang="pi">{copy.invocation.hers}</span></p>
     <p lang="pi" class="iv-inv reveal">{copy.invocation.blessing}</p>
     <p class="iv-line reveal">{t.invocation.line}</p>
   </div>
-  <Tour id="invocation" />
+  <Fragment set:html={divider()} />
 </section>

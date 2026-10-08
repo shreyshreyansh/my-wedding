@@ -8,7 +8,7 @@ import { extname, join, resolve } from 'node:path';
 
 const root = resolve('dist');
 if (!existsSync(join(root, 'og-card/index.html'))) { console.error('dist/og-card is missing: run npm run og (it builds first).'); process.exit(1); }
-const TYPES = { '.html': 'text/html', '.woff2': 'font/woff2', '.css': 'text/css', '.js': 'text/javascript', '.avif': 'image/avif', '.webp': 'image/webp' };
+const TYPES = { '.html': 'text/html', '.woff2': 'font/woff2', '.css': 'text/css', '.js': 'text/javascript', '.avif': 'image/avif', '.webp': 'image/webp', '.svg': 'image/svg+xml' };
 const server = createServer((req, res) => {
   const p = new URL(req.url, 'http://x').pathname;
   let f = join(root, decodeURIComponent(p));

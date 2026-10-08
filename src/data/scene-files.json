@@ -1,0 +1,81 @@
+{
+  "sky": {
+    "tall": {
+      "avif": [
+        [
+          "/scene/sky-tall-540.c79551ca.avif",
+          540,
+          2622
+        ],
+        [
+          "/scene/sky-tall-720.6818287d.avif",
+          720,
+          3555
+        ],
+        [
+          "/scene/sky-tall-1080.5403bafa.avif",
+          1080,
+          5899
+        ]
+      ],
+      "webp": [
+        [
+          "/scene/sky-tall-540.e7208a86.webp",
+          540,
+          2344
+        ],
+        [
+          "/scene/sky-tall-720.7a5d40d2.webp",
+          720,
+          3616
+        ],
+        [
+          "/scene/sky-tall-1080.737889f2.webp",
+          1080,
+          6768
+        ]
+      ]
+    },
+    "wide": {
+      "avif": [
+        [
+          "/scene/sky-wide-1280.02072528.avif",
+          1280,
+          5054
+        ],
+        [
+          "/scene/sky-wide-1920.7bfab088.avif",
+          1920,
+          7704
+        ],
+        [
+          "/scene/sky-wide-2560.471e7d64.avif",
+          2560,
+          10722
+        ]
+      ],
+      "webp": [
+        [
+          "/scene/sky-wide-1280.937d8462.webp",
+          1280,
+          6206
+        ],
+        [
+          "/scene/sky-wide-1920.c958490a.webp",
+          1920,
+          11344
+        ],
+        [
+          "/scene/sky-wide-2560.93dccf30.webp",
+          2560,
+          17532
+        ]
+      ]
+    }
+  },
+  "far": "/scene/far.0996fcf2.svg",
+  "mid": "/scene/mid.636eba9c.svg",
+  "near": "/scene/near.130e4b14.svg",
+  "ghat": "/scene/ghat.0d4b04ce.svg",
+  "night": "/scene/night.772fac75.svg"
+}

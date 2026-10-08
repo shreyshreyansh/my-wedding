@@ -18,14 +18,20 @@ const lenis = js.find((p) => /\/lenis\.[\w-]+\.js$/.test(p));
 if (!entry || !motion) fails.push('could not find the entry or motion script');
 
 /* what a phone downloads before the cover is fully drawn */
-const coverFonts = all.filter((p) => /fonts\/(instrument-serif-(normal|italic)-400-latin|tiro-hindi-normal-400-(latin|devanagari))\.\w+\.woff2$/.test(p));
+/* the faces the page preloads for the cover (scripts/fonts.mjs writes the list) */
+const coverFonts = JSON.parse(readFileSync('src/data/fonts.json', 'utf8')).preload.map((u) => join(DIST, u));
 const phoneJs = (entry ? gz(join(DIST, entry)) : 0) + (motion ? gz(motion) : 0);
 check('first view (HTML + JS + cover fonts, gzip)', gz(join(DIST, 'index.html')) + phoneJs + coverFonts.reduce((a, p) => a + statSync(p).size, 0), 300 * KB);
 check('JavaScript on a phone (gzip)', phoneJs, 75 * KB);
-/* the cover painting a phone fetches: the largest AVIF in the cover's portrait srcset */
-const coverImg = /<div id="cover"[\s\S]*?<source type="image\/avif" srcset="([^"]+)"/.exec(html)?.[1];
-if (!coverImg) fails.push('could not find the cover painting');
-else check('cover painting on a phone', Math.max(...coverImg.split(',').map((c) => statSync(join(DIST, c.trim().split(' ')[0])).size)), 120 * KB);
+/* the opening scene a phone fetches: the largest AVIF in the sky's portrait srcset, and the scene's SVG layers */
+const sky = /<picture[^>]*\bsc-sky\b[\s\S]*?<source[^>]*type="image\/avif"[^>]*srcset="([^"]+)"/.exec(html)?.[1];
+if (!sky) fails.push('could not find the sky of the opening scene');
+else check('sky of the opening scene on a phone', Math.max(...sky.split(',').map((c) => statSync(join(DIST, c.trim().split(' ')[0])).size)), 60 * KB);
+const layers = [...html.matchAll(/<img[^>]*class="sc-layer[^"]*"[^>]*src="(\/scene\/[^"]+\.svg)"/g)].map((m) => join(DIST, m[1]));
+if (layers.length < 3) fails.push('could not find the layers of the opening scene');
+check('scene layers (SVG, gzip)', layers.reduce((a, p) => a + gz(p), 0), 30 * KB);
+/* the page is personalised and sent again on every visit: keep drawings out of it */
+check('the page itself (gzip)', gz(join(DIST, 'index.html')), 45 * KB);
 if (lenis) check('smooth scroll, mouse only (gzip)', gz(lenis), 10 * KB);
 /* the museum art comes in several sizes and formats; a guest fetches one of each */
 check('everything in dist', all.reduce((a, p) => a + statSync(p).size, 0), 8 * KB * KB);

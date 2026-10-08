@@ -1,58 +1,61 @@
-/* tokens and base type: a quiet folio. Ivory paper and ink; colour comes from the art; gold only on dark or as ink. */
+/* tokens and base type: one wedding day, from a cream morning to a night of diyas. Brown ink, gold lines,
+   colour from the drawings. */
 :root{
-  --paper:#F4EEE3; --paper-2:#EBE2D0; --ink:#1F1915; --ink-2:#5A4E45; --hair:rgba(31,25,21,.16);
-  --night:#1A1220; --night-2:#251A2C; --night-zari:#D8B46A; --zari:#C9A04A; --zari-hi:#F2DFA2;
-  --gold-ink:#7A4E12; --rani:#8E1A50; --sindoor:#A8281E; --mor:#0E4F55; --haldi:#D99A1E;
-  /* older names, still used by the RSVP and burst colours */
-  --chuna:#F4EEE3; --kagaz:#EBE2D0; --kajal:#1F1915;
-  --display:"Instrument Serif","Tiro Devanagari Hindi",Georgia,serif;
-  /* hand-made paper from a 1922 Canson sample book (src/data/art.json, "paper"), toned to the ivory */
-  --paper-bg:var(--paper) url(/art/paper-1922.2c88ba4d.webp) 0 0/760px auto;
-  /* one Bodhi leaf (scripts/leaf.mjs): a gold ornament through a mask, a toran, and among the petals */
+  --cream:#FBF3E6; --card:#FFF9F0; --sand:#F4E3C8; --turmeric:#F2CF8E; --turmeric-2:#E9B866;
+  --ink:#5F250F; --ink-2:#8A5A3E; --rust:#AB5626; --gold:#DDA45D; --gold-deep:#B9823E; --hair:rgba(95,37,15,.18);
+  --rose:#E7B3A3; --night:#1A1220; --night-2:#251A2C; --night-zari:#E6C07A; --zari-hi:#F7E2AE;
+  --leafgreen:#5E8A3A; --lotus:#E07A8F;
+  /* older names, still used by the RSVP and the bursts of rice and petals */
+  --paper:var(--cream); --paper-2:var(--sand); --gold-ink:var(--gold-deep); --rani:#A3195B; --sindoor:#A8281E; --haldi:#D99A1E; --zari:var(--gold);
+  --display:"Alegreya","Tiro Devanagari Hindi",Georgia,serif;
+  /* one Bodhi leaf (scripts/leaf.mjs): a gold ornament through a mask */
   --leaf:url(/art/bodhi-leaf.27039368.webp);
   --gut:clamp(20px,5vw,56px);
   color-scheme:light;
 }
 *{box-sizing:border-box}
-html{touch-action:manipulation;background:var(--paper)}
+html{touch-action:manipulation;background:var(--cream);scrollbar-gutter:stable}
 html.locked,html.locked body{overflow:hidden}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
 .lenis.lenis-stopped{overflow:hidden}
-body{margin:0;background:var(--paper-bg);color:var(--ink);font-family:"Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif;font-size:clamp(18px,.4vw + 16.5px,20px);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:"Alegreya","Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif;font-size:clamp(18px,.4vw + 16.5px,20px);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
 :where(html:not(:lang(mr))) :lang(mr){font-family:"Tiro Devanagari Marathi","Noto Serif Devanagari",Georgia,serif}
+:where(html:not(:lang(hi))) :lang(hi),:lang(pi),:lang(sa){font-family:"Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif}
 /* the Marathi page (?lang=mr): Marathi letterforms throughout, the Latin names still in the display face */
-html:lang(mr){--display:"Instrument Serif","Tiro Devanagari Marathi",Georgia,serif}
-html:lang(mr) body{font-family:"Tiro Devanagari Marathi","Noto Serif Devanagari",Georgia,serif}
+html:lang(mr){--display:"Alegreya","Tiro Devanagari Marathi",Georgia,serif}
+html:lang(mr) body{font-family:"Alegreya","Tiro Devanagari Marathi","Noto Serif Devanagari",Georgia,serif}
 :where(html:lang(mr)) :lang(hi){font-family:"Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif}
-/* a guest's name on the Marathi and Hindi pages (server/personalize.ts): the face that keeps every Devanagari letter */
-/* on those pages Devanagari is never letter-spaced (it would break the line joining the letters), and the small
-   labels set in spaced capitals for English come up a size */
-html:not(:lang(en)) :is(.eyebrow,.label,.cv-for,.cv-date,.seal .small,.unit i,.credits summary,.h-eyebrow,.mg-label,.field label,.chapter dt,.r-send,.ch-no .num,.tour-cap b,.b-manuhar-head){letter-spacing:0}
+/* on the Marathi and Hindi pages Devanagari is never letter-spaced (it would break the line joining the letters), and
+   the small labels set in spaced capitals for English come up a size */
+html:not(:lang(en)) :is(.eyebrow,.label,.cv-for,.cv-date,.seal .small,.unit i,.credits summary,.h-eyebrow,.mg-label,.field label,.chapter dt,.r-send,.ch-no .num,.b-manuhar-head,.kn-item h3,.vn-btn){letter-spacing:0}
 html:not(:lang(en)) :is(.chapter dt,.field label,.unit i,.credits summary,.mg-label){font-size:.88rem}
-html:not(:lang(en)) .who{font-family:"Instrument Serif","Tiro Devanagari Hindi",Georgia,serif;font-style:normal}
+/* a guest's name on the Marathi and Hindi pages (server/personalize.ts): the face that keeps every Devanagari letter */
+html:not(:lang(en)) .who{font-family:"Alegreya","Tiro Devanagari Hindi",Georgia,serif;font-style:normal}
 h1,h2,h3{text-wrap:balance;font-weight:400}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--gold-ink);outline-offset:3px}
+:focus-visible{outline:2px solid var(--rust);outline-offset:3px}
 
-/* the shared editorial pieces */
-.eyebrow{margin:0;font-size:.78rem;line-height:1.5;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-ink)}
+/* the shared pieces */
+.eyebrow{margin:0;font-size:.78rem;line-height:1.5;letter-spacing:.2em;text-transform:uppercase;color:var(--rust)}
 .eyebrow span{font-size:1.15em;letter-spacing:0;text-transform:none}
-.sec-title{margin:0;font-family:var(--display);font-size:clamp(44px,11vw,88px);line-height:.98;letter-spacing:-.01em}
-.sec-title em,h2 em{font-style:italic}
-/* a museum label under each artwork */
-.label{margin:0;font-size:.8rem;line-height:1.45;letter-spacing:.02em;color:var(--ink-2)}
-.label span{font-style:italic}
+.sec-title,.sec h2{margin:0;font-family:var(--display);font-size:clamp(38px,9.6vw,72px);line-height:1.04;letter-spacing:-.005em;color:var(--ink)}
+.sec h2 em{font-style:italic;color:var(--rust)}
+.sec{position:relative;padding:clamp(64px,12svh,128px) var(--gut);display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.lede{margin:0;max-width:34em;color:var(--ink-2)}
+/* the gold rule with the sun coming up at its centre, and the lotus mark */
+.divider,.lotus-mark{display:block;color:var(--gold)}
+.lotus-mark{color:var(--gold-deep)}
+.ic-line{display:block}
 /* the Bodhi leaf of Bodh Gaya, in the colour of the words around it */
 .leaf{display:inline-block;width:.6em;height:1.22em;vertical-align:-.28em;background:currentColor;-webkit-mask:var(--leaf) center/contain no-repeat;mask:var(--leaf) center/contain no-repeat}
-.night{background:var(--night);color:var(--paper)}
+.night{background:var(--night);color:var(--cream)}
 .night .eyebrow{color:var(--night-zari)}
-.night .label{color:rgba(244,238,227,.66)}
-/* while a painting loads: its colour and a blurred 24 px sketch, never its alt text; then it fades in */
-picture{display:block;position:relative;overflow:hidden}
-picture::before{content:"";position:absolute;inset:0;background:var(--ph) var(--lq,none) center/cover no-repeat;filter:blur(14px);transform:scale(1.1)}
-/* the sketch goes once the painting has faded in over it (images.ts): left there, a phone would keep blurring it */
-picture.done::before{content:none}
-picture img{position:relative;display:block;width:100%;height:auto;color:transparent;transition:opacity .7s ease}
-html.js picture img:not(.in):not([fetchpriority=high]){opacity:0}
+/* a jharokha card: the arched top is a drawing that scales with the card, its sides continue the gold lines */
+.arch{--card-bg:var(--card);position:relative;color:var(--ink)}
+.arch .arch-top{display:block;width:100%;height:auto;--card:var(--card-bg)}
+.arch-body{position:relative;margin-top:-1px;background:var(--card-bg);border:solid var(--gold);border-width:0 1.6px 1.6px;padding:0 9% 28px}
+.arch-body::before{content:"";position:absolute;inset:0 3% 10px 3%;border:solid var(--gold);border-width:0 1px 1px;opacity:.8;pointer-events:none}
 .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+picture{display:block}
+picture img{display:block;width:100%;height:auto}

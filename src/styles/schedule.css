@@ -1,45 +1,35 @@
-/* the celebrations: plates in a folio */
-#schedule{background:var(--paper-bg)}
-.sched-head{padding:clamp(56px,10svh,112px) var(--gut) clamp(28px,5svh,48px);display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--hair)}
-.sched-head h2{margin:0;font-family:var(--display);font-size:clamp(44px,11vw,96px);line-height:.98;max-width:12em}
+/* noon: the celebrations, arch-topped cards on a turmeric ground carved like a jaali (src/art/sunrise.ts, jaali) */
+.sched{background:var(--jaali) 0 0/56px 56px,linear-gradient(var(--cream),var(--turmeric) 160px,var(--turmeric) calc(100% - 160px),var(--cream))}
+.sched-head{display:flex;flex-direction:column;align-items:center;gap:12px}
 .sched-head h2 em{display:block}
-.chapter{position:relative;display:flex;flex-direction:column}
-.ch-head{padding:clamp(40px,8svh,88px) var(--gut) clamp(4px,1svh,12px);display:flex;flex-direction:column;gap:8px}
-.ch-text{padding:clamp(20px,4svh,40px) var(--gut) clamp(64px,11svh,120px);display:flex;flex-direction:column;gap:12px}
-.ch-no{margin:0;display:flex;align-items:baseline;gap:14px;font-size:1.25rem;color:var(--rani)}
-.ch-no .num{font-family:"Tiro Devanagari Hindi",serif;font-size:.9rem;letter-spacing:.1em;color:var(--gold-ink)}
-.chapter h3{margin:0;font-family:var(--display);font-size:min(27vw,180px);line-height:.82;letter-spacing:-.02em}
-.chapter .story{margin:4px 0 0;font-family:var(--display);font-style:italic;font-size:clamp(24px,6.4vw,34px);line-height:1.15;max-width:18em}
-.chapter dl{margin:8px 0 0;display:flex;flex-direction:column;border-top:1px solid var(--hair)}
-.chapter dl div{display:grid;grid-template-columns:5.2em minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px solid var(--hair);line-height:1.45}
-.chapter dt{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);padding-top:.35em}
-.chapter dd{margin:0}
-.swatch{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:-1px;margin-right:10px;background:var(--sw);box-shadow:0 0 0 1px rgba(31,25,21,.25)}
-.rites{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-.rite{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:64px;padding:10px 14px;border:1px solid var(--ink);color:var(--ink);text-decoration:none;transition:background .25s ease,color .25s ease;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-.rite-t{display:flex;flex-direction:column;line-height:1.25}
-.rite b{font-weight:400;font-size:1rem}
-.rite i{font-size:.82rem;color:var(--ink-2)}
-.rite-ic{flex:none;display:grid;place-items:center}
-.rite:hover{background:var(--ink);color:var(--paper)}
-.rite:hover i{color:rgba(244,238,227,.75)}
+.chapters{position:relative;width:min(100%,1120px);margin-top:26px;display:grid;grid-template-columns:minmax(0,1fr);gap:34px;text-align:center}
+/* on a phone the cards hang on a dotted thread, with a dot that travels down it */
+.ch-thread{position:absolute;left:50%;top:0;bottom:0;width:0;border-left:2px dotted rgba(171,86,38,.45)}
+.ch-thread i{position:absolute;left:-7px;top:0;width:12px;height:12px;border-radius:50%;background:var(--rust);box-shadow:0 0 0 4px rgba(255,249,240,.85)}
+@media (min-width:1024px){.chapters{grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:28px;align-items:start}.ch-thread{display:none}}
+
+.chapter{--card-bg:var(--card);position:relative;width:min(100%,420px);margin:0 auto;filter:drop-shadow(0 18px 30px rgba(95,37,15,.16))}
+.ch-ic{position:absolute;left:50%;top:9%;translate:-50% 0;display:grid;place-items:center;width:66px;height:66px;border-radius:50%;color:var(--rust);background:var(--card);box-shadow:inset 0 0 0 1.6px var(--gold),inset 0 0 0 5px var(--card),inset 0 0 0 6px rgba(221,164,93,.55)}
+.chapter .arch-body{margin-top:-14%;padding-bottom:22px}
+.ch-head{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px}
+.ch-no{margin:0;display:flex;align-items:baseline;gap:10px;font-size:1.05rem;color:var(--rust)}
+.ch-no .num{font-size:.8rem;letter-spacing:.16em;color:var(--gold-deep)}
+.chapter h3{margin:0;font-family:var(--display);font-size:clamp(40px,11vw,54px);line-height:1.02;color:var(--ink)}
+.ch-text{display:flex;flex-direction:column;gap:10px}
+.chapter .story{margin:4px 0 0;font-style:italic;font-size:1.05rem;line-height:1.45;color:var(--ink-2)}
+.chapter dl{margin:4px 0 0;display:flex;flex-direction:column;border-top:1px solid var(--hair);text-align:left}
+.chapter dl div{display:grid;grid-template-columns:4.6em minmax(0,1fr);gap:10px;padding:10px 0;border-bottom:1px solid var(--hair);line-height:1.45}
+.chapter dt{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);padding-top:.4em}
+.chapter dd{margin:0;color:var(--ink)}
+.swatch{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:-1px;margin-right:8px;background:var(--sw);box-shadow:0 0 0 1px rgba(95,37,15,.25),0 0 0 3px var(--card),0 0 0 4px rgba(221,164,93,.6)}
+
+/* the way there and the date for the calendar */
+.rites{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.rite{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:58px;padding:8px 12px;border-radius:14px;border:1px solid var(--gold);background:#FFFDF8;color:var(--ink);text-decoration:none;text-align:left;transition:background .25s ease,color .25s ease;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.rite-t{display:flex;flex-direction:column;line-height:1.2}
+.rite b{font-weight:400;font-size:.98rem}
+.rite i{font-size:.78rem;color:var(--ink-2)}
+.rite-ic{flex:none;display:grid;place-items:center;color:var(--rust)}
+.rite:hover{background:var(--ink);color:var(--cream)}
+.rite:hover i,.rite:hover .rite-ic{color:var(--zari-hi)}
 .ic{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-
-/* Sangeet is at night */
-.ch-sangeet{background:var(--night);color:var(--paper)}
-.ch-sangeet .label,.ch-sangeet .rite i,.ch-sangeet dt{color:rgba(244,238,227,.66)}
-.ch-sangeet .ch-no{color:var(--rani-glow,#E07AA8)}
-.ch-sangeet .ch-no .num{color:var(--night-zari)}
-.ch-sangeet dl,.ch-sangeet dl div{border-color:rgba(244,238,227,.18)}
-.ch-sangeet .rite{border-color:rgba(244,238,227,.8);color:var(--paper)}
-.ch-sangeet .rite:hover{background:var(--paper);color:var(--night)}
-.ch-sangeet .rite:hover i{color:var(--ink-2)}
-.ch-sangeet .swatch{box-shadow:0 0 0 1px rgba(244,238,227,.5)}
-
-@media (min-width:1024px){
-  .ch-head{padding-inline:6vw;flex-direction:row;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
-  .ch-head h3{order:-1}
-  .ch-text{padding-inline:6vw;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);column-gap:6vw;align-items:start}
-  .ch-text .story{grid-row:span 2}
-  .chapter h3{font-size:min(12vw,200px)}
-}

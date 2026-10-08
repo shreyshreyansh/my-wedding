@@ -1,17 +1,20 @@
 ---
-// The celebrations, as plates in a folio: one painting each, with its museum label, and the day's details.
+// Noon: the celebrations, on a turmeric ground carved like a jaali. Three arch-topped cards that rise one after
+// another; on a phone they hang on a dotted thread with a dot that travels down it as you scroll.
 import Chapter from './Chapter.astro';
 import Parts from './Parts.astro';
 import { events } from '../data/wedding';
+import { jaali } from '../art/sunrise';
 import { T, viewOf } from '../data/i18n';
 const t = T(viewOf(Astro.url));
 ---
-<section id="schedule" aria-labelledby="schedTitle">
+<section id="schedule" class="sec sched" aria-labelledby="schedTitle" style={'--jaali:' + jaali}>
   <header class="sched-head">
     <p class="eyebrow reveal"><Parts parts={t.schedule.eyebrow} /></p>
     <h2 id="schedTitle" class="reveal">{t.schedule.title} <em data-count-title data-glyphs={t.schedule.countWords.join(' ')}>{t.schedule.countWords[events.length]}</em></h2>
   </header>
   <div class="chapters">
+    <span class="ch-thread" aria-hidden="true"><i></i></span>
     {events.map((ev, i) => <Chapter ev={ev} n={i + 1} />)}
   </div>
 </section>

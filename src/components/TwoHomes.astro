@@ -1,15 +1,22 @@
 ---
-// His Bihar and her faith, which began there: Chhath at the river, and the temple at Bodh Gaya where the Buddha awoke,
-// carved small for a pilgrim; and the threads between them.
-import Tour from './Tour.astro';
+// His Bihar and her faith, which began there: the Chhath sun over the river and the Bodhi leaf of Bodh Gaya, joined
+// by a gold thread that draws itself as you scroll (motion/reveal.ts); then the three lines that tell why.
 import Parts from './Parts.astro';
+import { medalBodhi, medalChhath, thread } from '../art/sunrise';
 import { T, viewOf } from '../data/i18n';
 const t = T(viewOf(Astro.url));
 ---
-<section id="homes" aria-labelledby="homesTitle">
+<section id="homes" class="sec hm" aria-labelledby="homesTitle">
   <header class="hm-head">
     <p class="eyebrow reveal"><Parts parts={t.homes.eyebrow} /></p>
     <h2 id="homesTitle" class="reveal">{t.homes.title} <em>{t.homes.titleEm}</em></h2>
   </header>
-  <Tour id="homes" />
+  <div class="hm-pair">
+    <figure class="hm-medal his"><Fragment set:html={medalChhath()} /><figcaption>{t.homes.marks[0]}</figcaption></figure>
+    <Fragment set:html={thread()} />
+    <figure class="hm-medal hers"><Fragment set:html={medalBodhi()} /><figcaption>{t.homes.marks[1]}</figcaption></figure>
+  </div>
+  <ol class="hm-lines">
+    {t.homes.lines.map((l) => <li class="hm-line reveal">{l}</li>)}
+  </ol>
 </section>

@@ -1,35 +1,38 @@
 ---
-// The cover: a 17th-century painting of a grove full of peacocks, the couple's names over its dark trees, and a
-// seal to open the invitation. The painting is "cover" in src/data/art.json.
-import Art from './Art.astro';
+// The cover, at dawn: two banks of cloud over the sunrise, parted in a V at the top so the sky glows through, and a
+// cream jharokha card with both families' invocations, the guest's name, the couple and the dates. Tapping Open
+// starts the music and the bell, the card dips away and the clouds slide off to the sides (motion/cover.ts).
 import Parts from './Parts.astro';
+import { archTop, coverClouds } from '../art/sunrise';
 import { couple, copy, events } from '../data/wedding';
 import { T, viewOf } from '../data/i18n';
 const t = T(viewOf(Astro.url));
 ---
 <div id="cover" role="dialog" aria-modal="true" aria-labelledby="cvTitle">
   <div class="cloth">
-    <div class="cv-art"><Art id="cover" wide="wide" eager alt="" sizes="(min-aspect-ratio: 1/1) 56vw, 100vw" /></div>
-    <div class="cv-shade" aria-hidden="true"></div>
-    <div class="cv-rim" aria-hidden="true"></div>
-    <div class="cv-panel">
-      <div class="cv-text cv-in cv-top">
-        <p class="cv-inv"><span lang="hi">{copy.invocation.his}</span><i class="leaf" aria-hidden="true"></i><span lang="pi">{copy.invocation.hers}</span></p>
-        <p class="cv-for"><Parts parts={t.cover.eyebrow} /></p>
-        <span class="cv-guestname" data-guest-name>{t.cover.guestDefault}</span>
-      </div>
-      <div class="cv-text cv-in cv-mid">
-        <p id="cvTitle" class="cv-names"><span class="nm">{couple.groom.en}</span> <span class="amp">&amp;</span> <span class="nm">{couple.bride.en}</span></p>
-        <span lang="hi" class="cv-dn">{couple.bothDev}</span>
-        <span class="cv-date"><span data-dates-short>{t.dates(events.map((e) => e.id)).short}</span><i aria-hidden="true"></i>{t.cover.city}</span>
-      </div>
-      <div class="cv-in cv-cta">
-        <div class="seal-wrap">
-          <span class="ring" aria-hidden="true"></span><span class="ring" aria-hidden="true"></span>
-          <button type="button" class="seal" id="openBtn">
-            <span lang="mr" class="big">{copy.cover.seal}</span>
-            <span class="small">{t.cover.tap}</span>
-          </button>
+    <div class="cv-cloud l" aria-hidden="true" set:html={coverClouds('l')}></div>
+    <div class="cv-cloud r" aria-hidden="true" set:html={coverClouds('r')}></div>
+    <div class="cv-card arch">
+      <Fragment set:html={archTop()} />
+      <div class="arch-body cv-panel">
+        <div class="cv-text cv-in cv-top">
+          <p class="cv-inv"><span lang="hi">{copy.invocation.his}</span><i class="leaf" aria-hidden="true"></i><span lang="pi">{copy.invocation.hers}</span></p>
+          <p class="cv-for"><Parts parts={t.cover.eyebrow} /></p>
+          <span class="cv-guestname" data-guest-name>{t.cover.guestDefault}</span>
+        </div>
+        <div class="cv-text cv-in cv-mid">
+          <p id="cvTitle" class="cv-names"><span class="nm">{couple.groom.en}</span> <span class="amp">&amp;</span> <span class="nm">{couple.bride.en}</span></p>
+          <span lang="hi" class="cv-dn">{couple.bothDev}</span>
+          <span class="cv-date"><span data-dates-short>{t.dates(events.map((e) => e.id)).short}</span><i aria-hidden="true"></i>{t.cover.city}</span>
+        </div>
+        <div class="cv-in cv-cta">
+          <div class="seal-wrap">
+            <span class="ring" aria-hidden="true"></span><span class="ring" aria-hidden="true"></span>
+            <button type="button" class="seal" id="openBtn">
+              <span lang="mr" class="big">{copy.cover.seal}</span>
+              <span class="small">{t.cover.tap}</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

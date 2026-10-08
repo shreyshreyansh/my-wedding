@@ -1,18 +1,24 @@
-/* footer */
-footer{position:relative;z-index:3;background:var(--night);color:var(--paper);text-align:center}
-.foot{padding:clamp(48px,9svh,88px) var(--gut) clamp(40px,7svh,64px);display:flex;flex-direction:column;align-items:center;gap:14px}
+/* night: the muhurat's hour, by the river; the words on the night sky, the drawing beneath them */
+footer{position:relative;z-index:3;background:var(--night);color:var(--cream);text-align:center;overflow:hidden}
+.foot{position:relative;z-index:1;padding:clamp(56px,10svh,104px) var(--gut) 0;display:flex;flex-direction:column;align-items:center;gap:14px}
 .foot .chaupai{color:var(--zari-hi);font-size:1.15rem;line-height:1.6;margin:0}
 .foot-leaf{color:var(--night-zari);font-size:1.1rem}
 .foot .metta{display:flex;flex-direction:column;align-items:center}
-.metta-en{font-family:var(--display);font-style:italic;font-size:1.05rem;color:rgba(244,238,227,.75)}
-.foot .love{font-family:var(--display);font-style:italic;font-size:clamp(26px,6.6vw,40px);line-height:1.1;margin:6px 0 0;max-width:14em}
+.metta-en{font-family:var(--display);font-style:italic;font-size:1.05rem;color:rgba(251,243,230,.75)}
+.foot .love{font-family:var(--display);font-style:italic;font-size:clamp(26px,6.6vw,40px);line-height:1.15;margin:6px 0 0;max-width:14em}
 .foot .credit{margin:0;font-size:1rem;font-style:italic;color:var(--zari-hi)}
-.credits{width:min(100%,560px);margin-top:12px;border-top:1px solid rgba(244,238,227,.18);border-bottom:1px solid rgba(244,238,227,.18);text-align:left}
+.credits{width:min(100%,560px);margin-top:12px;border-top:1px solid rgba(251,243,230,.18);border-bottom:1px solid rgba(251,243,230,.18);text-align:left}
 .credits summary{min-height:48px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;list-style:none;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--night-zari)}
 .credits summary::-webkit-details-marker{display:none}
 .credits summary::after{content:"+";font-size:1.4rem;letter-spacing:0;line-height:1}
 .credits[open] summary::after{content:"–"}
-.credits p{margin:0 0 10px;font-size:.95rem;font-style:italic;color:rgba(244,238,227,.75)}
+.credits p{margin:0 0 10px;font-size:.95rem;font-style:italic;color:rgba(251,243,230,.75)}
 .credits ul{margin:0 0 16px;padding:0;list-style:none;display:flex;flex-direction:column;font-size:.85rem;line-height:1.5}
-.credits a{display:flex;flex-direction:column;min-height:48px;padding:8px 0;border-top:1px solid rgba(244,238,227,.1);color:rgba(244,238,227,.72);text-decoration:none}
-.credits a b{font-weight:400;font-style:italic;color:var(--paper);text-decoration:underline;text-decoration-color:rgba(216,180,106,.6);text-underline-offset:3px}
+.credits a{display:flex;flex-direction:column;min-height:48px;padding:8px 0;border-top:1px solid rgba(251,243,230,.1);color:rgba(251,243,230,.72);text-decoration:none}
+.credits a b{font-weight:400;font-style:italic;color:var(--cream);text-decoration:underline;text-decoration-color:rgba(230,192,122,.6);text-underline-offset:3px}
+/* the river at night, as wide as the screen; its diyas flicker */
+.nt-stage{position:relative;height:min(78vw,62svh,640px);margin-top:-6svh;container-type:size;--s:max(100cqw / 1600,100cqh / 1000);
+  -webkit-mask:linear-gradient(transparent,#000 18%);mask:linear-gradient(transparent,#000 18%)}
+.nt-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 100%}
+.nt-flames i{position:absolute;left:calc(50% + (var(--x) - 800) * var(--s));top:calc(100% - (1000 - var(--y)) * var(--s));translate:-50% -50%;width:calc(80 * var(--k) * var(--s));aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,214,130,.9) 0,rgba(255,190,100,.35) 40%,rgba(255,180,90,0) 70%)}
+html.motion:not(.still) footer.live .nt-flames i{animation:flick 1.9s ease-in-out var(--dl) infinite alternate}

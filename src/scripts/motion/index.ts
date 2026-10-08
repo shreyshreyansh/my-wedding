@@ -3,11 +3,10 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { app, fine, root } from '../app';
 import { coverMotion } from './cover';
-import { hero } from './hero';
 import { interactions } from './interactions';
 import { mangal, curtain } from './mangal';
-import { schedule } from './schedule';
-import { tours } from './tour';
+import { reveal } from './reveal';
+import { scene } from './scene';
 import { shared, type Run } from './shared';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -34,9 +33,10 @@ export function start({ intro }: { intro: boolean }) {
     }).catch(() => { /* native scrolling is fine */ });
   }
 
+  /* the page's height doesn't change when the cover goes (the scrollbar's gutter is kept), so nothing is measured
+     again in the middle of the opening */
   app.hooks.afterOpen = () => {
     shared.lenis?.start();
-    ScrollTrigger.refresh();
     shared.heroIntro?.play();
   };
 
@@ -50,9 +50,8 @@ export function start({ intro }: { intro: boolean }) {
       on: (el, type, fn) => { el.addEventListener(type, fn); cleanups.push(() => el.removeEventListener(type, fn)); },
       cleanup: (fn) => cleanups.push(fn)
     };
-    hero(run);
-    schedule();
-    tours(run);
+    scene(run);
+    reveal(run);
     mangal();
     curtain();
     return () => cleanups.forEach((fn) => fn());

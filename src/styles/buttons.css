@@ -1,6 +1,6 @@
-/* buttons */
-.btn{position:relative;overflow:hidden;min-height:56px;padding:10px 22px;font:inherit;font-size:1.05rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;border-radius:0;transition:background .25s ease,color .25s ease}
-.btn-primary{border:0;background:var(--ink);color:var(--paper)}
-.btn-primary:hover{background:var(--rani)}
-.btn-line{border:1px solid var(--ink);background:transparent;color:var(--ink)}
-.btn-line:hover{background:var(--ink);color:var(--paper)}
+/* buttons: brown pills with cream words; a gold-lined one beside them */
+.btn{position:relative;overflow:hidden;min-height:56px;padding:10px 24px;font:inherit;font-size:1.05rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;border-radius:999px;transition:background .25s ease,color .25s ease}
+.btn-primary{border:0;background:var(--ink);color:var(--cream)}
+.btn-primary:hover{background:var(--rust)}
+.btn-line{border:1.4px solid var(--gold);background:var(--card);color:var(--ink)}
+.btn-line:hover{background:var(--ink);color:var(--cream);border-color:var(--ink)}

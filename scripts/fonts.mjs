@@ -12,11 +12,11 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, wri
 import { join } from 'node:path';
 import { collect } from './fonts-collect.mjs';
 
-const CSS_URL = 'https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Tiro+Devanagari+Hindi:ital@0;1&family=Tiro+Devanagari+Marathi:ital@0;1';
+const CSS_URL = 'https://fonts.googleapis.com/css2?family=Alegreya:ital@0;1&family=Tiro+Devanagari+Hindi:ital@0;1&family=Tiro+Devanagari+Marathi:ital@0;1';
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36';
 const CACHE = 'node_modules/.cache/fonts', OUT = 'public/fonts';
 /* the cover's faces, fetched first */
-const PRELOAD = ['Instrument Serif|normal|400|latin', 'Instrument Serif|italic|400|latin', 'Tiro Devanagari Hindi|normal|400|devanagari'];
+const PRELOAD = ['Alegreya|normal|400|latin', 'Alegreya|italic|400|latin', 'Tiro Devanagari Hindi|normal|400|devanagari'];
 /* the face that draws a family's name in Devanagari on the cover: any name, so every character */
 const KEEP_WHOLE = ['Tiro Devanagari Hindi|normal|400|devanagari'];
 /* always kept with any Devanagari: joiners, dandas, the Vedic-free basics a name might need */
@@ -95,8 +95,9 @@ for (const b of blocks) {
   } else if (b.subset === 'latin') {
     /* spaces and punctuation come from here even in Devanagari text */
     if (![...text].some((c) => inRange(b.range, c.codePointAt(0)))) continue;
-  } else if (!/[A-Za-z]/.test(text)) {
-    /* latin-ext stays available for names with accents, if the face draws Latin at all */
+  } else if (b.subset !== 'latin-ext' || !/[A-Za-z]/.test(text)) {
+    /* latin-ext stays available for names with accents, if the face draws Latin at all; Greek, Cyrillic and
+       Vietnamese never appear */
     continue;
   }
   const name = `${slug(b)}.${createHash('sha256').update(data).digest('hex').slice(0, 8)}.woff2`;

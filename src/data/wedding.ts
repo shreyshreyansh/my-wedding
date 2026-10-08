@@ -221,7 +221,31 @@ export const copy = {
     blessing: '॥ भवतु सब्ब मङ्गलं ॥',
     line: 'May every blessing be yours.'
   },
-  homes: { eyebrowDev: 'दो घर · दोन घरं', eyebrow: 'two homes', title: 'Bihar and Buddhism,', titleEm: 'and the old threads between them' },
+  homes: {
+    eyebrowDev: 'दो घर · दोन घरं', eyebrow: 'two homes', title: 'Bihar and Buddhism,', titleEm: 'and the old threads between them',
+    marks: ['Chhath', 'Bodh Gaya'] as [string, string],
+    lines: [
+      'His Bihar: at Chhath, women stand in the river and raise baskets of fruit to the sun.',
+      'Her faith began in his Bihar: at Bodh Gaya, under the Bodhi tree, the Buddha awoke.',
+      'Old threads already join them: the very name Bihar comes from vihara, a Buddhist monastery.'
+    ]
+  },
+  /* the couple's own note, lit word by word as it scrolls past */
+  note: {
+    eyebrowDev: 'दो शब्द', eyebrow: 'a note from us', title: 'Come, celebrate with us',
+    body: 'Two homes, Ranchi and Pune, are about to become one family. There will be turmeric and music, seven steps around the fire, and far too much food. None of it will feel complete without you.',
+    sign: '— Shreyansh & Mrunalini'
+  },
+  place: { eyebrowDev: 'विवाहस्थळ', eyebrow: 'the venue', title: 'Where we’ll be', map: 'Show the map', open: 'Open in Google Maps', copy: 'Copy the address', copied: 'Address copied' },
+  know: {
+    eyebrowDev: 'जानकारी', eyebrow: 'good to know', title: 'Things to know', intro: 'A few details to make the days easy.',
+    /* Ranchi's December climate normals (IMD): about 23 °C by day, 10 °C at night */
+    weather: ['Weather', 'Ranchi in December is cool and dry: around 23 °C by day and 10 °C at night. Bring a shawl for the evenings.'] as [string, string],
+    wear: 'What to wear',
+    way: ['Getting there', 'Haveli Banquet, Ranchi. The map and the way are just above.'] as [string, string],
+    reply: ['Reply by', 'Wednesday, 25 November. Please answer below, so we can plan for you.'] as [string, string]
+  },
+  photos: { eyebrowDev: 'आठवणी', eyebrow: 'the two of us', title: 'A few of our favourite days', soon: 'Photos coming soon' },
   invite: { eyebrowDev: 'निमंत्रण', eyebrow: 'the invitation', title: 'You are invited', titleFor: '{name}, you are invited', choose: 'Read the invitation in', manuhar: 'बाल मनुहार' },
   schedule: { eyebrowDev: 'कार्यक्रम', eyebrow: 'the celebrations', title: 'From Pune to Ranchi,', titleEm: 'three celebrations', when: 'When', where: 'Where', wear: 'Wear' },
   rites: {
@@ -270,9 +294,14 @@ export const copy = {
 export const site = {
   title: 'Shreyansh & Mrunalini · 8 & 9 December 2026',
   description: 'With love, you are invited to the wedding of Shreyansh and Mrunalini in Ranchi.',
-  ogAlt: 'Shreyansh & Mrunalini, in large letters over a 17th-century painting of a peacock grove.',
-  ogVersion: 3,
+  ogAlt: 'Shreyansh & Mrunalini, in large letters in a sunrise sky over two hills and a river.',
+  ogVersion: 4,
   /** bump when an event's time or place changes, so calendars update the saved event */
   calendarSequence: 0,
-  themeColor: '#1A1220'
+  themeColor: '#E8BC9A'
 };
+
+/* ---------- photos of the two of them (section "a few of our favourite days") ----------
+   Put each file in public/photos/ and list it here, e.g. { src: '/photos/pune-2023.jpg', alt: 'Shreyansh and Mrunalini at Sinhagad' }.
+   Until there are any, the frames show small drawings instead. */
+export const photos: { src: string; alt: string }[] = [];

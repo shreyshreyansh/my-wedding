@@ -1,12 +1,16 @@
 ---
-// The last word: his family's chaupai and her family's Pali blessing, and the credits for every artwork on the page.
+// Night, the muhurat's hour: the same river under the moon, every diya lit. His family's chaupai and her family's Pali
+// blessing, the families' love, and where the drawings come from.
 import art from '../data/art.json';
+import files from '../data/scene-files.json';
+import { NIGHT_DIYAS } from '../art/sunrise';
 import { chaupai, metta, music } from '../data/wedding';
 import { T, viewOf } from '../data/i18n';
-const works = Object.values(art);
 const t = T(viewOf(Astro.url));
+/* everything on the page is drawn for it, except the Bodhi leaf, traced from an old botanical plate */
+const leaf = art.bodhi;
 ---
-<footer>
+<footer class="night">
   <div class="foot">
     <p lang="hi" class="chaupai">{chaupai[0]}<br>{chaupai[1]}</p>
     <i class="leaf foot-leaf" aria-hidden="true"></i>
@@ -17,8 +21,12 @@ const t = T(viewOf(Astro.url));
       <summary>{t.footer.credits}</summary>
       <p>{t.footer.creditsNote}</p>
       <ul>
-        {works.map((w) => <li><a href={w.page} target="_blank" rel="noopener"><b>{w.title}</b><span>{w.place}, {w.date}. {w.credit}. {w.licence === 'CC0' ? 'Public domain (CC0)' : w.licence.startsWith('CC BY') ? w.licence : 'Public domain'}.</span></a></li>)}
+        <li><a href={leaf.page} target="_blank" rel="noopener"><b lang="en">{leaf.title}</b><span lang="en">{leaf.place}, {leaf.date}. {leaf.credit}. Public domain.</span></a></li>
       </ul>
     </details>
+  </div>
+  <div class="nt-stage" aria-hidden="true">
+    <img src={files.night} alt="" width="1600" height="1000" loading="lazy" decoding="async" />
+    <div class="nt-flames">{NIGHT_DIYAS.map(([x, y, s], i) => <i style={`--x:${x};--y:${(y - 13 * s).toFixed(1)};--k:${s};--dl:${(-i * 0.29).toFixed(2)}s`}></i>)}</div>
   </div>
 </footer>

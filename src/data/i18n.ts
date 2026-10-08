@@ -29,14 +29,17 @@ export interface Text {
   cover: { eyebrow: Part[]; guestDefault: string; tap: string; city: string };
   hero: { eyebrow: Part[]; aria: string };
   invocation: { line: string };
-  homes: { eyebrow: Part[]; title: string; titleEm: string };
+  homes: { eyebrow: Part[]; title: string; titleEm: string; marks: [string, string]; lines: string[] };
+  note: { eyebrow: Part[]; title: string; body: string; sign: string };
+  place: { eyebrow: Part[]; title: string; map: string; open: string; copy: string; copied: string };
+  know: { eyebrow: Part[]; title: string; intro: string; weather: [string, string]; wear: string; way: [string, string]; reply: [string, string] };
+  photos: { eyebrow: Part[]; title: string; soon: string };
   invite: { eyebrow: Part[]; title: string; titleFor: string; choose: string; card: Lang1 };
   schedule: { eyebrow: Part[]; title: string; countWords: string[]; when: string; where: string; wear: string };
   ev: Record<string, EvText>;
   venue: string;
   dates: (ids: readonly string[]) => { short: string; long: string };
   rites: { way: Part[]; knot: Part[]; busy: string; wayAria: string; knotAria: (ev: string) => string };
-  tour: { his: string; hers: string };
   mangal: { eyebrow: Part[]; title: string; titleEm: string; label: string; gloss: string; jayaLabel: string; jayaGloss: string };
   count: { eyebrow: Part[]; units: string[]; when: string };
   rsvp: {
@@ -58,7 +61,11 @@ const mixed: Text = {
   cover: { eyebrow: [{ t: copy.cover.eyebrowDev, lang: 'hi' }, { t: copy.cover.eyebrow }], guestDefault: copy.cover.guestDefault, tap: copy.cover.tap, city: venue.city },
   hero: { eyebrow: [{ t: '॥ शुभ विवाह ॥', lang: 'hi' }, { t: copy.hero.eyebrow }], aria: 'Shreyansh and Mrunalini' },
   invocation: { line: copy.invocation.line },
-  homes: { eyebrow: [{ t: copy.homes.eyebrowDev, lang: 'hi' }, { t: copy.homes.eyebrow }], title: copy.homes.title, titleEm: copy.homes.titleEm },
+  homes: { eyebrow: [{ t: copy.homes.eyebrowDev, lang: 'hi' }, { t: copy.homes.eyebrow }], title: copy.homes.title, titleEm: copy.homes.titleEm, marks: copy.homes.marks, lines: copy.homes.lines },
+  note: { eyebrow: [{ t: copy.note.eyebrowDev, lang: 'hi' }, { t: copy.note.eyebrow }], title: copy.note.title, body: copy.note.body, sign: copy.note.sign },
+  place: { eyebrow: [{ t: copy.place.eyebrowDev, lang: 'mr' }, { t: copy.place.eyebrow }], title: copy.place.title, map: copy.place.map, open: copy.place.open, copy: copy.place.copy, copied: copy.place.copied },
+  know: { eyebrow: [{ t: copy.know.eyebrowDev, lang: 'hi' }, { t: copy.know.eyebrow }], title: copy.know.title, intro: copy.know.intro, weather: copy.know.weather, wear: copy.know.wear, way: copy.know.way, reply: copy.know.reply },
+  photos: { eyebrow: [{ t: copy.photos.eyebrowDev, lang: 'mr' }, { t: copy.photos.eyebrow }], title: copy.photos.title, soon: copy.photos.soon },
   invite: { eyebrow: [{ t: copy.invite.eyebrowDev, lang: 'mr' }, { t: copy.invite.eyebrow }], title: copy.invite.title, titleFor: copy.invite.titleFor, choose: copy.invite.choose, card: 'en' },
   schedule: { eyebrow: [{ t: copy.schedule.eyebrowDev, lang: 'mr' }, { t: copy.schedule.eyebrow }], title: copy.schedule.title, countWords, when: copy.schedule.when, where: copy.schedule.where, wear: copy.schedule.wear },
   ev: evMixed,
@@ -68,7 +75,6 @@ const mixed: Text = {
     way: [{ t: copy.rites.wayDev, lang: 'mr' }, { t: copy.rites.way }], knot: [{ t: copy.rites.knotDev, lang: 'hi' }, { t: copy.rites.knot }], busy: copy.rites.knotBusy,
     wayAria: 'Find your way to ' + venue.full + ' (opens Google Maps)', knotAria: (ev) => 'Save the ' + ev + ' date to your calendar'
   },
-  tour: { his: 'Bihar: ', hers: 'Maharashtra: ' },
   mangal: { eyebrow: [{ t: copy.mangal.eyebrowDev, lang: 'mr' }, { t: copy.mangal.eyebrowPi, lang: 'pi' }, { t: copy.mangal.eyebrow }], title: copy.mangal.title, titleEm: copy.mangal.titleEm, label: mangal.label, gloss: mangal.gloss, jayaLabel: mangal.jaya.label, jayaGloss: mangal.jaya.gloss },
   count: { eyebrow: [{ t: copy.count.eyebrowDev, lang: 'mr' }, { t: copy.count.eyebrow }], units: copy.count.units, when: dates.countdownLabel },
   rsvp: {
@@ -89,6 +95,10 @@ const en: Text = {
   cover: { ...mixed.cover, eyebrow: [{ t: copy.cover.eyebrow }] },
   hero: { ...mixed.hero, eyebrow: [{ t: copy.hero.eyebrow }] },
   homes: { ...mixed.homes, eyebrow: [{ t: copy.homes.eyebrow }] },
+  note: { ...mixed.note, eyebrow: [{ t: copy.note.eyebrow }] },
+  place: { ...mixed.place, eyebrow: [{ t: copy.place.eyebrow }] },
+  know: { ...mixed.know, eyebrow: [{ t: copy.know.eyebrow }] },
+  photos: { ...mixed.photos, eyebrow: [{ t: copy.photos.eyebrow }] },
   invite: { ...mixed.invite, eyebrow: [{ t: copy.invite.eyebrow }] },
   schedule: { ...mixed.schedule, eyebrow: [{ t: copy.schedule.eyebrow }] },
   ev: Object.fromEntries(Object.entries(evMixed).map(([id, e]) => [id, { ...e, dn: [] }])),
@@ -119,7 +129,28 @@ const mr: Text = {
   cover: { eyebrow: [{ t: 'सस्नेह निमंत्रण' }], guestDefault: 'आमचे सर्व आप्तेष्ट आणि मित्रपरिवार', tap: 'उघडा', city: 'रांची' },
   hero: { eyebrow: [{ t: '॥ शुभविवाह ॥' }], aria: 'श्रेयांश आणि मृणालिनी' },
   invocation: { line: 'तुम्हाला सर्व मंगल लाभो.' },
-  homes: { eyebrow: [{ t: 'दोन घरं' }], title: 'बिहार आणि बौद्ध धम्म,', titleEm: 'आणि त्यांना जोडणारे जुने धागे' },
+  homes: {
+    eyebrow: [{ t: 'दोन घरं' }], title: 'बिहार आणि बौद्ध धम्म,', titleEm: 'आणि त्यांना जोडणारे जुने धागे', marks: ['छठ', 'बोधगया'],
+    lines: [
+      'श्रेयांशचा बिहार: छठ पूजेला स्त्रिया नदीत उभ्या राहून फळांच्या टोपल्या सूर्याला अर्पण करतात.',
+      'मृणालिनीच्या धम्माचा उगम श्रेयांशच्या बिहारमध्ये: बोधगयेत, बोधिवृक्षाखाली बुद्धांना ज्ञानप्राप्ती झाली.',
+      'जुने धागे त्यांना आधीच जोडतात: ‘बिहार’ हे नावच ‘विहार’, म्हणजे बौद्ध मठ, या शब्दावरून आले आहे.'
+    ]
+  },
+  note: {
+    eyebrow: [{ t: 'दोन शब्द' }], title: 'या, आनंदात सहभागी व्हा',
+    body: 'रांची आणि पुणे, ही दोन घरं आता एक कुटुंब होणार आहेत. हळद असेल, संगीत असेल, अग्नीभोवतीची सप्तपदी असेल आणि भरपूर मेजवानीही. पण तुम्ही नसाल तर यातलं काहीच पूर्ण वाटणार नाही.',
+    sign: '— श्रेयांश आणि मृणालिनी'
+  },
+  place: { eyebrow: [{ t: 'विवाहस्थळ' }], title: 'आम्ही इथे असू', map: 'नकाशा दाखवा', open: 'Google Maps मध्ये उघडा', copy: 'पत्ता कॉपी करा', copied: 'पत्ता कॉपी झाला' },
+  know: {
+    eyebrow: [{ t: 'उपयुक्त माहिती' }], title: 'हे लक्षात असू द्या', intro: 'दिवस सोपा आणि आनंदी जावा म्हणून काही गोष्टी.',
+    weather: ['हवामान', 'डिसेंबरमध्ये रांचीत थंड आणि कोरडं हवामान असतं: दिवसा सुमारे २३°, रात्री सुमारे १०° सेल्सियस. संध्याकाळसाठी शाल सोबत ठेवा.'],
+    wear: 'पोशाख',
+    way: ['कसे पोहोचाल', 'हवेली बँक्वेट, रांची. नकाशा आणि रस्ता वरच आहे.'],
+    reply: ['उत्तर कळवा', 'बुधवार, २५ नोव्हेंबरपर्यंत. खाली उत्तर द्या, म्हणजे आम्हाला आपली तयारी करता येईल.']
+  },
+  photos: { eyebrow: [{ t: 'आठवणी' }], title: 'आमचे काही आवडते क्षण', soon: 'फोटो लवकरच' },
   invite: { eyebrow: [{ t: 'निमंत्रण' }], title: 'आपणास सस्नेह निमंत्रण', titleFor: '{name}, आपणास सस्नेह निमंत्रण', choose: 'निमंत्रण या भाषेत वाचा', card: 'mr' },
   schedule: { eyebrow: [{ t: 'कार्यक्रम' }], title: 'पुण्याहून रांचीपर्यंत,', countWords: ['एकही सोहळा नाही', 'एक सोहळा', 'दोन सोहळे', 'तीन सोहळे'], when: 'केव्हा', where: 'कुठे', wear: 'पोशाख' },
   ev: {
@@ -130,7 +161,6 @@ const mr: Text = {
   venue: venue.mr,
   dates: datesIn('mr'),
   rites: { way: [{ t: 'रस्ता दाखवा' }], knot: [{ t: 'गाठ बांधून ठेवा' }], busy: 'कॅलेंडर उघडत आहोत…', wayAria: venue.mr + ' कडे जाण्याचा रस्ता (Google Maps उघडेल)', knotAria: (ev) => ev + ' आपल्या कॅलेंडरमध्ये जोडा' },
-  tour: { his: 'बिहार: ', hers: 'महाराष्ट्र: ' },
   mangal: {
     eyebrow: [{ t: 'मंगलाष्टक · जयमंगल' }], title: 'दोन्हीकडे आठ श्लोक,', titleEm: 'एकच आशीर्वाद',
     label: 'मंगलाष्टकातून: मराठी लग्नात म्हटले जाणारे आठ श्लोक',
@@ -166,7 +196,28 @@ const hi: Text = {
   cover: { eyebrow: [{ t: 'सस्नेह निमंत्रण' }], guestDefault: 'हमारे सभी परिजन और मित्र', tap: 'खोलें', city: 'रांची' },
   hero: { eyebrow: [{ t: '॥ शुभ विवाह ॥' }], aria: 'श्रेयांश और मृणालिनी' },
   invocation: { line: 'आपको हर मंगल प्राप्त हो।' },
-  homes: { eyebrow: [{ t: 'दो घर' }], title: 'बिहार और बौद्ध धर्म,', titleEm: 'और उन्हें जोड़ते पुराने धागे' },
+  homes: {
+    eyebrow: [{ t: 'दो घर' }], title: 'बिहार और बौद्ध धर्म,', titleEm: 'और उन्हें जोड़ते पुराने धागे', marks: ['छठ', 'बोधगया'],
+    lines: [
+      'श्रेयांश का बिहार: छठ पर महिलाएँ नदी में खड़ी होकर फलों से भरे सूप सूर्य को अर्पित करती हैं।',
+      'मृणालिनी के धर्म का उद्गम श्रेयांश के बिहार में है: बोधगया में, बोधिवृक्ष के नीचे, बुद्ध को ज्ञान मिला।',
+      'पुराने धागे उन्हें पहले से जोड़ते हैं: ‘बिहार’ नाम ही ‘विहार’, यानी बौद्ध मठ, से आया है।'
+    ]
+  },
+  note: {
+    eyebrow: [{ t: 'दो शब्द' }], title: 'आइए, हमारे साथ उत्सव मनाइए',
+    body: 'रांची और पुणे, ये दो घर अब एक परिवार बनने जा रहे हैं। हल्दी होगी, संगीत होगा, अग्नि के चारों ओर सात फेरे होंगे, और ढेर सारा खाना भी। पर आपके बिना इनमें से कुछ भी पूरा नहीं लगेगा।',
+    sign: '— श्रेयांश और मृणालिनी'
+  },
+  place: { eyebrow: [{ t: 'विवाह स्थल' }], title: 'हम यहाँ होंगे', map: 'नक्शा दिखाएँ', open: 'Google Maps में खोलें', copy: 'पता कॉपी करें', copied: 'पता कॉपी हो गया' },
+  know: {
+    eyebrow: [{ t: 'ज़रूरी जानकारी' }], title: 'कुछ बातें ध्यान रखें', intro: 'दिन आसान और आनंद भरा रहे, इसलिए कुछ बातें।',
+    weather: ['मौसम', 'दिसंबर में रांची का मौसम ठंडा और सूखा रहता है: दिन में लगभग २३° और रात में लगभग १०° सेल्सियस। शाम के लिए शॉल साथ रखें।'],
+    wear: 'पहनावा',
+    way: ['कैसे पहुँचें', 'हवेली बैंक्वेट, रांची। नक्शा और रास्ता ऊपर ही है।'],
+    reply: ['उत्तर दें', 'बुधवार, २५ नवंबर तक। कृपया नीचे उत्तर दें, ताकि हम आपके लिए तैयारी कर सकें।']
+  },
+  photos: { eyebrow: [{ t: 'यादें' }], title: 'हमारे कुछ पसंदीदा पल', soon: 'तस्वीरें जल्द ही' },
   invite: { eyebrow: [{ t: 'निमंत्रण' }], title: 'आप सादर आमंत्रित हैं', titleFor: '{name}, आप सादर आमंत्रित हैं', choose: 'निमंत्रण इस भाषा में पढ़ें', card: 'hi' },
   schedule: { eyebrow: [{ t: 'कार्यक्रम' }], title: 'पुणे से रांची तक,', countWords: ['कोई समारोह नहीं', 'एक समारोह', 'दो समारोह', 'तीन समारोह'], when: 'कब', where: 'कहाँ', wear: 'पहनावा' },
   ev: {
@@ -177,7 +228,6 @@ const hi: Text = {
   venue: venue.hi,
   dates: datesIn('hi'),
   rites: { way: [{ t: 'रास्ता देखें' }], knot: [{ t: 'गाँठ बाँध लीजिए' }], busy: 'कैलेंडर खुल रहा है…', wayAria: venue.hi + ' तक का रास्ता (Google Maps खुलेगा)', knotAria: (ev) => ev + ' अपने कैलेंडर में जोड़ें' },
-  tour: { his: 'बिहार: ', hers: 'महाराष्ट्र: ' },
   mangal: {
     eyebrow: [{ t: 'मंगलाष्टक · जयमंगल' }], title: 'दोनों ओर आठ श्लोक,', titleEm: 'एक ही आशीर्वाद',
     label: 'मंगलाष्टक से: मराठी विवाह में गाए जाने वाले आठ श्लोक',

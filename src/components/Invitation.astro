@@ -1,7 +1,8 @@
 ---
-// The invitation card in the family's words, in English, Marathi or Hindi. The switch is a CSS radio group:
-// no JavaScript, no history entries. The edge pre-selects the family's language.
+// The invitation card in the family's words, in English, Marathi or Hindi, inside a jharokha. The switch is a CSS
+// radio group: no JavaScript, no history entries. The edge pre-selects the family's language.
 import Parts from './Parts.astro';
+import { archTop } from '../art/sunrise';
 import { copy, invitation } from '../data/wedding';
 import { T, viewOf } from '../data/i18n';
 import type { Block, Lang } from '../data/schema';
@@ -29,16 +30,19 @@ function groups(blocks: Block[]) {
       <div class="inv-tabs reveal">
         {langs.map((l) => <label for={'inv-' + l} lang={l} class={'t-' + l}>{invitation[l].label}</label>)}
       </div>
-      <div class="inv-cards reveal">
-        {langs.map((l) => (
-          <article class={'inv-card c-' + l} lang={l}>
-            <div class="inv-in">
-              {groups(invitation[l].blocks).map((g) => Array.isArray(g)
-                ? <div class="manuhar-box"><p class="b-manuhar-head" lang="hi">{copy.invite.manuhar}</p>{g.map((b) => <p class={'b-' + b.k}>{b.t}</p>)}</div>
-                : <p class={'b-' + g.k}>{g.t}</p>)}
-            </div>
-          </article>
-        ))}
+      <div class="inv-cards arch reveal">
+        <Fragment set:html={archTop()} />
+        <div class="arch-body">
+          {langs.map((l) => (
+            <article class={'inv-card c-' + l} lang={l}>
+              <div class="inv-in">
+                {groups(invitation[l].blocks).map((g) => Array.isArray(g)
+                  ? <div class="manuhar-box"><p class="b-manuhar-head" lang="hi">{copy.invite.manuhar}</p>{g.map((b) => <p class={'b-' + b.k}>{b.t}</p>)}</div>
+                  : <p class={'b-' + g.k}>{g.t}</p>)}
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </fieldset>
   </div>

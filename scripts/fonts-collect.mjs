@@ -7,9 +7,9 @@ import { existsSync, readFileSync, statSync } from 'node:fs';
 import { extname, join, resolve } from 'node:path';
 
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.woff2': 'font/woff2' };
-export const OURS = ['Instrument Serif', 'Amita', 'Tiro Devanagari Hindi', 'Tiro Devanagari Marathi'];
+export const OURS = ['Alegreya', 'Amita', 'Tiro Devanagari Hindi', 'Tiro Devanagari Marathi'];
 /* faces with no Devanagari: the browser draws those letters with the next face in the stack */
-const LATIN_ONLY = ['Instrument Serif'];
+const LATIN_ONLY = ['Alegreya'];
 const PAGES = ['/', '/en/', '/mr/', '/hi/'];
 
 export async function collect(dir = 'dist') {

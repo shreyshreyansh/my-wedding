@@ -1,27 +1,68 @@
 ---
-// The names, set like the title page of a folio: his flush left, hers flush right, an italic & on a hairline.
-// The falling antarpat reveals this page. (On the English-only page an empty first span keeps "The wedding of" on the right.)
-import { couple, events } from '../data/wedding';
+// The opening scene: sunrise over two hills facing each other across a river. Ranchi's on the left, with a white
+// hilltop temple; Pune's flat-topped Sahyadri on the right, with Parvati. Chhath diyas float on the water among the
+// lotuses. A marigold toran with brass bells runs across the top; the couple's names sit in the sky.
+// The scene is drawn in code (src/art/sunrise.ts) and saved as files by `npm run scene`: the sky as pictures, the
+// hills and the river as SVG. Small things that move on their own (the sun, clouds, birds, the diyas' flames, the
+// toran) are placed over them in the scene's own 1600 × 1000 units (styles/scene.css). As you scroll, the layers
+// slide apart and the view comes down to the ghat (motion/scene.ts).
+import { couple, events, venue } from '../data/wedding';
 import { T, viewOf } from '../data/i18n';
+import { DIYAS, flock, puff, strand, swag } from '../art/sunrise';
+import files from '../data/scene-files.json';
 const t = T(viewOf(Astro.url));
+const set = (l: (string | number)[][]) => l.map(([u, w]) => u + ' ' + w + 'w').join(', ');
+const { tall, wide } = files.sky;
+/* drifting clouds (scene x, y, width): two that a phone sees, two more for a wider screen */
+const PUFFS = [[650, 392, 170, 3], [985, 300, 150, 5], [330, 420, 160, 9], [1240, 360, 190, 13]];
+/* flocks of birds: how many, how high (scene y), how long a crossing takes, when it starts */
+const FLOCKS = [[4, 430, 26, -4], [3, 300, 34, -19], [5, 510, 41, -31]];
+const SWAGS = 8;
 ---
-<section id="hero" aria-labelledby="heroTitle">
-  <div class="h-in">
-    <p class="h-eyebrow">{t.view === 'en' && <span></span>}{t.hero.eyebrow.map((p) => <span lang={p.lang}>{p.t}</span>)}</p>
-    <h1 id="heroTitle" tabindex="-1" class="h-names" aria-label={t.hero.aria}>
-      <span class="h-who his" aria-hidden="true">
-        <span class="nm">{couple.groom.en}</span>
-        <span class="h-sub"><span lang="hi" class="dn">{couple.groom.dev}</span></span>
-      </span>
-      <span class="h-amp" aria-hidden="true"><i></i><span>&amp;</span><i></i></span>
-      <span class="h-who her" aria-hidden="true">
-        <span class="nm">{couple.bride.en}</span>
-        <span class="h-sub"><span lang="mr" class="dn">{couple.bride.dev}</span></span>
-      </span>
-    </h1>
+<section id="hero" class="scene" aria-labelledby="heroTitle">
+  <div class="sc-pin">
+    <picture class="sc-sky sc-l">
+      <source media="(max-aspect-ratio: 3/4)" type="image/avif" srcset={set(tall.avif)} sizes="75svh" />
+      <source media="(max-aspect-ratio: 3/4)" type="image/webp" srcset={set(tall.webp)} sizes="75svh" />
+      <source type="image/avif" srcset={set(wide.avif)} sizes="100vw" />
+      <img src={wide.webp[0][0]} srcset={set(wide.webp)} sizes="100vw" width="1600" height="1000" alt="" fetchpriority="high" decoding="async" />
+    </picture>
+    <div class="sc-sun" aria-hidden="true"></div>
+    <div class="sc-puffs" aria-hidden="true">{PUFFS.map(([x, y, w, s], i) => <div class={'sc-puff' + (i > 1 ? ' wide' : '')} style={`--x:${x};--y:${y};--w:${w};--dl:${-i * 7}s`} set:html={puff(s, w)}></div>)}</div>
+    <div class="sc-birds" aria-hidden="true">{FLOCKS.map(([n, y, d, dl], i) => <div class="sc-flock" style={`--y:${y};--dur:${d}s;--dl:${dl}s`} set:html={flock(n, 40 + i)}></div>)}</div>
+
+    <div class="h-in">
+      <p class="h-eyebrow">{t.hero.eyebrow.map((p) => <span lang={p.lang}>{p.t}</span>)}</p>
+      <h1 id="heroTitle" tabindex="-1" class="h-names" aria-label={t.hero.aria}>
+        <span class="h-who his" aria-hidden="true">
+          <span class="nm">{couple.groom.en}</span>
+          <span class="h-sub"><span lang="hi" class="dn">{couple.groom.dev}</span></span>
+        </span>
+        <span class="h-amp" aria-hidden="true">&amp;</span>
+        <span class="h-who her" aria-hidden="true">
+          <span class="nm">{couple.bride.en}</span>
+          <span class="h-sub"><span lang="mr" class="dn">{couple.bride.dev}</span></span>
+        </span>
+      </h1>
+    </div>
+
+    <div class="sc-l sc-far"><img class="sc-layer" src={files.far} alt="" width="1600" height="1000" decoding="async" /></div>
+    <div class="sc-l sc-mid"><img class="sc-layer" src={files.mid} alt="" width="1600" height="1000" decoding="async" /></div>
+    <div class="sc-l sc-near">
+      <img class="sc-layer" src={files.near} alt="" width="1600" height="1000" decoding="async" />
+      <img class="sc-ghat" src={files.ghat} alt="" width="1600" height="760" decoding="async" />
+      <div class="sc-flames" aria-hidden="true">{DIYAS.map(([x, y, s], i) => <i style={`--x:${x};--y:${(y - 13 * s).toFixed(1)};--k:${s};--dl:${(-i * 0.37).toFixed(2)}s`}></i>)}</div>
+    </div>
+
+    <div class="sc-toran" aria-hidden="true"><div class="tr-in">
+      <div class="tr-swags">{Array.from({ length: SWAGS }, (_, i) => <div class="tr-swag" style={`--i:${i}`} set:html={swag()}></div>)}</div>
+      {Array.from({ length: SWAGS + 1 }, (_, i) => <div class={'tr-strand' + (i % 2 ? ' short' : '')} style={`--i:${i};--dl:${(-i * 0.53).toFixed(2)}s`} set:html={strand(i % 2 ? 7 : 10)}></div>)}
+    </div></div>
+
     <div class="h-when">
       <span class="h-date" data-dates-long>{t.dates(events.map((e) => e.id)).long}</span>
-      <span>{t.venue}</span>
+      <span class="h-venue">{t.venue}</span>
     </div>
+    <span class="sc-hint" aria-hidden="true"><i></i></span>
   </div>
 </section>

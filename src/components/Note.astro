@@ -1,0 +1,22 @@
+---
+// The couple's own note, inside a ring of lotus petals. Its words go from pale to dark as it scrolls past
+// (opacity only, so the lines wrap as they would), like the verse meanings further down.
+import Parts from './Parts.astro';
+import { petalFrame } from '../art/sunrise';
+import { T, viewOf } from '../data/i18n';
+const t = T(viewOf(Astro.url));
+const words = t.note.body.split(' ');
+---
+<section id="note" class="sec nt" aria-labelledby="ntTitle">
+  <div class="nt-ring">
+    <Fragment set:html={petalFrame()} />
+    <div class="nt-in">
+      <p class="eyebrow reveal"><Parts parts={t.note.eyebrow} /></p>
+      <h2 id="ntTitle" class="reveal">{t.note.title}</h2>
+      <div class="nt-text">
+        <p class="nt-body" id="note-words">{words.map((w, i) => <Fragment>{i > 0 && ' '}<span class="nw">{w}</span></Fragment>)}</p>
+        <p class="nt-sign">{t.note.sign}</p>
+      </div>
+    </div>
+  </div>
+</section>

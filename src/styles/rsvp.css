@@ -1,7 +1,7 @@
 /* rsvp: slides over the countdown like a curtain */
-#rsvp{position:relative;z-index:3;background:var(--paper-bg);box-shadow:0 -30px 60px -20px rgba(31,25,21,.35)}
+#rsvp{position:relative;z-index:3;background:var(--cream);box-shadow:0 -30px 60px -20px rgba(95,37,15,.3);border-radius:28px 28px 0 0}
 .rsvp{padding:clamp(56px,10svh,104px) var(--gut) clamp(64px,11svh,112px);display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
-.rsvp h2{margin:0;font-family:var(--display);font-size:clamp(48px,12vw,92px);line-height:.98}
+.rsvp h2{margin:0;font-family:var(--display);font-size:clamp(40px,10vw,76px);line-height:1.02;color:var(--ink)}
 
 /* one panel at a time: the edge (and the page, as you reply) sets data-rsvp */
 .r-panel{display:none;width:min(100%,480px)}
@@ -51,3 +51,13 @@ html:not(.js) .r-count{width:3.2em;border-bottom:1px solid var(--ink)}
 .r-summary{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;border-top:1px solid var(--hair);font-size:1.1rem}
 .r-summary li{padding:10px 0;border-bottom:1px solid var(--hair)}
 .r-seeyou{margin:14px 0 18px;font-family:var(--display);font-style:italic;font-size:1.6rem}
+
+/* the reply sits on a card with a gold line, like the others on the page */
+.r-panel{background:var(--card);border-radius:20px;box-shadow:0 0 0 1.4px var(--gold),0 0 0 6px var(--card),0 0 0 7px rgba(221,164,93,.5),0 22px 50px -24px rgba(95,37,15,.35);padding:20px 18px 22px}
+.rsvp form.r-panel{padding:20px 18px 24px}
+.r-nocode,.r-closed{border:0}
+.row .ev b{font-size:1.7rem;color:var(--ink)}
+.step button{border-color:rgba(221,164,93,.8);color:var(--ink)}
+.r-count{color:var(--ink)}
+.field input,.field textarea{border-bottom-color:rgba(95,37,15,.45);color:var(--ink)}
+.r-send{border-radius:999px}

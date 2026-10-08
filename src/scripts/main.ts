@@ -8,6 +8,7 @@ import { initCalendar } from './calendar';
 import { initMusic } from './music';
 import { chime } from './chime';
 import { initImages } from './images';
+import { initVenue } from './venue';
 
 (window as unknown as { __smBooted: boolean }).__smBooted = true;
 
@@ -20,6 +21,7 @@ const cover = initCover(() => { startMusic(); chime(); });
 initCountdown();
 initRsvp(labels.rsvp);
 initCalendar(labels.knotBusy);
+initVenue();
 
 type Motion = typeof import('./motion');
 let motion: Promise<Motion> | null = null;

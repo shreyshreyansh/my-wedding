@@ -1,0 +1,77 @@
+/* the morning and the afternoon: the invocation, the two homes, the note, the photos, the venue, things to know */
+
+/* morning: the ghat's stone fades into the cream page */
+#invocation{background:linear-gradient(#EACCA4,var(--cream) 140px)}
+.iv .lotus-mark{width:clamp(72px,18vw,96px);height:auto}
+.iv-text{display:flex;flex-direction:column;align-items:center;gap:8px}
+.iv-pair{margin:0;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px clamp(14px,4vw,34px);font-size:clamp(22px,5.8vw,32px);color:var(--rust)}
+.iv-pair .leaf{color:var(--gold-deep);font-size:.8em}
+.iv-inv{margin:2px 0 0;font-size:clamp(19px,4.8vw,26px);color:var(--gold-deep)}
+.iv-line{margin:6px 0 0;font-family:var(--display);font-style:italic;font-size:clamp(26px,6.6vw,42px);line-height:1.12;max-width:15em;color:var(--ink)}
+.iv .divider{margin-top:10px}
+
+/* two homes: two medallions on a gold thread */
+.hm{background:var(--cream)}
+.hm-head{display:flex;flex-direction:column;align-items:center;gap:12px}
+.hm-head h2 em{display:block}
+.hm-pair{display:grid;grid-template-columns:auto minmax(40px,1fr) auto;align-items:center;width:min(100%,560px);margin-top:18px}
+.hm-medal{margin:0;display:flex;flex-direction:column;align-items:center;gap:8px}
+.hm-svg{display:block;width:clamp(104px,28vw,150px);height:auto;filter:drop-shadow(0 8px 18px rgba(95,37,15,.16))}
+.hm-medal figcaption{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2)}
+html:not(:lang(en)) .hm-medal figcaption{letter-spacing:0;font-size:1rem}
+.hm-thread{display:block;width:100%;height:46px;margin-top:-26px}
+.hm-lines{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:14px;max-width:32em}
+.hm-line{font-size:1.06rem;line-height:1.55;color:var(--ink-2)}
+.hm-line:last-child{font-family:var(--display);font-style:italic;font-size:clamp(21px,5vw,26px);line-height:1.3;color:var(--ink);padding-top:12px;border-top:1px solid var(--hair)}
+
+/* the note, in its ring of petals */
+.nt{background:radial-gradient(ellipse at 50% 40%,#FFF4E2,var(--cream) 70%);overflow:hidden}
+.nt-ring{position:relative;width:min(100%,560px);display:grid;place-items:center}
+.nt-frame{position:absolute;left:50%;top:50%;width:min(132vw,720px);height:auto;translate:-50% -50%;opacity:.55;pointer-events:none}
+.nt-in{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;padding:clamp(24px,6svh,56px) 0}
+.nt-text{max-width:24em}
+.nt-body{margin:6px 0 0;font-family:var(--display);font-size:clamp(23px,5.6vw,32px);line-height:1.36;color:var(--ink)}
+.nt-sign{margin:16px 0 0;font-style:italic;color:var(--rust)}
+
+/* dusk: the day turns rose, then night, before the blessings */
+.dusk{height:clamp(140px,26svh,260px);background:linear-gradient(var(--cream),#F4D8C4 30%,#D9A39A 52%,#7E4A5E 74%,var(--night))}
+
+/* the photos, hung from a marigold string */
+.ph{background:var(--cream);overflow:hidden}
+.ph-head{display:flex;flex-direction:column;align-items:center;gap:12px}
+.ph-lines{width:min(100% + 2 * var(--gut),1100px);margin-top:18px;display:flex;flex-direction:column;gap:28px}
+.ph-line{position:relative}
+.ph-garland{display:block;width:100%;height:clamp(28px,5vw,40px)}
+.ph-frames{list-style:none;margin:-12px 0 0;padding:0 6%;display:grid;grid-template-columns:repeat(3,1fr);gap:0 5%}
+.ph-frame{display:flex;flex-direction:column;align-items:center;transform-origin:50% 0;rotate:var(--t)}
+.ph-cord{display:block;width:1px;height:var(--c);background:var(--gold-deep)}
+.ph-card{display:block;width:100%;padding:6px 6px 18px;background:#FFFDF8;box-shadow:0 10px 24px rgba(95,37,15,.18),0 0 0 1px rgba(221,164,93,.4)}
+.ph-card img,.ph-motif svg{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+@media (min-width:860px){.ph-lines{flex-direction:row;gap:0}.ph-line{flex:1}}
+.ph-soon{margin:10px 0 0;font-style:italic;color:var(--ink-2)}
+
+/* where we'll be */
+.vn{background:var(--cream)}
+.vn-card{width:min(100%,760px);margin-top:14px;display:grid;background:var(--card);box-shadow:0 0 0 1.6px var(--gold),0 0 0 6px var(--card),0 0 0 7px rgba(221,164,93,.6),0 22px 50px -22px rgba(95,37,15,.35);border-radius:18px;overflow:hidden;text-align:left}
+.vn-map{position:relative;aspect-ratio:16/10;background:#F6EAD3}
+.vn-map svg,.vn-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.vn-show{position:absolute;left:50%;bottom:14px;translate:-50% 0;min-height:48px;padding:8px 18px;border:0;border-radius:999px;background:rgba(255,249,240,.94);box-shadow:0 0 0 1px var(--gold),0 6px 16px rgba(95,37,15,.2);font:inherit;font-size:.98rem;color:var(--ink);cursor:pointer}
+.vn-map.on .vn-show{display:none}
+.vn-info{padding:18px 20px 20px;display:flex;flex-direction:column;gap:12px}
+.vn-name{margin:0;font-family:var(--display);font-size:clamp(24px,5.6vw,30px);line-height:1.2;color:var(--ink)}
+.vn-actions{display:flex;flex-wrap:wrap;gap:10px}
+.vn-btn{flex:1 1 220px;min-height:52px;font-size:.98rem}
+@media (min-width:760px){.vn-card{grid-template-columns:1.25fr 1fr}.vn-map{aspect-ratio:auto;min-height:300px}.vn-info{justify-content:center;padding:28px}.vn-btn{flex-basis:100%}}
+
+/* things to know: four round line icons */
+.kn{background:var(--cream);padding-top:clamp(24px,4svh,48px)}
+.kn-list{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:26px 18px;width:min(100%,980px)}
+.kn-item{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.kn-ic{display:grid;place-items:center;width:68px;height:68px;border-radius:50%;color:var(--rust);box-shadow:inset 0 0 0 1.6px var(--gold),inset 0 0 0 5px var(--card),inset 0 0 0 6px rgba(221,164,93,.55);background:var(--card)}
+.kn-item h3{margin:4px 0 0;font-family:var(--display);font-size:1.3rem;line-height:1.2;color:var(--ink)}
+.kn-item p{margin:0;font-size:.98rem;line-height:1.5;color:var(--ink-2);max-width:17em}
+.kn-item a{color:inherit;text-decoration-color:var(--gold);text-underline-offset:3px}
+.kn-ev{display:block}
+.kn-ev b{font-weight:400;color:var(--ink)}
+@media (min-width:860px){.kn-list{grid-template-columns:repeat(4,1fr)}.kn-item + .kn-item{border-left:1px solid var(--hair)}.kn-item{padding:0 12px}}
+@media (max-width:420px){.kn-list{grid-template-columns:1fr}}

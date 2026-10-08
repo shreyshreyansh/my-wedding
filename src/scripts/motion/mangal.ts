@@ -1,4 +1,4 @@
-// The blessing: reveals, and each verse lit word by word as it scrolls past, then what it means, the same way beneath it;
+// The blessing: each verse lit word by word as it scrolls past, then what it means, the same way beneath it;
 // then the curtain and the RSVP.
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -6,9 +6,6 @@ import { app } from '../app';
 import { burst } from './burst';
 
 export function mangal() {
-  gsap.utils.toArray<HTMLElement>('#invite .reveal, #mangal .reveal, #rsvp .reveal').forEach((el) => {
-    gsap.from(el, { y: 24, autoAlpha: 0, duration: 0.85, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
-  });
   if (document.getElementById('verse')) {
     for (const id of ['#verse', '#verse2']) if (document.querySelector(id)) gsap.fromTo(id + ' .vw', { opacity: 0.18, y: 6 }, { opacity: 1, y: 0, ease: 'none', stagger: 0.1, scrollTrigger: { trigger: id, start: 'top 78%', end: 'bottom 42%', scrub: true } });
     /* the meaning lights as its verse finishes (opacity only: the words are inline, so the lines wrap as they would) */
