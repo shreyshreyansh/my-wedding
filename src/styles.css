@@ -565,7 +565,7 @@ img { display: block; max-width: none; user-select: none; }
   .wide-couple__medallion { position: absolute; top: 5212.6px; width: 263.7px; height: 263.5px; object-fit: cover; z-index: 11; }
   .wide-couple__medallion--left { left: 57.9px; }
   .wide-couple__medallion--right { left: 1118.4px; }
-  .couple__heading { left: 118.2px; top: 5871px; width: 1203.6px; font: 500 110px/132px "IvyOra", serif; z-index: 12; }
+  .couple__heading { left: 50%; top: 5871px; width: 891.55px; translate: -50% 0; font: 500 110px/132px "IvyOra", serif; z-index: 12; }
   .wide-couple__portrait { position: absolute; left: 318px; top: 6199px; width: 804px; height: 989.7px; object-fit: cover; z-index: 11; }
   .couple__story { left: 390px; top: 6538px; width: 661px; font: 400 30px/36px "Gotham Book", sans-serif; z-index: 12; }
   .rotating-gallery { left: -37px; top: 7225px; width: 1515px; height: 760px; z-index: 12; }
@@ -697,7 +697,7 @@ img { display: block; max-width: none; user-select: none; }
   .wide-couple__medallion { top: 5280.64px; }
   .wide-couple__medallion--left { left: 92.55px; }
   .wide-couple__medallion--right { left: 1202.74px; }
-  .couple__heading { left: 388.33px; top: 5871px; }
+  .couple__heading { top: 5871px; }
   .wide-couple__portrait { left: 377.5px; top: 6199px; }
   .couple__story { left: 449.5px; top: 6538px; }
   .rotating-gallery { left: 22.5px; top: 7281.62px; width: 1515px; height: 431px; scale: .96; transform-origin: 50% 0; }
@@ -779,7 +779,7 @@ img { display: block; max-width: none; user-select: none; }
   .wide-couple__medallion { top: 5810.64px; }
   .wide-couple__medallion--left { left: 129.15px; }
   .wide-couple__medallion--right { left: 1347.15px; }
-  .couple__heading { left: 478.83px; top: 6571px; }
+  .couple__heading { top: 6571px; }
   .wide-couple__portrait { left: 468px; top: 6899px; height: 989.74px; }
   .couple__story { left: 540px; top: 7238px; }
   .rotating-gallery { left: -99.52px; top: 7996.28px; width: 1930px; height: 664px; scale: .96; transform-origin: 50% 0; }
@@ -869,7 +869,7 @@ img { display: block; max-width: none; user-select: none; }
   .wide-couple__medallion { top: 5660.64px; }
   .wide-couple__medallion--left { left: 156.15px; }
   .wide-couple__medallion--right { left: 1500.15px; }
-  .couple__heading { left: 568.83px; top: 6421px; }
+  .couple__heading { top: 6421px; }
   .wide-couple__portrait { left: 558px; top: 6749px; }
   .couple__story { left: 630px; top: 7088px; }
   .rotating-gallery { left: -9.99px; top: 7846.28px; width: 1930px; height: 664px; scale: .96; transform-origin: 50% 0; }

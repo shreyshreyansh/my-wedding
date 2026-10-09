@@ -230,6 +230,11 @@ test("1728px composition uses the full-width desktop reference variant", async (
   expect(daughterSpacing.relationHeight).toBeCloseTo(28.8, 0);
   expect(daughterSpacing.gap).toBeGreaterThan(10);
 
+  const coupleHeading = await page.locator(".couple__heading").boundingBox();
+  expect(coupleHeading).not.toBeNull();
+  expect(coupleHeading!.width).toBeCloseTo(1203.6, 0);
+  expect(coupleHeading!.x + coupleHeading!.width / 2).toBeCloseTo(864, 0);
+
   expectBox((await page.locator(".wide-couple__portrait").boundingBox())!, { x: 462, y: 6899, width: 804, height: 989.74 });
   expectBox((await page.locator(".rotating-gallery").boundingBox())!, { x: -66.92, y: 7996.28, width: 1852.8, height: 637.44 });
   expectBox((await page.locator(".wide-couple__photo").boundingBox())!, { x: -6, y: 8647, width: 1740, height: 1160 });
@@ -257,6 +262,29 @@ test("1728px composition uses the full-width desktop reference variant", async (
   expect(rsvpStyles.scale).toBe("none");
 });
 
+test("wide couple heading stays centered before and after its reveal", async ({ page }) => {
+  for (const width of [1440, 1559, 1728, 1920]) {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.emulateMedia({ reducedMotion: "no-preference" });
+    await page.goto("/");
+    await page.locator(".site-canvas").waitFor({ state: "visible" });
+    await page.evaluate(() => document.fonts.ready);
+
+    const entrance = await page.locator(".couple__heading").boundingBox();
+    expect(entrance).not.toBeNull();
+    expect(entrance!.width).toBeCloseTo(1203.6, 0);
+    expect(entrance!.x + entrance!.width / 2).toBeCloseTo(width / 2, 0);
+
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await expect(page.locator(".couple__heading")).toHaveCSS("transform", "none");
+
+    const settled = await page.locator(".couple__heading").boundingBox();
+    expect(settled).not.toBeNull();
+    expect(settled!.width).toBeCloseTo(891.55, 0);
+    expect(settled!.x + settled!.width / 2).toBeCloseTo(width / 2, 0);
+  }
+});
+
 test("desktop breakpoint boundaries preserve their measured reference canvases", async ({ page }) => {
   const cases = [
     { viewport: 1559, scrollHeight: 12261, canvas: { x: 0, y: 0, width: 1559, height: 12261 }, sky: { x: 0, y: -2, width: 1559, height: 1257.58 }, flag: { x: 666.48, y: 396, width: 225, height: 191 }, wave: { x: 763.91, y: 424, width: 124.72, height: 83.14 } },
@@ -278,5 +306,10 @@ test("desktop breakpoint boundaries preserve their measured reference canvases",
     expectBox((await page.locator(".wide-hero__sky").boundingBox())!, expected.sky);
     expectBox((await page.locator(".wide-hero__flag").boundingBox())!, expected.flag);
     expectBox((await page.locator(".hero__waving-flag").boundingBox())!, expected.wave);
+
+    const heading = await page.locator(".couple__heading").boundingBox();
+    expect(heading).not.toBeNull();
+    expect(heading!.width).toBeCloseTo(1203.6, 0);
+    expect(heading!.x + heading!.width / 2).toBeCloseTo(expected.viewport / 2, 0);
   }
 });
