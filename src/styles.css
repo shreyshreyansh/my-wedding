@@ -36,7 +36,7 @@ img { display: block; max-width: none; user-select: none; }
 .hero__bell--2 { left: 8.53cqw; top: -.25cqw; width: 10.94cqw; height: 46.06cqw; }
 .hero__bell--3 { left: 2.43cqw; top: 0; width: 9.42cqw; height: 34.86cqw; }
 .hero__bell--4 { left: 84.13cqw; top: 3.82cqw; width: 11.71cqw; height: 30.79cqw; }
-.hero__flag { position: absolute; left: 42.49cqw; top: 80.66cqw; width: 14.76cqw; height: 15.52cqw; object-fit: contain; z-index: 7; animation: flag-wave 2.8s ease-in-out infinite; }
+.hero__flag { position: absolute; left: 42.49cqw; top: 80.66cqw; width: 14.76cqw; height: 15.52cqw; object-fit: contain; z-index: 7; }
 .hero__flock { position: absolute; left: -.76cqw; top: 0; width: 101.27cqw; height: 126.97cqw; z-index: 4; overflow: hidden; pointer-events: none; }
 .hero__flock canvas { display: block; width: 100%; height: 100%; }
 .hero__waving-flag { position: absolute; left: 49.44cqw; top: 80.66cqw; width: 9.21cqw; height: 8.55cqw; z-index: 8; opacity: 1; background: url("/assets/images/wide-flag-cloth.png") center/contain no-repeat; touch-action: pan-y; transform-origin: 0 50%; }
@@ -185,7 +185,6 @@ img { display: block; max-width: none; user-select: none; }
 .finale__elephants { position: absolute; left: -7.63cqw; top: 1438.42cqw; width: 115.27cqw; height: 142.75cqw; object-fit: cover; }
 
 @keyframes bell-sway { 0%,100% { transform: rotate(-1.8deg); } 50% { transform: rotate(2.2deg); } }
-@keyframes flag-wave { 0%,100% { transform: skewX(-1deg) rotate(-1deg); } 50% { transform: skewX(3deg) rotate(1deg); } }
 @keyframes flock-arrive { from { opacity: 0; transform: translate(5%, -4%); } to { opacity: .88; transform: translate(0, 0); } }
 @keyframes bird-flap { from { transform: scale(var(--bird-size)) scaleY(.52) translateY(1px); } to { transform: scale(var(--bird-size)) scaleY(1.12) translateY(-1px); } }
 @keyframes cloth-wave { 0%,100% { transform: perspective(160px) rotateY(-8deg) skewY(-1deg); } 50% { transform: perspective(160px) rotateY(11deg) skewY(2deg) scaleX(.96); } }
@@ -493,7 +492,7 @@ img { display: block; max-width: none; user-select: none; }
   .wide-hero__temple { position: absolute; left: 102px; top: 175px; width: 1025px; height: 870px; object-fit: contain; z-index: 2; }
   .wide-hero__foreground { position: absolute; left: -37px; top: 453px; width: 1515px; height: 1501px; object-fit: cover; z-index: 5; }
   .wide-hero__journey { position: absolute; left: -37px; top: 498px; width: 1515px; height: 3574px; object-fit: contain; z-index: 9; }
-  .wide-hero__flag { position: absolute; left: 607.5px; top: 428px; width: 225px; height: 191px; object-fit: contain; z-index: 9; transform-origin: 50% 100%; animation: flag-wave 2.8s ease-in-out infinite; }
+  .wide-hero__flag { position: absolute; left: 607.5px; top: 428px; width: 225px; height: 191px; object-fit: contain; z-index: 9; }
   .hero__waving-flag { display: block; left: 705.35px; top: 459px; width: 121.2px; height: 80.8px; z-index: 9; }
   .hero__flock { left: -36px; top: -15px; width: 1515px; height: 814px; z-index: 2; opacity: 1; animation: none; }
   .hero__title { z-index: 8; }

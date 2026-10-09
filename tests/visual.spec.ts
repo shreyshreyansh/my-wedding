@@ -126,6 +126,22 @@ test("waving flag has a visible first-paint fallback on refresh", async ({ page 
   expect(readyBackground).toBe("none");
 });
 
+test("the flag pole stays anchored to the temple while the cloth waves", async ({ page }) => {
+  await page.setViewportSize({ width: 393, height: 852 });
+  await page.goto("/");
+
+  const mobilePole = page.locator(".hero__flag");
+  expect(await mobilePole.evaluate((element) => getComputedStyle(element).animationName)).toBe("none");
+  expectBox((await mobilePole.boundingBox())!, { x: 166.99, y: 317, width: 58, height: 61 });
+
+  await page.setViewportSize({ width: 1728, height: 1000 });
+  await page.goto("/");
+
+  const desktopPole = page.locator(".wide-hero__flag");
+  expect(await desktopPole.evaluate((element) => getComputedStyle(element).animationName)).toBe("none");
+  expectBox((await desktopPole.boundingBox())!, { x: 749.5, y: 474, width: 225, height: 191 });
+});
+
 test("1728px composition uses the full-width desktop reference variant", async ({ page }) => {
   await page.setViewportSize({ width: 1728, height: 1000 });
   await page.goto("/");
