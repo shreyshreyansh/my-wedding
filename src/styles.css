@@ -637,6 +637,266 @@ img { display: block; max-width: none; user-select: none; }
   .countdown__units div > span { margin-top: 6px; color: #888; font: 600 10px/12px "Inter", sans-serif; letter-spacing: 1px; }
 }
 
+@media (min-width: 1559px) and (max-width: 1727.98px) {
+  html, body, #root { min-height: 12261px; }
+  #root { height: 12261px; }
+  .site-canvas { position: relative; left: 50%; width: 1559px; height: 12261px; margin: 0; transform: translateX(-50%); }
+
+  .wide-hero__sky { left: 0; top: -2px; width: 1559px; height: 1257.59px; }
+  .wide-hero__clouds { left: -12px; top: -207px; width: 1583px; height: 808.64px; }
+  .wide-hero__atmosphere { left: 0; top: 0; width: 1559px; height: 1282px; }
+  .wide-hero__temple { left: 157.69px; top: 173px; width: 1025.36px; height: 870px; }
+  .wide-hero__foreground { left: 0; top: 451px; width: 1559px; height: 1544.7px; }
+  .wide-hero__journey { left: -11.49px; top: 496px; width: 1583px; height: 3630px; }
+  .wide-hero__flag { left: 666.49px; top: 396px; width: 225px; height: 191px; }
+  .hero__waving-flag { left: 763.91px; top: 424px; width: 124.72px; height: 83.14px; }
+  .hero__flock { left: 1px; top: -17px; width: 1559px; height: 813.95px; }
+
+  .hero__bell--wide-1 { left: 147.99px; top: -2px; }
+  .hero__bell--wide-2 { left: 1203.8px; top: -2px; }
+  .hero__bell--wide-3 { left: 68.59px; top: 60px; }
+  .hero__bell--wide-4 { left: 1334.31px; top: 60px; }
+  .hero__bell--wide-5 { left: -26.94px; top: 138px; }
+  .hero__bell--wide-6 { left: 1393.14px; top: 158px; }
+
+  .hero__name { font-size: 140px; line-height: 168px; }
+  .hero__name--first { left: 625.36px; top: 53px; width: 308.28px; }
+  .hero__and { left: 715.91px; top: 153px; width: 127.18px; font-size: 117px; line-height: 140.4px; }
+  .hero__name--second { left: 600.37px; top: 243px; width: 358.27px; }
+
+  .wide-invitation__backdrop { left: -3.5px; top: 2369px; width: 1566px; height: 1708.64px; }
+  .wide-invitation__scroll { left: 673.48px; top: 2151px; }
+  .wide-invitation__ganesh { left: 737.48px; top: 2216px; }
+  .wide-invitation__flourish { left: 644.48px; top: 2339px; }
+  .wide-invitation__copy { left: 59px; top: 2459px; }
+
+  .wide-timeline__backdrop { left: -29.5px; top: 2970px; width: 1617px; height: 3681.59px; }
+  .timeline__heading { top: 4135.84px; }
+  .event-card { top: 4420px; width: 186px; height: 287.53px; }
+  .event-card--1 { left: 33.5px; }
+  .event-card--2 { left: 278.5px; }
+  .event-card--3 { left: 523.5px; }
+  .event-card--4 { left: 767.5px; }
+  .event-card--5 { left: 1012.5px; }
+  .event-card--6 { left: 1257.5px; }
+  .wide-card-medallion { width: 124px; height: 123.89px; }
+  .wide-card-medallion--1, .wide-card-medallion--6 { left: 231.5px; }
+  .wide-card-medallion--2, .wide-card-medallion--7 { left: 480.5px; }
+  .wide-card-medallion--3, .wide-card-medallion--8 { left: 718px; }
+  .wide-card-medallion--4, .wide-card-medallion--9 { left: 970.5px; }
+  .wide-card-medallion--5, .wide-card-medallion--10 { left: 1220.5px; }
+  .wide-card-medallion--1, .wide-card-medallion--2, .wide-card-medallion--3, .wide-card-medallion--4, .wide-card-medallion--5 { top: 4329px; }
+  .wide-card-medallion--6, .wide-card-medallion--7, .wide-card-medallion--8, .wide-card-medallion--9, .wide-card-medallion--10 { top: 4647.11px; }
+  .wide-timeline__divider { left: 632px; top: 4801px; }
+
+  .wide-couple__backdrop { left: -13.5px; top: 4886px; width: 1586px; height: 5940.95px; }
+  .wide-couple__medallion { top: 5280.64px; }
+  .wide-couple__medallion--left { left: 92.55px; }
+  .wide-couple__medallion--right { left: 1202.74px; }
+  .couple__heading { left: 388.33px; top: 5871px; }
+  .wide-couple__portrait { left: 377.5px; top: 6199px; }
+  .couple__story { left: 449.5px; top: 6538px; }
+  .rotating-gallery { left: 22.5px; top: 7281.62px; width: 1515px; height: 431px; scale: .96; transform-origin: 50% 0; }
+  .couple__celebrate { left: 639.29px; top: 7656px; }
+  .wide-couple__photo { left: 27px; top: 7939px; width: 1505px; height: 1003.33px; }
+
+  .wide-guest__backdrop { left: 0; top: 7892px; width: 1559px; height: 9370px; }
+  .guest__looking { left: 457.41px; top: 9005.16px; width: 644.18px; }
+  .location-card { left: 271.49px; top: 9123.01px; scale: 1; }
+
+  .wide-finale__backdrop { left: 0; top: 10448px; width: 1559px; height: 1929.45px; }
+  .wide-finale__flourish { left: 486.69px; top: 10991.1px; scale: 1; }
+  .wide-finale__divider { left: 517.5px; }
+  .wide-finale__divider--top { top: 9889px; }
+  .wide-finale__divider--bottom { top: 10486px; }
+  .rsvp-card { left: 507.61px; top: 9606.82px; width: 540.78px; height: 254.36px; scale: 1; }
+  .knowledge { left: 0; top: 9975px; width: 1559px; }
+  .knowledge h2 { width: 368.53px; }
+  .knowledge__intro { width: 1465.46px; }
+  .countdown { left: 330.5px; top: 10670px; width: 899px; height: 477px; }
+  .countdown h2 { width: 807.44px; }
+  .countdown__units { scale: 1.97294; }
+}
+
+@media (min-width: 1728px) and (max-width: 1919.98px) {
+  html, body, #root { min-height: 13103px; }
+  #root { height: 13103px; }
+  .site-canvas { left: 50%; width: 1740px; height: 13107px; margin: 0; transform: translateX(-50%); }
+
+  .wide-hero__sky { left: 0; top: -2px; width: 1740px; height: 1403.59px; }
+  .wide-hero__clouds { left: -90px; top: -186.73px; width: 1920px; height: 980.79px; }
+  .wide-hero__atmosphere { left: 0; top: 0; width: 1740px; height: 1565px; }
+  .wide-hero__temple { left: 235.52px; top: 173px; width: 1025.36px; height: 870px; }
+  .wide-hero__foreground { left: 0; top: 451px; width: 1740px; height: 1724.05px; }
+  .wide-hero__journey { left: 0; top: 376px; width: 1740px; height: 4500px; }
+  .wide-hero__flag { left: 755.5px; top: 474px; width: 225px; height: 191px; }
+  .hero__waving-flag { left: 852.6px; top: 502px; width: 139.2px; height: 92.8px; }
+  .hero__flock { left: 1px; top: -17px; width: 1740px; height: 814px; }
+
+  .hero__bell--wide-1 { left: 176.789px; top: -2px; }
+  .hero__bell--wide-2 { left: 1355.16px; top: -2px; }
+  .hero__bell--wide-3 { left: 85.4375px; top: 60px; }
+  .hero__bell--wide-4 { left: 1498.11px; top: 60px; }
+  .hero__bell--wide-5 { left: -18.4531px; top: 138px; }
+  .hero__bell--wide-6 { left: 1566.49px; top: 158px; }
+
+  .hero__name { font-size: 171px; line-height: 205.2px; }
+  .hero__name--first { left: 681.73px; top: 53px; width: 376.55px; }
+  .hero__and { left: 792.28px; top: 175px; width: 155.45px; font-size: 143px; line-height: 171.6px; }
+  .hero__name--second { left: 651.2px; top: 285px; width: 437.59px; }
+
+  .wide-invitation__backdrop { left: 0; top: 2369px; width: 1740px; height: 1898.49px; }
+  .wide-invitation__scroll { left: 763.49px; top: 2421px; width: 211px; height: 65.45px; }
+  .wide-invitation__ganesh { left: 827.49px; top: 2486px; }
+  .wide-invitation__flourish { left: 734.49px; top: 2609px; }
+  .wide-invitation__copy { left: 149px; top: 2729px; }
+
+  .wide-timeline__backdrop { left: -10px; top: 2947px; width: 1760px; height: 4698px; }
+  .timeline__heading { top: 4621px; }
+  .timeline__heading p { margin-top: 18px; }
+  .event-card { top: 4891.65px; width: 204.6px; height: 316.28px; }
+  .event-card--1 { left: 42.25px; }
+  .event-card--2 { left: 311.75px; }
+  .event-card--3 { left: 581.25px; }
+  .event-card--4 { left: 849.65px; }
+  .event-card--5 { left: 1119.15px; }
+  .event-card--6 { left: 1388.65px; }
+  .wide-card-medallion { width: 136.4px; height: 136.28px; }
+  .wide-card-medallion--1, .wide-card-medallion--6 { left: 269.95px; }
+  .wide-card-medallion--2, .wide-card-medallion--7 { left: 543.85px; }
+  .wide-card-medallion--3, .wide-card-medallion--8 { left: 801.8px; }
+  .wide-card-medallion--4, .wide-card-medallion--9 { left: 1082.85px; }
+  .wide-card-medallion--5, .wide-card-medallion--10 { left: 1357.85px; }
+  .wide-card-medallion--1, .wide-card-medallion--2, .wide-card-medallion--3, .wide-card-medallion--4, .wide-card-medallion--5 { top: 4791.55px; }
+  .wide-card-medallion--6, .wide-card-medallion--7, .wide-card-medallion--8, .wide-card-medallion--9, .wide-card-medallion--10 { top: 5141.47px; }
+  .wide-timeline__divider { left: 723px; top: 5338px; width: 294px; height: 115.67px; }
+
+  .wide-couple__backdrop { left: 0; top: 5416px; width: 1740px; height: 6517.81px; }
+  .wide-couple__medallion { top: 5810.64px; }
+  .wide-couple__medallion--left { left: 129.15px; }
+  .wide-couple__medallion--right { left: 1347.15px; }
+  .couple__heading { left: 478.83px; top: 6571px; }
+  .wide-couple__portrait { left: 468px; top: 6899px; height: 989.74px; }
+  .couple__story { left: 540px; top: 7238px; }
+  .rotating-gallery { left: -99.52px; top: 7996.28px; width: 1930px; height: 664px; scale: .96; transform-origin: 50% 0; }
+  .couple__celebrate { left: 729.79px; top: 8336px; }
+  .wide-couple__photo { left: 0; top: 8647px; width: 1740px; height: 1160px; }
+
+  .wide-guest__backdrop { left: -116px; top: 8627px; width: 1972px; height: 10414px; }
+  .guest__looking { left: 494.23px; top: 9880.52px; width: 751.53px; font-size: 70px; line-height: 84px; }
+  .location-card { left: 312.31px; top: 10023.71px; width: 1114.65px; height: 453.93px; scale: 1; }
+  .location-card__map { width: 543.68px; height: 453.93px; }
+  .location-card__venue { left: 570.98px; width: 543.68px; height: 185.39px; padding: 22px 61.6px 22px 26.4px; }
+  .location-card__switcher { left: 570.98px; top: 203.6px; width: 543.68px; gap: 13.65px; }
+  .location-card__switcher button { width: 543.68px; height: 52.32px; }
+  .wide-finale__backdrop { left: 0; top: 11137px; width: 1740px; height: 2153.46px; }
+  .wide-finale__flourish { left: 578.18px; top: 11996.1px; scale: 1; }
+  .wide-finale__divider { left: 608px; }
+  .wide-finale__divider--top { top: 10874px; }
+  .wide-finale__divider--bottom { top: 11560px; }
+  .rsvp-card { left: 555.99px; top: 10556.14px; width: 627.64px; height: 295.72px; scale: 1; }
+  .rsvp-card h2 { font-size: 19.73px; }
+  .rsvp-card input, .rsvp-card button, .rsvp-card select { height: 51px; font-size: 16.25px; }
+  .rsvp-card__send { height: 55.2px; font-size: 17.4px; }
+  .knowledge { left: -32px; top: 10985px; width: 1804px; }
+  .knowledge h2 { width: 368.53px; }
+  .knowledge__intro { width: 1695.76px; }
+  .countdown { left: 421.49px; top: 11675px; width: 899px; height: 477px; }
+  .countdown h2 { width: 807.44px; }
+  .countdown__units { width: 656.99px; height: 124.55px; gap: 76.94px; scale: 1; }
+  .countdown__units div { width: 104.57px; height: 124.3px; }
+  .countdown__units strong { width: 104.57px; height: 88.78px; font-size: 80.89px; line-height: 80.89px; }
+  .countdown__units div > span { margin-top: 11.84px; font-size: 19.73px; line-height: 23.68px; }
+}
+
+@media (min-width: 1920px) {
+  html, body, #root { min-height: 13103px; }
+  #root { height: 13103px; }
+  .site-canvas { position: relative; left: 50%; width: 1920px; height: 13107px; margin: 0; transform: translateX(-50%); }
+
+  .wide-hero__sky { left: 0; top: -2px; width: 1920px; height: 1548.8px; }
+  .wide-hero__clouds { left: 160px; top: -105px; width: 1600px; height: 817.33px; }
+  .wide-hero__atmosphere { left: 0; top: 0; width: 1920px; height: 1565px; }
+  .wide-hero__temple { left: 312.92px; top: 173px; width: 1025.36px; height: 870px; }
+  .wide-hero__foreground { left: 0; top: 451px; width: 1920px; height: 1902.4px; }
+  .wide-hero__journey { left: 0; top: 566px; width: 1920px; height: 4500px; }
+  .wide-hero__flag { left: 844.5px; top: 461px; width: 225px; height: 191px; }
+  .hero__waving-flag { left: 940.8px; top: 489px; width: 153.59px; height: 102.39px; }
+  .hero__flock { left: 1px; top: -17px; width: 1920px; height: 813.95px; }
+
+  .hero__bell--wide-1 { left: 205.42px; top: -2px; }
+  .hero__bell--wide-2 { left: 1505.7px; top: -2px; }
+  .hero__bell--wide-3 { left: 102.19px; top: 60px; }
+  .hero__bell--wide-4 { left: 1661px; top: 60px; }
+  .hero__bell--wide-5 { left: -10.02px; top: 138px; }
+  .hero__bell--wide-6 { left: 1738.89px; top: 158px; }
+
+  .hero__name { font-size: 171px; line-height: 205.2px; }
+  .hero__name--first { left: 771.73px; top: 53px; width: 376.55px; }
+  .hero__and { left: 882.28px; top: 175px; width: 155.45px; font-size: 143px; line-height: 171.6px; }
+  .hero__name--second { left: 741.2px; top: 285px; width: 437.59px; }
+
+  .wide-invitation__backdrop { left: 0; top: 2369px; width: 1920px; height: 2094.89px; }
+  .wide-invitation__scroll { left: 853.49px; top: 2611px; }
+  .wide-invitation__ganesh { left: 917.49px; top: 2676px; }
+  .wide-invitation__flourish { left: 824.49px; top: 2799px; }
+  .wide-invitation__copy { left: 239px; top: 2919px; }
+
+  .wide-timeline__backdrop { left: -10px; top: 2947px; width: 1940px; height: 4698px; }
+  .timeline__heading { top: 4463.04px; }
+  .event-card { top: 4834.95px; width: 241.8px; height: 373.79px; }
+  .event-card--1 { left: -14.35px; }
+  .event-card--2 { left: 304.15px; }
+  .event-card--3 { left: 622.65px; }
+  .event-card--4 { left: 939.85px; }
+  .event-card--5 { left: 1258.35px; }
+  .event-card--6 { left: 1576.85px; }
+  .wide-card-medallion { width: 161.2px; height: 161.06px; }
+  .wide-card-medallion--1, .wide-card-medallion--6 { left: 250.85px; }
+  .wide-card-medallion--2, .wide-card-medallion--7 { left: 574.55px; }
+  .wide-card-medallion--3, .wide-card-medallion--8 { left: 879.4px; }
+  .wide-card-medallion--4, .wide-card-medallion--9 { left: 1211.55px; }
+  .wide-card-medallion--5, .wide-card-medallion--10 { left: 1536.55px; }
+  .wide-card-medallion--1, .wide-card-medallion--2, .wide-card-medallion--3, .wide-card-medallion--4, .wide-card-medallion--5 { top: 4716.65px; }
+  .wide-card-medallion--6, .wide-card-medallion--7, .wide-card-medallion--8, .wide-card-medallion--9, .wide-card-medallion--10 { top: 5130.19px; }
+  .wide-timeline__divider { left: 813px; top: 5208px; }
+
+  .wide-couple__backdrop { left: 0; top: 5266px; width: 1920px; height: 7192.08px; }
+  .wide-couple__medallion { top: 5660.64px; }
+  .wide-couple__medallion--left { left: 156.15px; }
+  .wide-couple__medallion--right { left: 1500.15px; }
+  .couple__heading { left: 568.83px; top: 6421px; }
+  .wide-couple__portrait { left: 558px; top: 6749px; }
+  .couple__story { left: 630px; top: 7088px; }
+  .rotating-gallery { left: -9.99px; top: 7846.28px; width: 1930px; height: 664px; scale: .96; transform-origin: 50% 0; }
+  .couple__celebrate { left: 819.79px; top: 8186px; }
+  .wide-couple__photo { left: 0; top: 8477px; width: 1920px; height: 1280px; }
+
+  .wide-guest__backdrop { left: -231px; top: 8430px; width: 2382px; height: 11627px; }
+  .guest__looking { left: 637.91px; top: 9773.16px; width: 644.18px; }
+  .location-card { left: 449.61px; top: 9911.01px; scale: 1; }
+
+  .wide-finale__backdrop { left: -10px; top: 10980px; width: 1940px; height: 2400.98px; }
+  .wide-finale__flourish { left: 667.19px; top: 11794.1px; scale: 1; }
+  .wide-finale__divider { left: 698px; }
+  .wide-finale__divider--top { top: 10677px; }
+  .wide-finale__divider--bottom { top: 11362px; }
+  .rsvp-card { left: 687.6px; top: 10394.82px; width: 540.78px; height: 254.36px; scale: 1; }
+  .knowledge { left: 58px; top: 10788px; width: 1804px; }
+  .knowledge h2 { width: 368.53px; }
+  .knowledge__intro { width: 1695.76px; }
+  .countdown { left: 511.5px; top: 11598px; width: 899px; height: 477px; }
+  .countdown h2 { width: 807.44px; }
+  .countdown__units { scale: 1.97294; }
+}
+
+@media (min-width: 1559px) {
+  .countdown__units { width: 656.99px; height: 124.55px; gap: 76.94px; scale: 1; }
+  .countdown__units div { width: 104.57px; height: 124.3px; }
+  .countdown__units strong { width: 104.57px; height: 88.78px; font-size: 80.89px; line-height: 80.89px; }
+  .countdown__units div > span { margin-top: 11.84px; font-size: 19.73px; line-height: 23.68px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
 }

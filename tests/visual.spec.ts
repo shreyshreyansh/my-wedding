@@ -100,3 +100,72 @@ test("1440px composition preserves the measured reference geometry", async ({ pa
     width: element.clientWidth
   }))).toEqual({ height: 760, left: -37, top: 7225, width: 1515 });
 });
+
+test("1728px composition uses the full-width desktop reference variant", async ({ page }) => {
+  await page.setViewportSize({ width: 1728, height: 1000 });
+  await page.goto("/");
+  await page.evaluate(() => document.fonts.ready);
+  await page.addStyleTag({ content: ".wide-hero__flag { animation: none !important; }" });
+
+  expect(await page.evaluate(() => document.documentElement.scrollHeight)).toBe(13103);
+
+  expectBox((await page.locator(".site-canvas").boundingBox())!, { x: -6, y: 0, width: 1740, height: 13107 });
+  expectBox((await page.locator(".wide-hero__sky").boundingBox())!, { x: -6, y: -2, width: 1740, height: 1403.59 });
+  expectBox((await page.locator(".wide-hero__clouds").boundingBox())!, { x: -96, y: -186.73, width: 1920, height: 980.79 });
+  expectBox((await page.locator(".wide-hero__atmosphere").boundingBox())!, { x: -6, y: 0, width: 1740, height: 1565 });
+  expectBox((await page.locator(".wide-hero__temple").boundingBox())!, { x: 229.52, y: 173, width: 1025.36, height: 870 });
+  expectBox((await page.locator(".wide-hero__foreground").boundingBox())!, { x: -6, y: 451, width: 1740, height: 1724.05 });
+  expectBox((await page.locator(".wide-hero__journey").boundingBox())!, { x: -6, y: 376, width: 1740, height: 4500 });
+  expectBox((await page.locator(".wide-hero__flag").boundingBox())!, { x: 749.5, y: 474, width: 225, height: 191 });
+  expectBox((await page.locator(".hero__waving-flag").boundingBox())!, { x: 846.6, y: 502, width: 139.2, height: 92.8 });
+  expectBox((await page.locator(".hero__flock").boundingBox())!, { x: -5, y: -17, width: 1740, height: 814 });
+
+  expectBox((await page.locator(".wide-couple__portrait").boundingBox())!, { x: 462, y: 6899, width: 804, height: 989.74 });
+  expectBox((await page.locator(".rotating-gallery").boundingBox())!, { x: -66.92, y: 7996.28, width: 1852.8, height: 637.44 });
+  expectBox((await page.locator(".wide-couple__photo").boundingBox())!, { x: -6, y: 8647, width: 1740, height: 1160 });
+  expectBox((await page.locator(".wide-guest__backdrop").boundingBox())!, { x: -122, y: 8627, width: 1972, height: 10414 });
+  expectBox((await page.locator(".wide-finale__backdrop").boundingBox())!, { x: -6, y: 11137, width: 1740, height: 2153.46 });
+
+  const locationStyles = await page.locator(".location-card").evaluate((element) => ({
+    height: Number.parseFloat(getComputedStyle(element).height),
+    left: Number.parseFloat(getComputedStyle(element).left),
+    scale: getComputedStyle(element).scale,
+    top: Number.parseFloat(getComputedStyle(element).top),
+    width: Number.parseFloat(getComputedStyle(element).width)
+  }));
+  expectBox({ x: locationStyles.left, y: locationStyles.top, width: locationStyles.width, height: locationStyles.height }, { x: 312.31, y: 10023.71, width: 1114.65, height: 453.93 });
+  expect(locationStyles.scale).toBe("none");
+
+  const rsvpStyles = await page.locator(".rsvp-card").evaluate((element) => ({
+    height: Number.parseFloat(getComputedStyle(element).height),
+    left: Number.parseFloat(getComputedStyle(element).left),
+    scale: getComputedStyle(element).scale,
+    top: Number.parseFloat(getComputedStyle(element).top),
+    width: Number.parseFloat(getComputedStyle(element).width)
+  }));
+  expectBox({ x: rsvpStyles.left, y: rsvpStyles.top, width: rsvpStyles.width, height: rsvpStyles.height }, { x: 555.99, y: 10556.14, width: 627.64, height: 295.72 });
+  expect(rsvpStyles.scale).toBe("none");
+});
+
+test("desktop breakpoint boundaries preserve their measured reference canvases", async ({ page }) => {
+  const cases = [
+    { viewport: 1559, scrollHeight: 12261, canvas: { x: 0, y: 0, width: 1559, height: 12261 }, sky: { x: 0, y: -2, width: 1559, height: 1257.58 }, flag: { x: 666.48, y: 396, width: 225, height: 191 }, wave: { x: 763.91, y: 424, width: 124.72, height: 83.14 } },
+    { viewport: 1727, scrollHeight: 12261, canvas: { x: 84, y: 0, width: 1559, height: 12261 }, sky: { x: 84, y: -2, width: 1559, height: 1257.58 }, flag: { x: 750.48, y: 396, width: 225, height: 191 }, wave: { x: 847.91, y: 424, width: 124.72, height: 83.14 } },
+    { viewport: 1728, scrollHeight: 13103, canvas: { x: -6, y: 0, width: 1740, height: 13107 }, sky: { x: -6, y: -2, width: 1740, height: 1403.59 }, flag: { x: 749.5, y: 474, width: 225, height: 191 }, wave: { x: 846.6, y: 502, width: 139.2, height: 92.8 } },
+    { viewport: 1919, scrollHeight: 13103, canvas: { x: 89.5, y: 0, width: 1740, height: 13107 }, sky: { x: 89.5, y: -2, width: 1740, height: 1403.59 }, flag: { x: 845, y: 474, width: 225, height: 191 }, wave: { x: 942.1, y: 502, width: 139.2, height: 92.8 } },
+    { viewport: 1920, scrollHeight: 13103, canvas: { x: 0, y: 0, width: 1920, height: 13107 }, sky: { x: 0, y: -2, width: 1920, height: 1548.8 }, flag: { x: 844.5, y: 461, width: 225, height: 191 }, wave: { x: 940.8, y: 489, width: 153.59, height: 102.39 } }
+  ];
+
+  for (const expected of cases) {
+    await page.setViewportSize({ width: expected.viewport, height: 1000 });
+    await page.goto("/");
+    await page.evaluate(() => document.fonts.ready);
+    await page.addStyleTag({ content: ".wide-hero__flag { animation: none !important; }" });
+
+    expect(await page.evaluate(() => document.documentElement.scrollHeight)).toBe(expected.scrollHeight);
+    expectBox((await page.locator(".site-canvas").boundingBox())!, expected.canvas);
+    expectBox((await page.locator(".wide-hero__sky").boundingBox())!, expected.sky);
+    expectBox((await page.locator(".wide-hero__flag").boundingBox())!, expected.flag);
+    expectBox((await page.locator(".hero__waving-flag").boundingBox())!, expected.wave);
+  }
+});
