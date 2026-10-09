@@ -12,6 +12,7 @@ function expectBox(actual: Box, expected: Box, tolerance = .06) {
 test("393px composition preserves the measured reference geometry", async ({ page }) => {
   await page.setViewportSize({ width: 393, height: 852 });
   await page.goto("/");
+  await page.locator(".site-canvas").waitFor({ state: "visible" });
   await page.evaluate(() => document.fonts.ready);
 
   expect(await page.evaluate(() => document.documentElement.scrollHeight)).toBe(6180);
@@ -54,6 +55,7 @@ test("412px composition uses the reference phone breakpoint", async ({ page }) =
 test("469px composition expands the hero artwork without shrinking it", async ({ page }) => {
   await page.setViewportSize({ width: 469, height: 852 });
   await page.goto("/");
+  await page.locator(".site-canvas").waitFor({ state: "visible" });
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(1800);
 
@@ -80,6 +82,7 @@ test("469px composition expands the hero artwork without shrinking it", async ({
 test("1440px composition preserves the measured reference geometry", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
+  await page.locator(".site-canvas").waitFor({ state: "visible" });
   await page.evaluate(() => document.fonts.ready);
 
   expect(await page.evaluate(() => document.documentElement.scrollHeight)).toBe(12261);
@@ -126,6 +129,27 @@ test("waving flag has a visible first-paint fallback on refresh", async ({ page 
   expect(readyBackground).toBe("none");
 });
 
+test("cold loading reveals the pole, cloth, and bells as one hero scene", async ({ page }) => {
+  await page.setViewportSize({ width: 1728, height: 1000 });
+  const delayedFiles = ["wide-flag.webp", "wide-flag-cloth.png", "wide-bell-outer.png", "wide-bell-inner.png"];
+  await page.route("**/assets/images/*", async (route) => {
+    if (delayedFiles.some((file) => route.request().url().endsWith(file))) {
+      await new Promise((resolve) => setTimeout(resolve, 350));
+    }
+    await route.continue();
+  });
+
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+
+  expect(await page.locator(".site-canvas").count()).toBe(0);
+  expect(await page.locator('.hanging-bell__body img[alt="Hanging bell"]').count()).toBe(0);
+
+  await page.locator(".site-canvas").waitFor({ state: "visible" });
+  expect(await page.locator('.hero__bell[data-image-ready="true"]:visible').count()).toBe(6);
+  await expect(page.locator(".wide-hero__flag")).toBeVisible();
+  await expect(page.locator(".hero__waving-flag")).toBeVisible();
+});
+
 test("the flag pole stays anchored to the temple while the cloth waves", async ({ page }) => {
   await page.setViewportSize({ width: 393, height: 852 });
   await page.goto("/");
@@ -142,9 +166,41 @@ test("the flag pole stays anchored to the temple while the cloth waves", async (
   expectBox((await desktopPole.boundingBox())!, { x: 749.5, y: 474, width: 225, height: 191 });
 });
 
+test("the temple journey artwork masks the lower flag pole", async ({ page }) => {
+  await page.setViewportSize({ width: 1728, height: 1000 });
+  await page.goto("/");
+  await page.locator(".site-canvas").waitFor({ state: "visible" });
+
+  const layers = await page.evaluate(() => {
+    const pole = document.querySelector(".wide-hero__flag");
+    const cloth = document.querySelector(".hero__waving-flag");
+    const journey = document.querySelector(".wide-hero__journey");
+    if (!(pole instanceof HTMLElement) || !(cloth instanceof HTMLElement) || !(journey instanceof HTMLElement)) {
+      throw new Error("Expected wide hero flag layers");
+    }
+
+    return {
+      clothBeforeJourney: Boolean(cloth.compareDocumentPosition(journey) & Node.DOCUMENT_POSITION_FOLLOWING),
+      clothZIndex: getComputedStyle(cloth).zIndex,
+      journeyZIndex: getComputedStyle(journey).zIndex,
+      poleBeforeJourney: Boolean(pole.compareDocumentPosition(journey) & Node.DOCUMENT_POSITION_FOLLOWING),
+      poleZIndex: getComputedStyle(pole).zIndex
+    };
+  });
+
+  expect(layers).toEqual({
+    clothBeforeJourney: true,
+    clothZIndex: "9",
+    journeyZIndex: "9",
+    poleBeforeJourney: true,
+    poleZIndex: "9"
+  });
+});
+
 test("1728px composition uses the full-width desktop reference variant", async ({ page }) => {
   await page.setViewportSize({ width: 1728, height: 1000 });
   await page.goto("/");
+  await page.locator(".site-canvas").waitFor({ state: "visible" });
   await page.evaluate(() => document.fonts.ready);
   await page.addStyleTag({ content: ".wide-hero__flag { animation: none !important; }" });
 
@@ -200,6 +256,7 @@ test("desktop breakpoint boundaries preserve their measured reference canvases",
   for (const expected of cases) {
     await page.setViewportSize({ width: expected.viewport, height: 1000 });
     await page.goto("/");
+    await page.locator(".site-canvas").waitFor({ state: "visible" });
     await page.evaluate(() => document.fonts.ready);
     await page.addStyleTag({ content: ".wide-hero__flag { animation: none !important; }" });
 

@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { bellIdleAngle, HangingBell } from "./HangingBell";
 
@@ -9,8 +9,16 @@ describe("HangingBell", () => {
     expect(bellIdleAngle(3750)).toBeCloseTo(-2.5);
   });
 
-  it("renders an interactive bell with the reference artwork", () => {
-    const { getByRole } = render(<HangingBell className="hero__bell" file="wide-bell-outer.png" />);
-    expect(getByRole("img", { name: "Hanging bell with flowers" })).toBeInTheDocument();
+  it("keeps decorative fallback text hidden until the bell artwork is ready", () => {
+    const { container, getByRole } = render(<HangingBell className="hero__bell" file="wide-bell-outer.png" />);
+    const host = getByRole("img", { name: "Hanging bell with flowers" });
+    const image = container.querySelector("img")!;
+
+    expect(host).toHaveAttribute("data-image-ready", "false");
+    expect(image).toHaveAttribute("alt", "");
+
+    fireEvent.load(image);
+
+    expect(host).toHaveAttribute("data-image-ready", "true");
   });
 });

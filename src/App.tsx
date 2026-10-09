@@ -53,15 +53,6 @@ function EventCard({ index }: { index: number }) {
 
 const wideCardMedallions = Array.from({ length: 10 }, (_, index) => index + 1);
 
-function HeroEffects() {
-  return (
-    <>
-      <BirdFlock />
-      <WavingFlag className="hero__waving-flag" />
-    </>
-  );
-}
-
 function LocationCard() {
   const [selectedLocation, setSelectedLocation] = useState(0);
   const [mapActive, setMapActive] = useState(false);
@@ -145,8 +136,9 @@ export function App() {
         <DecorativeImage className="wide-only wide-hero__atmosphere" file="wide-hero-atmosphere.webp" />
         <DecorativeImage className="wide-only wide-hero__temple" file="wide-hero-temple.webp" />
         <DecorativeImage className="wide-only wide-hero__foreground" file="wide-hero-foreground.webp" />
-        <DecorativeImage className="wide-only wide-hero__journey" file="wide-hero-journey.webp" />
         <DecorativeImage className="wide-only wide-hero__flag" file="wide-flag.webp" />
+        <WavingFlag className="hero__waving-flag" />
+        <DecorativeImage className="wide-only wide-hero__journey" file="wide-hero-journey.webp" />
         {[1, 2, 3, 4, 5, 6].map((bell) => <HangingBell className={`wide-only hero__bell hero__bell--wide hero__bell--wide-${bell}`} file={bell <= 2 ? "wide-bell-outer.png" : "wide-bell-inner.png"} key={bell} />)}
         <DecorativeImage className="hero__sky" file="3a1202a6edfbd91f.webp" />
         <DecorativeImage className="hero__glow" file="bad6103adb6c57a4.avif" />
@@ -159,7 +151,7 @@ export function App() {
         <HangingBell className="hero__bell hero__bell--3" file="22081e683158c046.avif" />
         <HangingBell className="hero__bell hero__bell--4" file="22081e683158c046.avif" mass={2} volume={.75} />
         <DecorativeImage className="hero__flag" file="be9b608a683e28b1.webp" />
-        <HeroEffects />
+        <BirdFlock />
         <DecorativeImage className="hero__birds" file="c32c73cb83ebac88.webp" />
         <h1 className="hero__title" aria-label="Akash weds Drashti">
           <span className="hero__name hero__name--first">Akash</span><span className="hero__and">weds</span><span className="hero__name hero__name--second">Drashti</span>

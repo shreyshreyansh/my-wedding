@@ -30,7 +30,8 @@ img { display: block; max-width: none; user-select: none; }
 .hero__walkway { position: absolute; left: -.76cqw; top: 88.55cqw; width: 101.78cqw; height: 370.99cqw; object-fit: contain; z-index: 3; }
 .hero__flowers { position: absolute; left: -2.04cqw; top: 0; width: 104.33cqw; height: 53.18cqw; object-fit: contain; z-index: 8; }
 .hero__bell { position: absolute; z-index: 9; cursor: pointer; touch-action: manipulation; }
-.hanging-bell__body { width: 100%; height: 100%; transform-origin: 50% 0; will-change: transform; }
+.hanging-bell__body { width: 100%; height: 100%; opacity: 0; transform-origin: 50% 0; transition: opacity .18s ease; will-change: transform, opacity; }
+.hero__bell[data-image-ready="true"] .hanging-bell__body { opacity: 1; }
 .hanging-bell__body img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; user-select: none; }
 .hero__bell--1 { left: 77.4cqw; top: -.25cqw; width: 13.23cqw; height: 46.06cqw; }
 .hero__bell--2 { left: 8.53cqw; top: -.25cqw; width: 10.94cqw; height: 46.06cqw; }

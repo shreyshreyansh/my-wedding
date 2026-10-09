@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type HangingBellProps = {
   className: string;
@@ -15,6 +15,7 @@ export function bellIdleAngle(timeMs: number, amplitude = 2.5, periodSeconds = 5
 export function HangingBell({ className, file, mass = 1.5, volume = .6 }: HangingBellProps) {
   const hostRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
+  const [imageReady, setImageReady] = useState(false);
 
   useEffect(() => {
     const host = hostRef.current;
@@ -127,9 +128,15 @@ export function HangingBell({ className, file, mass = 1.5, volume = .6 }: Hangin
   }, [mass, volume]);
 
   return (
-    <div className={className} ref={hostRef} role="img" aria-label="Hanging bell with flowers">
+    <div className={className} ref={hostRef} role="img" aria-label="Hanging bell with flowers" data-image-ready={imageReady}>
       <div className="hanging-bell__body" ref={bodyRef}>
-        <img src={`/assets/images/${file}`} alt="Hanging bell" draggable={false} />
+        <img
+          src={`/assets/images/${file}`}
+          alt=""
+          decoding="async"
+          draggable={false}
+          onLoad={() => setImageReady(true)}
+        />
       </div>
     </div>
   );
