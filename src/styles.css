@@ -1,0 +1,642 @@
+@font-face { font-family: "Gotham Light"; src: url("/assets/fonts/gotham-light.woff2") format("woff2"); font-weight: 300; font-display: swap; }
+@font-face { font-family: "Gotham Book"; src: url("/assets/fonts/gotham-book.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Gotham Medium"; src: url("/assets/fonts/gotham-medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "IvyOra"; src: url("/assets/fonts/ivyora-regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "IvyOra"; src: url("/assets/fonts/ivyora-medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "IvyOra"; src: url("/assets/fonts/ivyora-bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Miofarin"; src: url("/assets/fonts/miofarin.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Brother Signature"; src: url("/assets/fonts/brother-signature.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("/assets/fonts/inter-bold-latin.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+
+:root { color: #5f250f; background: #f9eddd; font-family: "Gotham Book", sans-serif; font-synthesis: none; }
+* { box-sizing: border-box; }
+html, body, #root { margin: 0; min-width: 320px; min-height: 100%; }
+body { overflow-x: hidden; background: #f9eddd; }
+button, input, select { font: inherit; }
+img { display: block; max-width: none; user-select: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.wide-only { display: none; }
+
+.site-canvas { container-type: inline-size; position: relative; width: 100cqw; height: 1572.52cqw; max-height: 6180px; overflow: clip; background: #f9eddd; }
+.section-layer { position: absolute; inset: 0; pointer-events: none; }
+.section-layer input, .section-layer button, .section-layer select, .section-layer a { pointer-events: auto; }
+.section-layer .location-card__map { pointer-events: auto; }
+.hero { z-index: 0; }
+
+.hero__sky { position: absolute; left: -.51cqw; top: -.25cqw; width: 101.27cqw; height: 204.07cqw; object-fit: cover; z-index: 0; }
+.hero__glow { position: absolute; left: -.51cqw; top: 22.9cqw; width: 101.53cqw; height: 81.93cqw; object-fit: cover; z-index: 2; }
+.hero__sun { position: absolute; left: 9.41cqw; top: 67.43cqw; width: 67.18cqw; height: 57cqw; object-fit: contain; z-index: 1; }
+.hero__mountains { position: absolute; left: -10.43cqw; top: 85.5cqw; width: 121.63cqw; height: 120.36cqw; object-fit: cover; z-index: 1; }
+.hero__walkway { position: absolute; left: -.76cqw; top: 88.55cqw; width: 101.78cqw; height: 370.99cqw; object-fit: contain; z-index: 3; }
+.hero__flowers { position: absolute; left: -2.04cqw; top: 0; width: 104.33cqw; height: 53.18cqw; object-fit: contain; z-index: 8; }
+.hero__bell { position: absolute; z-index: 9; cursor: pointer; touch-action: manipulation; }
+.hanging-bell__body { width: 100%; height: 100%; transform-origin: 50% 0; will-change: transform; }
+.hanging-bell__body img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; user-select: none; }
+.hero__bell--1 { left: 77.4cqw; top: -.25cqw; width: 13.23cqw; height: 46.06cqw; }
+.hero__bell--2 { left: 8.53cqw; top: -.25cqw; width: 10.94cqw; height: 46.06cqw; }
+.hero__bell--3 { left: 2.43cqw; top: 0; width: 9.42cqw; height: 34.86cqw; }
+.hero__bell--4 { left: 84.13cqw; top: 3.82cqw; width: 11.71cqw; height: 30.79cqw; }
+.hero__flag { position: absolute; left: 42.49cqw; top: 80.66cqw; width: 14.76cqw; height: 15.52cqw; object-fit: contain; z-index: 7; animation: flag-wave 2.8s ease-in-out infinite; }
+.hero__flock { position: absolute; left: -.76cqw; top: 0; width: 101.27cqw; height: 126.97cqw; z-index: 4; overflow: hidden; pointer-events: none; }
+.hero__flock canvas { display: block; width: 100%; height: 100%; }
+.hero__waving-flag { position: absolute; left: 49.44cqw; top: 80.66cqw; width: 9.21cqw; height: 8.55cqw; z-index: 8; opacity: 0; animation: flag-arrive .45s ease 1.5s forwards; touch-action: pan-y; transform-origin: 0 50%; }
+.hero__birds { position: absolute; left: 25.45cqw; top: 260.81cqw; width: 49.62cqw; height: 9.67cqw; object-fit: contain; opacity: .76; }
+.hero__title { position: absolute; inset: 0; margin: 0; color: rgba(171, 86, 38, .72); font-weight: 400; z-index: 5; }
+.hero__title span { position: absolute; display: block; text-align: center; }
+.hero__name { font: 400 21.88cqw/1.2 "Miofarin", sans-serif; }
+.hero__name--first { left: 25.95cqw; top: 23.92cqw; width: 48.09cqw; }
+.hero__and { left: 40.2cqw; top: 39.69cqw; width: 19.59cqw; font: 400 18.07cqw/1.2 "Brother Signature", cursive; }
+.hero__name--second { left: 21.88cqw; top: 53.69cqw; width: 55.98cqw; }
+
+.invitation__garden { position: absolute; left: -1.02cqw; top: 297.46cqw; width: 101.78cqw; height: 110.94cqw; object-fit: cover; }
+.invitation__copy { position: absolute; left: 0; top: 279.13cqw; width: 100%; text-align: center; font-family: "IvyOra", serif; font-size: 3.56cqw; line-height: 4.27cqw; z-index: 20; }
+.invitation__copy p { margin: 0; }
+.invitation__parents { color: #ab5626; font-family: "Gotham Medium", sans-serif; font-size: 3.31cqw; line-height: 4.07cqw; }
+.invitation__names { height: 76.34cqw; color: rgba(171, 86, 38, .72); position: relative; }
+.invitation__names span { display: block; height: 26.21cqw; font: 400 21.88cqw/1.2 "Miofarin", sans-serif; }
+.invitation__names em { display: block; height: 14.76cqw; margin-top: -10.18cqw; font: normal 400 18.58cqw/1.2 "Brother Signature", cursive; }
+.invitation__relation { margin-top: -1.53cqw !important; font-size: 3.31cqw; font-weight: 500; }
+.invitation__parents--second { margin-top: 1.02cqw !important; }
+.invitation__events { margin-top: 10.69cqw !important; font-size: 5.09cqw; font-weight: 500; }
+.invitation__scroll { position: absolute; left: 39.69cqw; top: 234.1cqw; width: 21.12cqw; height: 6.62cqw; object-fit: contain; z-index: 3; }
+.invitation__ganesh { position: absolute; left: 44.27cqw; top: 242cqw; width: 11.96cqw; height: 16.54cqw; object-fit: contain; z-index: 3; }
+.invitation__birds { position: absolute; left: 25.45cqw; top: 260.81cqw; width: 49.62cqw; height: 9.67cqw; object-fit: contain; z-index: 3; }
+
+@media (min-width: 360px) and (max-width: 599px) {
+  .hero__flock { left: -.63cqw; top: -1px; }
+  .hero__waving-flag { top: 81.73cqw; }
+  .invitation__copy { top: 921px; height: 362px; }
+  .invitation__copy > p { position: absolute; left: 0; width: 100%; }
+  .invitation__copy > p:nth-of-type(1) { top: 0; }
+  .invitation__copy > p:nth-of-type(2) { top: 22px; }
+  .invitation__copy > p:nth-of-type(3) { top: 38.8px; }
+  .invitation__copy > p:nth-of-type(4) { top: 55.6px; }
+  .invitation__names { position: absolute; top: 50.4px; height: 217px; width: 100%; }
+  .invitation__names em { margin-top: -43.4px; }
+  .invitation__relation { top: 261.4px; margin: 0 !important; }
+  .invitation__parents--second { top: 282.4px; margin: 0 !important; }
+  .invitation__events { top: 338px; margin: 0 !important; }
+}
+
+.timeline__garden { position: absolute; left: -1.02cqw; top: 322.39cqw; width: 101.78cqw; height: 507.12cqw; object-fit: cover; }
+.timeline__heading { position: absolute; left: 0; top: 479.9cqw; width: 100%; text-align: center; }
+.timeline__heading h2 { margin: 0; font: 700 7.12cqw/1.2 "IvyOra", serif; }
+.timeline__heading p { margin: 3.05cqw 0 0; font: 300 3.31cqw/1.2 "Gotham Light", sans-serif; }
+.event-card { position: absolute; width: 37.66cqw; height: 58.27cqw; }
+.event-card__frame { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
+.event-card__copy { position: absolute; inset: 14.5% 8% auto; text-align: center; color: #5f250f; }
+.event-card__copy h3 { color: #ab5626; margin: 0 0 2cqw; font: 500 5.85cqw/1.2 "IvyOra", serif; }
+.event-card__copy p { margin: 0; font: 300 3.05cqw/1.13 "Gotham Light", sans-serif; }
+.event-card__copy small { display: block; margin-top: 2.29cqw; font: 300 2.04cqw/1.2 "Gotham Light", sans-serif; }
+.event-card--1 { left: 6.87cqw; top: 503.31cqw; }
+.event-card--2 { left: 55.47cqw; top: 503.31cqw; }
+.event-card--3 { left: 6.87cqw; top: 569.47cqw; }
+.event-card--4 { left: 55.47cqw; top: 569.47cqw; }
+.event-card--5 { left: 6.87cqw; top: 635.62cqw; }
+.event-card--6 { left: 55.47cqw; top: 635.62cqw; }
+.timeline__medallion { position: absolute; left: 32.06cqw; width: 35.62cqw; height: 35.62cqw; object-fit: contain; }
+.timeline__medallion--1 { top: 543.77cqw; }
+.timeline__medallion--2 { top: 612.72cqw; }
+.timeline__divider { position: absolute; left: 28.75cqw; top: 691.09cqw; width: 42.24cqw; height: 16.54cqw; object-fit: contain; }
+
+.couple__backdrop { position: absolute; left: -.76cqw; top: 711.7cqw; width: 101.78cqw; height: 381.17cqw; object-fit: cover; }
+.couple__heading { position: absolute; left: 15.01cqw; top: 843.51cqw; width: 70.23cqw; margin: 0; text-align: center; font: 500 8.65cqw/1.2 "IvyOra", serif; }
+.couple__heading span { display: block; white-space: nowrap; }
+.couple__portrait { position: absolute; left: 7.12cqw; top: 873.79cqw; width: 85.75cqw; height: 105.6cqw; object-fit: cover; }
+.couple__story { position: absolute; left: 15.27cqw; top: 907.38cqw; width: 69.21cqw; margin: 0; text-align: center; font: 400 3.31cqw/1.2 "Gotham Book", sans-serif; }
+.couple__story span { color: rgba(95, 37, 15, .22); }
+.couple__story span:first-child { color: #5f250f; }
+.couple__gallery { position: absolute; inset: 0; }
+.gallery-photo { position: absolute; border-radius: 18%; object-fit: cover; box-shadow: 0 2cqw 4cqw rgba(63, 38, 16, .18); }
+.gallery-photo--1 { left: 39.44cqw; top: 989.57cqw; width: 20.36cqw; height: 20.36cqw; }
+.gallery-photo--2 { left: 65.39cqw; top: 995.17cqw; width: 28.5cqw; height: 28.5cqw; transform: rotate(38deg); }
+.gallery-photo--3 { left: 85.24cqw; top: 1022.14cqw; width: 25.7cqw; height: 25.7cqw; transform: rotate(-20deg); }
+.gallery-photo--4 { left: -11.45cqw; top: 1022.14cqw; width: 25.7cqw; height: 25.7cqw; transform: rotate(20deg); }
+.gallery-photo--5 { left: 5.6cqw; top: 995.17cqw; width: 28.5cqw; height: 28.5cqw; transform: rotate(-38deg); }
+.rotating-gallery { position: absolute; left: -5.5px; top: 3849px; width: 402px; height: 331.6px; overflow: hidden; background: transparent; z-index: 2; }
+.rotating-gallery__mask { position: absolute; inset: 0 0 auto; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 85%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 85%, transparent 100%); }
+.rotating-gallery__rotor { position: absolute; left: 50%; transform-origin: center; will-change: transform; }
+.rotating-gallery__ray { position: absolute; transform-origin: center; }
+.rotating-gallery__ray img { display: block; border-radius: 12px; object-fit: cover; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,.15); }
+.couple__celebrate { position: absolute; left: 36.39cqw; top: 1029.52cqw; width: 27.48cqw; margin: 0; text-align: center; font: 500 5.09cqw/1.2 "IvyOra", serif; }
+.couple__photo { position: absolute; left: -.51cqw; top: 1055.98cqw; width: 101.27cqw; height: 67.43cqw; object-fit: cover; }
+
+.guest__backdrop { position: absolute; left: -.51cqw; top: 1054.2cqw; width: 101.27cqw; height: 611.45cqw; object-fit: cover; }
+.guest__looking { position: absolute; left: 19.59cqw; top: 1128.75cqw; width: 61.07cqw; margin: 0; text-align: center; font: 500 5.34cqw/1.2 "IvyOra", serif; }
+.location-card { position: absolute; left: 6.23cqw; top: 1142.75cqw; width: 87.28cqw; height: 142.49cqw; border-radius: 4.07cqw; font-family: "Gotham Book", sans-serif; }
+.location-card__map { position: relative; height: 81.42cqw; overflow: hidden; border-radius: 4.07cqw; background: #c5d0b9; cursor: grab; }
+.location-card__map.is-active { cursor: grab; touch-action: none; }
+.location-card__map.is-active:active { cursor: grabbing; }
+.location-card__tiles { position: absolute; left: 50%; top: 50%; display: grid; grid-template-columns: repeat(3, 65.14cqw); width: 195.42cqw; height: 195.42cqw; transform-origin: center; transition: transform .25s ease; }
+.location-card__tile { width: 65.14cqw; height: 65.14cqw; object-fit: cover; }
+.location-card__pin { position: absolute; left: 50%; top: 50%; width: 7.63cqw; height: 10.18cqw; transform: translate(-50%, -100%); z-index: 3; }
+.location-card__pin svg { display: block; width: 100%; height: 100%; }
+.location-card__zoom { position: absolute; left: 2.54cqw; top: 2.54cqw; z-index: 5; display: flex; flex-direction: column; border: 1px solid rgba(0,0,0,.2); border-radius: 1.02cqw; overflow: hidden; box-shadow: 0 .5cqw 1.5cqw rgba(0,0,0,.18); }
+.location-card__zoom button { width: 7.63cqw; height: 7.63cqw; border: 0; border-bottom: 1px solid #ccc; background: #fff; color: #111; padding: 0; font: 400 5.09cqw/1 sans-serif; }
+.location-card__zoom button:last-child { border-bottom: 0; }
+.location-card__hint { position: absolute; left: 50%; top: 50%; z-index: 5; transform: translate(-50%, -50%); padding: 2.04cqw 3.56cqw; border-radius: 5.09cqw; background: rgba(0,0,0,.6); color: #fff; white-space: nowrap; font: 600 3.05cqw/1 "Gotham Medium", sans-serif; pointer-events: none; }
+.location-card__nearby { position: absolute; right: 3.05cqw; top: 3.05cqw; z-index: 5; max-width: 45%; padding: 2.04cqw 3.56cqw; border-radius: 2.04cqw; background: rgba(0,0,0,.55); color: #fff; text-align: center; font: 600 3.31cqw/1.3 "Gotham Medium", sans-serif; pointer-events: none; }
+.location-card__maps-link { position: absolute; right: 3.05cqw; bottom: 3.05cqw; z-index: 5; display: flex; align-items: center; gap: 1.53cqw; padding: 2.04cqw 3.05cqw; border-radius: 2.04cqw; background: rgba(0,0,0,.55); color: #fff; text-decoration: none; font: 600 3.31cqw/1.3 "Gotham Medium", sans-serif; }
+.location-card__recenter { position: absolute; left: 3.05cqw; bottom: 3.05cqw; z-index: 5; width: 8.65cqw; height: 8.65cqw; border: 0; border-radius: 2.04cqw; background: rgba(0,0,0,.55); color: #fff; font-size: 5.09cqw; }
+.location-card__venue { position: relative; min-height: 27.99cqw; margin-top: 4.07cqw; padding: 5.09cqw 14.25cqw 5.09cqw 6.11cqw; border-radius: 4.07cqw; background: #e4bc83; color: #1a1a1a; }
+.location-card__venue h3 { margin: 0 0 1.53cqw; font-size: 4.58cqw; }
+.location-card__venue p { margin: 0; font-size: 3.56cqw; line-height: 1.25; opacity: .8; }
+.location-card__venue > button { position: absolute; right: 4.07cqw; bottom: 4.07cqw; width: 8.14cqw; height: 8.14cqw; border: 0; border-radius: 2.04cqw; background: rgba(255,255,255,.12); color: #1a1a1a; font-size: 4.07cqw; }
+.location-card__copy-status { position: absolute; right: 3.05cqw; bottom: 13.23cqw; padding: 1.27cqw 2.04cqw; border-radius: 1.53cqw; background: #fff; font-size: 2.54cqw; }
+.location-card__copy-status.is-failed { color: #a52714; }
+.location-card__switcher { display: grid; grid-template-columns: 1fr 1fr; gap: 3.05cqw; margin-top: 4.07cqw; }
+.location-card__switcher button { height: 12.21cqw; border: 1px solid #d0d0d0; border-radius: 4.07cqw; background: #fff; color: #111; font-size: 3.56cqw; font-weight: 600; }
+.location-card__switcher button.is-active { border-color: #b37443; background: #b37443; color: #fff; }
+.knowledge { position: absolute; left: 0; top: 1295.67cqw; width: 100%; text-align: center; }
+.knowledge h2 { width: 51.54cqw; margin: 0 auto; font: 500 7.89cqw/1.2 "IvyOra", serif; white-space: nowrap; }
+.knowledge__intro { margin: 3.82cqw 0 0; font: 400 2.54cqw/1.6 "Gotham Book", sans-serif; }
+.knowledge__grid { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 7.63cqw; }
+.knowledge__grid article { position: relative; padding: 0 1.53cqw; min-width: 0; }
+.knowledge__icon { width: 9.67cqw; height: 9.67cqw; margin: 0 auto 1.02cqw; object-fit: contain; }
+.knowledge__grid h3 { margin: 0; font: 500 3.31cqw/1.2 "IvyOra", serif; }
+.knowledge__grid p { margin: 1.02cqw auto 0; font: 400 2.1cqw/1.2 "IvyOra", serif; }
+
+.finale__divider { position: absolute; left: 6.62cqw; width: 86.77cqw; height: 14.25cqw; object-fit: contain; }
+.finale__divider--top { top: 1352.93cqw; }
+.finale__divider--bottom { top: 1438.42cqw; }
+.rsvp-card { position: absolute; left: 6.74cqw; top: 1373.29cqw; width: 86.51cqw; padding: 5.09cqw; border-radius: 5.09cqw; background: rgba(255,255,255,.94); box-shadow: 0 2cqw 7cqw rgba(84,43,15,.12); font-family: Gotham, sans-serif; }
+.rsvp-card h2 { margin: 0 0 3.05cqw; font-size: 4.33cqw; }
+.rsvp-card input, .rsvp-card button, .rsvp-card select { height: 10.69cqw; border: 1px solid #ddd; border-radius: 3.05cqw; background: rgba(255,255,255,.9); color: rgba(0,0,0,.4); padding: 0 3.56cqw; font-size: 3.56cqw; }
+.rsvp-card input { width: 100%; }
+.rsvp-card__row { display: grid; grid-template-columns: 1fr 1fr; gap: 3.05cqw; margin-top: 3.05cqw; }
+.event-select { position: relative; }
+.event-select > button { width: 100%; }
+.event-select > button::after { content: ""; position: absolute; right: 1.1em; top: 50%; width: .38em; height: .38em; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor; transform: translateY(-70%) rotate(45deg); opacity: .55; }
+.event-select__menu { position: absolute; left: 0; right: 0; top: calc(100% + 1cqw); z-index: 20; overflow: hidden; border: 1px solid #ddd; border-radius: 3.05cqw; background: #fff; box-shadow: 0 2cqw 5cqw rgba(84,43,15,.16); }
+.event-select__menu button { width: 100%; height: 9.16cqw; border: 0; border-radius: 0; text-align: left; color: #5f250f; }
+.event-select__menu button:hover, .event-select__menu button:focus-visible { background: #f6e9d7; }
+.rsvp-card__send { display: flex; align-items: center; justify-content: center; gap: 2.04cqw; height: 11.7cqw; margin-top: 3.05cqw; border-radius: 3.56cqw; background: #25d366; color: #fff; text-decoration: none; font-size: 3.82cqw; font-weight: 700; }
+.rsvp-card__send svg { width: 4.58cqw; height: 4.58cqw; }
+.rsvp-card__send[aria-disabled="true"] { opacity: .5; cursor: not-allowed; }
+.countdown { position: absolute; left: 0; top: 1456.49cqw; width: 100%; text-align: center; z-index: 3; }
+.countdown h2 { position: relative; left: -1.02cqw; width: 58.94cqw; margin: 0 auto; font: 500 6.11cqw/1.2 "IvyOra", serif; white-space: nowrap; }
+.countdown p { margin: 2.54cqw 0 0; font: 400 2.8cqw/1.2 "IvyOra", serif; }
+.countdown__units { display: flex; justify-content: center; gap: 4.07cqw; margin-top: 10.18cqw; }
+.countdown__units div { display: flex; flex-direction: column; }
+.countdown__units strong { color: #dda45d; font: 700 5.34cqw/1 "Inter", sans-serif; letter-spacing: .05em; }
+.countdown__units strong span { margin: 0; color: inherit; font: inherit; letter-spacing: inherit; }
+.countdown__units div > span { margin-top: 1.53cqw; color: #888; font: 600 1.53cqw/1 "Inter", sans-serif; }
+.finale__elephants { position: absolute; left: -7.63cqw; top: 1438.42cqw; width: 115.27cqw; height: 142.75cqw; object-fit: cover; }
+
+@keyframes bell-sway { 0%,100% { transform: rotate(-1.8deg); } 50% { transform: rotate(2.2deg); } }
+@keyframes flag-wave { 0%,100% { transform: skewX(-1deg) rotate(-1deg); } 50% { transform: skewX(3deg) rotate(1deg); } }
+@keyframes flock-arrive { from { opacity: 0; transform: translate(5%, -4%); } to { opacity: .88; transform: translate(0, 0); } }
+@keyframes bird-flap { from { transform: scale(var(--bird-size)) scaleY(.52) translateY(1px); } to { transform: scale(var(--bird-size)) scaleY(1.12) translateY(-1px); } }
+@keyframes flag-arrive { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }
+@keyframes cloth-wave { 0%,100% { transform: perspective(160px) rotateY(-8deg) skewY(-1deg); } 50% { transform: perspective(160px) rotateY(11deg) skewY(2deg) scaleX(.96); } }
+
+@media (max-width: 359px) {
+  #root { position: relative; height: 5476px; overflow: clip; }
+  .site-canvas { width: 320px; height: 5476px; max-height: none; margin: 0 auto; }
+  .hero__sky { left: -1px; top: -1px; width: 322px; height: 802px; }
+  .hero__glow { left: -1px; top: 90px; width: 323px; height: 260.5px; }
+  .hero__sun { left: 5.6px; top: 264.8px; width: 263.7px; height: 223.5px; }
+  .hero__mountains { left: -40px; top: 336px; width: 402px; height: 398px; }
+  .hero__walkway { left: -2px; top: 348px; width: 324px; height: 1181px; }
+  .hero__flowers { left: -7px; top: 0; width: 334px; height: 170.6px; }
+  .hero__name { font-size: 65px; }
+  .hero__name--first { left: 88.4px; top: 137px; width: 143.2px; }
+  .hero__and { left: 133.9px; top: 183px; width: 58.7px; font-size: 54px; }
+  .hero__name--second { left: 76.8px; top: 225px; width: 166.4px; }
+  .hero__flock { left: -1px; width: 322px; height: 499px; }
+  .hero__waving-flag { left: 158px; top: 317px; width: 36px; height: 34px; }
+  .hero__flag { left: 131px; top: 317px; width: 58px; height: 61px; }
+  .invitation__garden { left: -3.9px; top: 1116px; width: 327.2px; height: 357px; }
+  .invitation__copy { top: 980px; font-size: 11px; line-height: 13.2px; }
+  .invitation__parents { font-size: 10px; line-height: 12px; }
+  .invitation__names { height: 244px; }
+  .invitation__names span { height: 80px; font-size: 67px; }
+  .invitation__names em { height: 64px; margin-top: -32px; font-size: 55px; }
+  .invitation__relation { font-size: 10px; }
+  .invitation__events { margin-top: 34px !important; font-size: 17px; }
+  .invitation__scroll { left: 126px; top: 920px; width: 68px; height: 22px; }
+  .invitation__ganesh { left: 141px; top: 947px; width: 38px; height: 53px; }
+  .invitation__birds { left: 80px; top: 1007px; width: 160px; height: 31px; }
+  .timeline__garden { left: -7.9px; top: 1192px; width: 336.2px; height: 1676px; }
+  .timeline__heading { top: 1711px; }
+  .timeline__heading h2 { font-size: 26px; }
+  .timeline__heading p { margin-top: 10px; font-size: 11px; }
+  .event-card { width: 148px; height: 229px; }
+  .event-card--1, .event-card--2 { top: 1774px; }
+  .event-card--3, .event-card--4 { top: 2034px; }
+  .event-card--5, .event-card--6 { top: 2294px; }
+  .event-card--1, .event-card--3, .event-card--5 { left: 22.6px; }
+  .event-card--2, .event-card--4, .event-card--6 { left: 178.7px; }
+  .event-card__copy h3 { margin-bottom: 8px; font-size: 23px; }
+  .event-card__copy p { font-size: 12px; }
+  .event-card__copy small { margin-top: 9px; font-size: 8px; }
+  .timeline__medallion { left: 103px; width: 114px; height: 114px; }
+  .timeline__medallion--1 { top: 1907px; }
+  .timeline__medallion--2 { top: 2167px; }
+  .timeline__divider { left: 92px; top: 2457px; width: 136px; height: 53px; }
+  .couple__backdrop { left: -3px; top: 2529px; width: 324px; height: 1214px; }
+  .couple__heading { left: 45.5px; top: 2888px; width: 227px; font-size: 28px; }
+  .couple__portrait { left: 25.5px; top: 2997px; width: 267px; height: 328.7px; }
+  .couple__story { left: 49px; top: 3104px; width: 222px; font-size: 11px; }
+  .gallery-photo--1 { left: 127px; top: 3342px; width: 65px; height: 65px; }
+  .gallery-photo--2 { left: 208px; top: 3360px; width: 91px; height: 91px; }
+  .gallery-photo--3 { left: 272px; top: 3443px; width: 82px; height: 82px; }
+  .gallery-photo--4 { left: -34px; top: 3443px; width: 82px; height: 82px; }
+  .gallery-photo--5 { left: 21px; top: 3360px; width: 91px; height: 91px; }
+  .rotating-gallery { left: -4px; top: 3262px; width: 328px; height: 300px; }
+  .couple__celebrate { left: 114.8px; top: 3543px; width: 88.4px; font-size: 17px; }
+  .couple__photo { left: -2.5px; top: 3630px; width: 325.2px; height: 216.8px; }
+  .guest__backdrop { left: -2.5px; top: 3623px; width: 325.2px; height: 1964px; }
+  .guest__looking { left: 67px; top: 3850px; width: 186px; font-size: 17px; }
+  .location-card { left: 18.6px; top: 3907px; width: 284px; height: 573px; }
+  .location-card__map { height: 296px; }
+  .knowledge { top: 4502px; }
+  .knowledge h2 { width: 202.56px; font-size: 31px; }
+  .rsvp-card { left: 24.6px; top: 4799px; width: 271px; height: 229px; padding: 20px; border-radius: 20px; }
+  .rsvp-card h2 { margin-bottom: 12px; font-size: 17px; }
+  .rsvp-card input, .rsvp-card button, .rsvp-card select { height: 43px; border-radius: 12px; padding: 0 14px; font-size: 14px; }
+  .rsvp-card__row { gap: 10px; margin-top: 12px; }
+  .rsvp-card__send { height: 46px; margin-top: 12px; border-radius: 14px; gap: 8px; font-size: 15px; }
+  .rsvp-card__send svg { width: 18px; height: 18px; }
+  .countdown { top: 5103px; }
+  .countdown h2 { left: 0; width: 202.7px; font-size: 21px; }
+  .finale__divider--top { top: 4712px; }
+  .finale__divider--bottom { top: 5035px; }
+  .finale__elephants { left: -25.4px; top: 5064px; width: 371px; height: 459.2px; }
+}
+
+@media (min-width: 394px) and (max-width: 599px) {
+  #root { height: 6180px; overflow: clip; }
+  .site-canvas { width: 393px; height: 6180px; max-height: none; margin: 0 auto; overflow: visible; }
+  .invitation__garden, .timeline__garden, .couple__backdrop, .couple__photo, .guest__backdrop { left: calc((393px - 100vw) / 2 - 2px); width: calc(100vw + 5px); }
+}
+
+@media (min-width: 394px) and (max-width: 411px) {
+  .hero__sky { left: -2.4688px; width: 397.9375px; height: 802px; }
+  .hero__glow { left: -2.4688px; width: 398.9375px; height: 321.8047px; }
+  .hero__mountains { left: -41.4688px; width: 477.9375px; height: 473.0313px; }
+  .hero__walkway { left: -3.4688px; width: 399.9375px; height: 1457.5703px; }
+  .hero__flowers { left: -8.4688px; width: 409.9375px; height: 209.4063px; }
+  .invitation__garden { left: -3.9219px; top: 1169px; width: 399.9375px; height: 436.2891px; }
+  .timeline__garden { left: -3.9219px; top: 1267px; width: 399.9375px; height: 1993.2344px; }
+  .couple__backdrop { left: -3.4688px; top: 2797px; width: 399.9375px; height: 1498.1094px; }
+  .couple__photo { left: -2.4688px; width: 397.9375px; height: 265.2891px; }
+  .guest__backdrop { left: -2.4688px; width: 397.9375px; height: 2402.8125px; }
+  .finale__elephants { left: -30px; top: 5653px; width: 453px; height: 560.6406px; }
+}
+
+@media (min-width: 412px) and (max-width: 429px) {
+  .hero__sky { left: -12.5625px; width: 418.1328px; height: 802px; }
+  .hero__glow { left: -12.5625px; width: 419.1328px; height: 338.0938px; }
+  .hero__mountains { left: -51.5625px; width: 498.1328px; height: 493.0234px; }
+  .hero__walkway { left: -13.5625px; width: 420.1328px; height: 1531.1719px; }
+  .hero__flowers { left: -18.5625px; width: 430.1328px; height: 219.7188px; }
+  .invitation__garden { left: -14.0469px; top: 1169px; width: 420.1328px; height: 458.3203px; }
+  .timeline__garden { left: -14.0469px; top: 1267px; width: 420.1328px; height: 2093.8828px; }
+  .couple__backdrop { left: -13.5625px; top: 2797px; width: 420.1328px; height: 1573.7578px; }
+  .couple__photo { left: -12.5625px; width: 418.1328px; height: 278.75px; }
+  .guest__backdrop { left: -12.5625px; width: 418.1328px; height: 2524.75px; }
+  .finale__elephants { left: -21px; top: 5651px; width: 435px; height: 538.3594px; }
+}
+
+@media (min-width: 430px) and (max-width: 599px) {
+  .hero__sky { left: -21.1484px; width: 435.3047px; height: 802px; }
+  .hero__glow { left: -21.1484px; width: 436.3047px; height: 351.9453px; }
+  .hero__mountains { left: -60.1484px; width: 515.3047px; height: 510.0156px; }
+  .hero__walkway { left: -22.1484px; width: 437.3047px; height: 1593.75px; }
+  .hero__flowers { left: -27.1484px; width: 447.3047px; height: 228.4922px; }
+  .hero__name { font-size: 86px; line-height: 1.2; }
+  .hero__name--first { left: 101.8125px; top: 94px; width: 189.375px; }
+  .hero__and { left: 157.9102px; top: 156px; width: 77.1797px; font-size: 71px; line-height: 1.2; }
+  .hero__name--second { left: 86.4609px; top: 211px; width: 220.0781px; }
+  .invitation__garden { left: -22.6484px; width: 437.3047px; height: 477.0547px; }
+  .timeline__garden { left: -22.6484px; width: 437.3047px; height: 2179.4688px; }
+  .couple__backdrop { left: -22.1484px; width: 437.3047px; height: 1638.0859px; }
+  .couple__photo { left: -21.1484px; width: 435.3047px; height: 290.2031px; }
+  .guest__backdrop { left: -21.1484px; width: 435.3047px; height: 2628.4375px; }
+  .finale__elephants { left: -21px; top: 5651px; width: 435px; height: 538.3594px; }
+}
+
+@media (min-width: 600px) {
+  .site-canvas { width: 1116px; height: 10279px; max-height: none; margin: 0 auto; }
+  .hero__sky { left: 71px; top: -1px; width: 975px; height: 802px; }
+  .hero__glow { left: 71px; top: 90px; width: 976px; height: 787px; }
+  .hero__sun { left: 358px; top: 265px; width: 264px; height: 224px; }
+  .hero__mountains { left: 32px; top: 336px; width: 1055px; height: 1044px; }
+  .hero__walkway { left: 70px; top: 348px; width: 977px; height: 3559px; }
+  .hero__flowers { left: 65px; top: 0; width: 987px; height: 504px; }
+  .hero__bell--1 { left: 828px; top: -2px; width: 63px; height: 324px; }
+  .hero__bell--2 { left: 201px; top: -1px; width: 60px; height: 315px; }
+  .hero__bell--3 { left: 145px; top: -1px; width: 59px; height: 255px; }
+  .hero__bell--4 { left: 777px; top: -12px; width: 55px; height: 265px; }
+  .hero__flag { left: 529px; top: 318px; width: 58px; height: 73px; }
+  .hero__flock { left: 70px; top: -1px; width: 975px; height: 708px; }
+  .hero__flock-shape { transform: none; }
+  .hero__bird { --bird-size: 1.3; }
+  .hero__waving-flag { left: 553px; top: 320px; width: 89px; height: 59px; }
+  .hero__birds { left: 461px; top: 1739px; width: 195px; height: 38px; }
+  .hero__name { font-size: 86px; }
+  .hero__name--first { left: 463px; top: 94px; width: 189px; }
+  .hero__and { left: 519px; top: 156px; width: 77px; font-size: 71px; }
+  .hero__name--second { left: 448px; top: 211px; width: 220px; }
+  .invitation__garden { left: 68px; top: 1649px; width: 977px; height: 1065px; }
+  .invitation__copy { top: 1811px; font-size: 14px; line-height: 16.8px; }
+  .invitation__parents { font-size: 13px; line-height: 15.6px; }
+  .invitation__names { height: 306px; }
+  .invitation__names span { height: 103px; font-size: 86px; }
+  .invitation__names em { height: 88px; margin-top: -40px; font-size: 73px; }
+  .invitation__relation { margin-top: -6px !important; font-size: 13px; }
+  .invitation__parents--second { margin-top: 4px !important; }
+  .invitation__events { margin-top: 42px !important; font-size: 20px; }
+  .invitation__scroll { left: 517px; top: 1634px; width: 83px; height: 26px; }
+  .invitation__ganesh { left: 535px; top: 1665px; width: 47px; height: 65px; }
+  .invitation__birds { left: 461px; top: 1739px; width: 195px; height: 38px; }
+  .timeline__garden { left: 68px; top: 1747px; width: 977px; height: 4867px; }
+  .timeline__heading { top: 3126px; }
+  .timeline__heading h2 { font-size: 47px; }
+  .timeline__heading p { margin-top: 12px; font-size: 22px; }
+  .event-card { width: 335px; height: 453px; }
+  .event-card__copy h3 { margin-bottom: 16px; font-size: 34px; }
+  .event-card__copy p { font-size: 16px; }
+  .event-card__copy small { margin-top: 16px; font-size: 12px; }
+  .event-card--1 { left: 116px; top: 3291px; }
+  .event-card--2 { left: 669px; top: 3291px; width: 330px; height: 446px; }
+  .event-card--3 { left: 120px; top: 3727px; }
+  .event-card--4 { left: 673px; top: 3720px; width: 330px; height: 446px; }
+  .event-card--5 { left: 116px; top: 4150px; }
+  .event-card--6 { left: 669px; top: 4154px; width: 330px; height: 446px; }
+  .timeline__medallion { left: 437px; width: 239px; height: 239px; }
+  .timeline__medallion--1 { top: 3519px; }
+  .timeline__medallion--2 { top: 4013px; }
+  .timeline__divider { left: 441px; top: 4465px; width: 232px; height: 91px; }
+  .couple__backdrop { left: 64px; top: 4487px; width: 977px; height: 3658px; }
+  .couple__heading { left: 236px; top: 5511px; width: 632px; font-size: 78px; }
+  .couple__portrait { left: 245px; top: 5780px; width: 633px; height: 779px; }
+  .couple__story { left: 342px; top: 6035px; width: 432px; font-size: 16px; }
+  .gallery-photo--1 { left: 452px; top: 6641px; width: 160px; height: 160px; }
+  .gallery-photo--2 { left: 717px; top: 6705px; width: 223px; height: 223px; }
+  .gallery-photo--3 { left: 911px; top: 6968px; width: 202px; height: 202px; }
+  .gallery-photo--4 { left: -48px; top: 6968px; width: 202px; height: 202px; }
+  .gallery-photo--5 { left: 124px; top: 6705px; width: 223px; height: 223px; }
+  .rotating-gallery { left: 64px; top: 6501px; width: 988px; height: 526px; }
+  .couple__celebrate { left: 406px; top: 6972px; width: 291px; font-size: 54px; }
+  .couple__photo { left: 71px; top: 7220px; width: 975px; height: 650px; }
+  .guest__backdrop { left: 71px; top: 7213px; width: 975px; height: 5885px; }
+  .guest__looking { left: 358px; top: 7865px; width: 400px; font-size: 35px; }
+  .location-card { left: 231px; top: 7933px; width: 665px; height: 560px; border-radius: 16px; }
+  .location-card__map { height: 320px; border-radius: 16px; }
+  .location-card__tiles { grid-template-columns: repeat(3, 256px); width: 768px; height: 768px; }
+  .location-card__tile { width: 256px; height: 256px; }
+  .location-card__pin { width: 30px; height: 40px; }
+  .location-card__zoom { left: 10px; top: 10px; border-radius: 4px; }
+  .location-card__zoom button { width: 30px; height: 30px; font-size: 20px; }
+  .location-card__hint { padding: 8px 14px; border-radius: 20px; font-size: 12px; }
+  .location-card__nearby { right: 12px; top: 12px; padding: 8px 14px; border-radius: 8px; font-size: 13px; }
+  .location-card__maps-link { right: 12px; bottom: 12px; gap: 6px; padding: 8px 12px; border-radius: 8px; font-size: 13px; }
+  .location-card__recenter { left: 12px; bottom: 12px; width: 34px; height: 34px; border-radius: 8px; font-size: 20px; }
+  .location-card__venue { height: 104px; min-height: 0; margin-top: 16px; padding: 20px 56px 20px 24px; border-radius: 16px; overflow: hidden; }
+  .location-card__venue h3 { margin-bottom: 6px; font-size: 18px; }
+  .location-card__venue p { font-size: 14px; }
+  .location-card__venue > button { right: 16px; bottom: 16px; width: 32px; height: 32px; border-radius: 8px; font-size: 16px; }
+  .location-card__copy-status { right: 12px; bottom: 52px; padding: 5px 8px; border-radius: 6px; font-size: 10px; }
+  .location-card__switcher { gap: 12px; margin-top: 16px; }
+  .location-card__switcher button { height: 46px; border-radius: 16px; font-size: 14px; }
+  .knowledge { left: 70.5px; top: 8526px; width: 975px; transform: scale(1.7); transform-origin: top center; }
+  .knowledge h2 { width: 202.56px; font-size: 31px; }
+  .knowledge__intro { margin-top: 18px; font-size: 14px; }
+  .knowledge__grid { width: 650px; margin: 42px auto 0; }
+  .knowledge__icon { width: 61px; height: 61px; margin-bottom: 8px; }
+  .knowledge__grid h3 { font-size: 22px; }
+  .knowledge__grid p { font-size: 11px; }
+  .finale__divider { left: 254px; width: 627px; height: 103px; }
+  .finale__divider--top { top: 8903px; }
+  .finale__divider--bottom { top: 9308px; }
+  .rsvp-card { left: 255px; top: 9040px; width: 626px; padding: 20px; border-radius: 20px; }
+  .rsvp-card h2 { margin-bottom: 12px; font-size: 17px; }
+  .rsvp-card input, .rsvp-card button, .rsvp-card select { height: 43px; border-radius: 12px; padding: 0 15px; font-size: 14px; }
+  .rsvp-card__row { gap: 12px; margin-top: 12px; }
+  .event-select__menu { top: calc(100% + 4px); border-radius: 12px; }
+  .event-select__menu button { height: 38px; }
+  .rsvp-card__send { height: 46px; margin-top: 12px; border-radius: 14px; font-size: 15px; }
+  .rsvp-card__send svg { width: 18px; height: 18px; }
+  .countdown { top: 9404px; }
+  .countdown h2 { left: 0; width: 376.4px; font-size: 39px; }
+  .countdown p { margin-top: 16px; font-size: 14px; }
+  .countdown__units { gap: 32px; margin-top: 60px; }
+  .countdown__units strong { font-size: 41px; }
+  .countdown__units div > span { margin-top: 8px; font-size: 10px; }
+  .finale__elephants { left: 56px; top: 9111px; width: 1004px; height: 1243px; }
+}
+
+@media (min-width: 600px) and (max-width: 959px) {
+  #root { position: relative; height: 9708px; overflow: clip; }
+  .site-canvas { left: 50%; width: 1116px; height: 9708px; margin: 0; transform: translateX(-50%); }
+  .hero__sky { left: calc(519px - 50vw); top: -1px; width: calc(100vw + 78px); height: 802px; }
+  .hero__glow { left: calc(518.8px - 50vw); top: 90px; width: calc(100vw + 79.4px); height: 683.5px; }
+  .hero__sun { left: 427px; top: 265px; width: 264px; height: 224px; }
+  .hero__mountains { left: calc(478.8px - 50vw); top: 336px; width: calc(100vw + 158.4px); height: 917px; }
+  .hero__walkway { left: calc(517.8px - 50vw); top: 348px; width: calc(100vw + 80.4px); height: 3092px; }
+  .hero__flowers { left: calc(513px - 50vw); top: 0; width: calc(100vw + 90px); height: 438.5px; }
+  .hero__flock { left: calc(518px - 50vw); width: calc(100vw + 80px); }
+  .hero__flag { left: 529px; }
+  .hero__waving-flag { left: 553px; }
+  .invitation__garden { left: calc(517px - 50vw); top: 1469px; width: calc(100vw + 80px); height: 925.5px; }
+  .invitation__copy { top: 1631px; }
+  .invitation__scroll { top: 1454px; }
+  .invitation__ganesh { top: 1485px; }
+  .invitation__birds { top: 1559px; }
+  .timeline__garden { left: calc(517px - 50vw); top: 1567px; width: calc(100vw + 80.4px); height: 4228px; }
+  .timeline__heading { top: 2776px; }
+  .event-card { width: 267px; height: 413px; }
+  .event-card--1, .event-card--3, .event-card--5 { left: 207px; }
+  .event-card--2, .event-card--4, .event-card--6 { left: 640px; width: 263px; height: 407px; }
+  .event-card--1, .event-card--2 { top: 2891px; }
+  .event-card--3, .event-card--4 { top: 3350px; }
+  .event-card--5, .event-card--6 { top: 3850px; }
+  .timeline__medallion--1 { top: 3178px; }
+  .timeline__medallion--2 { top: 3689px; }
+  .timeline__divider { left: 381px; top: 4231px; width: 352px; height: 139px; }
+  .couple__backdrop { left: calc(517px - 50vw); top: 4336px; width: calc(100vw + 80.4px); height: 3178px; }
+  .couple__heading { top: 5222px; }
+  .couple__portrait { left: 242px; top: 5440px; width: 633px; height: 779px; }
+  .couple__story { top: 5695px; }
+  .gallery-photo--1 { top: 6310px; }
+  .gallery-photo--2, .gallery-photo--5 { top: 6352px; }
+  .gallery-photo--3, .gallery-photo--4 { top: 6531px; }
+  .rotating-gallery { left: calc(512px - 50vw); top: 6170px; width: calc(100vw + 92px); height: 526px; }
+  .couple__celebrate { top: 6661px; }
+  .couple__photo { left: calc(550.5px - 50vw); top: 6880px; width: calc(100vw + 3px); height: 514px; }
+  .guest__backdrop { left: calc(550.5px - 50vw); top: 6873px; width: calc(100vw + 3px); height: 4655px; }
+  .guest__looking { top: 7375px; }
+  .location-card { left: 225px; top: 7443px; }
+  .knowledge { top: 8036px; }
+  .finale__divider--top { top: 8423px; }
+  .rsvp-card { left: 246px; top: 8570px; }
+  .finale__divider--bottom { top: 8838px; }
+  .countdown { top: 8964px; }
+  .finale__elephants { left: calc(513px - 50vw); top: 8787px; width: calc(100vw + 78px); height: 1047px; }
+}
+
+@media (min-width: 1280px) {
+  html, body, #root { width: 100%; min-height: 12261px; }
+  #root { height: 12261px; overflow: clip; }
+  .site-canvas { width: 1440px; height: 12261px; margin: 0 auto; transform: none; overflow: clip; }
+  .wide-only { display: block; }
+  .narrow-only { display: none; }
+
+  .hero__sky, .hero__glow, .hero__sun, .hero__mountains, .hero__walkway, .hero__flowers,
+  .hero__flag, .hero__birds,
+  .hero > .hero__bell:not(.hero__bell--wide) { display: none; }
+  .wide-hero__sky { position: absolute; left: -37px; top: 0; width: 1515px; height: 1222px; object-fit: cover; z-index: 6; }
+  .wide-hero__clouds { position: absolute; left: -36px; top: -183px; width: 1513px; height: 773px; object-fit: contain; z-index: 9; }
+  .wide-hero__atmosphere { position: absolute; left: -37px; top: 2px; width: 1515px; height: 1282px; object-fit: cover; z-index: -1; }
+  .wide-hero__temple { position: absolute; left: 102px; top: 175px; width: 1025px; height: 870px; object-fit: contain; z-index: 2; }
+  .wide-hero__foreground { position: absolute; left: -37px; top: 453px; width: 1515px; height: 1501px; object-fit: cover; z-index: 5; }
+  .wide-hero__journey { position: absolute; left: -37px; top: 498px; width: 1515px; height: 3574px; object-fit: contain; z-index: 9; }
+  .wide-hero__flag { position: absolute; left: 607.5px; top: 428px; width: 225px; height: 191px; object-fit: contain; z-index: 9; transform-origin: 50% 100%; animation: flag-wave 2.8s ease-in-out infinite; }
+  .hero__waving-flag { display: block; left: 705.35px; top: 459px; width: 121.2px; height: 80.8px; z-index: 9; }
+  .hero__flock { left: -36px; top: -15px; width: 1515px; height: 814px; z-index: 2; opacity: 1; animation: none; }
+  .hero__title { z-index: 8; }
+  .hero__bell--wide { object-fit: contain; }
+  .hero__bell--wide-1 { left: 104px; top: 0; width: 200px; height: 350px; z-index: 10; }
+  .hero__bell--wide-2 { left: 1130px; top: 0; width: 200px; height: 350px; z-index: 10; animation-delay: -1.1s; }
+  .hero__bell--wide-3 { left: 27.5px; top: 62px; width: 153px; height: 350px; z-index: 8; animation-delay: -2s; }
+  .hero__bell--wide-4 { left: 1257.5px; top: 62px; width: 153px; height: 350px; z-index: 8; animation-delay: -.6s; }
+  .hero__bell--wide-5 { left: -66px; top: 140px; width: 200px; height: 350px; z-index: 7; animation-delay: -2.6s; }
+  .hero__bell--wide-6 { left: 1314px; top: 160px; width: 200px; height: 350px; z-index: 7; animation-delay: -1.6s; }
+  .hero__name { font-size: 140px; line-height: 168px; }
+  .hero__name--first { left: 566.2px; top: 92px; width: 308.6px; }
+  .hero__and { left: 656.8px; top: 191.8px; width: 127.5px; font-size: 117px; line-height: 140.4px; }
+  .hero__name--second { left: 541.2px; top: 282px; width: 358.6px; }
+
+  .invitation__garden, .invitation__scroll, .invitation__ganesh, .invitation__birds, .invitation__copy { display: none; }
+  .wide-invitation__backdrop { position: absolute; left: -37.5px; top: 2369px; width: 1515px; height: 1653px; object-fit: contain; z-index: 6; }
+  .wide-invitation__scroll { position: absolute; left: 614.5px; top: 2153px; width: 211px; height: 65.5px; object-fit: contain; z-index: 8; }
+  .wide-invitation__ganesh { position: absolute; left: 678.5px; top: 2218px; width: 83px; height: 114.3px; object-fit: contain; z-index: 8; }
+  .wide-invitation__flourish { position: absolute; left: 585.5px; top: 2341px; width: 269px; height: 52.4px; object-fit: cover; z-index: 8; }
+  .wide-invitation__copy { position: absolute; left: 0; top: 2461px; width: 1440px; height: 813px; text-align: center; font-family: "IvyOra", serif; z-index: 9; }
+  .wide-invitation__copy p { position: absolute; margin: 0; }
+  .wide-invitation__parents { left: 328.2px; top: 0; width: 783.6px; color: #ab5626; font: 500 36px/43.2px "Gotham Medium", sans-serif; }
+  .wide-invitation__line { left: 388.1px; width: 663.8px; font: 400 27px/32.4px "IvyOra", serif; }
+  .wide-invitation__line--1 { top: 54px; }
+  .wide-invitation__line--2 { top: 86.4px; }
+  .wide-invitation__name { color: rgba(171,86,38,.72); font-family: "Miofarin", sans-serif; font-weight: 400; }
+  .wide-invitation__name--first { left: 553.8px; top: 130px; width: 332.5px; font-size: 151px; line-height: 181.2px; }
+  .wide-invitation__and { left: -35.5px; top: 232px; width: 1515px; color: rgba(171,86,38,.72); font: 400 128px/153.6px "Brother Signature", cursive; }
+  .wide-invitation__name--second { left: 554.9px; top: 340px; width: 330.1px; font-size: 129px; line-height: 154.8px; }
+  .wide-invitation__relation { left: 661.5px; top: 503.6px; width: 117px; font: 400 24px/28.8px "IvyOra", serif; }
+  .wide-invitation__parents--second { top: 544.2px; }
+  .wide-invitation__events { left: 531.3px; top: 766.2px; width: 377.5px; font: 400 39px/46.8px "IvyOra", serif; }
+
+  .timeline__garden, .timeline__medallion, .timeline__divider { display: none; }
+  .wide-timeline__backdrop { position: absolute; left: -37px; top: 2970px; width: 1515px; height: 3566.5px; object-fit: contain; z-index: 7; }
+  .timeline__heading { left: 0; top: 4135.84px; width: 100%; z-index: 10; }
+  .timeline__heading h2 { font: 500 80px/96px "IvyOra", serif; }
+  .timeline__heading p { margin-top: 19px; font: 300 23px/27.6px "Gotham Light", sans-serif; }
+  .event-card { top: 4369.5px; width: 186px; height: 287.5px; z-index: 10; }
+  .event-card--1 { left: 62px; }
+  .event-card--2 { left: 288px; }
+  .event-card--3 { left: 514px; }
+  .event-card--4 { left: 741px; }
+  .event-card--5 { left: 967px; }
+  .event-card--6 { left: 1193px; }
+  .event-card__frame { content: url("/assets/images/wide-card.png"); object-fit: cover; }
+  .event-card__copy { inset: 47px 8px auto; }
+  .event-card__copy h3 { margin: 0 0 10px; font: 500 23px/27.6px "IvyOra", serif; }
+  .event-card__copy p { margin: 0; font: 300 13px/19px "Gotham Light", sans-serif; }
+  .event-card__copy small { margin-top: 11px; font: 300 10px/14px "Gotham Light", sans-serif; }
+  .wide-timeline__medallions { position: absolute; inset: 0; z-index: 11; }
+  .wide-card-medallion { position: absolute; width: 124px; height: 123.9px; object-fit: cover; }
+  .wide-card-medallion--1, .wide-card-medallion--6 { left: 204px; }
+  .wide-card-medallion--2, .wide-card-medallion--7 { left: 437px; }
+  .wide-card-medallion--3, .wide-card-medallion--8 { left: 658.5px; }
+  .wide-card-medallion--4, .wide-card-medallion--9 { left: 889px; }
+  .wide-card-medallion--5, .wide-card-medallion--10 { left: 1113px; }
+  .wide-card-medallion--1, .wide-card-medallion--2, .wide-card-medallion--3, .wide-card-medallion--4, .wide-card-medallion--5 { top: 4302px; }
+  .wide-card-medallion--6, .wide-card-medallion--7, .wide-card-medallion--8, .wide-card-medallion--9, .wide-card-medallion--10 { top: 4586.1px; }
+  .wide-timeline__divider { position: absolute; left: 599px; top: 4751px; width: 243px; height: 95.6px; object-fit: cover; z-index: 11; }
+
+  .couple__backdrop, .couple__portrait, .couple__photo, .couple__gallery { display: none; }
+  .wide-couple__backdrop { position: absolute; left: -37.5px; top: 4818px; width: 1515px; height: 5675px; object-fit: contain; z-index: 8; }
+  .wide-couple__medallion { position: absolute; top: 5212.6px; width: 263.7px; height: 263.5px; object-fit: cover; z-index: 11; }
+  .wide-couple__medallion--left { left: 57.9px; }
+  .wide-couple__medallion--right { left: 1118.4px; }
+  .couple__heading { left: 118.2px; top: 5871px; width: 1203.6px; font: 500 110px/132px "IvyOra", serif; z-index: 12; }
+  .wide-couple__portrait { position: absolute; left: 318px; top: 6199px; width: 804px; height: 989.7px; object-fit: cover; z-index: 11; }
+  .couple__story { left: 390px; top: 6538px; width: 661px; font: 400 30px/36px "Gotham Book", sans-serif; z-index: 12; }
+  .rotating-gallery { left: -37px; top: 7225px; width: 1515px; height: 760px; z-index: 12; }
+  .wide-couple__gallery { position: absolute; inset: 0; z-index: 12; }
+  .wide-gallery-photo { position: absolute; border-radius: 18%; object-fit: cover; box-shadow: 0 24px 48px rgba(63,38,16,.18); }
+  .wide-gallery-photo--1, .wide-gallery-photo--6 { left: 643.7px; width: 153.6px; height: 153.6px; }
+  .wide-gallery-photo--1 { top: 7358.4px; }
+  .wide-gallery-photo--6 { top: 8326.1px; }
+  .wide-gallery-photo--2, .wide-gallery-photo--5, .wide-gallery-photo--7, .wide-gallery-photo--10 { width: 214.55px; height: 214.55px; }
+  .wide-gallery-photo--2 { left: 897.62px; top: 7420.34px; transform: rotate(38deg); }
+  .wide-gallery-photo--5 { left: 897.62px; top: 8203.22px; transform: rotate(-38deg); }
+  .wide-gallery-photo--7 { left: 328.83px; top: 8203.22px; transform: rotate(38deg); }
+  .wide-gallery-photo--10 { left: 328.83px; top: 7420.34px; transform: rotate(-38deg); }
+  .wide-gallery-photo--3, .wide-gallery-photo--4, .wide-gallery-photo--8, .wide-gallery-photo--9 { width: 193.55px; height: 193.55px; }
+  .wide-gallery-photo--3 { left: 1083.88px; top: 7672.76px; transform: rotate(-20deg); }
+  .wide-gallery-photo--4 { left: 1083.88px; top: 7971.8px; transform: rotate(20deg); }
+  .wide-gallery-photo--8 { left: 163.57px; top: 7971.8px; transform: rotate(-20deg); }
+  .wide-gallery-photo--9 { left: 163.57px; top: 7672.76px; transform: rotate(20deg); }
+  .couple__celebrate { left: 579.8px; top: 7656px; width: 280.4px; font: 500 52px/62.4px "IvyOra", serif; z-index: 13; }
+  .wide-couple__photo { position: absolute; left: 11.5px; top: 7945px; width: 1418px; height: 945.3px; object-fit: cover; z-index: 10; }
+
+  .guest__backdrop { display: none; }
+  .wide-guest__backdrop { position: absolute; left: -37px; top: 7940px; width: 1515px; height: 9148px; object-fit: contain; z-index: 9; }
+  .guest__looking { left: 398.4px; top: 8954.99px; width: 644.2px; font: 500 60px/72px "IvyOra", serif; white-space: nowrap; z-index: 12; }
+  .location-card { left: 212.63px; top: 9065.04px; width: 1013.32px; height: 412.57px; border-radius: 0; scale: 1.06384; transform-origin: 50% 0; z-index: 12; }
+  .location-card__map { position: absolute; left: 0; top: 0; width: 494.25px; height: 412.57px; border-radius: 16px; }
+  .location-card__tiles { grid-template-columns: repeat(3, 256px); width: 768px; height: 768px; }
+  .location-card__tile { width: 256px; height: 256px; }
+  .location-card__pin { width: 30px; height: 40px; }
+  .location-card__zoom { left: 10px; top: 10px; border-radius: 4px; }
+  .location-card__zoom button { width: 30px; height: 30px; font-size: 20px; }
+  .location-card__hint { padding: 8px 14px; border-radius: 20px; font-size: 12px; }
+  .location-card__nearby { right: 12px; top: 12px; padding: 8px 14px; border-radius: 8px; font-size: 13px; }
+  .location-card__maps-link { right: 12px; bottom: 12px; gap: 6px; padding: 8px 12px; border-radius: 8px; font-size: 13px; }
+  .location-card__recenter { left: 12px; bottom: 12px; width: 34px; height: 34px; border-radius: 8px; font-size: 20px; }
+  .location-card__venue { position: absolute; left: 519.07px; top: 0; width: 494.25px; height: 168.54px; min-height: 0; margin: 0; padding: 20px 56px 20px 24px; border-radius: 16px; }
+  .location-card__venue h3 { margin: 0 0 6px; font-size: 18px; }
+  .location-card__venue p { font-size: 14px; }
+  .location-card__venue > button { right: 16px; bottom: 16px; width: 32px; height: 32px; border-radius: 8px; font-size: 16px; }
+  .location-card__copy-status { right: 12px; bottom: 52px; padding: 5px 8px; border-radius: 6px; font-size: 10px; }
+  .location-card__switcher { position: absolute; left: 519.07px; top: 185.09px; display: grid; grid-template-columns: 1fr; gap: 12.41px; width: 494.25px; margin: 0; }
+  .location-card__switcher button { width: 494.25px; height: 47.56px; border-radius: 16px; font-size: 14px; }
+
+  .wide-finale__backdrop { position: absolute; left: -37px; top: 10496px; width: 1515px; height: 1875px; object-fit: contain; z-index: 11; }
+  .wide-finale__flourish { position: absolute; left: 427.2px; top: 10981.94px; width: 585.6px; height: 32.9px; object-fit: cover; scale: 1.06384; transform-origin: 50% 0; z-index: 11; }
+  .finale__divider, .finale__elephants { display: none; }
+  .wide-finale__divider { position: absolute; left: 458.5px; width: 524px; height: 85.9px; object-fit: cover; z-index: 12; }
+  .wide-finale__divider--top { top: 9917px; }
+  .wide-finale__divider--bottom { top: 10514px; }
+  .rsvp-card { left: 448.61px; top: 9550.35px; width: 540.78px; height: 254.36px; padding: 20px; border-radius: 20px; scale: 1.06384; transform-origin: 50% 0; z-index: 12; }
+  .rsvp-card h2 { margin: 0 0 12px; font-size: 17px; line-height: normal; }
+  .rsvp-card input, .rsvp-card button, .rsvp-card select { height: 43.95px; border-radius: 12px; padding: 0 15px; font-size: 14px; }
+  .rsvp-card__row { gap: 10.34px; margin-top: 12.4px; }
+  .event-select__menu { top: calc(100% + 4px); border-radius: 12px; }
+  .event-select__menu button { height: 38px; }
+  .rsvp-card__send { height: 47.56px; margin-top: 12.41px; border-radius: 14px; gap: 8px; font-size: 15px; }
+  .rsvp-card__send svg { width: 18px; height: 18px; }
+  .knowledge { left: 0; top: 10011.99px; width: 1440px; transform: none; z-index: 12; }
+  .knowledge h2 { width: 368.53px; font: 500 60px/72px "IvyOra", serif; }
+  .knowledge__intro { width: 1424.1px; margin: 24.05px auto 0; font: 400 28px/44.8px "Gotham Book", sans-serif; }
+  .knowledge__grid { grid-template-columns: repeat(4, 188px); gap: 59.22px; width: 929.66px; margin: 89.24px auto 0; }
+  .knowledge__grid article { padding: 0; }
+  .knowledge__icon { width: 94px; height: 94px; margin: 0 auto 13.63px; }
+  .knowledge__grid h3 { font: 500 26px/31.2px "IvyOra", serif; }
+  .knowledge__grid p { width: 188px; margin: 7px auto 0; font: 400 13px/15.6px "IvyOra", serif; }
+  .countdown { left: 0; top: 10717.99px; width: 1440px; z-index: 12; }
+  .countdown h2 { left: 0; width: 843.72px; font: 500 93px/111.6px "IvyOra", serif; }
+  .countdown p { margin-top: 12.7px; font: 400 30px/36px "IvyOra", serif; }
+  .countdown__units { width: 333px; height: 63px; gap: 39px; margin: 111.9px auto 0; scale: 2.1; transform-origin: 50% 0; }
+  .countdown__units div { align-items: center; width: 53px; height: 63px; }
+  .countdown__units strong { display: flex; justify-content: center; width: 53px; height: 45px; padding: 0; color: #dda45d; font: 700 41px/41px "Inter", sans-serif; letter-spacing: normal; }
+  .countdown__units strong span { margin: 0; color: inherit; font: inherit; letter-spacing: normal; }
+  .countdown__units div > span { margin-top: 6px; color: #888; font: 600 10px/12px "Inter", sans-serif; letter-spacing: 1px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+}

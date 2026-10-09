@@ -1,8 +1,0 @@
----
-// A line in one or more languages. Devanagari keeps its own span (no capitals, no letter-spacing); English stays bare.
-import type { Part } from '../data/i18n';
-interface Props { parts: Part[] }
-const { parts } = Astro.props;
-const deva = (s: string) => /[ऀ-ॿ]/.test(s);
----
-{parts.map((p, i) => <Fragment>{i > 0 && ' · '}{p.lang || deva(p.t) ? <span lang={p.lang}>{p.t}</span> : p.t}</Fragment>)}

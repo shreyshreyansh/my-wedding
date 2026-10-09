@@ -1,9 +1,0 @@
-/* Still pages: the phone or computer asks for reduced motion (html.still, set in the head), or the motion chunk
-   hasn't loaded (html:not(.motion)). Every section shows its final state. */
-html:not(.js) #cover{display:none}
-html.still .savdhan{animation:none}
-html.still .count{position:relative}
-@media (prefers-reduced-motion:reduce){
-  html:not(.js) .savdhan{animation:none}
-  html:not(.js) .count{position:relative}
-}

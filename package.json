@@ -1,40 +1,37 @@
 {
-  "name": "shreyansh-mrunalini",
+  "name": "ram-mandir-wedding",
   "private": true,
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build && node scripts/postbuild.mjs && node scripts/budget.mjs",
-    "preview": "astro preview",
-    "dev:edge": "npm run build && wrangler dev --port 8788",
-    "guests:push": "node scripts/guests-push.mjs",
-    "rsvp:resync": "node scripts/rsvp-resync.mjs",
-    "codes": "node scripts/codes.mjs",
-    "audio": "node scripts/audio.mjs",
-    "fonts": "node scripts/fonts.mjs",
-    "art": "node scripts/art.mjs",
-    "og": "astro build && node scripts/og.mjs",
-    "budget": "node scripts/budget.mjs",
-    "test": "playwright test",
-    "test:unit": "UNIT=1 playwright test --project=unit",
-    "golden:capture": "node tests/golden/capture.mjs",
-    "golden:compare": "node tests/golden/compare.mjs",
-    "golden": "npm run golden:capture -- prototype tests/golden/out/prototype && npm run golden:capture -- build tests/golden/out/build && npm run golden:compare -- tests/golden/out/prototype tests/golden/out/build",
-    "pretest": "MUSIC_SRC=/audio/test.wav npm run build && node tests/tools/tone.mjs",
-    "deploy": "npm run build && wrangler deploy"
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc -b && vite build",
+    "typecheck": "tsc -b --pretty false",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test tests/interactions.spec.ts",
+    "test:visual": "playwright test tests/visual.spec.ts",
+    "verify:assets": "node scripts/verify-assets.mjs"
   },
   "dependencies": {
-    "gsap": "3.13.0",
-    "lenis": "1.3.11"
+    "gsap": "3.12.5",
+    "leaflet": "1.9.4",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "three": "0.136.0"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.13.0",
-    "@cloudflare/workers-types": "^5.20260927.1",
-    "@playwright/test": "1.56.1",
-    "astro": "7.3.5",
-    "wrangler": "^4.142.0"
-  },
-  "engines": {
-    "node": ">=22"
+    "@playwright/test": "1.48.2",
+    "@testing-library/jest-dom": "6.6.3",
+    "@testing-library/react": "16.1.0",
+    "@types/leaflet": "1.9.14",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "@vitejs/plugin-react": "4.3.3",
+    "@vitest/coverage-v8": "2.1.4",
+    "jsdom": "25.0.1",
+    "typescript": "5.6.3",
+    "vite": "5.4.11",
+    "vitest": "2.1.4"
   }
 }
