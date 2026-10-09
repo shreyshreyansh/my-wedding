@@ -528,7 +528,7 @@ img { display: block; max-width: none; user-select: none; }
   .wide-invitation__name--first { left: 553.8px; top: 130px; width: 332.5px; font-size: 151px; line-height: 181.2px; }
   .wide-invitation__and { left: -35.5px; top: 232px; width: 1515px; color: rgba(171,86,38,.72); font: 400 128px/153.6px "Brother Signature", cursive; }
   .wide-invitation__name--second { left: 554.9px; top: 340px; width: 330.1px; font-size: 129px; line-height: 154.8px; }
-  .wide-invitation__relation { left: 661.5px; top: 503.6px; width: 117px; font: 400 24px/28.8px "IvyOra", serif; }
+  .wide-invitation__relation { left: 661.5px; top: 503.6px; width: 117px; white-space: pre; font: 400 24px/28.8px "IvyOra", serif; }
   .wide-invitation__parents--second { top: 544.2px; }
   .wide-invitation__events { left: 531.3px; top: 766.2px; width: 377.5px; font: 400 39px/46.8px "IvyOra", serif; }
 

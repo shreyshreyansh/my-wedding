@@ -217,6 +217,19 @@ test("1728px composition uses the full-width desktop reference variant", async (
   expectBox((await page.locator(".hero__waving-flag").boundingBox())!, { x: 846.6, y: 502, width: 139.2, height: 92.8 });
   expectBox((await page.locator(".hero__flock").boundingBox())!, { x: -5, y: -17, width: 1740, height: 814 });
 
+  const daughterSpacing = await page.locator(".wide-invitation__relation").evaluate((element) => {
+    const relation = element.getBoundingClientRect();
+    const parents = document.querySelector(".wide-invitation__parents--second")!.getBoundingClientRect();
+    return {
+      gap: parents.top - relation.bottom,
+      relationHeight: relation.height,
+      whiteSpace: getComputedStyle(element).whiteSpace
+    };
+  });
+  expect(daughterSpacing.whiteSpace).toBe("pre");
+  expect(daughterSpacing.relationHeight).toBeCloseTo(28.8, 0);
+  expect(daughterSpacing.gap).toBeGreaterThan(10);
+
   expectBox((await page.locator(".wide-couple__portrait").boundingBox())!, { x: 462, y: 6899, width: 804, height: 989.74 });
   expectBox((await page.locator(".rotating-gallery").boundingBox())!, { x: -66.92, y: 7996.28, width: 1852.8, height: 637.44 });
   expectBox((await page.locator(".wide-couple__photo").boundingBox())!, { x: -6, y: 8647, width: 1740, height: 1160 });

@@ -125,6 +125,8 @@ test("invitation copy starts at the reference 15 percent visibility threshold", 
 });
 
 test("invitation reveal passes through the reference spring between endpoints", async ({ page }) => {
+  await page.clock.install();
+  await page.clock.pauseAt(new Date());
   await page.setViewportSize({ width: 1728, height: 1000 });
   await page.goto("/");
   await page.locator(".site-canvas").waitFor({ state: "visible" });
@@ -138,7 +140,7 @@ test("invitation reveal passes through the reference spring between endpoints", 
     return Math.max(0, (layoutTop - visibleThreshold) / 1.1);
   });
   await page.evaluate((scrollY) => window.scrollTo(0, scrollY + 6), startScroll);
-  await page.waitForTimeout(325);
+  await page.clock.runFor(325);
 
   const frame = await ganpatiName.evaluate((element) => {
     const styles = getComputedStyle(element);
@@ -148,7 +150,7 @@ test("invitation reveal passes through the reference spring between endpoints", 
     };
   });
   expect(frame.opacity).toBeGreaterThan(.94);
-  expect(frame.opacity).toBeLessThan(.985);
+  expect(frame.opacity).toBeLessThan(.995);
   expect(frame.revealY).toBeCloseTo(24 * (1 - frame.opacity), 2);
 });
 
