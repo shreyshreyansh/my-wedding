@@ -101,6 +101,31 @@ test("1440px composition preserves the measured reference geometry", async ({ pa
   }))).toEqual({ height: 760, left: -37, top: 7225, width: 1515 });
 });
 
+test("waving flag has a visible first-paint fallback on refresh", async ({ page }) => {
+  await page.setViewportSize({ width: 1728, height: 1000 });
+  await page.goto("/");
+
+  const firstPaint = await page.locator(".hero__waving-flag").evaluate((element) => ({
+    animationName: getComputedStyle(element).animationName,
+    backgroundImage: getComputedStyle(element).backgroundImage,
+    opacity: getComputedStyle(element).opacity,
+    textureReady: element.getAttribute("data-texture-ready")
+  }));
+
+  expect(firstPaint).toEqual({
+    animationName: "none",
+    backgroundImage: expect.stringContaining("wide-flag-cloth.png"),
+    opacity: "1",
+    textureReady: "false"
+  });
+
+  const readyBackground = await page.locator(".hero__waving-flag").evaluate((element) => {
+    element.setAttribute("data-texture-ready", "true");
+    return getComputedStyle(element).backgroundImage;
+  });
+  expect(readyBackground).toBe("none");
+});
+
 test("1728px composition uses the full-width desktop reference variant", async ({ page }) => {
   await page.setViewportSize({ width: 1728, height: 1000 });
   await page.goto("/");

@@ -74,7 +74,7 @@ function createProgram(gl: WebGL2RenderingContext, vertexSource: string, fragmen
 }
 
 function uploadFallback(gl: WebGL2RenderingContext, texture: WebGLTexture) {
-  const pixel = new Uint8Array([215, 111, 39, 255]);
+  const pixel = new Uint8Array([0, 0, 0, 0]);
   gl.bindTexture(gl.TEXTURE_2D, texture);
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, pixel);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
@@ -333,8 +333,11 @@ export function WavingFlag({ className }: FlagProps) {
         : [1, imageAspect / planeAspect];
     };
 
+    let destroyed = false;
+    let readyFrame = 0;
     const image = new Image();
     image.onload = () => {
+      if (destroyed) return;
       imageAspect = image.naturalWidth > 0 && image.naturalHeight > 0
         ? image.naturalWidth / image.naturalHeight
         : 1;
@@ -347,6 +350,14 @@ export function WavingFlag({ className }: FlagProps) {
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
       gl.bindTexture(gl.TEXTURE_2D, null);
+      readyFrame = requestAnimationFrame(() => {
+        readyFrame = requestAnimationFrame(() => {
+          if (!destroyed) canvas.dataset.textureReady = "true";
+        });
+      });
+    };
+    image.onerror = () => {
+      if (!destroyed) canvas.dataset.textureReady = "false";
     };
     image.src = "/assets/images/wide-flag-cloth.png";
 
@@ -356,7 +367,6 @@ export function WavingFlag({ className }: FlagProps) {
     let ambient = settings.mode === "Still" ? .015 : .06;
     let frame = 0;
     let visible = true;
-    let destroyed = false;
 
     const updatePointer = (clientX: number, clientY: number) => {
       const rect = canvas.getBoundingClientRect();
@@ -481,6 +491,11 @@ export function WavingFlag({ className }: FlagProps) {
     return () => {
       destroyed = true;
       cancelAnimationFrame(frame);
+      cancelAnimationFrame(readyFrame);
+      image.onload = null;
+      image.onerror = null;
+      image.src = "";
+      canvas.dataset.textureReady = "false";
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
       canvas.removeEventListener("pointerenter", pointerEnter);
@@ -502,6 +517,7 @@ export function WavingFlag({ className }: FlagProps) {
     <canvas
       className={className}
       data-animation="waving-flag"
+      data-texture-ready="false"
       ref={canvasRef}
       aria-hidden="true"
     />

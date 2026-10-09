@@ -39,7 +39,8 @@ img { display: block; max-width: none; user-select: none; }
 .hero__flag { position: absolute; left: 42.49cqw; top: 80.66cqw; width: 14.76cqw; height: 15.52cqw; object-fit: contain; z-index: 7; animation: flag-wave 2.8s ease-in-out infinite; }
 .hero__flock { position: absolute; left: -.76cqw; top: 0; width: 101.27cqw; height: 126.97cqw; z-index: 4; overflow: hidden; pointer-events: none; }
 .hero__flock canvas { display: block; width: 100%; height: 100%; }
-.hero__waving-flag { position: absolute; left: 49.44cqw; top: 80.66cqw; width: 9.21cqw; height: 8.55cqw; z-index: 8; opacity: 0; animation: flag-arrive .45s ease 1.5s forwards; touch-action: pan-y; transform-origin: 0 50%; }
+.hero__waving-flag { position: absolute; left: 49.44cqw; top: 80.66cqw; width: 9.21cqw; height: 8.55cqw; z-index: 8; opacity: 1; background: url("/assets/images/wide-flag-cloth.png") center/contain no-repeat; touch-action: pan-y; transform-origin: 0 50%; }
+.hero__waving-flag[data-texture-ready="true"] { background-image: none; }
 .hero__birds { position: absolute; left: 25.45cqw; top: 260.81cqw; width: 49.62cqw; height: 9.67cqw; object-fit: contain; opacity: .76; }
 .hero__title { position: absolute; inset: 0; margin: 0; color: rgba(171, 86, 38, .72); font-weight: 400; z-index: 5; }
 .hero__title span { position: absolute; display: block; text-align: center; }
@@ -187,7 +188,6 @@ img { display: block; max-width: none; user-select: none; }
 @keyframes flag-wave { 0%,100% { transform: skewX(-1deg) rotate(-1deg); } 50% { transform: skewX(3deg) rotate(1deg); } }
 @keyframes flock-arrive { from { opacity: 0; transform: translate(5%, -4%); } to { opacity: .88; transform: translate(0, 0); } }
 @keyframes bird-flap { from { transform: scale(var(--bird-size)) scaleY(.52) translateY(1px); } to { transform: scale(var(--bird-size)) scaleY(1.12) translateY(-1px); } }
-@keyframes flag-arrive { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }
 @keyframes cloth-wave { 0%,100% { transform: perspective(160px) rotateY(-8deg) skewY(-1deg); } 50% { transform: perspective(160px) rotateY(11deg) skewY(2deg) scaleX(.96); } }
 
 @media (max-width: 359px) {
