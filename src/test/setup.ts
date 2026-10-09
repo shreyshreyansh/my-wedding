@@ -8,4 +8,12 @@ Object.defineProperty(window, "scrollTo", {
   writable: true
 });
 
+class ResizeObserverMock implements ResizeObserver {
+  disconnect() {}
+  observe() {}
+  unobserve() {}
+}
+
+globalThis.ResizeObserver = ResizeObserverMock;
+
 afterEach(() => cleanup());

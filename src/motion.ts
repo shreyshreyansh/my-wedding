@@ -10,15 +10,25 @@ export const timelineRevealState = (index: number) => ({
 
 export const timelineRevealDelay = (index: number, wideDesktop: boolean) => wideDesktop ? index * .2 : 0;
 
-export const mobileJourneyParallax = { distance: -1000, range: 5000 } as const;
-export const storyScrollRange = { start: "top 85%", end: "bottom 30%" } as const;
+export const heroParallaxSpeeds = {
+  cloud: 170,
+  mountain: 150,
+  sky: 100,
+  sun: 170,
+  temple: 110
+} as const;
+
+export const parallaxOffset = (scrollY: number, speed: number) => speed === 100 ? 0 : -((speed - 100) / 100) * scrollY;
+export const storyScrollRange = { start: "top 90%", end: "top 10%" } as const;
 
 export const wideHeroRevealState = (index: number) => ({
-  rotation: [-14, 7, 13][index] ?? 0,
-  scaleX: [1.12, 1.08, 1.08][index] ?? 1,
-  scaleY: [1.94, 1.7, 1.58][index] ?? 1,
-  y: [782, 685, 590][index] ?? 0
+  opacity: 1,
+  rotation: [40, 33, -40][index] ?? 0,
+  y: [862, 785, 864][index] ?? 0
 });
+
+const heroTitleSpeeds = [20, 30, 40] as const;
+const heroTitleRotations = [32, -32, -32] as const;
 
 const riseSelectors = [
   ".guest__looking",
@@ -53,20 +63,33 @@ export function initMotion(root: HTMLElement): () => void {
       return;
     }
 
+    const pageScrollDistance = () => Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    const addPageParallax = (selector: string, speed: number) => {
+      if (speed === 100) return;
+      gsap.to(selector, {
+        ease: "none",
+        scrollTrigger: {
+          end: "bottom bottom",
+          invalidateOnRefresh: true,
+          scrub: true,
+          start: "top top",
+          trigger: root
+        },
+        y: () => parallaxOffset(pageScrollDistance(), speed)
+      });
+    };
+
     if (wideDesktop) {
-      gsap.from(".hero__title > span", {
-        delay: .78,
-        duration: 2.45,
-        ease: "power3.inOut",
+      gsap.from(".hero__title-reveal", {
+        delay: 1,
+        duration: (index) => index === 1 ? 6.7 : 6.5,
+        ease: "elastic.out(1, .55)",
         rotation: (index) => wideHeroRevealState(index).rotation,
-        scaleX: (index) => wideHeroRevealState(index).scaleX,
-        scaleY: (index) => wideHeroRevealState(index).scaleY,
-        stagger: .06,
         transformOrigin: "50% 50%",
         y: (index) => wideHeroRevealState(index).y
       });
     } else {
-      gsap.from(".hero__title > span", {
+      gsap.from(".hero__title-reveal", {
         duration: 1.25,
         ease: "power3.out",
         opacity: 0,
@@ -77,26 +100,32 @@ export function initMotion(root: HTMLElement): () => void {
       });
     }
 
-    gsap.to(".hero__title", {
-      opacity: 0,
-      scrollTrigger: { end: "bottom top", scrub: true, start: "top top" },
-      y: -80
-    });
-    gsap.to(".hero__sun", { scrollTrigger: { end: "+=900", scrub: true, start: "top top" }, y: 90 });
-    gsap.to(".hero__glow", { scrollTrigger: { end: "+=900", scrub: true, start: "top top" }, y: 48 });
-    gsap.to(".hero__flowers", { scrollTrigger: { end: "+=700", scrub: true, start: "top top" }, y: -36 });
-    if (!wideDesktop) {
-      gsap.to(".hero__walkway", {
+    gsap.utils.toArray<HTMLElement>(".hero__title > span").forEach((title, index) => {
+      const scrollDistance = wideDesktop ? 1236 : 852;
+      gsap.to(title, {
         ease: "none",
-        scrollTrigger: { end: `+=${mobileJourneyParallax.range}`, scrub: true, start: "top top", trigger: root },
-        y: mobileJourneyParallax.distance
+        opacity: .3,
+        rotation: heroTitleRotations[index] ?? 0,
+        scale: .5,
+        scrollTrigger: { end: `+=${scrollDistance}`, scrub: true, start: "top top", trigger: root },
+        y: parallaxOffset(scrollDistance, heroTitleSpeeds[index] ?? 100)
       });
-    }
+    });
+
+    addPageParallax(".hero__glow", heroParallaxSpeeds.cloud);
+    addPageParallax(".hero__sun", heroParallaxSpeeds.sun);
+    addPageParallax(".hero__mountains", heroParallaxSpeeds.mountain);
+    addPageParallax(".hero__walkway", heroParallaxSpeeds.temple);
+    addPageParallax(".hero__flag", heroParallaxSpeeds.temple);
+    addPageParallax(".hero__waving-flag", heroParallaxSpeeds.temple);
     gsap.to(".hero__birds", { scrollTrigger: { end: "+=900", scrub: 1, start: "top 90%" }, x: 50, y: -18 });
-    gsap.to(".wide-hero__clouds", { scrollTrigger: { end: "+=900", scrub: true, start: "top top" }, y: -38 });
-    gsap.to(".wide-hero__atmosphere", { scrollTrigger: { end: "+=900", scrub: true, start: "top top" }, y: 44 });
+
+    addPageParallax(".wide-hero__clouds", heroParallaxSpeeds.cloud);
+    addPageParallax(".wide-hero__temple", heroParallaxSpeeds.sun);
+    addPageParallax(".wide-hero__foreground", heroParallaxSpeeds.mountain);
+    addPageParallax(".wide-hero__journey", heroParallaxSpeeds.temple);
+    addPageParallax(".wide-hero__flag", heroParallaxSpeeds.temple);
     if (wideDesktop) {
-      gsap.to(".wide-hero__journey", { scrollTrigger: { end: "+=10000", scrub: true, start: "top top", trigger: root }, y: -550 });
       gsap.to(".wide-invitation__backdrop", { scrollTrigger: { end: "+=12000", scrub: true, start: "top top", trigger: root }, y: 323 });
       gsap.to(".wide-invitation__scroll, .wide-invitation__ganesh, .wide-invitation__flourish", { scrollTrigger: { end: "+=9200", scrub: true, start: "top top", trigger: root }, y: -512 });
     }
@@ -169,7 +198,7 @@ export function initMotion(root: HTMLElement): () => void {
       color: "#5f250f",
       ease: "none",
       stagger: .045,
-      scrollTrigger: { end: storyScrollRange.end, scrub: .5, start: storyScrollRange.start, trigger: ".couple__story" }
+      scrollTrigger: { end: storyScrollRange.end, scrub: .3, start: storyScrollRange.start, trigger: ".couple__story" }
     });
 
     gsap.utils.toArray<HTMLElement>(".gallery-photo").forEach((photo, index) => {

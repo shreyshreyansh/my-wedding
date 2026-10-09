@@ -5,6 +5,7 @@ import { RotatingGallery } from "./RotatingGallery";
 import { HangingBell } from "./HangingBell";
 import { useCountdown } from "./countdown";
 import { initMotion } from "./motion";
+import { initSmoothScroll } from "./smoothScroll";
 
 const image = (name: string) => `/assets/images/${name}`;
 
@@ -125,7 +126,23 @@ export function App() {
 
   useLayoutEffect(() => {
     if (!canvasRef.current) return undefined;
-    return initMotion(canvasRef.current);
+    const root = canvasRef.current;
+    const stopSmoothScroll = initSmoothScroll();
+    let stopMotion = initMotion(root);
+    const motionQueries = typeof window.matchMedia === "function" ? [
+      window.matchMedia("(min-width: 1280px)"),
+      window.matchMedia("(prefers-reduced-motion: reduce)")
+    ] : [];
+    const rebuildMotion = () => {
+      stopMotion();
+      stopMotion = initMotion(root);
+    };
+    motionQueries.forEach((query) => query.addEventListener("change", rebuildMotion));
+    return () => {
+      motionQueries.forEach((query) => query.removeEventListener("change", rebuildMotion));
+      stopMotion();
+      stopSmoothScroll();
+    };
   }, []);
 
   return (
@@ -154,7 +171,7 @@ export function App() {
         <BirdFlock />
         <DecorativeImage className="hero__birds" file="c32c73cb83ebac88.webp" />
         <h1 className="hero__title" aria-label="Akash weds Drashti">
-          <span className="hero__name hero__name--first">Akash</span><span className="hero__and">weds</span><span className="hero__name hero__name--second">Drashti</span>
+          <span className="hero__name hero__name--first"><span className="hero__title-reveal">Akash</span></span><span className="hero__and"><span className="hero__title-reveal">weds</span></span><span className="hero__name hero__name--second"><span className="hero__title-reveal">Drashti</span></span>
         </h1>
       </section>
 

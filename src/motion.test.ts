@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { mobileJourneyParallax, storyScrollRange, timelineRevealDelay, timelineRevealState, wideHeroRevealState } from "./motion";
+import { heroParallaxSpeeds, parallaxOffset, storyScrollRange, timelineRevealDelay, timelineRevealState, wideHeroRevealState } from "./motion";
 
 describe("timelineRevealState", () => {
   it("mirrors the reference card entrances across the center line", () => {
@@ -9,9 +9,10 @@ describe("timelineRevealState", () => {
 });
 
 describe("wideHeroRevealState", () => {
-  it("starts the large-desktop title below the temple before it rises into place", () => {
-    expect(wideHeroRevealState(0)).toMatchObject({ y: 782, scaleX: 1.12, scaleY: 1.94 });
-    expect(wideHeroRevealState(2).y).toBe(590);
+  it("matches the reference title entrance states", () => {
+    expect(wideHeroRevealState(0)).toEqual({ opacity: 1, rotation: 40, y: 862 });
+    expect(wideHeroRevealState(1)).toEqual({ opacity: 1, rotation: 33, y: 785 });
+    expect(wideHeroRevealState(2)).toEqual({ opacity: 1, rotation: -40, y: 864 });
   });
 });
 
@@ -22,14 +23,27 @@ describe("timelineRevealDelay", () => {
   });
 });
 
-describe("mobileJourneyParallax", () => {
-  it("moves the journey artwork one pixel for every five pixels scrolled", () => {
-    expect(mobileJourneyParallax.distance / mobileJourneyParallax.range).toBe(-.2);
+describe("hero parallax", () => {
+  it("matches the measured reference speeds", () => {
+    expect(heroParallaxSpeeds).toEqual({
+      cloud: 170,
+      mountain: 150,
+      sky: 100,
+      sun: 170,
+      temple: 110
+    });
+  });
+
+  it("converts Framer speed values into exact scroll offsets", () => {
+    expect(parallaxOffset(807, 170)).toBeCloseTo(-564.9, 5);
+    expect(parallaxOffset(807, 150)).toBeCloseTo(-403.5, 5);
+    expect(parallaxOffset(807, 110)).toBeCloseTo(-80.7, 5);
+    expect(parallaxOffset(807, 100)).toBe(0);
   });
 });
 
 describe("storyScrollRange", () => {
   it("uses the original message reveal viewport thresholds", () => {
-    expect(storyScrollRange).toEqual({ start: "top 85%", end: "bottom 30%" });
+    expect(storyScrollRange).toEqual({ start: "top 90%", end: "top 10%" });
   });
 });

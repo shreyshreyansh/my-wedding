@@ -11,6 +11,11 @@
 :root { color: #5f250f; background: #f9eddd; font-family: "Gotham Book", sans-serif; font-synthesis: none; }
 * { box-sizing: border-box; }
 html, body, #root { margin: 0; min-width: 320px; min-height: 100%; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-scrolling iframe { pointer-events: none; }
 body { overflow-x: hidden; background: #f9eddd; }
 button, input, select { font: inherit; }
 img { display: block; max-width: none; user-select: none; }
@@ -44,7 +49,8 @@ img { display: block; max-width: none; user-select: none; }
 .hero__waving-flag[data-texture-ready="true"] { background-image: none; }
 .hero__birds { position: absolute; left: 25.45cqw; top: 260.81cqw; width: 49.62cqw; height: 9.67cqw; object-fit: contain; opacity: .76; }
 .hero__title { position: absolute; inset: 0; margin: 0; color: rgba(171, 86, 38, .72); font-weight: 400; z-index: 5; }
-.hero__title span { position: absolute; display: block; text-align: center; }
+.hero__title > span { position: absolute; display: block; text-align: center; }
+.hero__title-reveal { display: block; }
 .hero__name { font: 400 21.88cqw/1.2 "Miofarin", sans-serif; }
 .hero__name--first { left: 25.95cqw; top: 23.92cqw; width: 48.09cqw; }
 .hero__and { left: 40.2cqw; top: 39.69cqw; width: 19.59cqw; font: 400 18.07cqw/1.2 "Brother Signature", cursive; }
@@ -106,7 +112,7 @@ img { display: block; max-width: none; user-select: none; }
 .couple__heading span { display: block; white-space: nowrap; }
 .couple__portrait { position: absolute; left: 7.12cqw; top: 873.79cqw; width: 85.75cqw; height: 105.6cqw; object-fit: cover; }
 .couple__story { position: absolute; left: 15.27cqw; top: 907.38cqw; width: 69.21cqw; margin: 0; text-align: center; font: 400 3.31cqw/1.2 "Gotham Book", sans-serif; }
-.couple__story span { color: rgba(95, 37, 15, .22); }
+.couple__story span { color: rgba(95, 37, 15, .22); transition: color .3s linear; }
 .couple__story span:first-child { color: #5f250f; }
 .couple__gallery { position: absolute; inset: 0; }
 .gallery-photo { position: absolute; border-radius: 18%; object-fit: cover; box-shadow: 0 2cqw 4cqw rgba(63, 38, 16, .18); }
