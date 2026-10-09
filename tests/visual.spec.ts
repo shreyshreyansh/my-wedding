@@ -285,6 +285,59 @@ test("wide couple heading stays centered before and after its reveal", async ({ 
   }
 });
 
+test("invitation arrow follows the reference responsive variants", async ({ page }) => {
+  const cases = [
+    { viewport: 360, center: 180, top: 1467, labelTop: 1374.6, labelHeight: 20.4 },
+    { viewport: 374, center: 187, top: 1467, labelTop: 1374.6, labelHeight: 20.4 },
+    { viewport: 375, center: 187.5, top: 1467, labelTop: 1364.6, labelHeight: 20.4 },
+    { viewport: 389, center: 194.5, top: 1467, labelTop: 1364.6, labelHeight: 20.4 },
+    { viewport: 390, center: 195, top: 1467, labelTop: 1459, labelHeight: 24 },
+    { viewport: 393, center: 196.5, top: 1467, labelTop: 1459, labelHeight: 24 },
+    { viewport: 600, center: 300, top: 1467, labelTop: 1459, labelHeight: 24 },
+    { viewport: 767, center: 383.5, top: 1467, labelTop: 1459, labelHeight: 24 },
+    { viewport: 768, center: 384, top: 1997, labelTop: 1989, labelHeight: 24 },
+    { viewport: 960, center: 558, top: 2157, labelTop: 2149, labelHeight: 24 },
+    { viewport: 1280, center: 720, top: 3300 },
+    { viewport: 1440, center: 720, top: 3509 },
+    { viewport: 1559, center: 779.5, top: 3509 },
+    { viewport: 1728, center: 864, top: 3809 }
+  ];
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  for (const expected of cases) {
+    await page.setViewportSize({ width: expected.viewport, height: 1000 });
+    await page.goto("/");
+    await page.locator(".site-canvas").waitFor({ state: "visible" });
+
+    const arrow = page.locator(".invitation__arrow");
+    const arrowBox = await arrow.boundingBox();
+    const eventsSelector = expected.viewport >= 1280 ? ".wide-invitation__events" : ".invitation__events";
+    const eventsBox = await page.locator(eventsSelector).boundingBox();
+    expect(arrowBox).not.toBeNull();
+    expect(eventsBox).not.toBeNull();
+    if ("labelTop" in expected) {
+      expect(eventsBox!.y).toBeCloseTo(expected.labelTop, 0);
+      expect(eventsBox!.height).toBeCloseTo(expected.labelHeight, 0);
+    }
+    expect(arrowBox!.x + arrowBox!.width / 2).toBeCloseTo(expected.center, 0);
+    expect(arrowBox!.y).toBeCloseTo(expected.top, 0);
+    expect(arrowBox!.width).toBeCloseTo(50, 0);
+    expect(arrowBox!.height).toBeCloseTo(165, 0);
+
+    const innerBox = await arrow.locator(".invitation__arrow-inner").boundingBox();
+    expect(innerBox).not.toBeNull();
+    expect(innerBox!.y).toBeCloseTo(expected.top + 33, 0);
+    expect(innerBox!.width).toBeCloseTo(30, 0);
+    expect(innerBox!.height).toBeCloseTo(99, 0);
+  }
+
+  for (const viewport of [320, 359, 1920]) {
+    await page.setViewportSize({ width: viewport, height: 1000 });
+    await page.goto("/");
+    await expect(page.locator(".invitation__arrow")).toBeHidden();
+  }
+});
+
 test("desktop breakpoint boundaries preserve their measured reference canvases", async ({ page }) => {
   const cases = [
     { viewport: 1559, scrollHeight: 12261, canvas: { x: 0, y: 0, width: 1559, height: 12261 }, sky: { x: 0, y: -2, width: 1559, height: 1257.58 }, flag: { x: 666.48, y: 396, width: 225, height: 191 }, wave: { x: 763.91, y: 424, width: 124.72, height: 83.14 } },

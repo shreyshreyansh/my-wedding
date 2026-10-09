@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   heroParallaxSpeeds,
+  invitationArrowRevealDistance,
   invitationParallaxSpeeds,
   invitationRevealState,
   invitationRevealSteps,
@@ -69,6 +70,7 @@ describe("invitation reveal", () => {
       threshold: .15
     });
     expect(invitationParallaxSpeeds).toEqual({ narrow: 120, wide: 110 });
+    expect(invitationArrowRevealDistance).toEqual({ narrow: 32, wide: 24 });
   });
 
   it("reveals the artwork and copy one item at a time", () => {
@@ -83,7 +85,8 @@ describe("invitation reveal", () => {
       { key: "bride-name", delay: .35 },
       { key: "daughter-of", delay: .4 },
       { key: "bride-parents", delay: .45 },
-      { key: "events-intro", delay: .5 }
+      { key: "events-intro", delay: .5 },
+      { key: "events-arrow", delay: .55 }
     ]);
   });
 

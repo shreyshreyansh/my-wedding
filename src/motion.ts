@@ -24,6 +24,7 @@ export const storyScrollRange = { start: "top 90%", end: "top 10%" } as const;
 export const invitationRevealState = { opacity: 0, y: 24 } as const;
 export const invitationRevealTransition = { bounce: .12, duration: .65, threshold: .15 } as const;
 export const invitationParallaxSpeeds = { narrow: 120, wide: 110 } as const;
+export const invitationArrowRevealDistance = { narrow: 32, wide: 24 } as const;
 export const invitationRevealSteps = [
   { key: "ganpati-name", delay: 0 },
   { key: "ganpati-icon", delay: .05 },
@@ -35,7 +36,8 @@ export const invitationRevealSteps = [
   { key: "bride-name", delay: .35 },
   { key: "daughter-of", delay: .4 },
   { key: "bride-parents", delay: .45 },
-  { key: "events-intro", delay: .5 }
+  { key: "events-intro", delay: .5 },
+  { key: "events-arrow", delay: .55 }
 ] as const;
 
 const motionSpringDefaults = {
@@ -222,21 +224,25 @@ export function initMotion(root: HTMLElement): () => void {
     }
 
     const activeInvitationSelector = wideDesktop
-      ? ".wide-invitation__scroll[data-invitation-motion], .wide-invitation__ganesh[data-invitation-motion], .wide-invitation__flourish[data-invitation-motion], .wide-invitation__copy [data-invitation-motion]"
-      : ".invitation__scroll[data-invitation-motion], .invitation__ganesh[data-invitation-motion], .invitation__birds[data-invitation-motion], .invitation__copy [data-invitation-motion]";
+      ? ".wide-invitation__scroll[data-invitation-motion], .wide-invitation__ganesh[data-invitation-motion], .wide-invitation__flourish[data-invitation-motion], .wide-invitation__copy [data-invitation-motion], .invitation__arrow[data-invitation-motion]"
+      : ".invitation__scroll[data-invitation-motion], .invitation__ganesh[data-invitation-motion], .invitation__birds[data-invitation-motion], .invitation__copy [data-invitation-motion], .invitation__arrow[data-invitation-motion]";
     const invitationSpeed = wideDesktop ? invitationParallaxSpeeds.wide : invitationParallaxSpeeds.narrow;
     const invitationDelays = new Map<string, number>(invitationRevealSteps.map((step) => [step.key, step.delay]));
     gsap.utils.toArray<HTMLElement>(activeInvitationSelector).forEach((item) => {
       const key = item.dataset.invitationMotion ?? "";
+      const itemSpeed = Number.parseFloat(item.dataset.invitationSpeed ?? "") || invitationSpeed;
+      const revealDistance = key === "events-arrow"
+        ? invitationArrowRevealDistance[wideDesktop ? "wide" : "narrow"]
+        : invitationRevealState.y;
       const reveal = { progress: invitationRevealState.opacity };
-      item.style.setProperty("--invitation-reveal-y", `${invitationRevealState.y}px`);
+      item.style.setProperty("--invitation-reveal-y", `${revealDistance}px`);
       item.style.opacity = `${invitationRevealState.opacity}`;
       const revealTween = gsap.to(reveal, {
         delay: invitationDelays.get(key) ?? 0,
         duration: invitationRevealTransition.duration,
         ease: motionSpringProgress,
         onUpdate: () => {
-          item.style.setProperty("--invitation-reveal-y", `${invitationRevealState.y * (1 - reveal.progress)}px`);
+          item.style.setProperty("--invitation-reveal-y", `${revealDistance * (1 - reveal.progress)}px`);
           item.style.opacity = `${reveal.progress}`;
         },
         paused: true,
@@ -253,13 +259,13 @@ export function initMotion(root: HTMLElement): () => void {
           const currentTop = item.getBoundingClientRect().top + window.scrollY;
           const layoutTop = currentTop - parallaxY - revealY;
           const visibleThreshold = window.innerHeight - item.offsetHeight * invitationRevealTransition.threshold;
-          const startScroll = Math.max(0, (layoutTop - visibleThreshold) / (invitationSpeed / 100));
+          const startScroll = Math.max(0, (layoutTop - visibleThreshold) / (itemSpeed / 100));
           return `top ${currentTop - startScroll}px`;
         },
         trigger: item
       });
       gsap.to(item, {
-        "--invitation-parallax-y": () => `${parallaxOffset(pageScrollDistance(), invitationSpeed)}px`,
+        "--invitation-parallax-y": () => `${parallaxOffset(pageScrollDistance(), itemSpeed)}px`,
         ease: "none",
         scrollTrigger: {
           end: "bottom bottom",

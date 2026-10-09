@@ -41,6 +41,19 @@ function DecorativeImage({ className, file, alt = "", invitationMotion }: { clas
   return <img className={className} src={image(file)} alt={alt} data-invitation-motion={invitationMotion} draggable={false} />;
 }
 
+function InvitationArrow() {
+  return (
+    <div className="invitation__arrow" data-invitation-motion="events-arrow" data-invitation-speed="120" aria-hidden="true">
+      <div className="invitation__arrow-inner">
+        <svg width="40" height="100%" viewBox="0 0 40 165" fill="none">
+          <line x1="20" y1="155" x2="20" y2="30" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+          <path d="M 6.666666666666666 141.66666666666666 L 20 155 L 33.333333333333336 141.66666666666666" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
 function EventCard({ index }: { index: number }) {
   return (
     <article className={`event-card event-card--${index}`} data-testid="event-card">
@@ -199,6 +212,7 @@ export function App() {
           <p className="wide-invitation__parents wide-invitation__parents--second" data-invitation-motion="bride-parents">Shri. Rajmani Pathak &amp; Smt. Ambika Pathak</p>
           <p className="wide-invitation__events" data-invitation-motion="events-intro">On the following events</p>
         </div>
+        <InvitationArrow />
         <DecorativeImage className="invitation__scroll" file="be15daddc4d3d265.webp" invitationMotion="ganpati-name" />
         <DecorativeImage className="invitation__ganesh" file="299c9e87d4b523dc.webp" invitationMotion="ganpati-icon" />
         <DecorativeImage className="invitation__birds" file="c32c73cb83ebac88.webp" invitationMotion="shri-line" />

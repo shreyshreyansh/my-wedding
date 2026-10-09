@@ -66,7 +66,10 @@ img { display: block; max-width: none; user-select: none; }
 .invitation__names em { display: block; height: 14.76cqw; margin-top: -10.18cqw; font: normal 400 18.58cqw/1.2 "Brother Signature", cursive; }
 .invitation__relation { margin-top: -1.53cqw !important; font-size: 3.31cqw; font-weight: 500; }
 .invitation__parents--second { margin-top: 1.02cqw !important; }
-.invitation__events { margin-top: 10.69cqw !important; font-size: 5.09cqw; font-weight: 500; }
+.invitation__events { margin-top: 10.69cqw !important; font-size: 5.09cqw; font-weight: 500; line-height: 1.2; }
+.invitation__arrow { position: absolute; left: calc(50% - 25px); top: 1467px; width: 50px; height: 165px; color: #b37443; z-index: 20; pointer-events: none; }
+.invitation__arrow-inner { display: flex; align-items: flex-end; justify-content: center; width: 50px; height: 165px; transform: scale(.6); }
+.invitation__arrow svg { display: block; width: 40px; height: 100%; overflow: visible; }
 .invitation__scroll { position: absolute; left: 39.69cqw; top: 234.1cqw; width: 21.12cqw; height: 6.62cqw; object-fit: contain; z-index: 3; }
 .invitation__ganesh { position: absolute; left: 44.27cqw; top: 242cqw; width: 11.96cqw; height: 16.54cqw; object-fit: contain; z-index: 3; }
 .invitation__birds { position: absolute; left: 25.45cqw; top: 260.81cqw; width: 49.62cqw; height: 9.67cqw; object-fit: contain; z-index: 3; }
@@ -74,7 +77,7 @@ img { display: block; max-width: none; user-select: none; }
 @media (min-width: 360px) and (max-width: 599px) {
   .hero__flock { left: -.63cqw; top: -1px; }
   .hero__waving-flag { top: 81.73cqw; }
-  .invitation__copy { top: 921px; height: 362px; }
+  .invitation__copy { top: 920px; height: 563px; }
   .invitation__copy > p { position: absolute; left: 0; width: 100%; }
   .invitation__copy > .invitation__parents:not(.invitation__parents--second) { top: 0; }
   .mobile-invitation__line { position: absolute; left: 0; top: 22px; width: 100%; }
@@ -82,7 +85,19 @@ img { display: block; max-width: none; user-select: none; }
   .invitation__names em { margin-top: -43.4px; }
   .invitation__relation { top: 261.4px; margin: 0 !important; }
   .invitation__parents--second { top: 282.4px; margin: 0 !important; }
-  .invitation__events { top: 338px; margin: 0 !important; }
+  .invitation__events { top: 539px; margin: 0 !important; }
+}
+
+@media (min-width: 360px) and (max-width: 389.98px) {
+  .invitation__events { font-size: 17px; line-height: 20.4px; }
+}
+
+@media (min-width: 360px) and (max-width: 374.98px) {
+  .invitation__events { top: 454.6px; }
+}
+
+@media (min-width: 375px) and (max-width: 389.98px) {
+  .invitation__events { top: 444.6px; }
 }
 
 .timeline__garden { position: absolute; left: -1.02cqw; top: 322.39cqw; width: 101.78cqw; height: 507.12cqw; object-fit: cover; }
@@ -198,6 +213,7 @@ img { display: block; max-width: none; user-select: none; }
 @media (max-width: 359px) {
   #root { position: relative; height: 5476px; overflow: clip; }
   .site-canvas { width: 320px; height: 5476px; max-height: none; margin: 0 auto; }
+  .invitation__arrow { display: none; }
   .hero__sky { left: -1px; top: -1px; width: 322px; height: 802px; }
   .hero__glow { left: -1px; top: 90px; width: 323px; height: 260.5px; }
   .hero__sun { left: 5.6px; top: 264.8px; width: 263.7px; height: 223.5px; }
@@ -345,14 +361,15 @@ img { display: block; max-width: none; user-select: none; }
   .hero__and { left: 519px; top: 156px; width: 77px; font-size: 71px; }
   .hero__name--second { left: 448px; top: 211px; width: 220px; }
   .invitation__garden { left: 68px; top: 1649px; width: 977px; height: 1065px; }
-  .invitation__copy { top: 1811px; font-size: 14px; line-height: 16.8px; }
+  .invitation__copy { top: 1610px; font-size: 14px; line-height: 16.8px; }
   .invitation__parents { font-size: 13px; line-height: 15.6px; }
   .invitation__names { height: 306px; }
   .invitation__names span { height: 103px; font-size: 86px; }
   .invitation__names em { height: 88px; margin-top: -40px; font-size: 73px; }
   .invitation__relation { margin-top: -6px !important; font-size: 13px; }
   .invitation__parents--second { margin-top: 4px !important; }
-  .invitation__events { margin-top: 42px !important; font-size: 20px; }
+  .invitation__events { position: absolute; left: 0; top: 539px; width: 100%; margin: 0 !important; font-size: 20px; line-height: 24px; }
+  .invitation__arrow { top: 2157px; }
   .invitation__scroll { left: 517px; top: 1634px; width: 83px; height: 26px; }
   .invitation__ganesh { left: 535px; top: 1665px; width: 47px; height: 65px; }
   .invitation__birds { left: 461px; top: 1739px; width: 195px; height: 38px; }
@@ -446,7 +463,8 @@ img { display: block; max-width: none; user-select: none; }
   .hero__flag { left: 529px; }
   .hero__waving-flag { left: 553px; }
   .invitation__garden { left: calc(517px - 50vw); top: 1469px; width: calc(100vw + 80px); height: 925.5px; }
-  .invitation__copy { top: 1631px; }
+  .invitation__copy { top: 1450px; }
+  .invitation__arrow { top: 1997px; }
   .invitation__scroll { top: 1454px; }
   .invitation__ganesh { top: 1485px; }
   .invitation__birds { top: 1559px; }
@@ -480,6 +498,11 @@ img { display: block; max-width: none; user-select: none; }
   .finale__divider--bottom { top: 8838px; }
   .countdown { top: 8964px; }
   .finale__elephants { left: calc(513px - 50vw); top: 8787px; width: calc(100vw + 78px); height: 1047px; }
+}
+
+@media (min-width: 600px) and (max-width: 767.98px) {
+  .invitation__copy { top: 920px; }
+  .invitation__arrow { top: 1467px; }
 }
 
 @media (min-width: 1280px) {
@@ -530,7 +553,8 @@ img { display: block; max-width: none; user-select: none; }
   .wide-invitation__name--second { left: 554.9px; top: 340px; width: 330.1px; font-size: 129px; line-height: 154.8px; }
   .wide-invitation__relation { left: 661.5px; top: 503.6px; width: 117px; white-space: pre; font: 400 24px/28.8px "IvyOra", serif; }
   .wide-invitation__parents--second { top: 544.2px; }
-  .wide-invitation__events { left: 531.3px; top: 766.2px; width: 377.5px; font: 400 39px/46.8px "IvyOra", serif; }
+  .wide-invitation__events { left: 531.3px; top: 766.2px; width: 377.5px; white-space: pre; font: 400 39px/46.8px "IvyOra", serif; }
+  .invitation__arrow { top: 3509px; color: #5f250f; }
 
   .timeline__garden, .timeline__medallion, .timeline__divider { display: none; }
   .wide-timeline__backdrop { position: absolute; left: -37px; top: 2970px; width: 1515px; height: 3566.5px; object-fit: contain; z-index: 7; }
@@ -641,6 +665,10 @@ img { display: block; max-width: none; user-select: none; }
   .countdown__units div > span { margin-top: 6px; color: #888; font: 600 10px/12px "Inter", sans-serif; letter-spacing: 1px; }
 }
 
+@media (min-width: 1280px) and (max-width: 1348.98px) {
+  .invitation__arrow { top: 3300px; }
+}
+
 @media (min-width: 1559px) and (max-width: 1727.98px) {
   html, body, #root { min-height: 12261px; }
   #root { height: 12261px; }
@@ -673,6 +701,7 @@ img { display: block; max-width: none; user-select: none; }
   .wide-invitation__ganesh { left: 737.48px; top: 2216px; }
   .wide-invitation__flourish { left: 644.48px; top: 2339px; }
   .wide-invitation__copy { left: 59px; top: 2459px; }
+  .invitation__arrow { top: 3509px; }
 
   .wide-timeline__backdrop { left: -29.5px; top: 2970px; width: 1617px; height: 3681.59px; }
   .timeline__heading { top: 4135.84px; }
@@ -753,7 +782,8 @@ img { display: block; max-width: none; user-select: none; }
   .wide-invitation__scroll { left: 763.49px; top: 2421px; width: 211px; height: 65.45px; }
   .wide-invitation__ganesh { left: 827.49px; top: 2486px; }
   .wide-invitation__flourish { left: 734.49px; top: 2609px; }
-  .wide-invitation__copy { left: 149px; top: 2729px; }
+  .wide-invitation__copy { left: 149px; top: 2705px; }
+  .invitation__arrow { top: 3809px; }
 
   .wide-timeline__backdrop { left: -10px; top: 2947px; width: 1760px; height: 4698px; }
   .timeline__heading { top: 4621px; }
@@ -845,6 +875,7 @@ img { display: block; max-width: none; user-select: none; }
   .wide-invitation__ganesh { left: 917.49px; top: 2676px; }
   .wide-invitation__flourish { left: 824.49px; top: 2799px; }
   .wide-invitation__copy { left: 239px; top: 2919px; }
+  .invitation__arrow { display: none; }
 
   .wide-timeline__backdrop { left: -10px; top: 2947px; width: 1940px; height: 4698px; }
   .timeline__heading { top: 4463.04px; }

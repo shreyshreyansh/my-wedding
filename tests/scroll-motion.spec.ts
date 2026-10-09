@@ -89,7 +89,7 @@ test("invitation copy reveals in the reference order instead of as one block", a
   await expect(item("groom-parents")).toHaveCSS("opacity", "0");
   await expect(item("groom-name")).toHaveCSS("opacity", "0");
 
-  await page.evaluate(() => window.scrollTo(0, 1700));
+  await page.evaluate(() => window.scrollTo(0, 1670));
   await page.waitForTimeout(950);
 
   await expect(item("groom-parents")).toHaveCSS("opacity", "1");
@@ -165,6 +165,86 @@ test("invitation items use the reference desktop parallax speed", async ({ page 
     Number.parseFloat(getComputedStyle(element).getPropertyValue("--invitation-parallax-y"))
   );
   expect(parallaxY).toBeCloseTo(-245, 0);
+});
+
+test("event arrow matches the reference geometry and scroll speed", async ({ page }) => {
+  await page.setViewportSize({ width: 1728, height: 1000 });
+  await page.goto("/");
+  await page.locator(".site-canvas").waitFor({ state: "visible" });
+  await page.evaluate(() => document.fonts.ready);
+
+  const events = page.locator(".wide-invitation__events");
+  expect(await events.evaluate((element) => getComputedStyle(element).whiteSpace)).toBe("pre");
+  expect((await events.boundingBox())!.height).toBeCloseTo(46.8, 0);
+
+  const arrow = page.locator(".invitation__arrow");
+  await expect(arrow).toHaveCSS("opacity", "0");
+  const line = arrow.locator("line");
+  expect(await line.getAttribute("y2")).toBe("30");
+
+  await page.evaluate(() => window.scrollTo(0, 2500));
+  await page.waitForTimeout(1500);
+
+  await expect(arrow).toHaveCSS("opacity", "1");
+  const eventsBox = await events.boundingBox();
+  expect(eventsBox).not.toBeNull();
+  expect(eventsBox!.y).toBeCloseTo(721.2, 0);
+  const arrowBox = await arrow.boundingBox();
+  expect(arrowBox).not.toBeNull();
+  expect(arrowBox!.x).toBeCloseTo(839, 0);
+  expect(arrowBox!.y).toBeCloseTo(809, 0);
+  expect(arrowBox!.width).toBeCloseTo(50, 0);
+  expect(arrowBox!.height).toBeCloseTo(165, 0);
+
+  const arrowState = await arrow.evaluate((element) => {
+    const styles = getComputedStyle(element);
+    const inner = element.querySelector(".invitation__arrow-inner")!.getBoundingClientRect();
+    return {
+      color: styles.color,
+      innerHeight: inner.height,
+      innerWidth: inner.width,
+      parallaxY: Number.parseFloat(styles.getPropertyValue("--invitation-parallax-y"))
+    };
+  });
+  expect(arrowState.color).toBe("rgb(95, 37, 15)");
+  expect(arrowState.innerWidth).toBeCloseTo(30, 0);
+  expect(arrowState.innerHeight).toBeCloseTo(99, 0);
+  expect(arrowState.parallaxY).toBeCloseTo(-500, 0);
+});
+
+test("narrow event arrow enters below the event label", async ({ page }) => {
+  const cases = [
+    { viewport: 768, labelInitialY: 2013, arrowInitialY: 2029, labelSettledY: 189, arrowSettledY: 197 },
+    { viewport: 960, labelInitialY: 2173, arrowInitialY: 2189, labelSettledY: 349, arrowSettledY: 357 }
+  ];
+
+  for (const expected of cases) {
+    await page.setViewportSize({ width: expected.viewport, height: 1000 });
+    await page.goto("/");
+    await page.locator(".site-canvas").waitFor({ state: "visible" });
+    await page.evaluate(() => document.fonts.ready);
+
+    const label = page.locator(".invitation__events");
+    const arrow = page.locator(".invitation__arrow");
+    await expect(label).toHaveCSS("opacity", "0");
+    await expect(arrow).toHaveCSS("opacity", "0");
+    expect((await label.boundingBox())!.y).toBeCloseTo(expected.labelInitialY, 0);
+    expect((await arrow.boundingBox())!.y).toBeCloseTo(expected.arrowInitialY, 0);
+    expect((await arrow.locator(".invitation__arrow-inner").boundingBox())!.y).toBeCloseTo(expected.arrowInitialY + 33, 0);
+
+    await page.evaluate(() => window.scrollTo(0, 1500));
+    await page.waitForTimeout(1500);
+
+    await expect(label).toHaveCSS("opacity", "1");
+    await expect(arrow).toHaveCSS("opacity", "1");
+    const labelBox = (await label.boundingBox())!;
+    const arrowBox = (await arrow.boundingBox())!;
+    const innerBox = (await arrow.locator(".invitation__arrow-inner").boundingBox())!;
+    expect(labelBox.y).toBeCloseTo(expected.labelSettledY, 0);
+    expect(labelBox.height).toBeCloseTo(24, 0);
+    expect(arrowBox.y).toBeCloseTo(expected.arrowSettledY, 0);
+    expect(innerBox.y - (labelBox.y + labelBox.height)).toBeCloseTo(17, 0);
+  }
 });
 
 test("invitation items use the reference mobile parallax speed", async ({ page }) => {
