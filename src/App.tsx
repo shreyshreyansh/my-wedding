@@ -37,8 +37,8 @@ const knowledge = [
   { icon: "bdf80fd9d4b08bf2.webp", title: "Parking", copy: "Valet parking for all our guests will be available at the venue" }
 ] as const;
 
-function DecorativeImage({ className, file, alt = "" }: { className: string; file: string; alt?: string }) {
-  return <img className={className} src={image(file)} alt={alt} draggable={false} />;
+function DecorativeImage({ className, file, alt = "", invitationMotion }: { className: string; file: string; alt?: string; invitationMotion?: string }) {
+  return <img className={className} src={image(file)} alt={alt} data-invitation-motion={invitationMotion} draggable={false} />;
 }
 
 function EventCard({ index }: { index: number }) {
@@ -177,32 +177,31 @@ export function App() {
 
       <section className="section-layer invitation" aria-label="Wedding invitation">
         <DecorativeImage className="wide-only wide-invitation__backdrop" file="wide-invitation-backdrop.webp" />
-        <DecorativeImage className="wide-only wide-invitation__scroll" file="wide-scroll.webp" />
-        <DecorativeImage className="wide-only wide-invitation__ganesh" file="wide-ganesh.webp" />
-        <DecorativeImage className="wide-only wide-invitation__flourish" file="wide-heading-flourish.webp" />
+        <DecorativeImage className="wide-only wide-invitation__scroll" file="wide-scroll.webp" invitationMotion="ganpati-name" />
+        <DecorativeImage className="wide-only wide-invitation__ganesh" file="wide-ganesh.webp" invitationMotion="ganpati-icon" />
+        <DecorativeImage className="wide-only wide-invitation__flourish" file="wide-heading-flourish.webp" invitationMotion="shri-line" />
         <DecorativeImage className="invitation__garden" file="9833bdd6ffb94266.webp" />
         <div className="invitation__copy">
-          <p className="invitation__parents">Shri. Rajmani Pathak &amp; Smt. Ambika Pathak</p>
-          <p>Cordially request the honor of your</p><p>presence at the wedding celebration of</p><p>our beloved son</p>
-          <div className="invitation__names"><span>Akash</span><em>and</em><span>Drashti</span></div>
-          <p className="invitation__relation">Daughter of</p>
-          <p className="invitation__parents invitation__parents--second">Shri. Rajmani Pathak &amp; Smt. Ambika Pathak</p>
-          <p className="invitation__events"><span className="narrow-only">On The Following Events</span><span className="wide-only">On the following events</span></p>
+          <p className="invitation__parents" data-invitation-motion="groom-parents">Shri. Rajmani Pathak &amp; Smt. Ambika Pathak</p>
+          <div className="mobile-invitation__line" data-invitation-motion="invitation-line"><p>Cordially request the honor of your</p><p>presence at the wedding celebration of</p><p>our beloved son</p></div>
+          <div className="invitation__names"><span data-invitation-motion="groom-name">Akash</span><em data-invitation-motion="and">and</em><span data-invitation-motion="bride-name">Drashti</span></div>
+          <p className="invitation__relation" data-invitation-motion="daughter-of">Daughter of</p>
+          <p className="invitation__parents invitation__parents--second" data-invitation-motion="bride-parents">Shri. Rajmani Pathak &amp; Smt. Ambika Pathak</p>
+          <p className="invitation__events" data-invitation-motion="events-intro"><span className="narrow-only">On The Following Events</span><span className="wide-only">On the following events</span></p>
         </div>
         <div className="wide-only wide-invitation__copy">
-          <p className="wide-invitation__parents">Shri. Rajmani Pathak &amp; Smt. Ambika Pathak</p>
-          <p className="wide-invitation__line wide-invitation__line--1">Cordially request the honor of your presence at the wedding</p>
-          <p className="wide-invitation__line wide-invitation__line--2">celebration of our beloved son</p>
-          <p className="wide-invitation__name wide-invitation__name--first">Akash</p>
-          <p className="wide-invitation__and">and</p>
-          <p className="wide-invitation__name wide-invitation__name--second">Drashti</p>
-          <p className="wide-invitation__relation">Daughter of</p>
-          <p className="wide-invitation__parents wide-invitation__parents--second">Shri. Rajmani Pathak &amp; Smt. Ambika Pathak</p>
-          <p className="wide-invitation__events">On the following events</p>
+          <p className="wide-invitation__parents" data-invitation-motion="groom-parents">Shri. Rajmani Pathak &amp; Smt. Ambika Pathak</p>
+          <div className="wide-invitation__line" data-invitation-motion="invitation-line"><p>Cordially request the honor of your presence at the wedding</p><p>celebration of our beloved son</p></div>
+          <p className="wide-invitation__name wide-invitation__name--first" data-invitation-motion="groom-name">Akash</p>
+          <p className="wide-invitation__and" data-invitation-motion="and">and</p>
+          <p className="wide-invitation__name wide-invitation__name--second" data-invitation-motion="bride-name">Drashti</p>
+          <p className="wide-invitation__relation" data-invitation-motion="daughter-of">Daughter of</p>
+          <p className="wide-invitation__parents wide-invitation__parents--second" data-invitation-motion="bride-parents">Shri. Rajmani Pathak &amp; Smt. Ambika Pathak</p>
+          <p className="wide-invitation__events" data-invitation-motion="events-intro">On the following events</p>
         </div>
-        <DecorativeImage className="invitation__scroll" file="be15daddc4d3d265.webp" />
-        <DecorativeImage className="invitation__ganesh" file="299c9e87d4b523dc.webp" />
-        <DecorativeImage className="invitation__birds" file="c32c73cb83ebac88.webp" />
+        <DecorativeImage className="invitation__scroll" file="be15daddc4d3d265.webp" invitationMotion="ganpati-name" />
+        <DecorativeImage className="invitation__ganesh" file="299c9e87d4b523dc.webp" invitationMotion="ganpati-icon" />
+        <DecorativeImage className="invitation__birds" file="c32c73cb83ebac88.webp" invitationMotion="shri-line" />
       </section>
 
       <section className="section-layer timeline" aria-label="Wedding timeline">

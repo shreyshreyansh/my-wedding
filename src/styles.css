@@ -59,6 +59,7 @@ img { display: block; max-width: none; user-select: none; }
 .invitation__garden { position: absolute; left: -1.02cqw; top: 297.46cqw; width: 101.78cqw; height: 110.94cqw; object-fit: cover; }
 .invitation__copy { position: absolute; left: 0; top: 279.13cqw; width: 100%; text-align: center; font-family: "IvyOra", serif; font-size: 3.56cqw; line-height: 4.27cqw; z-index: 20; }
 .invitation__copy p { margin: 0; }
+[data-invitation-motion] { --invitation-parallax-y: 0px; --invitation-reveal-y: 0px; transform: translate3d(0, calc(var(--invitation-parallax-y) + var(--invitation-reveal-y)), 0); will-change: transform, opacity; }
 .invitation__parents { color: #ab5626; font-family: "Gotham Medium", sans-serif; font-size: 3.31cqw; line-height: 4.07cqw; }
 .invitation__names { height: 76.34cqw; color: rgba(171, 86, 38, .72); position: relative; }
 .invitation__names span { display: block; height: 26.21cqw; font: 400 21.88cqw/1.2 "Miofarin", sans-serif; }
@@ -75,10 +76,8 @@ img { display: block; max-width: none; user-select: none; }
   .hero__waving-flag { top: 81.73cqw; }
   .invitation__copy { top: 921px; height: 362px; }
   .invitation__copy > p { position: absolute; left: 0; width: 100%; }
-  .invitation__copy > p:nth-of-type(1) { top: 0; }
-  .invitation__copy > p:nth-of-type(2) { top: 22px; }
-  .invitation__copy > p:nth-of-type(3) { top: 38.8px; }
-  .invitation__copy > p:nth-of-type(4) { top: 55.6px; }
+  .invitation__copy > .invitation__parents:not(.invitation__parents--second) { top: 0; }
+  .mobile-invitation__line { position: absolute; left: 0; top: 22px; width: 100%; }
   .invitation__names { position: absolute; top: 50.4px; height: 217px; width: 100%; }
   .invitation__names em { margin-top: -43.4px; }
   .invitation__relation { top: 261.4px; margin: 0 !important; }
@@ -521,11 +520,10 @@ img { display: block; max-width: none; user-select: none; }
   .wide-invitation__ganesh { position: absolute; left: 678.5px; top: 2218px; width: 83px; height: 114.3px; object-fit: contain; z-index: 8; }
   .wide-invitation__flourish { position: absolute; left: 585.5px; top: 2341px; width: 269px; height: 52.4px; object-fit: cover; z-index: 8; }
   .wide-invitation__copy { position: absolute; left: 0; top: 2461px; width: 1440px; height: 813px; text-align: center; font-family: "IvyOra", serif; z-index: 9; }
-  .wide-invitation__copy p { position: absolute; margin: 0; }
+  .wide-invitation__copy > p, .wide-invitation__line { position: absolute; margin: 0; }
+  .wide-invitation__line p { margin: 0; }
   .wide-invitation__parents { left: 328.2px; top: 0; width: 783.6px; color: #ab5626; font: 500 36px/43.2px "Gotham Medium", sans-serif; }
-  .wide-invitation__line { left: 388.1px; width: 663.8px; font: 400 27px/32.4px "IvyOra", serif; }
-  .wide-invitation__line--1 { top: 54px; }
-  .wide-invitation__line--2 { top: 86.4px; }
+  .wide-invitation__line { left: 388.1px; top: 54px; width: 663.8px; font: 400 27px/32.4px "IvyOra", serif; }
   .wide-invitation__name { color: rgba(171,86,38,.72); font-family: "Miofarin", sans-serif; font-weight: 400; }
   .wide-invitation__name--first { left: 553.8px; top: 130px; width: 332.5px; font-size: 151px; line-height: 181.2px; }
   .wide-invitation__and { left: -35.5px; top: 232px; width: 1515px; color: rgba(171,86,38,.72); font: 400 128px/153.6px "Brother Signature", cursive; }

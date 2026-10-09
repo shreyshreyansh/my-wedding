@@ -1,5 +1,17 @@
 import { describe, expect, it } from "vitest";
-import { heroParallaxSpeeds, parallaxOffset, storyScrollRange, timelineRevealDelay, timelineRevealState, wideHeroRevealState } from "./motion";
+import {
+  heroParallaxSpeeds,
+  invitationParallaxSpeeds,
+  invitationRevealState,
+  invitationRevealSteps,
+  invitationRevealTransition,
+  motionSpringProgress,
+  parallaxOffset,
+  storyScrollRange,
+  timelineRevealDelay,
+  timelineRevealState,
+  wideHeroRevealState
+} from "./motion";
 
 describe("timelineRevealState", () => {
   it("mirrors the reference card entrances across the center line", () => {
@@ -45,5 +57,41 @@ describe("hero parallax", () => {
 describe("storyScrollRange", () => {
   it("uses the original message reveal viewport thresholds", () => {
     expect(storyScrollRange).toEqual({ start: "top 90%", end: "top 10%" });
+  });
+});
+
+describe("invitation reveal", () => {
+  it("matches the reference enter state and low-bounce spring", () => {
+    expect(invitationRevealState).toEqual({ opacity: 0, y: 24 });
+    expect(invitationRevealTransition).toEqual({
+      bounce: .12,
+      duration: .65,
+      threshold: .15
+    });
+    expect(invitationParallaxSpeeds).toEqual({ narrow: 120, wide: 110 });
+  });
+
+  it("reveals the artwork and copy one item at a time", () => {
+    expect(invitationRevealSteps).toEqual([
+      { key: "ganpati-name", delay: 0 },
+      { key: "ganpati-icon", delay: .05 },
+      { key: "shri-line", delay: .1 },
+      { key: "groom-parents", delay: .15 },
+      { key: "invitation-line", delay: .2 },
+      { key: "groom-name", delay: .25 },
+      { key: "and", delay: .3 },
+      { key: "bride-name", delay: .35 },
+      { key: "daughter-of", delay: .4 },
+      { key: "bride-parents", delay: .45 },
+      { key: "events-intro", delay: .5 }
+    ]);
+  });
+
+  it("uses Motion's duration-and-bounce curve between the endpoints", () => {
+    expect(motionSpringProgress(0)).toBe(0);
+    expect(motionSpringProgress(.25)).toBeCloseTo(.6796825725, 8);
+    expect(motionSpringProgress(.5)).toBeCloseTo(.9717379891, 8);
+    expect(motionSpringProgress(.75)).toBeCloseTo(1.0028983178, 8);
+    expect(motionSpringProgress(1)).toBe(1);
   });
 });
