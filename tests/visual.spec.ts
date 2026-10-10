@@ -203,6 +203,47 @@ test("reduced motion keeps the three-card timeline centered at wide desktop widt
   }
 });
 
+test("gold ornaments separate each pair of celebration cards", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+
+  for (const width of [320, 393, 600, 768, 960, 1440, 1559, 1728, 1920]) {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto("/");
+    await page.locator(".site-canvas").waitFor({ state: "visible" });
+
+    const layout = await page.evaluate(() => {
+      const boxes = (selector: string) => Array.from(document.querySelectorAll(selector)).map((element) => {
+        const rect = element.getBoundingClientRect();
+        return { bottom: rect.bottom, centerX: rect.left + rect.width / 2, centerY: rect.top + rect.height / 2, left: rect.left, right: rect.right, top: rect.top };
+      });
+      return { cards: boxes(".event-card"), ornaments: boxes(".timeline__medallion") };
+    });
+
+    expect(layout.ornaments, `expected two ornaments at ${width}px`).toHaveLength(2);
+
+    if (width >= 1280) {
+      layout.ornaments.forEach((ornament, index) => {
+        expect(ornament.centerX).toBeGreaterThan(layout.cards[index].right);
+        expect(ornament.centerX).toBeLessThan(layout.cards[index + 1].left);
+        expect(ornament.centerY).toBeGreaterThan(layout.cards[index].top);
+        expect(ornament.centerY).toBeLessThan(layout.cards[index].bottom);
+      });
+    } else if (width >= 600) {
+      layout.ornaments.forEach((ornament, index) => {
+        expect(ornament.centerX).toBeCloseTo(width / 2, 0);
+        expect(ornament.centerY).toBeGreaterThan(layout.cards[index].bottom);
+        expect(ornament.centerY).toBeLessThan(layout.cards[index + 1].top);
+      });
+    } else {
+      expect(layout.ornaments[0].centerX).toBeGreaterThan(layout.cards[0].right);
+      expect(layout.ornaments[0].centerX).toBeLessThan(layout.cards[1].left);
+      expect(layout.ornaments[1].centerX).toBeCloseTo(width / 2, width === 320 ? 0 : 1);
+      expect(layout.ornaments[1].centerY).toBeGreaterThan(Math.max(layout.cards[0].bottom, layout.cards[1].bottom));
+      expect(layout.ornaments[1].centerY).toBeLessThan(layout.cards[2].top);
+    }
+  }
+});
+
 test("the formal wedding card fits between its language tabs and the gallery", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
 

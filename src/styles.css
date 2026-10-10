@@ -1147,3 +1147,47 @@ img { display: block; max-width: none; user-select: none; }
   .event-card--2 { left: calc(50% - 120.9px); }
   .event-card--3 { left: calc(50% + 159.1px); }
 }
+
+/* Reuse the original gold timeline ornaments between the three celebrations. */
+.event-card { z-index: 10; }
+.timeline__medallion { display: block; filter: drop-shadow(0 4px 5px rgba(95,37,15,.12)); pointer-events: none; z-index: 9; }
+
+@media (max-width: 359.98px) {
+  .timeline__medallion--1 { left: 157.65px; top: 1871.5px; width: 34px; height: 34px; }
+  .timeline__medallion--2 { left: 146px; top: 2004.5px; width: 28px; height: 28px; }
+}
+
+@media (min-width: 360px) and (max-width: 599.98px) {
+  .timeline__medallion--1 { left: calc(50% - 6cqw); top: 526.45cqw; width: 12cqw; height: 12cqw; }
+  .timeline__medallion--2 { left: calc(50% - 3.6cqw); top: 561.9cqw; width: 7.2cqw; height: 7.2cqw; }
+}
+
+@media (min-width: 600px) and (max-width: 1279.98px) {
+  .timeline__medallion { left: calc(50% - 45px); width: 90px; height: 90px; }
+  .timeline__medallion--1 { top: 3239px; }
+  .timeline__medallion--2 { top: 3754px; }
+}
+
+@media (min-width: 1280px) and (max-width: 1558.98px) {
+  .timeline__medallion { top: 4463.25px; width: 100px; height: 100px; }
+  .timeline__medallion--1 { left: calc(50% - 190px); }
+  .timeline__medallion--2 { left: calc(50% + 90px); }
+}
+
+@media (min-width: 1559px) and (max-width: 1727.98px) {
+  .timeline__medallion { top: 4513.75px; width: 100px; height: 100px; }
+  .timeline__medallion--1 { left: calc(50% - 190px); }
+  .timeline__medallion--2 { left: calc(50% + 90px); }
+}
+
+@media (min-width: 1728px) and (max-width: 1919.98px) {
+  .timeline__medallion { top: 4999.79px; width: 100px; height: 100px; }
+  .timeline__medallion--1 { left: calc(50% - 195px); }
+  .timeline__medallion--2 { left: calc(50% + 75px); }
+}
+
+@media (min-width: 1920px) {
+  .timeline__medallion { top: 4971.85px; width: 100px; height: 100px; }
+  .timeline__medallion--1 { left: calc(50% - 190px); }
+  .timeline__medallion--2 { left: calc(50% + 90px); }
+}
