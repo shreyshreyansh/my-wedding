@@ -27,32 +27,39 @@ const venue = {
 
 const invitationCopy = {
   en: {
-    tab: "English", lang: "en", kicker: "Together with our families",
-    hostOne: "Mr Umesh Kumar Sinha & Mrs Rupa Sinha", connector: "and",
-    hostTwo: "Mr Shriharsh Waghmare & Mrs Sumati Waghmare",
-    request: "request the honour of your presence at the wedding of",
-    names: "Shreyansh & Mrunalini", date: "Wednesday, 9 December 2026 · 8:00 PM",
-    place: "Haveli Banquet, Ranchi", closing: "Please accept this invitation as our personal visit."
-  },
-  hi: {
-    tab: "हिंदी", lang: "hi", kicker: "सपरिवार सादर आमंत्रण",
-    hostOne: "श्री उमेश कुमार सिन्हा एवं श्रीमती रूपा सिन्हा", connector: "तथा",
-    hostTwo: "श्री श्रीहर्ष वाघमारे एवं श्रीमती सुमति वाघमारे",
-    request: "अपने प्रिय श्रेयांश एवं मृणालिनी के शुभ विवाह के अवसर पर आपकी स्नेहमयी उपस्थिति का अनुरोध करते हैं।",
-    names: "श्रेयांश एवं मृणालिनी", date: "बुधवार, 9 दिसंबर 2026 · सायं 8 बजे",
-    place: "हवेली बैंकेट, रांची", closing: "कृपया इस निमंत्रण को हमारा व्यक्तिगत आमंत्रण स्वीकार करें।"
+    tab: "English", lang: "en", invocation: "॥ Shri Ganeshaya Namah ॥ · ॥ Namo Buddhaya ॥",
+    request: "With the blessings of our elders, we request the pleasure of your company at the wedding of",
+    groomName: "Shreyansh", groomRelation: "son of Mr Umesh Kumar Sinha & Mrs Rupa Sinha",
+    connector: "with", brideName: "Mrunalini",
+    brideRelation: "daughter of Mr Shriharsh Waghmare & Mrs Sumati Waghmare",
+    date: "Wednesday, 9 December 2026", timeVenue: "8:00 in the evening · Haveli Banquet, Ranchi",
+    closing: "Please accept this invitation as our personal visit.",
+    familyClosing: "With love, Umesh Kumar & Rupa Sinha and Shriharsh & Sumati Waghmare"
   },
   mr: {
-    tab: "मराठी", lang: "mr", kicker: "सस्नेह निमंत्रण",
-    hostOne: "श्री. उमेश कुमार सिन्हा व सौ. रूपा सिन्हा", connector: "आणि",
-    hostTwo: "श्री. श्रीहर्ष वाघमारे व सौ. सुमती वाघमारे",
-    request: "यांच्या प्रिय श्रेयांश आणि मृणालिनी यांच्या शुभविवाह सोहळ्यास आपली स्नेहपूर्ण उपस्थिती प्रार्थनीय आहे.",
-    names: "श्रेयांश आणि मृणालिनी", date: "बुधवार, ९ डिसेंबर २०२६ · सायंकाळी ८ वाजता",
-    place: "हवेली बँक्वेट, रांची", closing: "कृपया हे निमंत्रण आमचे वैयक्तिक आमंत्रण समजावे."
+    tab: "मराठी", lang: "mr", invocation: "॥ श्री गणेशाय नमः ॥ · ॥ नमो बुद्धाय ॥",
+    request: "आपल्या ज्येष्ठांच्या आशीर्वादाने, शुभविवाह सोहळ्यास आपली स्नेहपूर्ण उपस्थिती प्रार्थनीय आहे",
+    groomName: "श्रेयांश", groomRelation: "श्री. उमेश कुमार सिन्हा व सौ. रूपा सिन्हा यांचे सुपुत्र",
+    connector: "आणि", brideName: "मृणालिनी",
+    brideRelation: "श्री. श्रीहर्ष वाघमारे व सौ. सुमती वाघमारे यांची सुकन्या",
+    date: "बुधवार, ९ डिसेंबर २०२६", timeVenue: "सायंकाळी ८ वाजता · हवेली बँक्वेट, रांची",
+    closing: "कृपया हे निमंत्रण आमचे वैयक्तिक आमंत्रण समजावे.",
+    familyClosing: "सस्नेह — उमेश कुमार व रूपा सिन्हा आणि श्रीहर्ष व सुमती वाघमारे"
+  },
+  hi: {
+    tab: "हिंदी", lang: "hi", invocation: "॥ श्री गणेशाय नमः ॥ · ॥ नमो बुद्धाय ॥",
+    request: "अपने ज्येष्ठजनों के आशीर्वाद से, शुभ विवाह के अवसर पर आपकी स्नेहमयी उपस्थिति का अनुरोध है",
+    groomName: "श्रेयांश", groomRelation: "श्री उमेश कुमार सिन्हा एवं श्रीमती रूपा सिन्हा के सुपुत्र",
+    connector: "संग", brideName: "मृणालिनी",
+    brideRelation: "श्री श्रीहर्ष वाघमारे एवं श्रीमती सुमति वाघमारे की सुपुत्री",
+    date: "बुधवार, ९ दिसंबर २०२६", timeVenue: "सायं ८ बजे · हवेली बैंकेट, रांची",
+    closing: "कृपया इस निमंत्रण को हमारा व्यक्तिगत आमंत्रण स्वीकार करें।",
+    familyClosing: "सप्रेम — उमेश कुमार एवं रूपा सिन्हा तथा श्रीहर्ष एवं सुमति वाघमारे"
   }
 } as const;
 
 type InvitationLanguage = keyof typeof invitationCopy;
+const invitationLanguages: InvitationLanguage[] = ["en", "mr", "hi"];
 
 const knowledge = [
   { icon: "2fe267c199f164f1.avif", title: "Haldi", copy: "Tuesday, 8 December 2026 at 12 noon. Wear yellow, in turmeric shades." },
@@ -91,7 +98,7 @@ function EventCard({ card, index }: { card: (typeof eventCards)[number]; index: 
 
 function FormalInvitation({ language, onLanguageChange }: { language: InvitationLanguage; onLanguageChange: (language: InvitationLanguage) => void }) {
   const copy = invitationCopy[language];
-  const languages = Object.keys(invitationCopy) as InvitationLanguage[];
+  const languages = invitationLanguages;
 
   const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
     let nextIndex: number | undefined;
@@ -132,20 +139,24 @@ function FormalInvitation({ language, onLanguageChange }: { language: Invitation
       </div>
       <article
         aria-label={`${copy.tab} invitation`}
-        className="formal-invitation__content"
+        className="formal-invitation__content formal-invitation__card"
         id="formal-invitation-panel"
+        key={language}
         lang={copy.lang}
         role="tabpanel"
       >
-        <p className="formal-invitation__kicker">{copy.kicker}</p>
-        <p className="formal-invitation__hosts">{copy.hostOne}</p>
-        <p className="formal-invitation__connector">{copy.connector}</p>
-        <p className="formal-invitation__hosts">{copy.hostTwo}</p>
+        <p className="formal-invitation__invocation">{copy.invocation}</p>
         <p className="formal-invitation__request">{copy.request}</p>
-        <p className="formal-invitation__names">{copy.names}</p>
+        <p className="formal-invitation__person">{copy.groomName}</p>
+        <p className="formal-invitation__relation">{copy.groomRelation}</p>
+        <p className="formal-invitation__connector">{copy.connector}</p>
+        <p className="formal-invitation__person">{copy.brideName}</p>
+        <p className="formal-invitation__relation">{copy.brideRelation}</p>
+        <span className="formal-invitation__divider" aria-hidden="true" />
         <p className="formal-invitation__date">{copy.date}</p>
-        <p className="formal-invitation__place">{copy.place}</p>
+        <p className="formal-invitation__venue">{copy.timeVenue}</p>
         <p className="formal-invitation__closing">{copy.closing}</p>
+        <p className="formal-invitation__family">{copy.familyClosing}</p>
       </article>
     </div>
   );

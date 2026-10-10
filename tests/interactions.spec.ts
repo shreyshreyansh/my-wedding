@@ -37,17 +37,17 @@ test("the formal invitation switches between all three languages", async ({ page
   const hindiTab = page.getByRole("tab", { name: "हिंदी" });
   const marathiTab = page.getByRole("tab", { name: "मराठी" });
 
-  await expect(page.getByRole("tabpanel", { name: "English invitation" })).toContainText("request the honour of your presence");
+  await expect(page.getByRole("tabpanel", { name: "English invitation" })).toContainText("request the pleasure of your company");
   await englishTab.focus();
   await englishTab.press("ArrowRight");
-  await expect(hindiTab).toBeFocused();
-  await expect(hindiTab).toHaveAttribute("lang", "hi");
-  await expect(page.getByRole("tabpanel", { name: "हिंदी invitation" })).toContainText("श्रेयांश एवं मृणालिनी");
-  await hindiTab.press("End");
   await expect(marathiTab).toBeFocused();
   await expect(marathiTab).toHaveAttribute("lang", "mr");
-  await expect(page.getByRole("tabpanel", { name: "मराठी invitation" })).toContainText("श्रेयांश आणि मृणालिनी");
-  await marathiTab.press("Home");
+  await expect(page.getByRole("tabpanel", { name: "मराठी invitation" })).toContainText("श्री गणेशाय नमः");
+  await marathiTab.press("End");
+  await expect(hindiTab).toBeFocused();
+  await expect(hindiTab).toHaveAttribute("lang", "hi");
+  await expect(page.getByRole("tabpanel", { name: "हिंदी invitation" })).toContainText("श्री गणेशाय नमः");
+  await hindiTab.press("Home");
   await expect(englishTab).toBeFocused();
 });
 

@@ -106,16 +106,23 @@ describe("Ram Mandir wedding page", () => {
     render(<App />);
 
     expect(screen.getByRole("tablist", { name: "Invitation language" })).toBeVisible();
-    expect(screen.getByRole("tabpanel", { name: "English invitation" })).toHaveTextContent("request the honour of your presence");
-    expect(screen.getByRole("tabpanel", { name: "English invitation" })).toHaveTextContent("Wednesday, 9 December 2026 · 8:00 PM");
+    expect(screen.getAllByRole("tab").map((tab) => tab.textContent)).toEqual(["English", "मराठी", "हिंदी"]);
+    expect(screen.getByRole("tabpanel", { name: "English invitation" })).toHaveClass("formal-invitation__card");
+    expect(screen.getByRole("tabpanel", { name: "English invitation" })).toHaveTextContent("request the pleasure of your company");
+    expect(screen.getByRole("tabpanel", { name: "English invitation" })).toHaveTextContent("son of Mr Umesh Kumar Sinha & Mrs Rupa Sinha");
+    expect(screen.getByRole("tabpanel", { name: "English invitation" })).toHaveTextContent("daughter of Mr Shriharsh Waghmare & Mrs Sumati Waghmare");
+    expect(screen.getByRole("tabpanel", { name: "English invitation" })).toHaveTextContent("Wednesday, 9 December 2026");
+    expect(screen.getByRole("tabpanel", { name: "English invitation" })).toHaveTextContent("8:00 in the evening · Haveli Banquet, Ranchi");
 
     fireEvent.click(screen.getByRole("tab", { name: "हिंदी" }));
-    expect(screen.getByRole("tabpanel", { name: "हिंदी invitation" })).toHaveTextContent("सपरिवार सादर आमंत्रण");
-    expect(screen.getByRole("tabpanel", { name: "हिंदी invitation" })).toHaveTextContent("श्रेयांश एवं मृणालिनी");
+    expect(screen.getByRole("tabpanel", { name: "हिंदी invitation" })).toHaveTextContent("श्री गणेशाय नमः");
+    expect(screen.getByRole("tabpanel", { name: "हिंदी invitation" })).toHaveTextContent("श्रेयांश");
+    expect(screen.getByRole("tabpanel", { name: "हिंदी invitation" })).toHaveTextContent("मृणालिनी");
 
     fireEvent.click(screen.getByRole("tab", { name: "मराठी" }));
-    expect(screen.getByRole("tabpanel", { name: "मराठी invitation" })).toHaveTextContent("सस्नेह निमंत्रण");
-    expect(screen.getByRole("tabpanel", { name: "मराठी invitation" })).toHaveTextContent("श्रेयांश आणि मृणालिनी");
+    expect(screen.getByRole("tabpanel", { name: "मराठी invitation" })).toHaveTextContent("श्री गणेशाय नमः");
+    expect(screen.getByRole("tabpanel", { name: "मराठी invitation" })).toHaveTextContent("श्रेयांश");
+    expect(screen.getByRole("tabpanel", { name: "मराठी invitation" })).toHaveTextContent("मृणालिनी");
   });
 
   it("uses the verified couple, family, venue, and event details", () => {

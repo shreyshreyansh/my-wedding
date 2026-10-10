@@ -203,6 +203,43 @@ test("reduced motion keeps the three-card timeline centered at wide desktop widt
   }
 });
 
+test("the formal wedding card fits between its language tabs and the gallery", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+
+  for (const width of [320, 359, 393, 600, 1440, 1728]) {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto("/");
+    await page.locator(".site-canvas").waitFor({ state: "visible" });
+    await page.evaluate(() => document.fonts.ready);
+
+    const layout = await page.evaluate(() => {
+      const bounds = (selector: string) => {
+        const rect = document.querySelector(selector)!.getBoundingClientRect();
+        return { bottom: rect.bottom, left: rect.left, right: rect.right, top: rect.top };
+      };
+      const card = document.querySelector(".formal-invitation__card");
+      return {
+        card: card ? bounds(".formal-invitation__card") : null,
+        gallery: bounds(".rotating-gallery"),
+        tabs: bounds(".formal-invitation__tabs"),
+        borderStyle: card ? getComputedStyle(card).borderTopStyle : "missing"
+      };
+    });
+    expect(layout.card, `wedding card is missing at ${width}px`).not.toBeNull();
+    expect(layout.borderStyle).toBe("solid");
+    expect(layout.card!.top, `card overlaps tabs at ${width}px`).toBeGreaterThanOrEqual(layout.tabs.bottom);
+    expect(layout.card!.bottom, `card overlaps gallery at ${width}px`).toBeLessThanOrEqual(layout.gallery.top + 1);
+    expect(layout.card!.left, `card exits left edge at ${width}px`).toBeGreaterThanOrEqual(12);
+    expect(layout.card!.right, `card exits right edge at ${width}px`).toBeLessThanOrEqual(width - 12);
+
+    for (const language of ["English", "मराठी", "हिंदी"]) {
+      await page.getByRole("tab", { name: language, exact: true }).click();
+      const overflow = await page.locator(".formal-invitation__card").evaluate((element) => element.scrollHeight - element.clientHeight);
+      expect(overflow, `${language} invitation overflows at ${width}px`).toBeLessThanOrEqual(1);
+    }
+  }
+});
+
 test("cold loading reveals the pole, cloth, and bells as one hero scene", async ({ page }) => {
   await page.setViewportSize({ width: 1728, height: 1000 });
   const delayedFiles = ["wide-flag.webp", "wide-flag-cloth.png", "wide-bell-outer.png", "wide-bell-inner.png"];
