@@ -12,6 +12,6 @@ describe("application entry point", () => {
   it("mounts the invitation into the root element", async () => {
     await import("./main");
 
-    expect(await screen.findByRole("heading", { name: "Akash weds Drashti" })).toBeVisible();
+    expect(await screen.findByRole("heading", { name: "Shreyansh weds Mrunalini" })).toBeVisible();
   });
 });

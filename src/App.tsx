@@ -9,32 +9,34 @@ import { initSmoothScroll } from "./smoothScroll";
 
 const image = (name: string) => `/assets/images/${name}`;
 
-const events = Array.from({ length: 6 }, (_, index) => index + 1);
 const people = Array.from({ length: 50 }, (_, index) => index + 1);
-const eventOptions = ["Mehendi", "Sangeet", "Wedding Ceremony", "Reception"] as const;
-const weddingDate = new Date("2026-08-29T18:00:00+05:30");
+const eventOptions = ["Haldi", "Sangeet", "Shaadi"] as const;
+const weddingDate = new Date("2026-12-09T20:00:00+05:30");
 
-const locations = [
-  { name: "Location 1", address: "M10 geomatrix silver crest kamote 9819200906 M10 geomatrix silver crest kamote 9819200906", wideAddress: "Full street address, city, state, ZIP", coordinates: "19.2183%2C%2072.9781" },
-  { name: "Location 2", address: "Full street address, city, state, ZIP", coordinates: "19.0760%2C%2072.8777" },
-  { name: "Location", address: "Full street address", coordinates: "19.2183%2C%2072.9781" },
-  { name: "Location", address: "Full street address", coordinates: "19.0760%2C%2072.8777" }
+const eventCards = [
+  { title: "Haldi", lines: ["Tuesday", "8th Dec 2026", "Haveli Banquet, Ranchi", "12 Noon"], note: "Yellow · Turmeric shades" },
+  { title: "Sangeet", lines: ["Tuesday", "8th Dec 2026", "Haveli Banquet, Ranchi", "8 in the evening"], note: "Evening formals · Indo-western welcome" },
+  { title: "Shaadi", lines: ["Wednesday", "9th Dec 2026", "Haveli Banquet, Ranchi", "8 in the evening"], note: "Traditional finery · Jewel tones" },
+  { title: "Haldi Attire", lines: ["Yellow", "Turmeric shades", "Tuesday · 8 Dec", "12 Noon"], note: "Haveli Banquet, Ranchi" },
+  { title: "Sangeet Attire", lines: ["Evening formals", "Indo-western welcome", "Tuesday · 8 Dec", "8 in the evening"], note: "Haveli Banquet, Ranchi" },
+  { title: "Shaadi Attire", lines: ["Traditional finery", "Jewel tones", "Wednesday · 9 Dec", "8 in the evening"], note: "Haveli Banquet, Ranchi" }
 ] as const;
 
-const mapTiles = [
-  "426594370b7ea67a.png", "833f32b761f439cd.png", "73d9f0924b320557.png",
-  "a2783fec7de810ea.png", "a6cd1f44096c8090.png", "d1bebc74671167c4.png",
-  "c1c3cce0b6a83dce.png", "a597cc0f476083f1.png", "0b9fd2ccbf1cab52.png"
+const locations = [
+  { name: "Venue", address: "Haveli Banquet, Ranchi", details: "Haveli Banquet, Ranchi", query: "Haveli+Banquet+Ranchi" },
+  { name: "Haldi", address: "Haveli Banquet, Ranchi", details: "Tuesday, 8 December 2026 · 12 noon", query: "Haveli+Banquet+Ranchi" },
+  { name: "Sangeet", address: "Haveli Banquet, Ranchi", details: "Tuesday, 8 December 2026 · 8 in the evening", query: "Haveli+Banquet+Ranchi" },
+  { name: "Shaadi", address: "Haveli Banquet, Ranchi", details: "Wednesday, 9 December 2026 · 8 in the evening", query: "Haveli+Banquet+Ranchi" }
 ] as const;
 
 const story =
-  "Our hearts are full and our smiles wide, we can hardly believe our dreamy eyed teen selves made it here! We’re ready to make memories that last a lifetime, and they’ll be incomplete without you by our side. Come celebrate our love, share our joy, eat . till you can’t move and help us make this day a beautiful, laughter-filled blur we’ll never forget!";
+  "With the blessings of our elders, we request the pleasure of your company at the wedding of Shreyansh with Mrunalini. Please accept this invitation as our personal visit. With love, Umesh Kumar & Rupa Sinha and Shriharsh & Sumati Waghmare.";
 
 const knowledge = [
-  { icon: "2fe267c199f164f1.avif", title: "Hashtag", copy: "While posting photos on social media please use the hashtag - #abkan" },
-  { icon: "37d2ce6c13c35461.avif", title: "Weather", copy: "It will be mostly sunny with temperature reaching up to 28 degrees at the venue" },
-  { icon: "f4d45415c3a62726.avif", title: "Staff", copy: "We recommend the nearby hotel called Bhola Bhawan near the venue for the staff members" },
-  { icon: "bdf80fd9d4b08bf2.webp", title: "Parking", copy: "Valet parking for all our guests will be available at the venue" }
+  { icon: "2fe267c199f164f1.avif", title: "Haldi", copy: "Tuesday, 8 December 2026 at 12 noon. Wear yellow, in turmeric shades." },
+  { icon: "37d2ce6c13c35461.avif", title: "Sangeet", copy: "Tuesday, 8 December 2026 at 8 in the evening. Evening formals; Indo-western welcome." },
+  { icon: "f4d45415c3a62726.avif", title: "Shaadi", copy: "Wednesday, 9 December 2026 at 8 in the evening. Traditional finery, in jewel tones." },
+  { icon: "bdf80fd9d4b08bf2.webp", title: "Venue", copy: "All celebrations are at Haveli Banquet, Ranchi." }
 ] as const;
 
 function DecorativeImage({ className, file, alt = "", invitationMotion }: { className: string; file: string; alt?: string; invitationMotion?: string }) {
@@ -54,12 +56,12 @@ function InvitationArrow() {
   );
 }
 
-function EventCard({ index }: { index: number }) {
+function EventCard({ card, index }: { card: (typeof eventCards)[number]; index: number }) {
   return (
     <article className={`event-card event-card--${index}`} data-testid="event-card">
       <DecorativeImage className="event-card__frame" file="75f08cc5ddae6040.avif" />
       <div className="event-card__copy">
-        <h3>Shaadi</h3><p>Friday</p><p>29th Aug 2026</p><p>Pune, Maharashtra</p><p>6 Pm Onwards</p><small>More details below</small>
+        <h3>{card.title}</h3>{card.lines.map((line) => <p key={line}>{line}</p>)}<small>{card.note}</small>
       </div>
     </article>
   );
@@ -69,11 +71,7 @@ const wideCardMedallions = Array.from({ length: 10 }, (_, index) => index + 1);
 
 function LocationCard() {
   const [selectedLocation, setSelectedLocation] = useState(0);
-  const [mapActive, setMapActive] = useState(false);
-  const [zoom, setZoom] = useState(1);
-  const [pan, setPan] = useState({ x: 0, y: 0 });
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "failed">("idle");
-  const dragRef = useRef<{ pointerId: number; x: number; y: number }>();
   const location = locations[selectedLocation];
 
   const copyAddress = async () => {
@@ -85,43 +83,18 @@ function LocationCard() {
     }
   };
 
-  const startMapDrag = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (!mapActive || (event.target instanceof Element && event.target.closest("button, a"))) return;
-    dragRef.current = { pointerId: event.pointerId, x: event.clientX, y: event.clientY };
-    event.currentTarget.setPointerCapture?.(event.pointerId);
-  };
-
-  const moveMap = (event: React.PointerEvent<HTMLDivElement>) => {
-    const drag = dragRef.current;
-    if (!drag || drag.pointerId !== event.pointerId) return;
-    const dx = event.clientX - drag.x;
-    const dy = event.clientY - drag.y;
-    drag.x = event.clientX;
-    drag.y = event.clientY;
-    setPan((value) => ({ x: value.x + dx, y: value.y + dy }));
-  };
-
-  const stopMapDrag = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (dragRef.current?.pointerId !== event.pointerId) return;
-    dragRef.current = undefined;
-    event.currentTarget.releasePointerCapture?.(event.pointerId);
-  };
-
   return (
     <div className="location-card">
-      <div className={`location-card__map${mapActive ? " is-active" : ""}`} role="region" aria-label={`Map showing ${location.name}`} onClick={() => setMapActive(true)} onPointerDown={startMapDrag} onPointerMove={moveMap} onPointerUp={stopMapDrag} onPointerCancel={stopMapDrag} onWheel={(event) => { if (!mapActive) return; event.preventDefault(); setZoom((value) => Math.max(.8, Math.min(1.6, value + (event.deltaY < 0 ? .2 : -.2)))); }}>
-        <div className="location-card__tiles" style={{ transform: `translate(calc(-50% + ${pan.x}px), calc(-50% + ${pan.y}px)) scale(${zoom})` }}>
-          {mapTiles.map((file) => <DecorativeImage className="location-card__tile" file={file} key={file} />)}
+      <div className="location-card__map" role="region" aria-label={`Venue details for ${location.name}`}>
+        <div className="location-card__venue-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 82"><path d="M32 2C15.4 2 2 15.4 2 32c0 22 30 48 30 48s30-26 30-48C62 15.4 48.6 2 32 2Z" /><circle cx="32" cy="32" r="11" /></svg>
         </div>
-        <span className="location-card__pin" aria-hidden="true"><svg viewBox="0 0 30 40"><path d="M15 0C6.716 0 0 6.716 0 15c0 10.5 15 25 15 25s15-14.5 15-25C30 6.716 23.284 0 15 0z" fill="#ea4335" /><circle cx="15" cy="15" r="5.5" fill="#fff" /></svg></span>
-        <div className="location-card__zoom" aria-label="Map zoom controls"><button type="button" aria-label="Zoom in" onClick={(event) => { event.stopPropagation(); setZoom((value) => Math.min(1.6, value + .2)); }}>+</button><button type="button" aria-label="Zoom out" onClick={(event) => { event.stopPropagation(); setZoom((value) => Math.max(.8, value - .2)); }}>−</button></div>
-        {!mapActive && <span className="location-card__hint">Tap to interact with map</span>}
-        <span className="location-card__nearby">Nearby Location</span>
-        <a className="location-card__maps-link" href={`https://www.google.com/maps/search/?api=1&query=${location.coordinates}`} target="_blank" rel="noreferrer">Open in Google Maps <span aria-hidden="true">↗</span></a>
-        <button className="location-card__recenter" type="button" aria-label="Recenter map on location" title="Recenter" onClick={(event) => { event.stopPropagation(); setZoom(1); setPan({ x: 0, y: 0 }); }}><span aria-hidden="true">⌾</span></button>
+        <div className="location-card__map-copy"><strong>Haveli Banquet</strong><span>Ranchi</span></div>
+        <span className="location-card__nearby">{location.name}</span>
+        <a className="location-card__maps-link" href={`https://www.google.com/maps/search/?api=1&query=${location.query}`} target="_blank" rel="noreferrer">Open in Google Maps <span aria-hidden="true">↗</span></a>
       </div>
-      <div className="location-card__venue"><h3>Venue Name</h3><p>{"wideAddress" in location ? <><span className="narrow-only">{location.address}</span><span className="wide-only">{location.wideAddress}</span></> : location.address}</p><button type="button" aria-label="Copy address to clipboard" onClick={copyAddress}><span aria-hidden="true">▣</span></button>{copyStatus !== "idle" && <span className={`location-card__copy-status is-${copyStatus}`} role="status">{copyStatus === "copied" ? "Copied" : "Copy failed"}</span>}</div>
-      <div className="location-card__switcher">{locations.map((item, index) => <button className={index === selectedLocation ? "is-active" : ""} key={`${item.name}-${index}`} type="button" onClick={() => { setSelectedLocation(index); setMapActive(false); setPan({ x: 0, y: 0 }); setZoom(1); setCopyStatus("idle"); }}>{item.name}</button>)}</div>
+      <div className="location-card__venue"><h3>Haveli Banquet</h3><p>{location.details}</p><button type="button" aria-label="Copy address to clipboard" onClick={copyAddress}><span aria-hidden="true">▣</span></button>{copyStatus !== "idle" && <span className={`location-card__copy-status is-${copyStatus}`} role="status">{copyStatus === "copied" ? "Copied" : "Copy failed"}</span>}</div>
+      <div className="location-card__switcher">{locations.map((item, index) => <button className={index === selectedLocation ? "is-active" : ""} key={`${item.name}-${index}`} type="button" onClick={() => { setSelectedLocation(index); setCopyStatus("idle"); }}>{item.name}</button>)}</div>
     </div>
   );
 }
@@ -183,8 +156,8 @@ export function App() {
         <DecorativeImage className="hero__flag" file="be9b608a683e28b1.webp" />
         <BirdFlock />
         <DecorativeImage className="hero__birds" file="c32c73cb83ebac88.webp" />
-        <h1 className="hero__title" aria-label="Akash weds Drashti">
-          <span className="hero__name hero__name--first"><span className="hero__title-reveal">Akash</span></span><span className="hero__and"><span className="hero__title-reveal">weds</span></span><span className="hero__name hero__name--second"><span className="hero__title-reveal">Drashti</span></span>
+        <h1 className="hero__title" aria-label="Shreyansh weds Mrunalini">
+          <span className="hero__name hero__name--first"><span className="hero__title-reveal">Shreyansh</span></span><span className="hero__and"><span className="hero__title-reveal">weds</span></span><span className="hero__name hero__name--second"><span className="hero__title-reveal">Mrunalini</span></span>
         </h1>
       </section>
 
@@ -195,21 +168,21 @@ export function App() {
         <DecorativeImage className="wide-only wide-invitation__flourish" file="wide-heading-flourish.webp" invitationMotion="shri-line" />
         <DecorativeImage className="invitation__garden" file="9833bdd6ffb94266.webp" />
         <div className="invitation__copy">
-          <p className="invitation__parents" data-invitation-motion="groom-parents">Shri. Rajmani Pathak &amp; Smt. Ambika Pathak</p>
-          <div className="mobile-invitation__line" data-invitation-motion="invitation-line"><p>Cordially request the honor of your</p><p>presence at the wedding celebration of</p><p>our beloved son</p></div>
-          <div className="invitation__names"><span data-invitation-motion="groom-name">Akash</span><em data-invitation-motion="and">and</em><span data-invitation-motion="bride-name">Drashti</span></div>
+          <p className="invitation__parents" data-invitation-motion="groom-parents">Mr Umesh Kumar Sinha &amp; Mrs Rupa Sinha</p>
+          <div className="mobile-invitation__line" data-invitation-motion="invitation-line"><p>With the blessings of our elders,</p><p>we request the pleasure of your company</p><p>at the wedding of our beloved son</p></div>
+          <div className="invitation__names"><span data-invitation-motion="groom-name">Shreyansh</span><em data-invitation-motion="and">with</em><span data-invitation-motion="bride-name">Mrunalini</span></div>
           <p className="invitation__relation" data-invitation-motion="daughter-of">Daughter of</p>
-          <p className="invitation__parents invitation__parents--second" data-invitation-motion="bride-parents">Shri. Rajmani Pathak &amp; Smt. Ambika Pathak</p>
+          <p className="invitation__parents invitation__parents--second" data-invitation-motion="bride-parents">Mr Shriharsh Waghmare &amp; Mrs Sumati Waghmare</p>
           <p className="invitation__events" data-invitation-motion="events-intro"><span className="narrow-only">On The Following Events</span><span className="wide-only">On the following events</span></p>
         </div>
         <div className="wide-only wide-invitation__copy">
-          <p className="wide-invitation__parents" data-invitation-motion="groom-parents">Shri. Rajmani Pathak &amp; Smt. Ambika Pathak</p>
-          <div className="wide-invitation__line" data-invitation-motion="invitation-line"><p>Cordially request the honor of your presence at the wedding</p><p>celebration of our beloved son</p></div>
-          <p className="wide-invitation__name wide-invitation__name--first" data-invitation-motion="groom-name">Akash</p>
-          <p className="wide-invitation__and" data-invitation-motion="and">and</p>
-          <p className="wide-invitation__name wide-invitation__name--second" data-invitation-motion="bride-name">Drashti</p>
+          <p className="wide-invitation__parents" data-invitation-motion="groom-parents">Mr Umesh Kumar Sinha &amp; Mrs Rupa Sinha</p>
+          <div className="wide-invitation__line" data-invitation-motion="invitation-line"><p>With the blessings of our elders, we request the pleasure of your company</p><p>at the wedding of our beloved son</p></div>
+          <p className="wide-invitation__name wide-invitation__name--first" data-invitation-motion="groom-name">Shreyansh</p>
+          <p className="wide-invitation__and" data-invitation-motion="and">with</p>
+          <p className="wide-invitation__name wide-invitation__name--second" data-invitation-motion="bride-name">Mrunalini</p>
           <p className="wide-invitation__relation" data-invitation-motion="daughter-of">Daughter of</p>
-          <p className="wide-invitation__parents wide-invitation__parents--second" data-invitation-motion="bride-parents">Shri. Rajmani Pathak &amp; Smt. Ambika Pathak</p>
+          <p className="wide-invitation__parents wide-invitation__parents--second" data-invitation-motion="bride-parents">Mr Shriharsh Waghmare &amp; Mrs Sumati Waghmare</p>
           <p className="wide-invitation__events" data-invitation-motion="events-intro">On the following events</p>
         </div>
         <InvitationArrow />
@@ -222,7 +195,7 @@ export function App() {
         <DecorativeImage className="wide-only wide-timeline__backdrop" file="wide-timeline-backdrop.webp" />
         <DecorativeImage className="timeline__garden" file="acf828b9baf56ad9.webp" />
         <div className="timeline__heading"><h2><span className="narrow-only">Wedding Timeline</span><span className="wide-only">Wedding Celebration Timeline</span></h2><p>Mark Your Calendars, We Can’t Wait to Celebrate</p></div>
-        {events.map((event) => <EventCard index={event} key={event} />)}
+        {eventCards.map((card, index) => <EventCard card={card} index={index + 1} key={`${card.title}-${index}`} />)}
         <div className="wide-only wide-timeline__medallions">{wideCardMedallions.map((item) => <DecorativeImage className={`wide-card-medallion wide-card-medallion--${item}`} file="wide-card-medallion.webp" key={item} />)}</div>
         <DecorativeImage className="timeline__medallion timeline__medallion--1" file="4ca8349ac539e315.webp" />
         <DecorativeImage className="timeline__medallion timeline__medallion--2" file="4ca8349ac539e315.webp" />
@@ -241,8 +214,8 @@ export function App() {
         <p className="couple__story">{story.split(" ").map((word, index) => <span key={`${word}-${index}`}>{word} </span>)}</p>
         <RotatingGallery />
         <p className="couple__celebrate">Almost time<br />to celebrate</p>
-        <DecorativeImage className="couple__photo" file="61350ca076dd5ac0.webp" alt="Akash and Drashti celebrating together" />
-        <DecorativeImage className="wide-only wide-couple__photo" file="wide-couple-photo.webp" alt="Akash and Drashti celebrating together" />
+        <DecorativeImage className="couple__photo" file="61350ca076dd5ac0.webp" />
+        <DecorativeImage className="wide-only wide-couple__photo" file="wide-couple-photo.webp" />
       </section>
 
       <section className="section-layer guest" aria-label="Location and guest details">

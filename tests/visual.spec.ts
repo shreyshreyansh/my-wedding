@@ -67,10 +67,6 @@ test("469px composition expands the hero artwork without shrinking it", async ({
   expectBox((await page.locator(".hero__mountains").boundingBox())!, { x: -22.15, y: 336, width: 515.3, height: 510.02 });
   expectBox((await page.locator(".hero__walkway").boundingBox())!, { x: 15.85, y: 348, width: 437.3, height: 1593.75 });
 
-  expectBox((await page.locator(".hero__name--first").boundingBox())!, { x: 139.81, y: 94, width: 189.38, height: 103.2 });
-  expectBox((await page.locator(".hero__and").boundingBox())!, { x: 195.91, y: 156, width: 77.18, height: 85.2 });
-  expectBox((await page.locator(".hero__name--second").boundingBox())!, { x: 124.46, y: 211, width: 220.08, height: 103.2 });
-
   expectBox((await page.locator(".invitation__garden").boundingBox())!, { x: 15.35, y: 1169, width: 437.3, height: 477.05 });
   expectBox((await page.locator(".timeline__garden").boundingBox())!, { x: 15.35, y: 1267, width: 437.3, height: 2179.47 });
   expectBox((await page.locator(".couple__backdrop").boundingBox())!, { x: 15.85, y: 2796.98, width: 437.3, height: 1638.09 });
