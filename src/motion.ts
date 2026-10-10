@@ -109,6 +109,7 @@ const heroTitleSpeeds = [20, 30, 40] as const;
 const heroTitleRotations = [32, -32, -32] as const;
 
 const riseSelectors = [
+  ".formal-invitation",
   ".guest__looking",
   ".location-card",
   ".finale__divider--top",
@@ -153,7 +154,7 @@ export function initMotion(root: HTMLElement): () => void {
         item.style.setProperty("--invitation-reveal-y", "0px");
         item.style.opacity = "1";
       });
-      gsap.set(".couple__story span", { color: "#5f250f" });
+      gsap.set(".formal-invitation", { clearProps: "transform,opacity" });
       return;
     }
 
@@ -328,13 +329,6 @@ export function initMotion(root: HTMLElement): () => void {
       scale: 1.35,
       scrollTrigger: { start: "top 88%", trigger: ".couple__heading" },
       y: 110
-    });
-
-    gsap.to(".couple__story span", {
-      color: "#5f250f",
-      ease: "none",
-      stagger: .045,
-      scrollTrigger: { end: storyScrollRange.end, scrub: .3, start: storyScrollRange.start, trigger: ".couple__story" }
     });
 
     gsap.utils.toArray<HTMLElement>(".gallery-photo").forEach((photo, index) => {

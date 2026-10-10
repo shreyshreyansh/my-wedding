@@ -29,18 +29,21 @@ describe("Ram Mandir wedding page", () => {
     expect(screen.getByRole("region", { name: "RSVP and countdown" })).toBeVisible();
   });
 
-  it("keeps the reference invitation copy and all six timeline cards", () => {
+  it("keeps the invitation copy and shows exactly the three celebrations", () => {
     render(<App />);
 
     expect(screen.getByText("With the blessings of our elders,")).toBeVisible();
     expect(screen.getByText("On The Following Events")).toBeVisible();
     expect(screen.getByText("Wedding Timeline")).toBeVisible();
-    expect(screen.getAllByTestId("event-card")).toHaveLength(6);
+    expect(screen.getAllByTestId("event-card")).toHaveLength(3);
     expect(screen.getAllByText("8th Dec 2026")).toHaveLength(2);
     expect(screen.getAllByText("9th Dec 2026")).toHaveLength(1);
     expect(screen.getAllByText("Yellow · Turmeric shades")).toHaveLength(1);
     expect(screen.getAllByText("Evening formals · Indo-western welcome")).toHaveLength(1);
     expect(screen.getAllByText("Traditional finery · Jewel tones")).toHaveLength(1);
+    expect(screen.queryByRole("heading", { name: "Haldi Attire" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Sangeet Attire" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Shaadi Attire" })).not.toBeInTheDocument();
   });
 
   it("includes the reference large-desktop artwork and copy variant", () => {
@@ -56,46 +59,63 @@ describe("Ram Mandir wedding page", () => {
     render(<App />);
 
     expect(screen.getByRole("heading", { name: "Things to know" })).toBeVisible();
-    expect(screen.getByRole("textbox", { name: "Full Name" })).toBeVisible();
-    expect(screen.getByRole("button", { name: "Select Event" })).toBeVisible();
+    expect(screen.getByRole("textbox", { name: "Guest name" })).toBeVisible();
+    expect(screen.getByRole("group", { name: "Celebrations attending" })).toBeVisible();
+    expect(screen.getByRole("checkbox", { name: "Haldi" })).toBeVisible();
+    expect(screen.getByRole("checkbox", { name: "Sangeet" })).toBeVisible();
+    expect(screen.getByRole("checkbox", { name: "Shaadi" })).toBeVisible();
     expect(screen.getByRole("combobox", { name: "No. of People" })).toBeVisible();
     expect(screen.getByRole("link", { name: "Send via WhatsApp" })).toBeVisible();
     expect(screen.getByText("The countdown begins")).toBeVisible();
   });
 
-  it("builds a WhatsApp RSVP only after the three required values are selected", () => {
+  it("builds a multi-event WhatsApp RSVP only after the required values are selected", () => {
     render(<App />);
 
     const send = screen.getByRole("link", { name: "Send via WhatsApp" });
     expect(send).toHaveAttribute("aria-disabled", "true");
 
-    fireEvent.change(screen.getByRole("textbox", { name: "Full Name" }), { target: { value: "Aarav" } });
-    fireEvent.click(screen.getByRole("button", { name: "Select Event" }));
-
-    expect(screen.getByRole("listbox", { name: "Wedding event" })).toBeVisible();
-    expect(screen.getAllByRole("option")).toHaveLength(54);
-    fireEvent.click(screen.getByRole("option", { name: "Shaadi" }));
+    fireEvent.change(screen.getByRole("textbox", { name: "Guest name" }), { target: { value: "Aarav" } });
+    fireEvent.click(screen.getByRole("checkbox", { name: "Haldi" }));
+    fireEvent.click(screen.getByRole("checkbox", { name: "Shaadi" }));
     fireEvent.change(screen.getByRole("combobox", { name: "No. of People" }), { target: { value: "3" } });
 
     expect(send).toHaveAttribute("aria-disabled", "false");
     expect(send.getAttribute("href")).toMatch(/^https:\/\/wa\.me\/\?text=/);
     expect(decodeURIComponent(send.getAttribute("href") ?? "")).toContain("Aarav");
-    expect(decodeURIComponent(send.getAttribute("href") ?? "")).toContain("Shaadi");
+    expect(decodeURIComponent(send.getAttribute("href") ?? "")).toContain("Haldi and Shaadi");
   });
 
-  it("switches venue details and copies the selected address", async () => {
+  it("shows one live venue preview and copies the shared address", async () => {
     render(<App />);
 
-    expect(screen.getByRole("region", { name: "Venue details for Venue" })).toBeVisible();
-    fireEvent.click(screen.getByRole("button", { name: "Sangeet" }));
-
-    expect(screen.getByRole("region", { name: "Venue details for Sangeet" })).toBeVisible();
-    expect(screen.getByText("Tuesday, 8 December 2026 · 8 in the evening")).toBeVisible();
+    expect(screen.getByRole("region", { name: "Wedding venue" })).toBeVisible();
+    expect(screen.getByTitle("Map showing Haveli Banquet, Ranchi")).toHaveAttribute(
+      "src",
+      "https://www.google.com/maps?q=Haveli%20Banquet%20Ranchi&output=embed"
+    );
+    expect(screen.queryByRole("button", { name: "Sangeet" })).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Open in Google Maps/ })).toHaveAttribute("href", "https://www.google.com/maps/search/?api=1&query=Haveli+Banquet+Ranchi");
     fireEvent.click(screen.getByRole("button", { name: "Copy address to clipboard" }));
 
     expect(writeText).toHaveBeenCalledWith("Haveli Banquet, Ranchi");
     expect(await screen.findByText("Copied")).toBeVisible();
+  });
+
+  it("provides an official invitation in English, Hindi, and Marathi", () => {
+    render(<App />);
+
+    expect(screen.getByRole("tablist", { name: "Invitation language" })).toBeVisible();
+    expect(screen.getByRole("tabpanel", { name: "English invitation" })).toHaveTextContent("request the honour of your presence");
+    expect(screen.getByRole("tabpanel", { name: "English invitation" })).toHaveTextContent("Wednesday, 9 December 2026 · 8:00 PM");
+
+    fireEvent.click(screen.getByRole("tab", { name: "हिंदी" }));
+    expect(screen.getByRole("tabpanel", { name: "हिंदी invitation" })).toHaveTextContent("सपरिवार सादर आमंत्रण");
+    expect(screen.getByRole("tabpanel", { name: "हिंदी invitation" })).toHaveTextContent("श्रेयांश एवं मृणालिनी");
+
+    fireEvent.click(screen.getByRole("tab", { name: "मराठी" }));
+    expect(screen.getByRole("tabpanel", { name: "मराठी invitation" })).toHaveTextContent("सस्नेह निमंत्रण");
+    expect(screen.getByRole("tabpanel", { name: "मराठी invitation" })).toHaveTextContent("श्रेयांश आणि मृणालिनी");
   });
 
   it("uses the verified couple, family, venue, and event details", () => {
@@ -106,6 +126,7 @@ describe("Ram Mandir wedding page", () => {
     expect(screen.getByRole("heading", { name: "Haveli Banquet" })).toBeVisible();
     expect(screen.getAllByText("Haveli Banquet, Ranchi").length).toBeGreaterThan(0);
     expect(document.querySelector(".couple__story")).toHaveTextContent("Please accept this invitation as our personal visit.");
-    expect(document.querySelector(".couple__story")).toHaveTextContent("With love, Umesh Kumar & Rupa Sinha and Shriharsh & Sumati Waghmare.");
+    expect(document.querySelector(".couple__story")).toHaveTextContent("Mr Umesh Kumar Sinha & Mrs Rupa Sinha");
+    expect(document.querySelector(".couple__story")).toHaveTextContent("Mr Shriharsh Waghmare & Mrs Sumati Waghmare");
   });
 });

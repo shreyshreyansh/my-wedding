@@ -1,29 +1,66 @@
 import { expect, test } from "@playwright/test";
 
-test("RSVP and verified venue controls work without leaving the page", async ({ page }) => {
+test("multi-event RSVP and live venue controls work without leaving the page", async ({ page }) => {
   await page.setViewportSize({ width: 393, height: 852 });
   await page.goto("/");
 
   const send = page.getByRole("link", { name: "Send via WhatsApp" });
   await expect(send).toHaveAttribute("aria-disabled", "true");
 
-  await page.getByRole("textbox", { name: "Full Name" }).fill("Aarav");
-  await page.getByRole("button", { name: "Select Event" }).click();
-  await page.getByRole("option", { name: "Shaadi" }).click();
+  await page.getByRole("textbox", { name: "Guest name" }).fill("Aarav");
+  await page.getByRole("checkbox", { name: "Haldi" }).check();
+  await page.getByRole("checkbox", { name: "Shaadi" }).check();
   await page.getByRole("combobox", { name: "No. of People" }).selectOption("3");
 
   await expect(send).toHaveAttribute("aria-disabled", "false");
   await expect(send).toHaveAttribute(
     "href",
-    "https://wa.me/?text=Hi%2C%20I%20am%20Aarav.%20I%20would%20like%20to%20RSVP%20for%20Shaadi%20for%203%20people."
+    "https://wa.me/?text=Hi%2C%20I%20am%20Aarav.%20I%20would%20like%20to%20RSVP%20for%20Haldi%20and%20Shaadi%20for%203%20people."
   );
 
-  await page.getByRole("button", { name: "Sangeet" }).click();
-  await expect(page.getByRole("region", { name: "Venue details for Sangeet" })).toBeVisible();
+  await expect(page.getByRole("region", { name: "Wedding venue" })).toBeVisible();
+  await expect(page.getByTitle("Map showing Haveli Banquet, Ranchi")).toHaveAttribute(
+    "src",
+    "https://www.google.com/maps?q=Haveli%20Banquet%20Ranchi&output=embed"
+  );
   await expect(page.getByRole("link", { name: /Open in Google Maps/ })).toHaveAttribute(
     "href",
     "https://www.google.com/maps/search/?api=1&query=Haveli+Banquet+Ranchi"
   );
+});
+
+test("the formal invitation switches between all three languages", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+
+  const englishTab = page.getByRole("tab", { name: "English" });
+  const hindiTab = page.getByRole("tab", { name: "हिंदी" });
+  const marathiTab = page.getByRole("tab", { name: "मराठी" });
+
+  await expect(page.getByRole("tabpanel", { name: "English invitation" })).toContainText("request the honour of your presence");
+  await englishTab.focus();
+  await englishTab.press("ArrowRight");
+  await expect(hindiTab).toBeFocused();
+  await expect(hindiTab).toHaveAttribute("lang", "hi");
+  await expect(page.getByRole("tabpanel", { name: "हिंदी invitation" })).toContainText("श्रेयांश एवं मृणालिनी");
+  await hindiTab.press("End");
+  await expect(marathiTab).toBeFocused();
+  await expect(marathiTab).toHaveAttribute("lang", "mr");
+  await expect(page.getByRole("tabpanel", { name: "मराठी invitation" })).toContainText("श्रेयांश आणि मृणालिनी");
+  await marathiTab.press("Home");
+  await expect(englishTab).toBeFocused();
+});
+
+test("RSVP event choices show keyboard focus", async ({ page }) => {
+  await page.setViewportSize({ width: 768, height: 900 });
+  await page.goto("/");
+
+  const haldi = page.getByRole("checkbox", { name: "Haldi" });
+  await haldi.focus();
+  await expect(haldi).toBeFocused();
+  await expect(haldi.locator("xpath=..")).toHaveCSS("outline-style", "solid");
+  await haldi.press("Space");
+  await expect(haldi).toBeChecked();
 });
 
 test("the verified names and parent lines fit at responsive boundaries", async ({ page }) => {
@@ -78,5 +115,20 @@ test("the verified names and parent lines fit at responsive boundaries", async (
     });
     expect(card.left, `venue card starts outside ${width}px`).toBeGreaterThanOrEqual(-1);
     expect(card.right, `venue card ends outside ${width}px`).toBeLessThanOrEqual(width + 1);
+  }
+});
+
+test("the hero names share the exact viewport center", async ({ page }) => {
+  for (const width of [393, 600, 768, 1440, 1728, 1920]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/");
+
+    for (const selector of [".hero__name--first", ".hero__and", ".hero__name--second"]) {
+      const center = await page.locator(selector).evaluate((element) => {
+        const rect = element.getBoundingClientRect();
+        return rect.left + rect.width / 2;
+      });
+      expect(Math.abs(center - width / 2), `${selector} is not centered at ${width}px`).toBeLessThanOrEqual(1);
+    }
   }
 });

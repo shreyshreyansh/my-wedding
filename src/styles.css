@@ -961,3 +961,175 @@ img { display: block; max-width: none; user-select: none; }
   .wide-invitation__line { left: 270px; width: 900px; font-size: 24px; }
   .wide-invitation__name--first, .wide-invitation__name--second { left: 220px; width: 1000px; font-size: 110px; }
 }
+
+/* Guest-experience refinements: shared alignment, formal invitation, live map and RSVP. */
+.hero__name--first, .hero__and, .hero__name--second { left: 50%; translate: -50% 0; }
+
+.formal-invitation { color: #5f250f; font-family: "Gotham Book", sans-serif; }
+.formal-invitation__tabs { display: flex; justify-content: center; gap: 1.27cqw; margin-bottom: 2.04cqw; }
+.formal-invitation__tabs button { min-width: 19cqw; height: 7.63cqw; border: 1px solid rgba(171,86,38,.28); border-radius: 999px; background: rgba(255,249,241,.7); color: #7a3518; font: 500 2.54cqw/1 "Gotham Medium", sans-serif; cursor: pointer; }
+.formal-invitation__tabs button.is-active { border-color: #ab5626; background: #ab5626; color: #fff8ee; box-shadow: 0 1.02cqw 2.54cqw rgba(95,37,15,.13); }
+.formal-invitation__tabs button:focus-visible { outline: 3px solid #6f3217; outline-offset: 3px; }
+.formal-invitation__content { animation: invitation-language-in .35s ease both; }
+.formal-invitation__content p { margin: 0; }
+.formal-invitation__kicker { margin-bottom: 1.53cqw !important; color: #ab5626; font: 500 3.05cqw/1.2 "IvyOra", serif; }
+.formal-invitation__hosts { font: 500 2.54cqw/1.35 "Gotham Medium", sans-serif; }
+.formal-invitation__connector { margin: .76cqw 0 !important; font: 400 3.05cqw/1 "IvyOra", serif; }
+.formal-invitation__request { max-width: 63cqw; margin: 2.29cqw auto 0 !important; font: 400 2.54cqw/1.4 "IvyOra", serif; }
+.formal-invitation__names { margin-top: 1.53cqw !important; color: #ab5626; font: 500 5.34cqw/1.15 "IvyOra", serif; }
+.formal-invitation__date { margin-top: 1.53cqw !important; font: 500 2.54cqw/1.3 "Gotham Medium", sans-serif; }
+.formal-invitation__place { margin-top: .51cqw !important; font: 400 2.54cqw/1.3 "Gotham Book", sans-serif; }
+.formal-invitation__closing { max-width: 61cqw; margin: 1.53cqw auto 0 !important; color: rgba(95,37,15,.72); font: 400 2.29cqw/1.35 "IvyOra", serif; }
+
+.location-card__map iframe { display: block; width: 100%; height: 100%; border: 0; filter: sepia(.12) saturate(.88); }
+.location-card__eyebrow { margin-bottom: 1.27cqw !important; color: #8f4c24; font-family: "Gotham Medium", sans-serif; font-size: 2.8cqw !important; letter-spacing: .08em; text-transform: uppercase; }
+
+.rsvp-card { display: grid; grid-template-columns: 1fr; gap: 2.29cqw; height: auto; font-family: "Gotham Book", sans-serif; }
+.rsvp-card__eyebrow { margin: 0; color: #ab5626; font: 500 2.54cqw/1.2 "Gotham Medium", sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+.rsvp-card h2 { margin: 0; color: #5f250f; font-family: "IvyOra", serif; font-weight: 500; }
+.rsvp-card__field { display: grid; gap: 1.02cqw; color: #6f3217; font: 500 2.8cqw/1.2 "Gotham Medium", sans-serif; }
+.rsvp-card__field input, .rsvp-card__field select { width: 100%; border-color: rgba(95,37,15,.2); background: #fffaf4; color: #35180d; outline: 0; }
+.rsvp-card__field input:focus, .rsvp-card__field select:focus { border-color: #ab5626; box-shadow: 0 0 0 2px rgba(171,86,38,.13); }
+.rsvp-card__events { min-width: 0; margin: 0; padding: 0; border: 0; }
+.rsvp-card__events legend { margin-bottom: 1.02cqw; color: #6f3217; font: 500 2.8cqw/1.2 "Gotham Medium", sans-serif; }
+.rsvp-card__events > div { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.53cqw; }
+.rsvp-card__events label { position: relative; display: grid; place-items: center; height: 9.67cqw; overflow: hidden; border: 1px solid rgba(95,37,15,.2); border-radius: 999px; background: #fffaf4; color: #6f3217; cursor: pointer; }
+.rsvp-card__events label.is-selected { border-color: #ab5626; background: #ab5626; color: #fff8ee; box-shadow: 0 1.02cqw 2.54cqw rgba(95,37,15,.12); }
+.rsvp-card__events label:focus-within { outline: 3px solid #6f3217; outline-offset: 3px; }
+.rsvp-card__events input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.rsvp-card__events span { font: 500 2.8cqw/1 "Gotham Medium", sans-serif; }
+.rsvp-card__send { margin-top: 0; }
+.rsvp-card__note { margin: 0; color: rgba(95,37,15,.64); text-align: center; font: 400 2.29cqw/1.3 "Gotham Book", sans-serif; }
+
+@keyframes invitation-language-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 599.98px) {
+  .event-card--3 { left: 50%; margin-left: -18.83cqw; }
+  .formal-invitation { left: 12.5cqw; width: 75cqw; }
+  .rsvp-card { padding: 4.07cqw; }
+  .finale__divider--bottom { top: 1468cqw; }
+  .countdown { top: 1493cqw; }
+  .finale__elephants { top: 1473cqw; }
+}
+
+@media (max-width: 359.98px) {
+  #root, .site-canvas { height: 5700px; }
+  .event-card--3 { margin-left: -74px; }
+  .formal-invitation { top: 3060px; }
+  .finale__divider--bottom { top: 5145px; }
+  .countdown { top: 5225px; }
+  .finale__elephants { top: 5165px; }
+}
+
+@media (min-width: 360px) and (max-width: 599.98px) {
+  .formal-invitation { top: 894.38cqw; }
+}
+
+@media (min-width: 600px) and (max-width: 1279.98px) {
+  .site-canvas { position: relative; left: 50%; margin-right: 0; margin-left: 0; transform: translateX(-50%); }
+  .event-card--1 { top: 2820px; }
+  .event-card--2 { top: 3335px; }
+  .event-card--3 { top: 3850px; }
+  .formal-invitation { left: calc(50% - 260px); width: 520px; }
+  .formal-invitation__tabs { gap: 8px; margin-bottom: 14px; }
+  .formal-invitation__tabs button { min-width: 108px; height: 36px; font-size: 12px; }
+  .formal-invitation__kicker { margin-bottom: 10px !important; font-size: 19px; }
+  .formal-invitation__hosts { font-size: 14px; }
+  .formal-invitation__connector { margin: 5px 0 !important; font-size: 18px; }
+  .formal-invitation__request { max-width: 470px; margin-top: 13px !important; font-size: 14px; }
+  .formal-invitation__names { margin-top: 10px !important; font-size: 30px; }
+  .formal-invitation__date, .formal-invitation__place { font-size: 14px; }
+  .formal-invitation__closing { max-width: 460px; font-size: 12px; }
+
+  .location-card { left: max(calc(50% - 332.5px), calc(50% - 50vw + 20px)); width: min(665px, calc(100vw - 40px)); height: 480px; }
+  .location-card__venue { box-sizing: border-box; height: 144px; min-height: 144px; padding: 18px 56px 18px 24px; overflow: visible; }
+  .location-card__venue .location-card__eyebrow { margin-bottom: 8px !important; font-size: 11px !important; }
+  .location-card__venue h3 { margin-bottom: 7px; font-size: 22px; }
+  .location-card__venue p { font-size: 13px; line-height: 1.35; }
+
+  .rsvp-card { left: max(calc(50% - 313px), calc(50% - 50vw + 20px)); grid-template-columns: 1fr 1fr; gap: 10px 14px; width: min(626px, calc(100vw - 40px)); height: auto; min-height: 0; padding: 24px 28px 20px; }
+  .rsvp-card__eyebrow, .rsvp-card h2, .rsvp-card__events, .rsvp-card__send, .rsvp-card__note { grid-column: 1 / -1; }
+  .rsvp-card__field--name { grid-column: 1; grid-row: 3; }
+  .rsvp-card__field--guests { grid-column: 2; grid-row: 3; }
+  .rsvp-card__events { grid-row: 4; }
+  .rsvp-card__eyebrow { font-size: 11px; }
+  .rsvp-card h2 { margin: 0 0 4px; font-size: 27px; }
+  .rsvp-card__field { gap: 6px; font-size: 12px; }
+  .rsvp-card input, .rsvp-card button, .rsvp-card select { height: 44px; border-radius: 12px; padding: 0 14px; font-size: 14px; }
+  .rsvp-card__events legend { margin-bottom: 7px; font-size: 12px; }
+  .rsvp-card__events > div { gap: 9px; }
+  .rsvp-card__events label { height: 42px; }
+  .rsvp-card__events span { font-size: 13px; }
+  .rsvp-card__send { height: 48px; margin-top: 2px; border-radius: 14px; font-size: 15px; }
+  .rsvp-card__note { font-size: 11px; }
+}
+
+@media (min-width: 600px) and (max-width: 959.98px) {
+  #root, .site-canvas { height: 10080px; }
+  .event-card--1, .event-card--3 { left: calc(50% - 133.5px); }
+  .event-card--2 { left: calc(50% - 131.5px); }
+  .rsvp-card { top: 8520px; }
+  .finale__divider--bottom { top: 8920px; }
+  .countdown { top: 9030px; }
+  .finale__elephants { top: 8950px; }
+}
+
+@media (min-width: 960px) and (max-width: 1279.98px) {
+  .event-card--1, .event-card--3 { left: calc(50% - 167.5px); }
+  .event-card--2 { left: calc(50% - 165px); }
+  .rsvp-card { top: 9020px; }
+  .finale__divider--bottom { top: 9420px; }
+  .countdown { top: 9530px; }
+  .finale__elephants { top: 9470px; }
+}
+
+@media (min-width: 1280px) {
+  .event-card--1 { left: calc(50% - 373px); }
+  .event-card--2 { left: calc(50% - 93px); }
+  .event-card--3 { left: calc(50% + 187px); }
+
+  .formal-invitation { left: calc(50% - 380px); width: 760px; font-size: 16px; }
+  .formal-invitation__tabs { gap: 10px; margin-bottom: 22px; }
+  .formal-invitation__tabs button { min-width: 122px; height: 40px; border-radius: 999px; font-size: 13px; }
+  .formal-invitation__kicker { margin-bottom: 12px !important; font-size: 24px; line-height: 1.2; }
+  .formal-invitation__hosts { font-size: 18px; line-height: 1.35; }
+  .formal-invitation__connector { margin: 7px 0 !important; font-size: 21px; }
+  .formal-invitation__request { max-width: 650px; margin-top: 17px !important; font-size: 18px; line-height: 1.4; }
+  .formal-invitation__names { margin-top: 11px !important; font-size: 42px; line-height: 1.12; }
+  .formal-invitation__date { margin-top: 12px !important; font-size: 17px; }
+  .formal-invitation__place { margin-top: 4px !important; font-size: 16px; }
+  .formal-invitation__closing { max-width: 620px; margin-top: 13px !important; font-size: 15px; }
+
+  .location-card__venue { display: flex; height: 100%; flex-direction: column; justify-content: center; }
+  .location-card__venue h3 { margin-bottom: 10px; font: 500 32px/1.1 "IvyOra", serif; }
+  .location-card__venue p { font-size: 16px; }
+  .location-card__venue .location-card__eyebrow { margin-bottom: 14px !important; font-size: 12px !important; letter-spacing: .1em; }
+
+  .rsvp-card { left: calc(50% - 340px); grid-template-columns: 1fr 1fr; gap: 10px 14px; width: 680px; height: auto; min-height: 0; padding: 24px 28px 20px; scale: 1; }
+  .rsvp-card__eyebrow, .rsvp-card h2, .rsvp-card__events, .rsvp-card__send, .rsvp-card__note { grid-column: 1 / -1; }
+  .rsvp-card__field--name { grid-column: 1; grid-row: 3; }
+  .rsvp-card__field--guests { grid-column: 2; grid-row: 3; }
+  .rsvp-card__events { grid-row: 4; }
+  .rsvp-card__eyebrow { font-size: 11px; }
+  .rsvp-card h2 { margin: 0 0 4px; font-size: 27px; }
+  .rsvp-card__field { gap: 6px; font-size: 12px; }
+  .rsvp-card input, .rsvp-card button, .rsvp-card select { height: 44px; border-radius: 12px; padding: 0 14px; font-size: 14px; }
+  .rsvp-card__events legend { margin-bottom: 7px; font-size: 12px; }
+  .rsvp-card__events > div { gap: 9px; }
+  .rsvp-card__events label { height: 42px; }
+  .rsvp-card__events span { font-size: 13px; }
+  .rsvp-card__send { height: 48px; margin-top: 2px; border-radius: 14px; font-size: 15px; }
+  .rsvp-card__note { font-size: 11px; }
+}
+
+@media (min-width: 1728px) and (max-width: 1919.98px) {
+  .event-card--1 { left: calc(50% - 382.3px); }
+  .event-card--2 { left: calc(50% - 102.3px); }
+  .event-card--3 { left: calc(50% + 177.7px); }
+}
+
+@media (min-width: 1920px) {
+  .event-card--1 { left: calc(50% - 400.9px); }
+  .event-card--2 { left: calc(50% - 120.9px); }
+  .event-card--3 { left: calc(50% + 159.1px); }
+}

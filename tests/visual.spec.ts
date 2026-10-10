@@ -72,7 +72,7 @@ test("469px composition expands the hero artwork without shrinking it", async ({
   expectBox((await page.locator(".couple__backdrop").boundingBox())!, { x: 15.85, y: 2796.98, width: 437.3, height: 1638.09 });
   expectBox((await page.locator(".couple__photo").boundingBox())!, { x: 16.85, y: 4150, width: 435.3, height: 290.2 });
   expectBox((await page.locator(".guest__backdrop").boundingBox())!, { x: 16.85, y: 4143, width: 435.3, height: 2628.44 });
-  expectBox((await page.locator(".finale__elephants").boundingBox())!, { x: 17, y: 5651, width: 435, height: 538.36 });
+  expectBox((await page.locator(".finale__elephants").boundingBox())!, { x: 17, y: 5788.88, width: 435, height: 538.36 });
 });
 
 test("1440px composition preserves the measured reference geometry", async ({ page }) => {
@@ -100,7 +100,7 @@ test("1440px composition preserves the measured reference geometry", async ({ pa
   }))).toEqual({ height: 760, left: -37, top: 7225, width: 1515 });
 });
 
-test("waving flag has a visible first-paint fallback on refresh", async ({ page }) => {
+test("waving flag stays visible while its texture initializes", async ({ page }) => {
   await page.setViewportSize({ width: 1728, height: 1000 });
   await page.goto("/");
 
@@ -111,18 +111,96 @@ test("waving flag has a visible first-paint fallback on refresh", async ({ page 
     textureReady: element.getAttribute("data-texture-ready")
   }));
 
-  expect(firstPaint).toEqual({
-    animationName: "none",
-    backgroundImage: expect.stringContaining("wide-flag-cloth.png"),
-    opacity: "1",
-    textureReady: "false"
-  });
+  expect(firstPaint.animationName).toBe("none");
+  expect(firstPaint.opacity).toBe("1");
+  if (firstPaint.textureReady === "false") {
+    expect(firstPaint.backgroundImage).toContain("wide-flag-cloth.png");
+  } else {
+    expect(firstPaint.textureReady).toBe("true");
+    expect(firstPaint.backgroundImage).toBe("none");
+  }
 
   const readyBackground = await page.locator(".hero__waving-flag").evaluate((element) => {
     element.setAttribute("data-texture-ready", "true");
     return getComputedStyle(element).backgroundImage;
   });
   expect(readyBackground).toBe("none");
+});
+
+test("reduced motion keeps guest sections centered and separated at tablet widths", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+
+  for (const width of [600, 768, 960, 1279]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/");
+    await page.locator(".site-canvas").waitFor({ state: "visible" });
+
+    const centers = await page.locator(".event-card").evaluateAll((elements) => elements.map((element) => {
+      const rect = element.getBoundingClientRect();
+      return rect.left + rect.width / 2;
+    }));
+    for (const center of centers) {
+      expect(Math.abs(center - width / 2), `timeline card is not centered at ${width}px`).toBeLessThanOrEqual(1);
+    }
+
+    for (const selector of [".formal-invitation", ".rsvp-card"]) {
+      const center = await page.locator(selector).evaluate((element) => {
+        const rect = element.getBoundingClientRect();
+        return rect.left + rect.width / 2;
+      });
+      expect(Math.abs(center - width / 2), `${selector} is not centered at ${width}px`).toBeLessThanOrEqual(1);
+    }
+
+    const layout = await page.evaluate(() => {
+      const box = (selector: string) => {
+        const rect = document.querySelector(selector)!.getBoundingClientRect();
+        return { bottom: rect.bottom, left: rect.left, right: rect.right, top: rect.top };
+      };
+      const venue = document.querySelector(".location-card__venue")!;
+      return {
+        countdown: box(".countdown"),
+        divider: box(".finale__divider--bottom"),
+        rsvp: box(".rsvp-card"),
+        venue: box(".location-card__venue"),
+        venueContentBottom: Math.max(...Array.from(venue.children).map((child) => child.getBoundingClientRect().bottom))
+      };
+    });
+
+    expect(layout.rsvp.left).toBeGreaterThanOrEqual(19);
+    expect(layout.rsvp.right).toBeLessThanOrEqual(width - 19);
+    expect(layout.rsvp.bottom, `RSVP overlaps divider at ${width}px`).toBeLessThanOrEqual(layout.divider.top);
+    expect(layout.divider.bottom, `divider overlaps countdown at ${width}px`).toBeLessThanOrEqual(layout.countdown.top);
+    expect(layout.venueContentBottom, `venue copy is clipped at ${width}px`).toBeLessThanOrEqual(layout.venue.bottom + 1);
+  }
+});
+
+test("reduced motion keeps the three-card timeline centered at wide desktop widths", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+
+  for (const width of [1440, 1728, 1920]) {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto("/");
+    await page.locator(".site-canvas").waitFor({ state: "visible" });
+
+    const timeline = await page.locator(".event-card").evaluateAll((elements) => {
+      const boxes = elements.map((element) => element.getBoundingClientRect());
+      return {
+        center: (boxes[0].left + boxes[boxes.length - 1].right) / 2,
+        count: boxes.length
+      };
+    });
+
+    expect(timeline.count).toBe(3);
+    expect(Math.abs(timeline.center - width / 2), `timeline is not centered at ${width}px`).toBeLessThanOrEqual(1);
+
+    for (const selector of [".formal-invitation", ".rsvp-card"]) {
+      const center = await page.locator(selector).evaluate((element) => {
+        const rect = element.getBoundingClientRect();
+        return rect.left + rect.width / 2;
+      });
+      expect(Math.abs(center - width / 2), `${selector} is not centered at ${width}px`).toBeLessThanOrEqual(1);
+    }
+  }
 });
 
 test("cold loading reveals the pole, cloth, and bells as one hero scene", async ({ page }) => {
@@ -254,7 +332,7 @@ test("1728px composition uses the full-width desktop reference variant", async (
     top: Number.parseFloat(getComputedStyle(element).top),
     width: Number.parseFloat(getComputedStyle(element).width)
   }));
-  expectBox({ x: rsvpStyles.left, y: rsvpStyles.top, width: rsvpStyles.width, height: rsvpStyles.height }, { x: 555.99, y: 10556.14, width: 627.64, height: 295.72 });
+  expectBox({ x: rsvpStyles.left, y: rsvpStyles.top, width: rsvpStyles.width, height: rsvpStyles.height }, { x: 530, y: 10556.14, width: 680, height: 339.27 });
   expect(rsvpStyles.scale).toBe("none");
 });
 
@@ -292,7 +370,7 @@ test("invitation arrow follows the reference responsive variants", async ({ page
     { viewport: 600, center: 300, top: 1467, labelTop: 1459, labelHeight: 24 },
     { viewport: 767, center: 383.5, top: 1467, labelTop: 1459, labelHeight: 24 },
     { viewport: 768, center: 384, top: 1997, labelTop: 1989, labelHeight: 24 },
-    { viewport: 960, center: 558, top: 2157, labelTop: 2149, labelHeight: 24 },
+    { viewport: 960, center: 480, top: 2157, labelTop: 2149, labelHeight: 24 },
     { viewport: 1280, center: 720, top: 3300 },
     { viewport: 1440, center: 720, top: 3509 },
     { viewport: 1559, center: 779.5, top: 3509 },

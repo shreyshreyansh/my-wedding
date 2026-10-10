@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { type KeyboardEvent, useLayoutEffect, useRef, useState } from "react";
 import { BirdFlock } from "./BirdFlock";
 import { WavingFlag } from "./WavingFlag";
 import { RotatingGallery } from "./RotatingGallery";
@@ -16,21 +16,43 @@ const weddingDate = new Date("2026-12-09T20:00:00+05:30");
 const eventCards = [
   { title: "Haldi", lines: ["Tuesday", "8th Dec 2026", "Haveli Banquet, Ranchi", "12 Noon"], note: "Yellow · Turmeric shades" },
   { title: "Sangeet", lines: ["Tuesday", "8th Dec 2026", "Haveli Banquet, Ranchi", "8 in the evening"], note: "Evening formals · Indo-western welcome" },
-  { title: "Shaadi", lines: ["Wednesday", "9th Dec 2026", "Haveli Banquet, Ranchi", "8 in the evening"], note: "Traditional finery · Jewel tones" },
-  { title: "Haldi Attire", lines: ["Yellow", "Turmeric shades", "Tuesday · 8 Dec", "12 Noon"], note: "Haveli Banquet, Ranchi" },
-  { title: "Sangeet Attire", lines: ["Evening formals", "Indo-western welcome", "Tuesday · 8 Dec", "8 in the evening"], note: "Haveli Banquet, Ranchi" },
-  { title: "Shaadi Attire", lines: ["Traditional finery", "Jewel tones", "Wednesday · 9 Dec", "8 in the evening"], note: "Haveli Banquet, Ranchi" }
+  { title: "Shaadi", lines: ["Wednesday", "9th Dec 2026", "Haveli Banquet, Ranchi", "8 in the evening"], note: "Traditional finery · Jewel tones" }
 ] as const;
 
-const locations = [
-  { name: "Venue", address: "Haveli Banquet, Ranchi", details: "Haveli Banquet, Ranchi", query: "Haveli+Banquet+Ranchi" },
-  { name: "Haldi", address: "Haveli Banquet, Ranchi", details: "Tuesday, 8 December 2026 · 12 noon", query: "Haveli+Banquet+Ranchi" },
-  { name: "Sangeet", address: "Haveli Banquet, Ranchi", details: "Tuesday, 8 December 2026 · 8 in the evening", query: "Haveli+Banquet+Ranchi" },
-  { name: "Shaadi", address: "Haveli Banquet, Ranchi", details: "Wednesday, 9 December 2026 · 8 in the evening", query: "Haveli+Banquet+Ranchi" }
-] as const;
+const venue = {
+  address: "Haveli Banquet, Ranchi",
+  mapEmbed: "https://www.google.com/maps?q=Haveli%20Banquet%20Ranchi&output=embed",
+  mapLink: "https://www.google.com/maps/search/?api=1&query=Haveli+Banquet+Ranchi"
+} as const;
 
-const story =
-  "With the blessings of our elders, we request the pleasure of your company at the wedding of Shreyansh with Mrunalini. Please accept this invitation as our personal visit. With love, Umesh Kumar & Rupa Sinha and Shriharsh & Sumati Waghmare.";
+const invitationCopy = {
+  en: {
+    tab: "English", lang: "en", kicker: "Together with our families",
+    hostOne: "Mr Umesh Kumar Sinha & Mrs Rupa Sinha", connector: "and",
+    hostTwo: "Mr Shriharsh Waghmare & Mrs Sumati Waghmare",
+    request: "request the honour of your presence at the wedding of",
+    names: "Shreyansh & Mrunalini", date: "Wednesday, 9 December 2026 · 8:00 PM",
+    place: "Haveli Banquet, Ranchi", closing: "Please accept this invitation as our personal visit."
+  },
+  hi: {
+    tab: "हिंदी", lang: "hi", kicker: "सपरिवार सादर आमंत्रण",
+    hostOne: "श्री उमेश कुमार सिन्हा एवं श्रीमती रूपा सिन्हा", connector: "तथा",
+    hostTwo: "श्री श्रीहर्ष वाघमारे एवं श्रीमती सुमति वाघमारे",
+    request: "अपने प्रिय श्रेयांश एवं मृणालिनी के शुभ विवाह के अवसर पर आपकी स्नेहमयी उपस्थिति का अनुरोध करते हैं।",
+    names: "श्रेयांश एवं मृणालिनी", date: "बुधवार, 9 दिसंबर 2026 · सायं 8 बजे",
+    place: "हवेली बैंकेट, रांची", closing: "कृपया इस निमंत्रण को हमारा व्यक्तिगत आमंत्रण स्वीकार करें।"
+  },
+  mr: {
+    tab: "मराठी", lang: "mr", kicker: "सस्नेह निमंत्रण",
+    hostOne: "श्री. उमेश कुमार सिन्हा व सौ. रूपा सिन्हा", connector: "आणि",
+    hostTwo: "श्री. श्रीहर्ष वाघमारे व सौ. सुमती वाघमारे",
+    request: "यांच्या प्रिय श्रेयांश आणि मृणालिनी यांच्या शुभविवाह सोहळ्यास आपली स्नेहपूर्ण उपस्थिती प्रार्थनीय आहे.",
+    names: "श्रेयांश आणि मृणालिनी", date: "बुधवार, ९ डिसेंबर २०२६ · सायंकाळी ८ वाजता",
+    place: "हवेली बँक्वेट, रांची", closing: "कृपया हे निमंत्रण आमचे वैयक्तिक आमंत्रण समजावे."
+  }
+} as const;
+
+type InvitationLanguage = keyof typeof invitationCopy;
 
 const knowledge = [
   { icon: "2fe267c199f164f1.avif", title: "Haldi", copy: "Tuesday, 8 December 2026 at 12 noon. Wear yellow, in turmeric shades." },
@@ -67,16 +89,74 @@ function EventCard({ card, index }: { card: (typeof eventCards)[number]; index: 
   );
 }
 
-const wideCardMedallions = Array.from({ length: 10 }, (_, index) => index + 1);
+function FormalInvitation({ language, onLanguageChange }: { language: InvitationLanguage; onLanguageChange: (language: InvitationLanguage) => void }) {
+  const copy = invitationCopy[language];
+  const languages = Object.keys(invitationCopy) as InvitationLanguage[];
+
+  const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    let nextIndex: number | undefined;
+    if (event.key === "ArrowRight") nextIndex = (index + 1) % languages.length;
+    if (event.key === "ArrowLeft") nextIndex = (index - 1 + languages.length) % languages.length;
+    if (event.key === "Home") nextIndex = 0;
+    if (event.key === "End") nextIndex = languages.length - 1;
+    if (nextIndex === undefined) return;
+
+    event.preventDefault();
+    const nextLanguage = languages[nextIndex];
+    onLanguageChange(nextLanguage);
+    event.currentTarget.parentElement
+      ?.querySelectorAll<HTMLButtonElement>('[role="tab"]')[nextIndex]
+      ?.focus();
+  };
+
+  return (
+    <div className="couple__story formal-invitation">
+      <div className="formal-invitation__tabs" role="tablist" aria-label="Invitation language">
+        {languages.map((key, index) => (
+          <button
+            aria-controls="formal-invitation-panel"
+            aria-selected={language === key}
+            className={language === key ? "is-active" : ""}
+            id={`formal-invitation-tab-${key}`}
+            key={key}
+            lang={invitationCopy[key].lang}
+            onClick={() => onLanguageChange(key)}
+            onKeyDown={(event) => handleTabKeyDown(event, index)}
+            role="tab"
+            tabIndex={language === key ? 0 : -1}
+            type="button"
+          >
+            {invitationCopy[key].tab}
+          </button>
+        ))}
+      </div>
+      <article
+        aria-label={`${copy.tab} invitation`}
+        className="formal-invitation__content"
+        id="formal-invitation-panel"
+        lang={copy.lang}
+        role="tabpanel"
+      >
+        <p className="formal-invitation__kicker">{copy.kicker}</p>
+        <p className="formal-invitation__hosts">{copy.hostOne}</p>
+        <p className="formal-invitation__connector">{copy.connector}</p>
+        <p className="formal-invitation__hosts">{copy.hostTwo}</p>
+        <p className="formal-invitation__request">{copy.request}</p>
+        <p className="formal-invitation__names">{copy.names}</p>
+        <p className="formal-invitation__date">{copy.date}</p>
+        <p className="formal-invitation__place">{copy.place}</p>
+        <p className="formal-invitation__closing">{copy.closing}</p>
+      </article>
+    </div>
+  );
+}
 
 function LocationCard() {
-  const [selectedLocation, setSelectedLocation] = useState(0);
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "failed">("idle");
-  const location = locations[selectedLocation];
 
   const copyAddress = async () => {
     try {
-      await navigator.clipboard.writeText(location.address);
+      await navigator.clipboard.writeText(venue.address);
       setCopyStatus("copied");
     } catch {
       setCopyStatus("failed");
@@ -84,17 +164,25 @@ function LocationCard() {
   };
 
   return (
-    <div className="location-card">
-      <div className="location-card__map" role="region" aria-label={`Venue details for ${location.name}`}>
-        <div className="location-card__venue-mark" aria-hidden="true">
-          <svg viewBox="0 0 64 82"><path d="M32 2C15.4 2 2 15.4 2 32c0 22 30 48 30 48s30-26 30-48C62 15.4 48.6 2 32 2Z" /><circle cx="32" cy="32" r="11" /></svg>
-        </div>
-        <div className="location-card__map-copy"><strong>Haveli Banquet</strong><span>Ranchi</span></div>
-        <span className="location-card__nearby">{location.name}</span>
-        <a className="location-card__maps-link" href={`https://www.google.com/maps/search/?api=1&query=${location.query}`} target="_blank" rel="noreferrer">Open in Google Maps <span aria-hidden="true">↗</span></a>
+    <div className="location-card" role="region" aria-label="Wedding venue">
+      <div className="location-card__map">
+        <iframe
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          src={venue.mapEmbed}
+          title="Map showing Haveli Banquet, Ranchi"
+        />
+        <span className="location-card__nearby">Wedding venue</span>
+        <a className="location-card__maps-link" href={venue.mapLink} target="_blank" rel="noreferrer">Open in Google Maps <span aria-hidden="true">↗</span></a>
       </div>
-      <div className="location-card__venue"><h3>Haveli Banquet</h3><p>{location.details}</p><button type="button" aria-label="Copy address to clipboard" onClick={copyAddress}><span aria-hidden="true">▣</span></button>{copyStatus !== "idle" && <span className={`location-card__copy-status is-${copyStatus}`} role="status">{copyStatus === "copied" ? "Copied" : "Copy failed"}</span>}</div>
-      <div className="location-card__switcher">{locations.map((item, index) => <button className={index === selectedLocation ? "is-active" : ""} key={`${item.name}-${index}`} type="button" onClick={() => { setSelectedLocation(index); setCopyStatus("idle"); }}>{item.name}</button>)}</div>
+      <div className="location-card__venue">
+        <p className="location-card__eyebrow">All three celebrations</p>
+        <h3>Haveli Banquet</h3>
+        <p>{venue.address}</p>
+        <button type="button" aria-label="Copy address to clipboard" onClick={copyAddress}><span aria-hidden="true">▣</span></button>
+        {copyStatus !== "idle" && <span className={`location-card__copy-status is-${copyStatus}`} role="status">{copyStatus === "copied" ? "Copied" : "Copy failed"}</span>}
+      </div>
     </div>
   );
 }
@@ -102,13 +190,21 @@ function LocationCard() {
 export function App() {
   const canvasRef = useRef<HTMLElement>(null);
   const [fullName, setFullName] = useState("");
-  const [selectedEvent, setSelectedEvent] = useState("");
+  const [selectedEvents, setSelectedEvents] = useState<string[]>([]);
   const [partySize, setPartySize] = useState("");
-  const [eventMenuOpen, setEventMenuOpen] = useState(false);
+  const [invitationLanguage, setInvitationLanguage] = useState<InvitationLanguage>("en");
   const countdown = useCountdown(weddingDate);
-  const canSendRsvp = Boolean(fullName.trim() && selectedEvent && partySize);
-  const message = `Hi, I am ${fullName.trim()}. I would like to RSVP for ${selectedEvent} for ${partySize} people.`;
+  const canSendRsvp = Boolean(fullName.trim() && selectedEvents.length && partySize);
+  const eventSummary = selectedEvents.length > 1
+    ? `${selectedEvents.slice(0, -1).join(", ")} and ${selectedEvents.at(-1)}`
+    : selectedEvents[0] ?? "";
+  const message = `Hi, I am ${fullName.trim()}. I would like to RSVP for ${eventSummary} for ${partySize} people.`;
   const whatsappHref = canSendRsvp ? `https://wa.me/?text=${encodeURIComponent(message)}` : "#whatsapp";
+  const toggleEvent = (eventName: string) => {
+    setSelectedEvents((current) => current.includes(eventName)
+      ? current.filter((item) => item !== eventName)
+      : eventOptions.filter((item) => [...current, eventName].includes(item)));
+  };
 
   useLayoutEffect(() => {
     if (!canvasRef.current) return undefined;
@@ -196,7 +292,6 @@ export function App() {
         <DecorativeImage className="timeline__garden" file="acf828b9baf56ad9.webp" />
         <div className="timeline__heading"><h2><span className="narrow-only">Wedding Timeline</span><span className="wide-only">Wedding Celebration Timeline</span></h2><p>Mark Your Calendars, We Can’t Wait to Celebrate</p></div>
         {eventCards.map((card, index) => <EventCard card={card} index={index + 1} key={`${card.title}-${index}`} />)}
-        <div className="wide-only wide-timeline__medallions">{wideCardMedallions.map((item) => <DecorativeImage className={`wide-card-medallion wide-card-medallion--${item}`} file="wide-card-medallion.webp" key={item} />)}</div>
         <DecorativeImage className="timeline__medallion timeline__medallion--1" file="4ca8349ac539e315.webp" />
         <DecorativeImage className="timeline__medallion timeline__medallion--2" file="4ca8349ac539e315.webp" />
         <DecorativeImage className="timeline__divider" file="af880b786538e470.webp" />
@@ -211,7 +306,7 @@ export function App() {
         <DecorativeImage className="couple__backdrop" file="1c055f08ede33e3b.webp" />
         <h2 className="couple__heading"><span>Meet the</span><span>BRIDE &amp; GROOM</span></h2>
         <DecorativeImage className="couple__portrait" file="b2e7dc1c08c886c8.avif" />
-        <p className="couple__story">{story.split(" ").map((word, index) => <span key={`${word}-${index}`}>{word} </span>)}</p>
+        <FormalInvitation language={invitationLanguage} onLanguageChange={setInvitationLanguage} />
         <RotatingGallery />
         <p className="couple__celebrate">Almost time<br />to celebrate</p>
         <DecorativeImage className="couple__photo" file="61350ca076dd5ac0.webp" />
@@ -237,13 +332,21 @@ export function App() {
         <DecorativeImage className="wide-only wide-finale__divider wide-finale__divider--bottom" file="wide-divider.webp" />
         <DecorativeImage className="finale__divider finale__divider--top" file="92459d463a334df1.webp" />
         <form className="rsvp-card">
-          <h2><span className="narrow-only">RSVP via WhatsApp</span><span className="wide-only">Please confirm your presence</span></h2>
-          <label className="sr-only" htmlFor="full-name">Full Name</label><input id="full-name" name="fullName" placeholder="Full Name" value={fullName} onChange={(event) => setFullName(event.target.value)} />
-          <div className="rsvp-card__row">
-            <div className="event-select"><button type="button" aria-haspopup="listbox" aria-expanded={eventMenuOpen} onClick={() => setEventMenuOpen((open) => !open)}>{selectedEvent || "Select Event"}</button>{eventMenuOpen && <div className="event-select__menu" role="listbox" aria-label="Wedding event">{eventOptions.map((option) => <button type="button" role="option" aria-selected={selectedEvent === option} key={option} onClick={() => { setSelectedEvent(option); setEventMenuOpen(false); }}>{option}</button>)}</div>}</div>
-            <label className="sr-only" htmlFor="people">No. of People</label><select id="people" value={partySize} onChange={(event) => setPartySize(event.target.value)} aria-label="No. of People"><option value="" disabled>No. of People</option>{people.map((count) => <option value={count} key={count}>{count}</option>)}</select>
-          </div>
+          <p className="rsvp-card__eyebrow">We would love to celebrate with you</p>
+          <h2>Please confirm your presence</h2>
+          <label className="rsvp-card__field rsvp-card__field--name" htmlFor="full-name"><span>Guest name</span><input id="full-name" name="fullName" placeholder="Your full name" value={fullName} onChange={(event) => setFullName(event.target.value)} /></label>
+          <fieldset className="rsvp-card__events">
+            <legend>Celebrations attending</legend>
+            <div>{eventOptions.map((option) => (
+              <label className={selectedEvents.includes(option) ? "is-selected" : ""} key={option}>
+                <input checked={selectedEvents.includes(option)} onChange={() => toggleEvent(option)} type="checkbox" />
+                <span>{option}</span>
+              </label>
+            ))}</div>
+          </fieldset>
+          <label className="rsvp-card__field rsvp-card__field--guests" htmlFor="people"><span>Number of guests</span><select id="people" value={partySize} onChange={(event) => setPartySize(event.target.value)} aria-label="No. of People"><option value="" disabled>Select guest count</option>{people.map((count) => <option value={count} key={count}>{count}</option>)}</select></label>
           <a className="rsvp-card__send" href={whatsappHref} target={canSendRsvp ? "_blank" : undefined} rel={canSendRsvp ? "noreferrer" : undefined} aria-label="Send via WhatsApp" aria-disabled={canSendRsvp ? "false" : "true"} onClick={(event) => { if (!canSendRsvp) event.preventDefault(); }}><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h.01A7.94 7.94 0 0 0 17.6 6.32ZM12.05 18.4a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.65.67-2.43-.16-.25a6.6 6.6 0 1 1 5.59 3.1Z" fill="currentColor" /></svg>Send via WhatsApp</a>
+          <p className="rsvp-card__note">A prepared confirmation will open in WhatsApp.</p>
         </form>
         <DecorativeImage className="finale__divider finale__divider--bottom" file="92459d463a334df1.webp" />
         <div className="countdown"><h2>The countdown begins</h2><p><span className="narrow-only">Our families are excited that you are able to join<br />us in celebrating what we hope will be one<br />of the happiest days of our lives</span><span className="wide-only">Our families are excited that you are able to<br />join us in celebrating what we hope will be<br />one of the happiest days of our lives</span></p><div className="countdown__units">{(["days", "hours", "minutes", "seconds"] as const).map((unit) => { const value = String(countdown[unit]).padStart(2, "0"); return <div key={unit}><strong aria-label={value}>{value.split("").map((digit, index) => <span aria-hidden="true" key={`${unit}-${index}`}>{digit}</span>)}</strong><span>{unit.toUpperCase()}</span></div>; })}</div></div>
