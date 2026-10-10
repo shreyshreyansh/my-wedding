@@ -118,17 +118,45 @@ test("the verified names and parent lines fit at responsive boundaries", async (
   }
 });
 
-test("the hero names share the exact viewport center", async ({ page }) => {
+test("the rendered hero lettering shares the exact viewport center", async ({ page }) => {
   for (const width of [393, 600, 768, 1440, 1728, 1920]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/");
 
-    for (const selector of [".hero__name--first", ".hero__and", ".hero__name--second"]) {
+    for (const selector of [".hero__name--first .hero__title-reveal", ".hero__and .hero__title-reveal", ".hero__name--second .hero__title-reveal"]) {
       const center = await page.locator(selector).evaluate((element) => {
-        const rect = element.getBoundingClientRect();
+        const range = document.createRange();
+        range.selectNodeContents(element);
+        const rect = range.getBoundingClientRect();
         return rect.left + rect.width / 2;
       });
       expect(Math.abs(center - width / 2), `${selector} is not centered at ${width}px`).toBeLessThanOrEqual(1);
+    }
+  }
+});
+
+test("the animated hero lettering stays centered across live responsive resizes", async ({ page }) => {
+  await page.setViewportSize({ width: 393, height: 900 });
+  await page.goto("/");
+  await page.waitForTimeout(1600);
+
+  for (const width of [393, 599, 600, 1279, 1280, 1728]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.waitForTimeout(250);
+
+    const expectedCenter = await page.locator(".hero__title").evaluate((element) => {
+      const rect = element.getBoundingClientRect();
+      return rect.left + rect.width / 2;
+    });
+
+    for (const selector of [".hero__name--first .hero__title-reveal", ".hero__and .hero__title-reveal", ".hero__name--second .hero__title-reveal"]) {
+      const center = await page.locator(selector).evaluate((element) => {
+        const range = document.createRange();
+        range.selectNodeContents(element);
+        const rect = range.getBoundingClientRect();
+        return rect.left + rect.width / 2;
+      });
+      expect(Math.abs(center - expectedCenter), `${selector} drifts after resizing to ${width}px`).toBeLessThanOrEqual(1);
     }
   }
 });

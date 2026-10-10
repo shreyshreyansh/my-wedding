@@ -51,6 +51,7 @@ img { display: block; max-width: none; user-select: none; }
 .hero__birds { position: absolute; left: 25.45cqw; top: 260.81cqw; width: 49.62cqw; height: 9.67cqw; object-fit: contain; opacity: .76; }
 .hero__title { position: absolute; inset: 0; margin: 0; color: rgba(171, 86, 38, .72); font-weight: 400; z-index: 5; }
 .hero__title > span { position: absolute; display: block; text-align: center; }
+.hero__title-positioner { position: relative; left: 50%; display: block; width: max-content; translate: -50% 0; }
 .hero__title-reveal { display: block; }
 .hero__name { font: 400 21.88cqw/1.2 "Miofarin", sans-serif; }
 .hero__name--first { left: 25.95cqw; top: 23.92cqw; width: 48.09cqw; }
@@ -963,8 +964,6 @@ img { display: block; max-width: none; user-select: none; }
 }
 
 /* Guest-experience refinements: shared alignment, formal invitation, live map and RSVP. */
-.hero__name--first, .hero__and, .hero__name--second { left: 50%; translate: -50% 0; }
-
 .formal-invitation { color: #5f250f; font-family: "Gotham Book", sans-serif; }
 .formal-invitation__tabs { display: flex; justify-content: center; gap: 1.27cqw; margin-bottom: 2.04cqw; }
 .formal-invitation__tabs button { min-width: 19cqw; height: 7.63cqw; border: 1px solid rgba(171,86,38,.28); border-radius: 999px; background: rgba(255,249,241,.7); color: #7a3518; font: 500 2.54cqw/1 "Gotham Medium", sans-serif; cursor: pointer; }

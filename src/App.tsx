@@ -253,7 +253,7 @@ export function App() {
         <BirdFlock />
         <DecorativeImage className="hero__birds" file="c32c73cb83ebac88.webp" />
         <h1 className="hero__title" aria-label="Shreyansh weds Mrunalini">
-          <span className="hero__name hero__name--first"><span className="hero__title-reveal">Shreyansh</span></span><span className="hero__and"><span className="hero__title-reveal">weds</span></span><span className="hero__name hero__name--second"><span className="hero__title-reveal">Mrunalini</span></span>
+          <span className="hero__name hero__name--first"><span className="hero__title-positioner"><span className="hero__title-reveal">Shreyansh</span></span></span><span className="hero__and"><span className="hero__title-positioner"><span className="hero__title-reveal">weds</span></span></span><span className="hero__name hero__name--second"><span className="hero__title-positioner"><span className="hero__title-reveal">Mrunalini</span></span></span>
         </h1>
       </section>
 
